@@ -1,3 +1,2 @@
 # SEMO
 
-git test
