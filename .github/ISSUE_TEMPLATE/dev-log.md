@@ -1,7 +1,7 @@
 ---
 name: Dev-Log
 about: Daily development
-title: "[✍️ Dev Log]이름 "
+title: "[✍️ Dev Log]이름 2022.00.00"
 labels: ''
 assignees: ''
 
