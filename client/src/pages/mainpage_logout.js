@@ -46,7 +46,7 @@ const Mainpage_logout = () => {
     <Conainer>
       <Image_layout>
         <Image1_text_layout>
-          <h1>문제를 못풀겠나요?</h1>
+          <h1>문제를 못풀겠나요??</h1>
           <h2>지금당장 질문하세요!</h2>
           <h3>질문 하러가기~</h3>
           <Button_layout>
