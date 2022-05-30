@@ -1,0 +1,1 @@
+INSERT INTO users (user_id, nickname, password) VALUES ("qjastar","범둘기", 'a123456'), ("david0525", "응애", 'b123456');
