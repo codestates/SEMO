@@ -19,7 +19,7 @@ module.exports = (req, res) => {
           if(!isCreated){
             return res.status(409).send("id exists")
           } else {
-            return res.status(201).json({message : "ok"})
+            return res.status(201).json({message : "okay"})
           }
       })
     }
