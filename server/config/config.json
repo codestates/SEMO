@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "qjawnalwn22@",
+    "database": "semo",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "qjawnalwn22@",
+    "database": "semo",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "qjawnalwn22@",
+    "database": "semo",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
