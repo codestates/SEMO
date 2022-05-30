@@ -4,13 +4,11 @@ const Button_component = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 8px;
+  font-size: 15px;
   background-color: #a573ff;
   border: 2px solid #7a57d1;
-  border-radius: 7px;
+  border-radius: 10px;
   padding: 5px 7px;
-  height: 20px;
-  width: 44px;
   cursor: pointer;
 `;
 
