@@ -1,49 +1,60 @@
 CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id INT AUTO_INCREMENT,
+  user_id varchar(255),
   nickname varchar(255),
   password varchar(255),
-  profile_img IMAGE,
-  questions_id INT,
-  answers_id INT,
-  studygroup_id INT
-
+  profile varchar(255),
+  createdAt datetime,
+  updatedAt datetime,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE questions (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  school char(20 char),
-  grade char(5 char),
-  subject char(5 char),
-  title char(30 char),
+  id INT AUTO_INCREMENT,
+  school varchar(255),
+  grade varchar(255),
+  subject varchar(255),
+  title varchar(255),
   content varchar(255),
-  qanswers_id int,
-
+  questions_id INT,
+  qanswers_id INT,
+  createdAt datetime,
+  updatedAt datetime,
+  PRIMARY KEY (id),
+  FOREIGN KEY (questions_id) REFERENCES users (id)
 );
 
 CREATE TABLE answers (
-  id int AUTO_INCREMENT PRIMARY KEY,
-  title char(30 char),
+  id int AUTO_INCREMENT,
+  title varchar(255),
   content varchar(255),
-
+  answers_id INT,
+  createdAt datetime,
+  updatedAt datetime,  
+  PRIMARY KEY (id),
+  FOREIGN KEY (answers_id) REFERENCES users (id)
 );
 
 CREATE TABLE studygroup (
-  id int AUTO_INCREMENT PRIMARY KEY,
-  groupname char(30 char),
-  school char(20 char),
-  grade char(5 char),
-  subject char(5 char),
+  id INT AUTO_INCREMENT,
+  groupname varchar(255),
+  school varchar(255),
+  grade varchar(255),
+  subject varchar(255),
   content varchar(255),
-
+  createdAt datetime,
+  updatedAt datetime,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE users_studygroup (
-  id int AUTO_INCREMENT PRIMARY KEY,
-  users_id int,
-  studygroups_id int
-)
-ALTER TABLE users ADD FOREIGN KEY (questions_id) REFERENCES questions (id);
-ALTER TABLE users ADD FOREIGN KEY (answers_id) REFERENCES answers (id);
-ALTER TABLE users ADD FOREIGN KEY (studygroup_id) REFERENCES users_studygroup (users_id);
-ALTER TABLE questions ADD FOREIGN KEY (qanswers_id) REFERENCES answers (id);
-ALTER TABLE studygroup ADD FOREIGN KEY (id) REFERENCES users_studygroup (studygroups_id);
+  id INT AUTO_INCREMENT,
+  users_id INT,
+  studygroups_id INT,
+  createdAt datetime,
+  updatedAt datetime,
+  PRIMARY KEY (id),
+  FOREIGN KEY (users_id) REFERENCES users (id),
+  FOREIGN KEY (studygroups_id) REFERENCES studygroup (id)
+);
+
