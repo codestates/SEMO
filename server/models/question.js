@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     grade: DataTypes.STRING,
     subject: DataTypes.STRING,
     title: DataTypes.STRING,
-    content: DataTypes.STRING
+    content: DataTypes.STRING,
+    user_id: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'question',

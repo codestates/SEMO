@@ -5,8 +5,8 @@ module.exports = (req, res) => {
   // TODO: 회원가입 및 사용자 생성 로직을 작성하세요.
 
   try{
-    const {school, grade, subject, title, content} = req.body;
-    if(!school || !grade || !title || !content || !subject){
+    const {school, grade, subject, title, content, user_id} = req.body;
+    if(!school || !grade || !title || !content || !subject || !user_id){
       return res.status(422).send("insufficient parameters supplied");
     } else {
        question.findOrCreate({
@@ -15,7 +15,8 @@ module.exports = (req, res) => {
           school: school,
           grade: grade,
           subject: subject,
-          content: content
+          content: content,
+          user_id: user_id
         }
       }).then(([result, isCreated])=> {
           if(!isCreated){
