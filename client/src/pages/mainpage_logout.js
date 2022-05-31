@@ -5,119 +5,94 @@ import image3 from "../images/mainimage3.jpg";
 import image4 from "../images/mainimage4.jpg";
 import Button from "../components/button";
 import Header from "../components/header";
+import Footer from "../components/footer";
 
-const Button_layout = styled.div`
-  padding-top: 20px;
+const Header_container = styled.div`
+  border: 1px solid red;
+  width: 100vw;
+  height: 10vh;
 `;
 
-const Conainer = styled.div`
+const Itemas_container = styled.div`
+  /* border: 1px solid blue; */
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+`;
+
+const Img_container = styled.img`
+  /* border: 1px solid green; */
+  width: 40vw;
+  height: 31.5vw;
+`;
+
+const Itemas_container1 = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Text_container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 14vh;
-  box-sizing: border-box;
-  position: sticky;
-  top: 0px;
-`;
+  /* border: 1px solid purple; */
 
-const Main_items_right = styled.div`
-  width: 100vw;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 3px;
-  box-sizing: border-box;
-  @media only screen and (min-width: 560px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
-const Main_items_left = styled.div`
-  width: 100vw;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 3px;
-  box-sizing: border-box;
-  @media only screen and (min-width: 550px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
-const Image_layout = styled.img`
-  width: 50vw;
-  height: 30vh;
-  border-radius: 7px;
-`;
-
-const Text_layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Outcontainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* min -> 이상 */
-  /* max -> 이하 */
-  @media only screen and (min-width: 550px) {
-    gap: 5px;
+  .btn1 {
+    font-size: 11px;
+    width: 21vw;
   }
 `;
 
 const Mainpage_logout = () => {
   return (
-    <Outcontainer>
+    <>
       <Header />
-      <Main_items_right>
-        <Text_layout>
-          <h3>문제를 못풀겠나요?</h3>
-          <h4>지금 당장 질문하세요!</h4>
-          <h5>질문 하러가자~</h5>
-          <Button_layout>
-            <Button>질문 하러가기!</Button>
-          </Button_layout>
-        </Text_layout>
-        <Image_layout src={image1} alt="" />
-      </Main_items_right>
-      <Main_items_right>
-        <Text_layout>
-          <h3>문제를 푸실려구요?</h3>
-          <h4>지금 당장 가시죠</h4>
-          <h5>문제 풀러 가자~</h5>
-          <Button_layout>
-            <Button>풀이하러 가기!</Button>
-          </Button_layout>
-        </Text_layout>
-        <Image_layout src={image2} alt="" />
-      </Main_items_right>
-      {/* 더미데이터 들어가야하는 자리 */}
-      <Main_items_left>
-        <Image_layout src={image3} alt="" />
-        <Text_layout>
-          <h3>01</h3>
-          <h4>학생들은 모르는</h4>
-          <h5>문제를 질문할 수 있어요!</h5>
-        </Text_layout>
-      </Main_items_left>
-      <Main_items_left>
-        <Image_layout src={image4} alt="" />
-        <Text_layout>
-          <h3>02</h3>
-          <h4>공부의 신은</h4>
-          <h5>문제를 풀어 줄 수 있어요!</h5>
-        </Text_layout>
-      </Main_items_left>
-    </Outcontainer>
+      <Itemas_container>
+        <Itemas_container1>
+          <Text_container>
+            <h3>문제를 못풀겠나요?</h3>
+            <h4>지금 당장 질문하세요!</h4>
+            <h5>질문 하러가기!</h5>
+            <Button className="btn1">질문하러 가기</Button>
+          </Text_container>
+          <Img_container src={image1} alt="" />
+        </Itemas_container1>
+
+        <Itemas_container1>
+          <Text_container>
+            <h3>문제를 푸실려구요?</h3>
+            <h4>지금 당장 가시죠!</h4>
+            <h5>문제 풀러 가자~</h5>
+            <Button className="btn1">풀이하러 가기</Button>
+          </Text_container>
+          <Img_container src={image2} alt="" />
+        </Itemas_container1>
+
+        {/* 더미 데이터 들어가야하는곳  */}
+
+        <Itemas_container1>
+          <Img_container src={image3} alt="" />
+          <Text_container>
+            <h3>01</h3>
+            <h4>학생들은 모르는</h4>
+            <h5>문제를 질문할 수 있어요!</h5>
+          </Text_container>
+        </Itemas_container1>
+
+        <Itemas_container1>
+          <Img_container src={image4} alt="" />
+          <Text_container>
+            <h3>02</h3>
+            <h4>공부의 신은</h4>
+            <h5>문제를 풀어줄 수 있어요!</h5>
+          </Text_container>
+        </Itemas_container1>
+      </Itemas_container>
+    </>
   );
 };
 
