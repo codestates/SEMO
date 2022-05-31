@@ -6,76 +6,87 @@ import beomju from '../images/beomju.jpg'
 import kyungmo from '../images/kyungmo.jpg'
 import styled from "styled-components"
 
-
 const FooterContainer = styled.div`
   position: fixed;
   display: flex;
   left: 0;
   bottom: 0;
-  width : 100vw;
-  height : 15vw;
-  background-color: white;
+  height : 7rem;
   border-top: solid lightgrey;
-  border-width: 3px;
-  
+  border-width: 2px;
 `
 
 const LogoContainer = styled.div`
-    width: 100%;
-    margin: 0 auto;
-    /* border-right: 2px solid lightgrey; */
+    width: 20%;
+    margin-left: 0;
     img {
-        margin: 40px;
-        width:  65%;
-        height: 65%;
+        margin: 20px;
+        width:  auto;
+        height: 70%;
         border-right: 3px solid lightgrey;
-        padding-right: 30%;
+        padding-right: 20%;
     }
 `
 
 const TeamContainer = styled.div`
     display: flex;
-    width : 100%;
+    width : 37rem;
     justify-content : center;
     align-items : center;
+    
 `
 
 
 const ProfileContainer = styled.div`
+    gap: 20px;
     display: flex;
     flex-wrap: wrap;
     padding: 1rem;
     justify-content : space-evenly;
-    color : black;
-    width: 80vw;
+    width: 150vw;
     margin-top: 0rem;
     img {
-    width: 5rem;
-    height: 5rem;
-    }
-    
+    width: 3rem;
+    height: 3rem;
+    }    
 `
 
 const ProfilePhoto = styled.div`
     flex-direction: column;
     display: flex;
     align-items: center;
-    justify-content : center;
-    padding-top : 0rem; 
-
+    justify-content: center;
+    padding-top: 0rem; 
     img {
+      margin-top: 20px;
       border-radius: 100%;
     }
 `
 
 const ProfileInfo = styled.div`
-  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content : center;
+    
+    & > p {
+        margin: 0;
+    }
+    & > p span {
+        font-size: 0.2rem;
+        margin-left: 0.1rem;
+    }
+    & > span {
+        font-size: 0.2rem;
+        margin-left: 0.1rem;
+    }
 `
 
 
 const Footer = () => {
 
   return (
+
     <FooterContainer>
 
       <LogoContainer>
@@ -130,6 +141,7 @@ const Footer = () => {
       </TeamContainer>
 
     </FooterContainer>
+
   )
 }
 
