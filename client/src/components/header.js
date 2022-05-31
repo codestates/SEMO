@@ -1,5 +1,3 @@
-
-
 import styled from "styled-components";
 import logo from "../images/logo.png";
 import Button from "../components/button.js";
@@ -9,8 +7,8 @@ const HeadDiv = styled.div`
   margin: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 7px 0 0;
-  width : 100vw
+  padding: 5px 15px;
+  width: 100vw;
 `;
 
 const Logoimage = styled.img.attrs({
@@ -31,19 +29,15 @@ const Btndiv = styled.div`
   padding: 0px;
   gap: 2vw;
   margin-top: auto;
-  .headerBtn{
+  .headerBtn {
     font-size: 3vw;
-    width : 17vw
-   
+    width: 17vw;
   }
-`
-;
-
+`;
 const Header = () => {
   return (
     <HeadDiv>
       <Logoimage />
-
 
       <Btndiv>
         <Button className="headerBtn">로그인</Button>
@@ -54,4 +48,3 @@ const Header = () => {
 };
 
 export default Header;
-
