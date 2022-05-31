@@ -5,27 +5,6 @@ import image3 from "../images/mainimage3.jpg";
 import image4 from "../images/mainimage4.jpg";
 import Button from "../components/button";
 import Header from "../components/header";
-import Footer from "../components/footer";
-
-// const Image_layout = styled.div`
-//   display: flex;
-//   justify-content: flex-end;
-//   width: 50px;
-//   height: 50px;
-// `;
-
-// const Image_layout2 = styled.div`
-//   display: flex;
-//   justify-content: flex-start;
-// `;
-
-// const Image1_text_layout = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   gap: 2px;
-// `;
 
 const Button_layout = styled.div`
   padding-top: 20px;
