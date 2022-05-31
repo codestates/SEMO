@@ -5,6 +5,7 @@ import image3 from "../images/mainimage3.jpg";
 import image4 from "../images/mainimage4.jpg";
 import Button from "../components/button";
 import Header from "../components/header";
+import Footer from "../components/footer";
 
 const Image_layout = styled.div`
   display: flex;
@@ -84,6 +85,7 @@ const Mainpage_logout = () => {
           <h2>학생들의 문제를 풀어줄수 있어요!</h2>
         </Image1_text_layout>
       </Image_layout2>
+      <Footer />
     </Conainer>
   );
 };

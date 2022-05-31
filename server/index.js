@@ -20,6 +20,8 @@ app.get("/signin", controllers.signin);
 app.post("/signup", controllers.signup);
 app.post("/signout", controllers.signout);
 app.post("/signwithdraw", controllers.signwithdraw);
+app.post("/question", controllers.question);
+app.post("/answer", controllers.answer);
 
 
 const PORT = process.env.PORT || 3500;

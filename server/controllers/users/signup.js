@@ -1,4 +1,5 @@
 const { user } = require('../../models');
+const { sendAccessToken } = require('../tokenFunctions');
 
 module.exports = (req, res) => {
   // TODO: 회원가입 및 사용자 생성 로직을 작성하세요.
@@ -19,7 +20,7 @@ module.exports = (req, res) => {
           if(!isCreated){
             return res.status(409).send("id exists")
           } else {
-            return res.status(201).json({message : "okay"})
+            return res.status(201).cookie('jwt', sendAccessToken).json({message : "okay"})
           }
       })
     }

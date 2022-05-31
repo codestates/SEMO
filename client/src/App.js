@@ -1,22 +1,8 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import React from "react";
-import Footer from "./components/footer";
+import "./App.css";
+import Mainpage_logout from "./pages/mainpage_logout";
 
 function App() {
-  return (
-    <BrowserRouter>
-    <div className="App">
-      <main>
-        <section className="features">
-        <Routes>
-          <Route path="/" element={<Footer/>}></Route>
-        </Routes>
-        </section>
-      </main>
-
-    </div>
-    </BrowserRouter>
-  );
+  return <Mainpage_logout />;
 }
 
 export default App;
