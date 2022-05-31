@@ -6,5 +6,6 @@ module.exports = {
   question: require('./options/question'),
   answer: require('./options/answer'),
   questiondelete: require('./options/questiondelete'),
-  answerdelete: require('./options/answerdelete')
+  answerdelete: require('./options/answerdelete'),
+  questionall: require('./options/questionall'),
 };

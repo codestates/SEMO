@@ -12,7 +12,7 @@ app.use(
   cors({
     origin: ["http://localhost:3001"],
     credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
   })
 );
 app.use(cookieParser());
@@ -24,6 +24,7 @@ app.post("/question", controllers.question);
 app.post("/answer", controllers.answer);
 app.delete("/questiondelete", controllers.questiondelete);
 app.delete("/answerdelete", controllers.answerdelete);
+app.get("/questionall", controllers.questionall);
 
 const PORT = process.env.PORT || 3500;
 
