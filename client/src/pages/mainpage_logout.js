@@ -52,7 +52,7 @@ const Main_items_right = styled.div`
   align-items: center;
   padding: 0 3px;
   box-sizing: border-box;
-  @media only screen and (min-width: 550px) {
+  @media only screen and (min-width: 560px) {
     display: flex;
     align-items: center;
     justify-content: center;
