@@ -1,13 +1,13 @@
 import React from 'react'
 import logo from '../images/logo.png'
-import minsoo from '../images/minsoo.jpg'
-import ikchan from '../images/ikchan.jpg'
-import beomju from '../images/beomju.jpg'
-import kyungmo from '../images/kyungmo.jpg'
+import minsoo from '../images/권민수.jpg'
+import ikchan from '../images/권익찬.jpg'
+import beomju from '../images/김범주.jpg'
+import kyungmo from '../images/제경모.jpg'
 import styled from "styled-components"
 
 const FooterContainer = styled.div`
-  position: fixed;
+  
   display: flex;
   left: 0;
   bottom: 0;
