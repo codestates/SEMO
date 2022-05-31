@@ -4,17 +4,16 @@ import image2 from "../images/mainimage2.jpg";
 import image3 from "../images/mainimage3.jpg";
 import image4 from "../images/mainimage4.jpg";
 import Button from "../components/button";
+import Header from "../components/header";
 
 const Image_layout = styled.div`
   display: flex;
   justify-content: flex-end;
-  border: 1px solid black;
 `;
 
 const Image_layout2 = styled.div`
   display: flex;
   justify-content: flex-start;
-  border: 1px solid black;
 `;
 
 const Image1_text_layout = styled.div`
@@ -23,12 +22,10 @@ const Image1_text_layout = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2px;
-  border: 1px solid black;
 `;
 
 const Button_layout = styled.div`
   padding-top: 20px;
-  border: 1px solid black;
 `;
 
 const Conainer = styled.div`
@@ -37,13 +34,13 @@ const Conainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  border: 1px solid black;
   box-sizing: border-box;
 `;
 
 const Mainpage_logout = () => {
   return (
     <Conainer>
+      <Header />
       <Image_layout>
         <Image1_text_layout>
           <h1>문제를 못풀겠나요??</h1>
