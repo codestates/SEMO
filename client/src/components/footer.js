@@ -119,7 +119,7 @@ const Footer = () => {
             <img src={beomju} alt="team-member"></img>
             <ProfileInfo>
               <p>
-                <span>김범주 Back-End</span>
+                <span>범주 Back-End</span>
               </p>
               <span>stwinsilver2@gmail.com</span>
             </ProfileInfo>
