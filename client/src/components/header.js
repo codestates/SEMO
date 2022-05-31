@@ -1,21 +1,18 @@
+
+
 import styled from "styled-components";
 import logo from "../images/logo.png";
-import Button from "./button";
+import Button from "../components/button.js";
 
 const HeadDiv = styled.div`
   box-sizing: border-box;
   margin: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 350px;
-  width: 100vw;
-  position: sticky;
-  top: 0px;
-  background-color: white;
+  padding: 0 7px 0 0;
+  width : 100vw
 `;
 
-//position:relative;
-//left: -30px;
 const Logoimage = styled.img.attrs({
   src: `${logo}`,
 })`
@@ -24,29 +21,37 @@ const Logoimage = styled.img.attrs({
   align-items: flex-start;
   padding: 0px;
   gap: 10px;
-  width: 88px;
-  height: 71px;
+  width: 17vw;
+  height: 17vw;
 `;
-
 const Btndiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
-  gap: 10px;
+  gap: 2vw;
   margin-top: auto;
-`;
+  .headerBtn{
+    font-size: 3vw;
+    width : 17vw
+   
+  }
+`
+;
 
 const Header = () => {
   return (
     <HeadDiv>
       <Logoimage />
+
+
       <Btndiv>
-        <Button>로그인</Button>
-        <Button>회원가입</Button>
+        <Button className="headerBtn">로그인</Button>
+        <Button className="headerBtn">회원가입</Button>
       </Btndiv>
     </HeadDiv>
   );
 };
 
 export default Header;
+

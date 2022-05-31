@@ -39,13 +39,11 @@ const Conainer = styled.div`
   width: 100vw;
   height: 14vh;
   box-sizing: border-box;
-  border: 1px solid red;
   position: sticky;
   top: 0px;
 `;
 
 const Main_items_right = styled.div`
-  border: 1px solid red;
   width: 100vw;
   display: flex;
   justify-content: flex-end;
@@ -55,7 +53,6 @@ const Main_items_right = styled.div`
 `;
 
 const Main_items_left = styled.div`
-  border: 1px solid red;
   width: 100vw;
   display: flex;
   justify-content: flex-start;
@@ -67,7 +64,6 @@ const Main_items_left = styled.div`
 const Image_layout = styled.img`
   width: 50vw;
   height: 30vh;
-  border: 3px solid black;
   border-radius: 7px;
 `;
 
@@ -80,7 +76,7 @@ const Text_layout = styled.div`
 const Mainpage_logout = () => {
   return (
     <>
-      <Conainer>Header</Conainer>
+      <Header></Header>
       <Main_items_right>
         <Text_layout>
           <h3>문제를 못풀겠나요?</h3>
