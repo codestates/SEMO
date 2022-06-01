@@ -23,7 +23,5 @@ module.exports = async (req, res) => {
   catch(err){
       return ;
   }
-   
-
   
 };
