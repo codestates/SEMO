@@ -18,7 +18,6 @@ const Container = styled.div`
         a:hover {
            background-color: orange;
            border-radius: 7px;
-        
       };
   `
     
