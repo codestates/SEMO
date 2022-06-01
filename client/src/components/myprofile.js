@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import profileimg from "../images/제경모.jpg"
 import Button from "./button";
+
 const Container = styled.div`
       display: flex;
       flex-direction: row;
