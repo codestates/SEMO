@@ -9,6 +9,7 @@ const Button_component = styled.button`
   border: 2px solid #7a57d1;
   border-radius: 10px;
   padding: 5px 7px;
+  width: 70px;
   cursor: pointer;
 `;
 
