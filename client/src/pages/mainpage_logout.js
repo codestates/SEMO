@@ -42,8 +42,9 @@ const Text_container = styled.div`
   /* border: 1px solid purple; */
 
   .btn1 {
-    font-size: 11px;
-    width: 21vw;
+    font-size: 3vw;
+    width: 17vw;
+    height: 17vh;
   }
 `;
 
