@@ -6,6 +6,8 @@ import image4 from "../images/mainimage4.jpg";
 import Button from "../components/button";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import Loginmodal from "../components/loginmodal";
+import { useState } from "react";
 
 const Header_container = styled.div`
   border: 1px solid red;
@@ -49,9 +51,14 @@ const Text_container = styled.div`
 `;
 
 const Mainpage_logout = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const openModalHandler = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
-      <Header />
+      <Header openModalHandler={openModalHandler} />
       <Itemas_container>
         <Itemas_container1>
           <Text_container>
@@ -92,6 +99,7 @@ const Mainpage_logout = () => {
             <h5>문제를 풀어줄 수 있어요!</h5>
           </Text_container>
         </Itemas_container1>
+        <Loginmodal isOpen={isOpen} openModalHandler={openModalHandler} />
       </Itemas_container>
     </>
   );
