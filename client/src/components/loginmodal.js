@@ -1,7 +1,7 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Button from "./button";
 import kakaologo from "../images/kakaologo.png";
+import { KAKAO_AUTH_URL } from "../kakao";
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -125,7 +125,9 @@ const Loginmodal = (props) => {
                 </div>
                 <Button>로그인</Button>
               </Loginform>
-              <Kakaologbtn src={kakaologo} alt="" />
+              <a href={KAKAO_AUTH_URL}>
+                <Kakaologbtn src={kakaologo} alt="" />
+              </a>
             </ModalView>
           </ModalBackdrop>
         ) : null}
