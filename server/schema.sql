@@ -16,6 +16,7 @@ CREATE TABLE questions (
   subject varchar(255),
   title varchar(255),
   content varchar(255),
+  user_id varchar(255),
   questions_id INT,
   qanswers_id INT,
   createdAt datetime,
@@ -28,6 +29,7 @@ CREATE TABLE answers (
   id int AUTO_INCREMENT,
   title varchar(255),
   content varchar(255),
+  user_id varchar(255),
   answers_id INT,
   createdAt datetime,
   updatedAt datetime,  
@@ -38,6 +40,7 @@ CREATE TABLE answers (
 CREATE TABLE studygroup (
   id INT AUTO_INCREMENT,
   groupname varchar(255),
+  member varchar(255),
   school varchar(255),
   grade varchar(255),
   subject varchar(255),
