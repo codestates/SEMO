@@ -1,5 +1,5 @@
 const CLIENT_ID = "1d3ae3d7f704bfdf575aca7d042711fc";
-const REDIRECT_URI = "http://localhost:3000/oauth/callback/kakao";
+const REDIRECT_URI = "http://localhost:3500/kakao/code";
 
 // 프런트엔드 리다이랙트 URI 예시
 // const REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
