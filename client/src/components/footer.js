@@ -131,7 +131,7 @@ function Footer() {
     <FooterContainer>
       <LogoContainer>
         Team FineCode
-        {/* <img src={logo} alt="logo" /> */}
+
       </LogoContainer>
       <TeamContainer>
         <ProfileContainer>
