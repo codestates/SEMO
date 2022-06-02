@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import profileimg from "../images/제경모.jpg"
+import Mainpage_logout from "../pages/mainpage_logout";
 import Button from "./button";
 
 const Container = styled.div`
@@ -93,7 +94,6 @@ const Container = styled.div`
 //사진 수정 ==> 
 // 모달? 컴포넌트 추가? 
 
-    
 const Myprofile = () => {
 const [isEditnickname,editNickname] =useState(false);
 const [isEditPw,editPw] =useState(false);
