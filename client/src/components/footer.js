@@ -16,8 +16,6 @@ const SemoinfoContainer = styled.div`
     justify-content : center;
     
     border-bottom: 2px solid #CED4DA;
-    
-    
 `
 const Semoinfo = styled.div`
     display: flex;
@@ -31,7 +29,6 @@ const Semoinfo = styled.div`
       color : #FFFFFF;
     }
     `
-
 
 const FooterContainer = styled.footer`
     width: 100vw;
