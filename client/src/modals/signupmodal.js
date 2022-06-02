@@ -156,14 +156,18 @@ const Signupmodal = (props) => {
     }
   };
 
+  const modalout = () => {
+    props.openSignup();
+    props.openModalHandler();
+  };
   return (
     <>
       <ModalContainer>
         {props.isOpen === true ? (
-          <ModalBackdrop onClick={props.openSignup}>
+          <ModalBackdrop onClick={modalout}>
             <ModalView onClick={(e) => e.stopPropagation()}>
               <Closebutton>
-                <div onClick={props.openSignup}>&times;</div>
+                <div onClick={modalout}>&times;</div>
               </Closebutton>
               <Title>회원가입</Title>
               <Signupform>

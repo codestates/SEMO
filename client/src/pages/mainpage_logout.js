@@ -122,6 +122,7 @@ const Mainpage_logout = () => {
             openSignup={openSignup}
           />
         )}
+        <Footer />
       </Itemas_container>
     </>
   );

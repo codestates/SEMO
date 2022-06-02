@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import Mainpage_login from "./pages/mainpage_login";
 
 const KakaoRedirectHandler = () => {
   useEffect(() => {
@@ -10,11 +11,7 @@ const KakaoRedirectHandler = () => {
 
     axios
       .post(
-        `https://kauth.kakao.com/oauth/token?
-        grant_type=${grant_type}
-        &client_id=${client_id}
-        &redirect_uri=http://localhost:3000/main
-        &code=${code}`,
+        `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=http://localhost:3000/oauth/callback/kakao&code=${code}`,
         {
           headers: {
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -22,12 +19,12 @@ const KakaoRedirectHandler = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         // res에 포함된 토큰 받아서 원하는 로직을 하면된다.
       });
   }, []);
 
-  return <div></div>;
+  return <Mainpage_login />;
 };
 
 export default KakaoRedirectHandler;

@@ -3,10 +3,18 @@ import Mainpage_logout from "./pages/mainpage_logout";
 import Mainpage_login from "./pages/mainpage_login";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import KakaoRedirectHandler from "./KakaoRedirectHandeler";
-import TEST from "./pages/helloworld";
+import Mypage from "./pages/mypage";
 
 function App() {
-  return <TEST />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Mainpage_logout />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/oauth/callback/kakao" component={KakaoRedirectHandler} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
