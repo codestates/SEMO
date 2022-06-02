@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "./button";
 import kakaologo from "../images/kakaologo.png";
-import { KAKAO_AUTH_URL } from "../kakao";
+import { KAKAO_AUTH_URL } from "../oauth";
 
 const ModalBackdrop = styled.div`
   position: fixed;
