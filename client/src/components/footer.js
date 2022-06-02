@@ -5,58 +5,81 @@ import ikchan from '../images/권익찬.jpg'
 import beomju from '../images/김범주.jpg'
 import kyungmo from '../images/제경모.jpg'
 import styled from "styled-components"
+import githubIcon from '../images/githublogo.png'
 
-const FooterContainer = styled.div`
-  
-  display: flex;
-  left: 0;
-  bottom: 0;
-  height : 7rem;
-  border-top: solid lightgrey;
-  border-width: 2px;
+
+const SemoinfoContainer = styled.div`
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content : center;
+    
+    border-bottom: 2px solid #CED4DA;
 `
-
-const LogoContainer = styled.div`
-    width: 20%;
-    margin-left: 0;
-    img {
-        margin: 20px;
-        width:  auto;
-        height: 70%;
-        border-right: 3px solid lightgrey;
-        padding-right: 20%;
+const Semoinfo = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content : space-evenly;
+    font-size: 1.5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    a{
+      text-decoration: none;
+      color : #FFFFFF;
     }
-`
+    `
 
+const FooterContainer = styled.footer`
+    width: 100vw;
+    background-color : #2E3447;
+    padding-top : 2rem;
+    padding-bottom : 1rem;
+    height : auto;
+`
+const LogoContainer = styled.div`
+    width: 100%;
+    font-size : 2rem;
+    text-align : center;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    img {
+        width: auto;
+        height: 2rem;
+    }
+    
+`
 const TeamContainer = styled.div`
     display: flex;
-    width : 37rem;
+    width : 100%;
     justify-content : center;
     align-items : center;
-    
 `
 
 
 const ProfileContainer = styled.div`
-    gap: 20px;
     display: flex;
     flex-wrap: wrap;
     padding: 1rem;
     justify-content : space-evenly;
-    width: 150vw;
-    margin-top: 0rem;
+    color : white;
+    width: 100vw;
+    margin-top: 2rem;
+    border-top: 2px solid #CED4DA;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #CED4DA;
     img {
-    width: 3rem;
-    height: 3rem;
-    }    
+    width: 4rem;
+    height: 4rem;
+    }
+    
 `
 
 const ProfilePhoto = styled.div`
-    flex-direction: column;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-top: 0rem; 
+    justify-content : center;
     img {
       margin-top: 20px;
       border-radius: 100%;
@@ -64,7 +87,9 @@ const ProfilePhoto = styled.div`
 `
 
 const ProfileInfo = styled.div`
+    
     display: flex;
+    padding-top: 1rem;
     flex-direction: column;
     align-items: flex-start;
     justify-content : center;
@@ -73,31 +98,45 @@ const ProfileInfo = styled.div`
         margin: 0;
     }
     & > p span {
-        font-size: 0.2rem;
-        margin-left: 0.1rem;
+        font-size: 1rem;
+        margin-left: 0.5rem;
     }
     & > span {
-        font-size: 0.2rem;
-        margin-left: 0.1rem;
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
     }
 `
 
+const GithubIcon = styled.div`
+width : 100%;
+display : flex;
+margin-top: 1rem;
+justify-content : center;
+align-items : center;
+color : white;
+img{
+    width : 5rem;
+    height : 5rem;
+}
 
-const Footer = () => {
+`
+
+
+function Footer() {
 
   return (
-
     <FooterContainer>
-
       <LogoContainer>
-        <img src={logo} alt="logo" />
+        Team FineCode
+
       </LogoContainer>
-
       <TeamContainer>
-
         <ProfileContainer>
+
           <ProfilePhoto>
-            <img src={minsoo} alt="team-leader"></img>
+            <a href="https://github.com/FineArtGo" >
+              <img src={minsoo} alt="team-leader"></img>
+            </a>
             <ProfileInfo>
               <p>
                 <span>권민수 Full-Stack</span>
@@ -107,27 +146,33 @@ const Footer = () => {
           </ProfilePhoto>
 
           <ProfilePhoto>
-            <img src={ikchan} alt="team-member"></img>
+            <a href="https://github.com/ikchan0625">
+              <img src={ikchan} alt="team-member"></img>
+            </a>
             <ProfileInfo>
               <p>
                 <span>권익찬 Front-End</span>
               </p>
-              <span>ikchan0625@gmail.com</span>
+              <span>ikchan0625@gmail.comm</span>
             </ProfileInfo>
           </ProfilePhoto>
 
           <ProfilePhoto>
-            <img src={kyungmo} alt="team-member"></img>
+            <a href="https://github.com/304HO">
+              <img src={kyungmo} alt="team-member"></img>
+            </a>
             <ProfileInfo>
               <p>
-                <span>제경모 Front-end</span>
+                <span>제경모 Front-End</span>
               </p>
               <span>lonnie4165@gmail.com</span>
             </ProfileInfo>
           </ProfilePhoto>
 
           <ProfilePhoto>
-            <img src={beomju} alt="team-member"></img>
+            <a href="https://github.com/bbammju">
+              <img src={beomju} alt="team-member"></img>
+            </a>
             <ProfileInfo>
               <p>
                 <span>김범주 Back-End</span>
@@ -135,13 +180,22 @@ const Footer = () => {
               <span>stwinsilver2@gmail.com</span>
             </ProfileInfo>
           </ProfilePhoto>
-
         </ProfileContainer>
-
       </TeamContainer>
+      <SemoinfoContainer>
+        <Semoinfo><a href="https://github.com/codestates/SEMO/projects/4" >Dev-Log</a></Semoinfo>
+        <Semoinfo><a href="https://www.figma.com/file/88jNhnNcal8eYj3vHkPJ3C/SEMO?node-id=360%3A976">ProtoType</a></Semoinfo>
+        <Semoinfo><a href="https://github.com/codestates/Semo/wiki/System-Architecture">Architecture</a></Semoinfo>
+        <Semoinfo><a href="https://github.com/codestates/Semo/wiki/DB-schema">DB</a></Semoinfo>
+      </SemoinfoContainer>
 
+      <GithubIcon>
+        <a href="https://github.com/codestates/SEMO/">
+          <img src={githubIcon} alt="github-icon" />
+        </a>
+        <span>About Us</span>
+      </GithubIcon>
     </FooterContainer>
-
   )
 }
 
