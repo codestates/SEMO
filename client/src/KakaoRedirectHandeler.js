@@ -9,9 +9,13 @@ const KakaoRedirectHandler = () => {
     let grant_type = "authorization_code";
     let client_id = "1d3ae3d7f704bfdf575aca7d042711fc";
 
-    axios
+    const codedata = axios
       .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=http://localhost:3000/oauth/callback/kakao&code=${code}`,
+        `https://kauth.kakao.com/oauth/token?
+        grant_type=${grant_type}
+        &client_id=${client_id}
+        &redirect_uri=http://localhost:3500/
+        kakao&code=${code}`,
         {
           headers: {
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
