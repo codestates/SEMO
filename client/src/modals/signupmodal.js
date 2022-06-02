@@ -143,7 +143,7 @@ const Signupmodal = (props) => {
     console.log(user_id, nickname, password, checkpw);
     if (user_id && nickname && password && checkpw) {
       if (password !== checkpw) {
-        alert("비밀번호가 다르네요??ㅋㅋ");
+        alert("비밀번호가 일치하지 않습니다.");
       } else {
         axios.post("http://localhost:3500/signup", {
           user_id,
@@ -152,18 +152,18 @@ const Signupmodal = (props) => {
         });
       }
     } else {
-      alert("모든항목은 필수인데요??ㅋㅋ");
+      alert("모든 항목은 필수입니다.");
     }
   };
 
   return (
     <>
       <ModalContainer>
-        {props.isOpen === false ? (
-          <ModalBackdrop onClick={props.openModalHandler}>
+        {props.isOpen === true ? (
+          <ModalBackdrop onClick={props.openSignup}>
             <ModalView onClick={(e) => e.stopPropagation()}>
               <Closebutton>
-                <div onClick={props.openModalHandler}>&times;</div>
+                <div onClick={props.openSignup}>&times;</div>
               </Closebutton>
               <Title>회원가입</Title>
               <Signupform>
