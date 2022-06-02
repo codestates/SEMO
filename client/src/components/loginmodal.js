@@ -113,7 +113,8 @@ const Loginmodal = (props) => {
               </Closebutton>
               <Title>로그인</Title>
               <Login>
-                회원이 아니신가요?<Button>회원가입</Button>
+                회원이 아니신가요?
+                <Button onClick={props.openSignup}>회원가입</Button>
               </Login>
               <Loginform>
                 <div className="idtext">

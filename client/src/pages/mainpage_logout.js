@@ -8,6 +8,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import Loginmodal from "../components/loginmodal";
 import { useState } from "react";
+import Signupmodal from "../modals/signupmodal";
 
 const Header_container = styled.div`
   border: 1px solid red;
@@ -54,6 +55,13 @@ const Mainpage_logout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openModalHandler = () => {
     setIsOpen(!isOpen);
+    console.log(isOpen, signup);
+  };
+
+  const [signup, setSignup] = useState(false);
+  const openSignup = () => {
+    setSignup(!signup);
+    console.log("!@#!@#@!#@#!@#!@@#@!#!@#!@#@#@!#@");
   };
 
   return (
@@ -99,7 +107,21 @@ const Mainpage_logout = () => {
             <h5>문제를 풀어줄 수 있어요!</h5>
           </Text_container>
         </Itemas_container1>
-        <Loginmodal isOpen={isOpen} openModalHandler={openModalHandler} />
+        {signup === false ? (
+          <Loginmodal
+            isOpen={isOpen}
+            openModalHandler={openModalHandler}
+            signup={signup}
+            openSignup={openSignup}
+          />
+        ) : (
+          <Signupmodal
+            isOpen={isOpen}
+            openModalHandler={openModalHandler}
+            signup={signup}
+            openSignup={openSignup}
+          />
+        )}
       </Itemas_container>
     </>
   );
