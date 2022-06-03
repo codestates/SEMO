@@ -1,8 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
 import logo from "../images/logo.png";
 import Button from "../components/button.js";
-import Loginmodal from "./loginmodal";
 
 const HeadDiv = styled.div`
   box-sizing: border-box;
@@ -42,7 +40,6 @@ const Header = (props) => {
     <>
       <HeadDiv>
         <Logoimage />
-
         <Btndiv>
           <Button className="headerBtn" onClick={props.openModalHandler}>
             로그인

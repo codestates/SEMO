@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import Mainpage_login from "./pages/mainpage_login";
+import Main from "./pages/main";
 
 const KakaoRedirectHandler = () => {
   useEffect(() => {
@@ -9,7 +9,7 @@ const KakaoRedirectHandler = () => {
     let grant_type = "authorization_code";
     let client_id = "1d3ae3d7f704bfdf575aca7d042711fc";
 
-    const codedata = axios
+    axios
       .post(
         `https://kauth.kakao.com/oauth/token?
         grant_type=${grant_type}
@@ -28,7 +28,7 @@ const KakaoRedirectHandler = () => {
       });
   }, []);
 
-  return <Mainpage_login />;
+  return <Main />;
 };
 
 export default KakaoRedirectHandler;
