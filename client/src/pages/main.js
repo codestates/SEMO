@@ -6,17 +6,11 @@ import image4 from "../images/mainimage4.jpg";
 import Button from "../components/button";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import Loginmodal from "../components/loginmodal";
+import Loginmodal from "../modals/loginmodal";
 import { useState } from "react";
 import Signupmodal from "../modals/signupmodal";
 
-const Header_container = styled.div`
-  border: 1px solid red;
-  width: 100vw;
-  height: 10vh;
-`;
-
-const Itemas_container = styled.div`
+const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
   width: 100vw;
   height: 90vh;
@@ -26,18 +20,18 @@ const Itemas_container = styled.div`
   gap: 15px;
 `;
 
-const Img_container = styled.img`
+const ImgContainer = styled.img`
   /* border: 1px solid green; */
   width: 40vw;
   height: 31.5vw;
 `;
 
-const Itemas_container1 = styled.div`
+const ItemasContainer1 = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-const Text_container = styled.div`
+const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,7 +45,7 @@ const Text_container = styled.div`
   }
 `;
 
-const Mainpage_logout = () => {
+const Main = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openModalHandler = () => {
     setIsOpen(!isOpen);
@@ -67,46 +61,46 @@ const Mainpage_logout = () => {
   return (
     <>
       <Header openModalHandler={openModalHandler} />
-      <Itemas_container>
-        <Itemas_container1>
-          <Text_container>
+      <ItemasContainer>
+        <ItemasContainer1>
+          <TextContainer>
             <h3>문제를 못풀겠나요?</h3>
             <h4>지금 당장 질문하세요!</h4>
             <h5>질문 하러가기!</h5>
             <Button className="btn1">질문하러 가기</Button>
-          </Text_container>
-          <Img_container src={image1} alt="" />
-        </Itemas_container1>
+          </TextContainer>
+          <ImgContainer src={image1} alt="" />
+        </ItemasContainer1>
 
-        <Itemas_container1>
-          <Text_container>
+        <ItemasContainer1>
+          <TextContainer>
             <h3>문제를 푸실려구요?</h3>
             <h4>지금 당장 가시죠!</h4>
             <h5>문제 풀러 가자~</h5>
             <Button className="btn1">풀이하러 가기</Button>
-          </Text_container>
-          <Img_container src={image2} alt="" />
-        </Itemas_container1>
+          </TextContainer>
+          <ImgContainer src={image2} alt="" />
+        </ItemasContainer1>
 
         {/* 더미 데이터 들어가야하는곳  */}
 
-        <Itemas_container1>
-          <Img_container src={image3} alt="" />
-          <Text_container>
+        <ItemasContainer1>
+          <ImgContainer src={image3} alt="" />
+          <TextContainer>
             <h3>01</h3>
             <h4>학생들은 모르는</h4>
             <h5>문제를 질문할 수 있어요!</h5>
-          </Text_container>
-        </Itemas_container1>
+          </TextContainer>
+        </ItemasContainer1>
 
-        <Itemas_container1>
-          <Img_container src={image4} alt="" />
-          <Text_container>
+        <ItemasContainer1>
+          <ImgContainer src={image4} alt="" />
+          <TextContainer>
             <h3>02</h3>
             <h4>공부의 신은</h4>
             <h5>문제를 풀어줄 수 있어요!</h5>
-          </Text_container>
-        </Itemas_container1>
+          </TextContainer>
+        </ItemasContainer1>
         {signup === false ? (
           <Loginmodal
             isOpen={isOpen}
@@ -123,9 +117,9 @@ const Mainpage_logout = () => {
           />
         )}
         <Footer />
-      </Itemas_container>
+      </ItemasContainer>
     </>
   );
 };
 
-export default Mainpage_logout;
+export default Main;
