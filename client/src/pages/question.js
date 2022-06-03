@@ -6,7 +6,7 @@ import WriteQuestionComponenet from "../components/writeQuestion";
 const WritingPage =() => { 
      return (
         <>
-        
+          <Header></Header>
           <WriteQuestionComponenet />
         </>
      )

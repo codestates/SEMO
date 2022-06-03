@@ -1,24 +1,30 @@
 import styled from "styled-components";
 import Button from "./button";
-import Header from "./header";
 import { useState } from "react";
+
 const ContainQuestion =styled.div`
     diplay:flex;
   
 `
 const InputTitleBox = styled.input`
     width: 80vw;
-    height: 5vw;
+    height: 2vw;
     margin 5 0 2 0vw;
     background: #cccccc;
+    border-radius: 2vw;
+    padding:3vw;
     
 `
 const InputTextBox =styled.textarea`
+    
     width: 80vw;
     height: 50vw;
     margin 5vw;
     background: #cccccc;
     vertical-align: middle;
+    border-radius: 2vw;
+    padding:3vw;
+    
 `
 const TitleContainer =styled.div`
     display:flex;
@@ -42,9 +48,10 @@ const BtnContainer = styled.div`
     }
 
 `
-const ImageTest =styled.div``
 
-
+const ImageTest =styled.div`
+   
+`
 const WriteQuestionComponenet = () => { 
     const [title,setTitle]=useState("");
     const [text,setText]=useState("");
@@ -69,7 +76,7 @@ const WriteQuestionComponenet = () => {
 
     return (
         <>
-        <Header></Header>
+       
         <ContainQuestion>
             <TitleContainer>
                 <InputTitleBox 
