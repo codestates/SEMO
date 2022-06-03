@@ -161,54 +161,46 @@ const Signupmodal = (props) => {
     props.openModalHandler();
   };
   return (
-    <>
-      <ModalContainer>
-        {props.isOpen === true ? (
-          <ModalBackdrop onClick={modalout}>
-            <ModalView onClick={(e) => e.stopPropagation()}>
-              <Closebutton>
-                <div onClick={modalout}>&times;</div>
-              </Closebutton>
-              <Title>회원가입</Title>
-              <Signupform>
-                <Text>아이디</Text>
-                <Signupbox1>
-                  <Inputbox
-                    name="user_id"
-                    value={user_id}
-                    onChange={idHandler}
-                  />
-                  <Button className="text">중복검사</Button>
-                </Signupbox1>
+    <ModalContainer>
+      <ModalBackdrop onClick={props.closeSignupModal}>
+        <ModalView onClick={(e) => e.stopPropagation()}>
+          <Closebutton>
+            <div onClick={props.closeSignupModal}>&times;</div>
+          </Closebutton>
+          <Title>회원가입</Title>
+          <Signupform>
+            <Text>아이디</Text>
+            <Signupbox1>
+              <Inputbox name="user_id" value={user_id} onChange={idHandler} />
+              <Button className="text">중복검사</Button>
+            </Signupbox1>
 
-                <Text>닉네임</Text>
-                <Signupbox1>
-                  <Inputbox value={nickname} onChange={nickNameHandler} />
-                  <Button className="text">중복검사</Button>
-                </Signupbox1>
+            <Text>닉네임</Text>
+            <Signupbox1>
+              <Inputbox value={nickname} onChange={nickNameHandler} />
+              <Button className="text">중복검사</Button>
+            </Signupbox1>
 
-                <Text>비밀번호</Text>
-                <Inputbox
-                  type="password"
-                  value={password}
-                  onChange={passwordHandler}
-                />
+            <Text>비밀번호</Text>
+            <Inputbox
+              type="password"
+              value={password}
+              onChange={passwordHandler}
+            />
 
-                <Text>비밀번호 확인</Text>
-                <Inputbox
-                  type="password"
-                  value={checkpw}
-                  onChange={checkpwHandler}
-                />
-                <Signupbutton>
-                  <Button onClick={signupHandler}>회원가입</Button>
-                </Signupbutton>
-              </Signupform>
-            </ModalView>
-          </ModalBackdrop>
-        ) : null}
-      </ModalContainer>
-    </>
+            <Text>비밀번호 확인</Text>
+            <Inputbox
+              type="password"
+              value={checkpw}
+              onChange={checkpwHandler}
+            />
+            <Signupbutton>
+              <Button onClick={signupHandler}>회원가입</Button>
+            </Signupbutton>
+          </Signupform>
+        </ModalView>
+      </ModalBackdrop>
+    </ModalContainer>
   );
 };
 

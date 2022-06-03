@@ -6,9 +6,9 @@ import image4 from "../images/mainimage4.jpg";
 import Button from "../components/button";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import Loginmodal from "../modals/loginmodal";
+import LoginModalComponent from "../modals/loginmodal";
 import { useState } from "react";
-import Signupmodal from "../modals/signupmodal";
+import SignupModalComponent from "../modals/signupmodal";
 
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
@@ -55,19 +55,32 @@ const TextContainer = styled.div`
 `;
 
 const Main = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const openModalHandler = () => {
-    setIsOpen(!isOpen);
+  const [loginModal, setLoginModal] = useState(false);
+  const openLoginModal = () => {
+    setLoginModal((loginModal) => (loginModal = true));
+    console.log("로그인 모달 열림");
+  };
+  const closeLoginModal = () => {
+    setLoginModal((loginModal) => (loginModal = false));
+    console.log("로그인 모달 닫힘");
   };
 
-  const [signup, setSignup] = useState(false);
-  const openSignup = () => {
-    setSignup(!signup);
+  const [signupModal, setSignupModal] = useState(false);
+  const openSignupModal = () => {
+    setSignupModal((signupModal) => (signupModal = true));
+    console.log("회원가입 모달 열림");
+  };
+  const closeSignupModal = () => {
+    setSignupModal((signupModal) => (signupModal = false));
+    console.log("회원가입 모달 닫힘");
   };
 
   return (
     <>
-      <Header openModalHandler={openModalHandler} />
+      <Header
+        openLoginModal={openLoginModal}
+        openSignupModal={openSignupModal}
+      />
       <ItemasContainer>
         <ItemasContainer1>
           <TextContainer>
@@ -106,21 +119,15 @@ const Main = () => {
             <p className="h2">문제를 풀어줄 수 있어요!</p>
           </TextContainer>
         </ItemasContainer1>
-        {signup === false ? (
-          <Loginmodal
-            isOpen={isOpen}
-            openModalHandler={openModalHandler}
-            signup={signup}
-            openSignup={openSignup}
+        {loginModal === true ? (
+          <LoginModalComponent
+            closeLoginModal={closeLoginModal}
+            openSignupModal={openSignupModal}
           />
-        ) : (
-          <Signupmodal
-            isOpen={isOpen}
-            openModalHandler={openModalHandler}
-            signup={signup}
-            openSignup={openSignup}
-          />
-        )}
+        ) : null}
+        {signupModal === true ? (
+          <SignupModalComponent closeSignupModal={closeSignupModal} />
+        ) : null}
         <Footer />
       </ItemasContainer>
     </>

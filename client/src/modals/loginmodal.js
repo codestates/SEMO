@@ -102,38 +102,38 @@ const Kakaologbtn = styled.img`
   padding-top: 15px;
 `;
 const Loginmodal = (props) => {
+  const changeModal = () => {
+    props.openSignupModal();
+    props.closeLoginModal();
+  };
   return (
-    <>
-      <ModalContainer>
-        {props.isOpen === true ? (
-          <ModalBackdrop onClick={props.openModalHandler}>
-            <ModalView onClick={(e) => e.stopPropagation()}>
-              <Closebutton>
-                <div onClick={props.openModalHandler}>&times;</div>
-              </Closebutton>
-              <Title>로그인</Title>
-              <Login>
-                회원이 아니신가요?
-                <Button onClick={props.openSignup}>회원가입</Button>
-              </Login>
-              <Loginform>
-                <div className="idtext">
-                  아이디
-                  <Inputbox />
-                </div>
-                <div className="passwordtext">
-                  비밀번호 <Inputbox type="password" />
-                </div>
-                <Button>로그인</Button>
-              </Loginform>
-              <a href={KAKAO_AUTH_URL}>
-                <Kakaologbtn src={kakaologo} alt="" />
-              </a>
-            </ModalView>
-          </ModalBackdrop>
-        ) : null}
-      </ModalContainer>
-    </>
+    <ModalContainer>
+      <ModalBackdrop onClick={props.closeLoginModal}>
+        <ModalView onClick={(e) => e.stopPropagation()}>
+          <Closebutton>
+            <div onClick={props.closeLoginModal}>&times;</div>
+          </Closebutton>
+          <Title>로그인</Title>
+          <Login>
+            회원이 아니신가요?
+            <Button onClick={changeModal}>회원가입</Button>
+          </Login>
+          <Loginform>
+            <div className="idtext">
+              아이디
+              <Inputbox />
+            </div>
+            <div className="passwordtext">
+              비밀번호 <Inputbox type="password" />
+            </div>
+            <Button>로그인</Button>
+          </Loginform>
+          <a href={KAKAO_AUTH_URL}>
+            <Kakaologbtn src={kakaologo} alt="" />
+          </a>
+        </ModalView>
+      </ModalBackdrop>
+    </ModalContainer>
   );
 };
 

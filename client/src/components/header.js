@@ -41,10 +41,12 @@ const Header = (props) => {
       <HeadDiv>
         <Logoimage />
         <Btndiv>
-          <Button className="headerBtn" onClick={props.openModalHandler}>
+          <Button className="headerBtn" onClick={props.openLoginModal}>
             로그인
           </Button>
-          <Button className="headerBtn">회원가입</Button>
+          <Button className="headerBtn" onClick={props.openSignupModal}>
+            회원가입
+          </Button>
         </Btndiv>
       </HeadDiv>
     </>
