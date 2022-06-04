@@ -10,15 +10,16 @@ const Container = styled.div`
       gap: 25px;
       background: #CCCCCC;
       height : 60vw;
-       .showMyquestionBtn{
-        font-size: 4vw;
-        background-color: #CCCCCC;
-        border: 0px solid #7a57d1;
-        border-radius: 0px;
-        a:hover {
-           background-color: orange;
-           border-radius: 7px;
-      };
+      .showMyquestionBtn {
+      font-size: 4vw;
+      background-color: #CCCCCC;
+      border: 0px solid #7a57d1;
+      border-radius: 0px;
+      a:hover {
+          background-color: orange;
+          border-radius: 7px;
+    };
+  }
   `
     
 

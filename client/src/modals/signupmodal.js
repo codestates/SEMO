@@ -119,7 +119,7 @@ const Text = styled.div`
 `;
 
 const Signupbutton = styled.div`
-  padding: 7px 0 0 60px;
+  padding: 7px 0 0 8vw;
 `;
 const Signupmodal = (props) => {
   const [user_id, setId] = useState("");
@@ -145,7 +145,7 @@ const Signupmodal = (props) => {
       if (password !== checkpw) {
         alert("비밀번호가 일치하지 않습니다.");
       } else {
-        axios.post("http://localhost:3500/signup", {
+        axios.post("http://localhost:3500/sign/up", {
           user_id,
           nickname,
           password,
@@ -156,47 +156,59 @@ const Signupmodal = (props) => {
     }
   };
 
+  const modalout = () => {
+    props.openSignup();
+    props.openModalHandler();
+  };
   return (
-    <ModalContainer>
-      <ModalBackdrop onClick={props.closeSignupModal}>
-        <ModalView onClick={(e) => e.stopPropagation()}>
-          <Closebutton>
-            <div onClick={props.closeSignupModal}>&times;</div>
-          </Closebutton>
-          <Title>회원가입</Title>
-          <Signupform>
-            <Text>아이디</Text>
-            <Signupbox1>
-              <Inputbox name="user_id" value={user_id} onChange={idHandler} />
-              <Button className="text">중복검사</Button>
-            </Signupbox1>
+    <>
+      <ModalContainer>
+        {props.isOpen === true ? (
+          <ModalBackdrop onClick={modalout}>
+            <ModalView onClick={(e) => e.stopPropagation()}>
+              <Closebutton>
+                <div onClick={modalout}>&times;</div>
+              </Closebutton>
+              <Title>회원가입</Title>
+              <Signupform>
+                <Text>아이디</Text>
+                <Signupbox1>
+                  <Inputbox
+                    name="user_id"
+                    value={user_id}
+                    onChange={idHandler}
+                  />
+                  <Button className="text">중복검사</Button>
+                </Signupbox1>
 
-            <Text>닉네임</Text>
-            <Signupbox1>
-              <Inputbox value={nickname} onChange={nickNameHandler} />
-              <Button className="text">중복검사</Button>
-            </Signupbox1>
+                <Text>닉네임</Text>
+                <Signupbox1>
+                  <Inputbox value={nickname} onChange={nickNameHandler} />
+                  <Button className="text">중복검사</Button>
+                </Signupbox1>
 
-            <Text>비밀번호</Text>
-            <Inputbox
-              type="password"
-              value={password}
-              onChange={passwordHandler}
-            />
+                <Text>비밀번호</Text>
+                <Inputbox
+                  type="password"
+                  value={password}
+                  onChange={passwordHandler}
+                />
 
-            <Text>비밀번호 확인</Text>
-            <Inputbox
-              type="password"
-              value={checkpw}
-              onChange={checkpwHandler}
-            />
-            <Signupbutton>
-              <Button onClick={signupHandler}>회원가입</Button>
-            </Signupbutton>
-          </Signupform>
-        </ModalView>
-      </ModalBackdrop>
-    </ModalContainer>
+                <Text>비밀번호 확인</Text>
+                <Inputbox
+                  type="password"
+                  value={checkpw}
+                  onChange={checkpwHandler}
+                />
+                <Signupbutton>
+                  <Button onClick={signupHandler}>회원가입</Button>
+                </Signupbutton>
+              </Signupform>
+            </ModalView>
+          </ModalBackdrop>
+        ) : null}
+      </ModalContainer>
+    </>
   );
 };
 
