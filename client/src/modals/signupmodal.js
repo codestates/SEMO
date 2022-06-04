@@ -119,7 +119,7 @@ const Text = styled.div`
 `;
 
 const Signupbutton = styled.div`
-  padding: 7px 0 0 8vw;
+  padding: 7px 0 0 60px;
 `;
 const Signupmodal = (props) => {
   const [user_id, setId] = useState("");
@@ -156,10 +156,6 @@ const Signupmodal = (props) => {
     }
   };
 
-  const modalout = () => {
-    props.openSignup();
-    props.openModalHandler();
-  };
   return (
     <ModalContainer>
       <ModalBackdrop onClick={props.closeSignupModal}>
