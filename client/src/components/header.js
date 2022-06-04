@@ -67,7 +67,7 @@ const Header = (props) => {
 
   return (
     <>
-      {isLogined !== false ? (
+      {isLogined === false ? (
         <HeadDiv>
           <Logoimage />
           <RightContainer>
@@ -76,10 +76,12 @@ const Header = (props) => {
               <UserNickName>서양범고래</UserNickName>
             </MyprofileContainer>
             <Btndiv>
-              <Button className="headerBtn" onClick={props.openModalHandler}>
+              <Button className="headerBtn" onClick={props.openLoginModal}>
                 로그인
               </Button>
-              <Button className="headerBtn">회원가입</Button>
+              <Button className="headerBtn" onClick={props.openSignupModal}>
+                회원가입
+              </Button>
             </Btndiv>
           </RightContainer>
         </HeadDiv>
