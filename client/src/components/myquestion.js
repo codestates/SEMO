@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "./button";
 
 const Container = styled.div`
+
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -15,6 +16,7 @@ const Container = styled.div`
         background-color: #ffffff;
         border: 0px solid #7a57d1;
         border-radius: 0px;
+        width:40vw;
         a:hover {
            background-color: orange;
            border-radius: 7px;
@@ -25,6 +27,7 @@ const Container = styled.div`
   const Myquestion = () => { 
       return(
         <Container>
+          
           <Button className="showMyquestionBtn"><a>내 질문 보러가기</a> </Button>
         </Container>
 
