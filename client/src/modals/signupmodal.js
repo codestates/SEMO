@@ -140,7 +140,7 @@ const Signupmodal = (props) => {
     setCheckpw(e.target.value);
   };
   const signupHandler = () => {
-    console.log(user_id, nickname, password, checkpw);
+    // console.log(user_id, nickname, password, checkpw);
     if (user_id && nickname && password && checkpw) {
       if (password !== checkpw) {
         alert("비밀번호가 일치하지 않습니다.");
