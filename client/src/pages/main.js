@@ -6,9 +6,9 @@ import image4 from "../images/mainimage4.jpg";
 import Button from "../components/button";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import Loginmodal from "../modals/loginmodal";
+import LoginModalComponent from "../modals/loginmodal";
 import { useState } from "react";
-import Signupmodal from "../modals/signupmodal";
+import SignupModalComponent from "../modals/signupmodal";
 
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
@@ -32,41 +32,60 @@ const ItemasContainer1 = styled.div`
 `;
 
 const TextContainer = styled.div`
+  /* border: 1px solid purple; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid purple; */
+
+  > .h1 {
+    font-size: 5vw;
+    font-weight: bold;
+  }
+  > .h2 {
+    font-size: 4vw;
+    font-weight: bold;
+  }
 
   .btn1 {
-    font-size: 3vw;
+    padding: 0;
+    font-size: 2.5vw;
     width: 17vw;
-    height: 17vh;
   }
 `;
 
 const Main = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const openModalHandler = () => {
-    setIsOpen(!isOpen);
-    console.log(isOpen, signup);
+  const [loginModal, setLoginModal] = useState(false);
+  const openLoginModal = () => {
+    setLoginModal((loginModal) => (loginModal = true));
+    console.log("로그인 모달 열림");
+  };
+  const closeLoginModal = () => {
+    setLoginModal((loginModal) => (loginModal = false));
+    console.log("로그인 모달 닫힘");
   };
 
-  const [signup, setSignup] = useState(false);
-  const openSignup = () => {
-    setSignup(!signup);
-    console.log("!@#!@#@!#@#!@#!@@#@!#!@#!@#@#@!#@");
+  const [signupModal, setSignupModal] = useState(false);
+  const openSignupModal = () => {
+    setSignupModal((signupModal) => (signupModal = true));
+    console.log("회원가입 모달 열림");
+  };
+  const closeSignupModal = () => {
+    setSignupModal((signupModal) => (signupModal = false));
+    console.log("회원가입 모달 닫힘");
   };
 
   return (
     <>
-      <Header openModalHandler={openModalHandler} />
+      <Header
+        openLoginModal={openLoginModal}
+        openSignupModal={openSignupModal}
+      />
       <ItemasContainer>
         <ItemasContainer1>
           <TextContainer>
-            <h3>문제를 못풀겠나요?</h3>
-            <h4>지금 당장 질문하세요!</h4>
-            <h5>질문 하러가기!</h5>
+            <p className="h1">문제를 못풀겠나요?</p>
+            <p className="h2">지금 당장 질문하세요!</p>
             <Button className="btn1">질문하러 가기</Button>
           </TextContainer>
           <ImgContainer src={image1} alt="" />
@@ -74,9 +93,8 @@ const Main = () => {
 
         <ItemasContainer1>
           <TextContainer>
-            <h3>문제를 푸실려구요?</h3>
-            <h4>지금 당장 가시죠!</h4>
-            <h5>문제 풀러 가자~</h5>
+            <p className="h1">문제를 푸실려구요?</p>
+            <p className="h2">지금 당장 가시죠!</p>
             <Button className="btn1">풀이하러 가기</Button>
           </TextContainer>
           <ImgContainer src={image2} alt="" />
@@ -87,35 +105,29 @@ const Main = () => {
         <ItemasContainer1>
           <ImgContainer src={image3} alt="" />
           <TextContainer>
-            <h3>01</h3>
-            <h4>학생들은 모르는</h4>
-            <h5>문제를 질문할 수 있어요!</h5>
+            <p className="h1">01</p>
+            <p className="h2">학생들은 모르는</p>
+            <p className="h2">문제를 질문할 수 있어요!</p>
           </TextContainer>
         </ItemasContainer1>
 
         <ItemasContainer1>
           <ImgContainer src={image4} alt="" />
           <TextContainer>
-            <h3>02</h3>
-            <h4>공부의 신은</h4>
-            <h5>문제를 풀어줄 수 있어요!</h5>
+            <p className="h1">02</p>
+            <p className="h2">공부의 신은</p>
+            <p className="h2">문제를 풀어줄 수 있어요!</p>
           </TextContainer>
         </ItemasContainer1>
-        {signup === false ? (
-          <Loginmodal
-            isOpen={isOpen}
-            openModalHandler={openModalHandler}
-            signup={signup}
-            openSignup={openSignup}
+        {loginModal === true ? (
+          <LoginModalComponent
+            closeLoginModal={closeLoginModal}
+            openSignupModal={openSignupModal}
           />
-        ) : (
-          <Signupmodal
-            isOpen={isOpen}
-            openModalHandler={openModalHandler}
-            signup={signup}
-            openSignup={openSignup}
-          />
-        )}
+        ) : null}
+        {signupModal === true ? (
+          <SignupModalComponent closeSignupModal={closeSignupModal} />
+        ) : null}
         <Footer />
       </ItemasContainer>
     </>
