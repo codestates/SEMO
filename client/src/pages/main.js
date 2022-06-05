@@ -9,6 +9,7 @@ import Footer from "../components/footer";
 import LoginModalComponent from "../modals/loginmodal";
 import { useState } from "react";
 import SignupModalComponent from "../modals/signupmodal";
+import SimpleSlider from '../components/slickslide';
 
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
@@ -100,6 +101,7 @@ const Main = () => {
           <ImgContainer src={image2} alt="" />
         </ItemasContainer1>
 
+        <div style={{ width: '100%' }}><SimpleSlider /></div>
         {/* 더미 데이터 들어가야하는곳  */}
 
         <ItemasContainer1>
