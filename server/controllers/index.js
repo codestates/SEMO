@@ -8,4 +8,10 @@ module.exports = {
   questiondelete: require('./options/questiondelete'),
   answerdelete: require('./options/answerdelete'),
   questionall: require('./options/questionall'),
+  userinfo: require('./users/userinfo'),
+  infoedit: require('./users/nickname_edit'),
+  answeredit: require('./options/answeredit'),
+  questionedit: require('./options/questionedit'),
+  passwordedit: require('./users/password_edit'),
+  nicknameedit: require('./users/nickname_edit'),
 };
