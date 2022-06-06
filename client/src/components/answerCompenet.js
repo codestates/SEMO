@@ -30,13 +30,13 @@ const AnswerText =styled.div`
     border-radius: 2vw;
     padding:3vw;
     height: 300px;
-    margin 5vw;
+    margin: 5vw;
 `
 const ButtonContainer=styled.div`
     display:flex;
     flex-direction: row;
     justify-content: center;
-    gap 10vw;
+    gap: 10vw;
 `
 
 const Answer = () => { 
