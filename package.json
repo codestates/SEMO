@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "sequelize-cli": "^6.4.1"
+  },
+  "dependencies": {
+    "react-icons": "^4.4.0"
   }
 }
