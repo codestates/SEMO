@@ -14,4 +14,5 @@ module.exports = {
   questionedit: require('./options/questionedit'),
   passwordedit: require('./users/password_edit'),
   nicknameedit: require('./users/nickname_edit'),
+  auth: require('./users/auth'),
 };
