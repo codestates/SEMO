@@ -56,7 +56,7 @@ const ImageTest =styled.div`
 `
 const WriteQuestionComponenet = () => { 
     const [title,setTitle]=useState("");
-    const [text,setText]=useState("");
+    const [content,setText]=useState("");
     
     const titleHandler = (e)=> {
         setTitle(e.target.value)
@@ -65,11 +65,12 @@ const WriteQuestionComponenet = () => {
         setText(e.target.value)
     }
     const testFn = () =>{
-       // console.log("@@@@@@@@@@@@@@@@타이틀@@@@@@@@",title,"@@@@@@@@@@@@@@@@텍스트@@@@@@@@",text)
+        console.log("@@@@@@@@@@@@@@@@타이틀@@@@@@@@",title,"@@@@@@@@@@@@@@@@텍스트@@@@@@@@",content)
         axios.post("http://localhost:3500/question",{
             title,
-            text
-        })
+            content
+
+        }) 
     }
     const [fileImg,setfileImg] =useState("")
     const saveFileImg =(e) =>{
@@ -82,7 +83,6 @@ const WriteQuestionComponenet = () => {
 
     return (
         <>
-       
         <ContainQuestion>
             <TitleContainer>
                 <InputTitleBox 
@@ -92,21 +92,17 @@ const WriteQuestionComponenet = () => {
                 onChange={titleHandler}
                 />
             </TitleContainer>
-
-            
             <WritingContainer> 
                 <InputTextBox 
                 type="text" 
                 placeholder="내용을 입력하세요" 
-                value={text}
+                value={content}
                 onChange={textHandler}
                 ></InputTextBox>
             </WritingContainer>
             <BtnContainer>
-                
                 <Button className="btn" onClick={testFn}>질문하기</Button>
                 <Button className="btn">취소</Button>
-
             </BtnContainer>       
             {/* 아래는 사진 업로드 기능인데, db로 보내기랑 css수정해야함 */}
             <ImageTest>
