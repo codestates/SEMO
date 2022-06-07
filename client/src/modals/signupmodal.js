@@ -145,7 +145,7 @@ const Signupmodal = (props) => {
       if (password !== checkpw) {
         alert("비밀번호가 일치하지 않습니다.");
       } else {
-        axios.post("http://localhost:3500/signup", {
+        axios.post("http://localhost:3500/sign/up", {
           user_id,
           nickname,
           password,
