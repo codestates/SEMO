@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "./button";
 import { useState } from "react";
-
+import axios from "axios";
 const ContainQuestion =styled.div`
     diplay:flex;
   
@@ -13,6 +13,7 @@ const InputTitleBox = styled.input`
     background: #cccccc;
     border-radius: 2vw;
     padding:3vw;
+    font-size : 5vw;
     
 `
 const InputTextBox =styled.textarea`
@@ -24,6 +25,7 @@ const InputTextBox =styled.textarea`
     vertical-align: middle;
     border-radius: 2vw;
     padding:3vw;
+    font-size : 4vw;
     
 `
 const TitleContainer =styled.div`
@@ -63,7 +65,11 @@ const WriteQuestionComponenet = () => {
         setText(e.target.value)
     }
     const testFn = () =>{
-        console.log("@@@@@@@@@@@@@@@@타이틀@@@@@@@@",title,"@@@@@@@@@@@@@@@@텍스트@@@@@@@@",text)
+       // console.log("@@@@@@@@@@@@@@@@타이틀@@@@@@@@",title,"@@@@@@@@@@@@@@@@텍스트@@@@@@@@",text)
+        axios.post("http://localhost:3500/question",{
+            title,
+            text
+        })
     }
     const [fileImg,setfileImg] =useState("")
     const saveFileImg =(e) =>{
