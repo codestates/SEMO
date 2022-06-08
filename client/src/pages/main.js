@@ -9,7 +9,8 @@ import Footer from "../components/footer";
 import LoginModalComponent from "../modals/loginmodal";
 import { useState } from "react";
 import SignupModalComponent from "../modals/signupmodal";
-import SimpleSlider from '../components/slickslide';
+import SimpleSlider from "../components/slickslide";
+import { useStore } from "../zustand/store";
 
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
@@ -56,32 +57,10 @@ const TextContainer = styled.div`
 `;
 
 const Main = () => {
-  const [loginModal, setLoginModal] = useState(false);
-  const openLoginModal = () => {
-    setLoginModal((loginModal) => (loginModal = true));
-    console.log("로그인 모달 열림");
-  };
-  const closeLoginModal = () => {
-    setLoginModal((loginModal) => (loginModal = false));
-    console.log("로그인 모달 닫힘");
-  };
-
-  const [signupModal, setSignupModal] = useState(false);
-  const openSignupModal = () => {
-    setSignupModal((signupModal) => (signupModal = true));
-    console.log("회원가입 모달 열림");
-  };
-  const closeSignupModal = () => {
-    setSignupModal((signupModal) => (signupModal = false));
-    console.log("회원가입 모달 닫힘");
-  };
-
+  const { loginmodal, signupmodal } = useStore();
   return (
     <>
-      <Header
-        openLoginModal={openLoginModal}
-        openSignupModal={openSignupModal}
-      />
+      <Header />
       <ItemasContainer>
         <ItemasContainer1>
           <TextContainer>
@@ -101,7 +80,6 @@ const Main = () => {
           <ImgContainer src={image2} alt="" />
         </ItemasContainer1>
 
-        <div style={{ width: '100%' }}><SimpleSlider /></div>
         {/* 더미 데이터 들어가야하는곳  */}
 
         <ItemasContainer1>
@@ -121,15 +99,8 @@ const Main = () => {
             <p className="h2">문제를 풀어줄 수 있어요!</p>
           </TextContainer>
         </ItemasContainer1>
-        {loginModal === true ? (
-          <LoginModalComponent
-            closeLoginModal={closeLoginModal}
-            openSignupModal={openSignupModal}
-          />
-        ) : null}
-        {signupModal === true ? (
-          <SignupModalComponent closeSignupModal={closeSignupModal} />
-        ) : null}
+        {loginmodal === true ? <LoginModalComponent /> : null}
+        {signupmodal === true ? <SignupModalComponent /> : null}
         <Footer />
       </ItemasContainer>
     </>

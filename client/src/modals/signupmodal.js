@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../components/button";
 import { useState, useHistory } from "react";
 import axios from "axios";
+import { useStore } from "../zustand/store";
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -121,7 +122,9 @@ const Text = styled.div`
 const Signupbutton = styled.div`
   padding: 7px 0 0 60px;
 `;
-const Signupmodal = (props) => {
+const Signupmodal = () => {
+  const { closeSignupModal } = useStore();
+
   const [user_id, setId] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
@@ -158,10 +161,10 @@ const Signupmodal = (props) => {
 
   return (
     <ModalContainer>
-      <ModalBackdrop onClick={props.closeSignupModal}>
+      <ModalBackdrop onClick={closeSignupModal}>
         <ModalView onClick={(e) => e.stopPropagation()}>
           <Closebutton>
-            <div onClick={props.closeSignupModal}>&times;</div>
+            <div onClick={closeSignupModal}>&times;</div>
           </Closebutton>
           <Title>회원가입</Title>
           <Signupform>

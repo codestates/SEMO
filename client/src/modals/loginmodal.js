@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../components/button";
 import kakaologo from "../images/kakaologo.png";
 import { KAKAO_AUTH_URL } from "../oauth";
+import { useStore } from "../zustand/store";
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -101,17 +102,14 @@ const Kakaologbtn = styled.img`
   /* border: 1px solid blue; */
   padding-top: 15px;
 `;
-const Loginmodal = (props) => {
-  const changeModal = () => {
-    props.openSignupModal();
-    props.closeLoginModal();
-  };
+const Loginmodal = () => {
+  const { closeLoginModal, changeModal } = useStore();
   return (
     <ModalContainer>
-      <ModalBackdrop onClick={props.closeLoginModal}>
+      <ModalBackdrop onClick={closeLoginModal}>
         <ModalView onClick={(e) => e.stopPropagation()}>
           <Closebutton>
-            <div onClick={props.closeLoginModal}>&times;</div>
+            <div onClick={closeLoginModal}>&times;</div>
           </Closebutton>
           <Title>로그인</Title>
           <Login>
