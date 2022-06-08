@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import profileimg from "../images/제경모.jpg";
@@ -89,28 +90,41 @@ const InputBox = styled.input`
 //비밀번호 수정  -->
 //사진 수정 ==>
 // 모달? 컴포넌트 추가?
-
+//isEditPw
 const Myprofile = () => {
   const [isEditnickname, editNickname] = useState(false);
-  const [isEditPw, editPw] = useState(false);
+  const [password, editPw] = useState("a123456");
+  const [isEditPw,setEditPw] =useState(false)
   const [isEditPicture, EditPicture] = useState(false);
+  const [nickname,setNickname] =useState("");
   const editNicknameBtn = () => {
     console.log("닉네임수정");
-    editNickname(true);
+    editNickname(!isEditnickname);
     console.log(isEditnickname);
   };
   const editPwBtn = () => {
     console.log("비밀번호수정");
-    editPw(true);
+    setEditPw(!isEditPw);
     console.log("비밀번호수정");
-    console.log(isEditPw);
+    console.log(password);
   };
   const editPictureBtn = () => {
     console.log("사진수정");
     EditPicture(true);
     console.log(isEditPicture);
   };
-  console.log("!!");
+  const nickNameHandler =(e)=>{
+    setNickname(e.target.value)
+  }
+const sendEditNickname =()=>{
+  console.log(nickname)
+  axios.patch("http://localhost:3500/user/nickname/edit",{
+    nickname,
+    password
+  })
+}
+//localhost3500/user/password/edit
+
   return (
     <>
       <Container>
@@ -133,10 +147,14 @@ const Myprofile = () => {
       {isEditnickname !== false ? (
         <Container2>
           <BtnContainer>
-            <InputBox placeholder="닉네임을 입력하세요" />
+            <InputBox 
+            value ={nickname}
+            placeholder="닉네임을 입력하세요"
+            onChange={nickNameHandler}
+             />
             <EditBtnContainer>
-              <Button className="btn2">수정</Button>
-              <Button className="btn2">취소</Button>
+              <Button className="btn2" onClick={sendEditNickname}>수정</Button>
+              <Button className="btn2" onClick={editNicknameBtn}>취소</Button>
             </EditBtnContainer>
           </BtnContainer>
         </Container2>
