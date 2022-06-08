@@ -3,13 +3,13 @@ import Button from "./button";
 import { useState } from "react";
 
 const ContainQuestion =styled.div`
-    diplay:flex;
+    display: flex;
   
 `
 const InputTitleBox = styled.input`
     width: 80vw;
     height: 2vw;
-    margin 5 0 2 0vw;
+    margin: 5 0 2 0vw;
     background: #cccccc;
     border-radius: 2vw;
     padding:3vw;
@@ -19,7 +19,7 @@ const InputTextBox =styled.textarea`
     
     width: 80vw;
     height: 50vw;
-    margin 5vw;
+    margin: 5vw;
     background: #cccccc;
     vertical-align: middle;
     border-radius: 2vw;
