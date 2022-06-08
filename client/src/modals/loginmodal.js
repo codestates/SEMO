@@ -2,10 +2,9 @@ import styled from "styled-components";
 import Button from "../components/button";
 import kakaologo from "../images/kakaologo.png";
 import { KAKAO_AUTH_URL } from "../oauth";
-import { useStore,useStoreTemp } from "../zustand/store";
+import { useStore, useStoreTemp } from "../zustand/store";
 import axios from "axios";
 import React from "react";
-
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -107,24 +106,23 @@ const Kakaologbtn = styled.img`
 `;
 const Loginmodal = () => {
   const { closeLoginModal, changeModal } = useStore();
-  const {testId,testPw,setTestId,setTestPw} =useStoreTemp();
-  
-  const TestIdHandler = (e)=> {
-    setTestId(e.target.value)
-    console.log(testId)
-}
-const TestPwHandler = (e)=> {
-  setTestPw(e.target.value)
-  console.log(testPw)
-}
-const testFn2 = async () =>{
-  console.log("@@@@@@@@@@@@@@@")
-   await axios.post("http://localhost:3500/sign",{
-    user_id:testId,
-    password: testPw
-   })
-   
-}
+  const { testId, testPw, setTestId, setTestPw } = useStoreTemp();
+
+  const TestIdHandler = (e) => {
+    setTestId(e.target.value);
+    console.log(testId);
+  };
+  const TestPwHandler = (e) => {
+    setTestPw(e.target.value);
+    console.log(testPw);
+  };
+  const testFn2 = async () => {
+    console.log("@@@@@@@@@@@@@@@");
+    await axios.post("http://localhost:3500/sign", {
+      user_id: testId,
+      password: testPw,
+    });
+  };
 
   return (
     <ModalContainer>
@@ -141,15 +139,15 @@ const testFn2 = async () =>{
           <Loginform>
             <div className="idtext">
               아이디
-              <Inputbox 
-              value={testId}
-              onChange={TestIdHandler}/>
+              <Inputbox value={testId} onChange={TestIdHandler} />
             </div>
             <div className="passwordtext">
-              비밀번호 
-              <Inputbox type="password" 
+              비밀번호
+              <Inputbox
+                type="password"
                 value={testPw}
-              onChange={TestPwHandler}/>
+                onChange={TestPwHandler}
+              />
             </div>
             <Button onClick={testFn2}>로그인</Button>
           </Loginform>
