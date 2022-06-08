@@ -9,11 +9,7 @@ const controllers = require("./controllers");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    credentials: true,
-    methods: ["GET", "POST", "DELETE", "OPTIONS", "PATCH"],
-  })
+  cors()
 );
 app.use(cookieParser());
 app.get("/sign/in", controllers.signin);
