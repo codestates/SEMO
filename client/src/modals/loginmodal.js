@@ -118,7 +118,7 @@ const Loginmodal = () => {
   };
   const testFn2 = async () => {
     console.log("@@@@@@@@@@@@@@@");
-    await axios.post("http://localhost:3500/sign", {
+    await axios.post("http://localhost:3500/sign/in", {
       user_id: testId,
       password: testPw,
     });
