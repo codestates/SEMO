@@ -7,7 +7,6 @@ import Button from "../components/button";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import LoginModalComponent from "../modals/loginmodal";
-import { useState } from "react";
 import SignupModalComponent from "../modals/signupmodal";
 import SimpleSlider from "../components/slickslide";
 import { useStore } from "../zustand/store";
