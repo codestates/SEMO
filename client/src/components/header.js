@@ -3,6 +3,8 @@ import styled from "styled-components";
 import logo from "../images/logo.png";
 import Button from "../components/button.js";
 import profileimg from "../images/제경모.jpg";
+import { useStore } from "../zustand/store";
+
 const HeadDiv = styled.div`
   box-sizing: border-box;
   margin: 0;
@@ -65,6 +67,8 @@ const Header = (props) => {
     console.log("login상태가 되면 ");
   };
 
+  const { openLoginModal, openSignupModal } = useStore();
+
   return (
     <>
       {isLogined === false ? (
@@ -76,10 +80,10 @@ const Header = (props) => {
               <UserNickName>서양범고래</UserNickName>
             </MyprofileContainer>
             <Btndiv>
-              <Button className="headerBtn" onClick={props.openLoginModal}>
+              <Button className="headerBtn" onClick={openLoginModal}>
                 로그인
               </Button>
-              <Button className="headerBtn" onClick={props.openSignupModal}>
+              <Button className="headerBtn" onClick={openSignupModal}>
                 회원가입
               </Button>
             </Btndiv>
