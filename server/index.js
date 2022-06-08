@@ -8,12 +8,9 @@ const controllers = require("./controllers");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors()
-);
+app.use(cors());
 app.use(cookieParser());
 app.get("/sign/in", controllers.signin);
-app.get("/sign/in/auth", controllers.auth);
 app.post("/sign/up", controllers.signup);
 app.post("/sign/out", controllers.signout);
 app.delete("/sign/withdraw", controllers.signwithdraw);
