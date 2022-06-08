@@ -13,3 +13,39 @@ export const useStore = create((set) => ({
     set({ signupmodal: false }, console.log("회원가입 모달 닫힘")),
   changeModal: () => set({ loginmodal: false, signupmodal: true }),
 }));
+
+export  const useStoreTemp = create((set) => ({
+    loginmodal: false,
+    isEditnickname :false,
+    isEditPw:false,
+    password:"a123456",
+    nickname:"",
+    inputPw:"",
+    confirmInputPw:"",
+    title:"",
+    text:"",
+    
+    editPwBtn:()=>set((state)=>({isEditPw:(state.isEditPw=true)})),
+  
+    editNicknameBtn: () => set((state)=> ({isEditnickname :(state.isEditnickname =true) })),
+    cancelEditNicknameBtn:()=>set((state)=>({isEditnickname:(!state.isEditnickname)})),
+    setNickname: (a) =>set((state)=>({nickname:(state.nickname =a)}),console.log(a)),
+    setInputPw: (a) =>set((state)=>({inputPw:(state.inputPw =a)}),console.log(a)),
+    setConfrimInputPw: (a) =>set((state)=>({confirmInputPw:(state.confirmInputPw =a)}),console.log(a)),
+    setTitle: (a) =>set((state)=>({title:(state.title =a)}),console.log(a)),
+    setText: (a) =>set((state)=>({text:(state.text =a)}),console.log(a)),  
+    
+    
+    
+    openLoginModal: () => 
+      set((state) => ({ loginmodal: (state.loginmodal = true) })),
+    
+    
+      
+  })
+  
+  
+  );
+  
+  
+  

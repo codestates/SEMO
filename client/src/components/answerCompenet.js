@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Button from "./button";
-import Header from "./header";
 import { useState } from "react";
 import axios from "axios";
 
@@ -31,13 +30,13 @@ const AnswerText =styled.div`
     border-radius: 2vw;
     padding:3vw;
     height: 300px;
-    margin: 5vw;
+    margin 5vw;
 `
 const ButtonContainer=styled.div`
     display:flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10vw;
+    gap 10vw;
 `
 const ReplyContainer =styled.div`
 
