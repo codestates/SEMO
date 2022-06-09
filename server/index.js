@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
+app.get("/sign/auth", controllers.auth);
 app.post("/sign/in", controllers.signin);
 app.post("/sign/up", controllers.signup);
 app.post("/sign/out", controllers.signout);
