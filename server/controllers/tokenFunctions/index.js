@@ -8,10 +8,21 @@ module.exports = {
     const accessToken = sign(data, process.env.ACCESS_SECRET,{expiresIn : "1d"});
     return accessToken
   },
+  generateRefreshToken: (data) => {
+    return sign(data, process.env.REFRESH_SECRET, { expiresIn: "3d" });
+  },
   sendAccessToken: (res, accessToken) => {
     // TODO: JWT 토큰을 쿠키로 전달합니다.
     return res.cookie("jwt", accessToken);
     //res.json({ message: 'ok' });
+  },
+  sendRefreshToken: (res, refreshToken) => {
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+    });
+  },
+  resendAccessToken: (res, accessToken, data) => {
+    res.cookie("jwt",accessToken).json({ data: { userInfo: data }, message: "ok" });
   },
   isAuthorized: (req) => {
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
@@ -36,5 +47,13 @@ module.exports = {
 
     }
 
-  }
+  },
+  checkRefeshToken: (refreshToken) => {
+    try {
+      return verify(refreshToken, process.env.REFRESH_SECRET);
+    } catch (err) {
+      // return null if refresh token is not valid
+      return null;
+    }
+  },
 };

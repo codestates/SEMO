@@ -11,15 +11,12 @@ try{
    
   if(!accessTokenData){
       return res.status(401).send({ data: null, message: 'not authorized' });
-
-
-
   } else {
    const userInfo = await user.findOne({
      where  :{user_id : accessTokenData.user_id}
    }) ;
 
-   return res.status(200).cookie("jwt",req.cookies.jwt).json({data : userInfo })
+   return res.status(200).json({data : userInfo })
 
   }
 
