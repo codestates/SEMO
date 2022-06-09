@@ -3,8 +3,9 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import KakaoRedirectHandler from "./KakaoRedirectHandeler";
 import Mypage from "./pages/mypage";
 import Main from "./pages/main";
-import WritingPage from "./pages/question"
+import WritingPage from "./pages/question";
 import AnswerPage from "./pages/answer";
+
 function App() {
   return (
     <BrowserRouter>

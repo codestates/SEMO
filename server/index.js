@@ -5,19 +5,20 @@ const express = require("express");
 const app = express();
 
 const controllers = require("./controllers");
+const models = require("./models/index.js");
 
+models.sequelize.sync().then(() => {
+    console.log("DB 연결 성공");
+}).catch(err => {
+    console.log("연결 실패");
+    console.log(err);
+})
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    credentials: true,
-    methods: ["GET", "POST", "DELETE", "OPTIONS", "PATCH"],
-  })
-);
+app.use(cors());
 app.use(cookieParser());
-app.get("/sign/in", controllers.signin);
-app.get("/sign/in/auth", controllers.auth);
+app.get("/sign/auth", controllers.auth);
+app.post("/sign/in", controllers.signin);
 app.post("/sign/up", controllers.signup);
 app.post("/sign/out", controllers.signout);
 app.delete("/sign/withdraw", controllers.signwithdraw);

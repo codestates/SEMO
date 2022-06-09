@@ -2,10 +2,10 @@ import styled from "styled-components";
 import Button from "../components/button";
 import kakaologo from "../images/kakaologo.png";
 import { KAKAO_AUTH_URL } from "../oauth";
-import { useStore,useStoreTemp } from "../zustand/store";
+import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
 import axios from "axios";
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -106,25 +106,54 @@ const Kakaologbtn = styled.img`
   padding-top: 15px;
 `;
 const Loginmodal = () => {
-  const { closeLoginModal, changeModal } = useStore();
-  const {testId,testPw,setTestId,setTestPw} =useStoreTemp();
-  
-  const TestIdHandler = (e)=> {
-    setTestId(e.target.value)
-    console.log(testId)
-}
-const TestPwHandler = (e)=> {
-  setTestPw(e.target.value)
-  console.log(testPw)
-}
-const testFn2 = async () =>{
-  console.log("@@@@@@@@@@@@@@@")
-   await axios.post("http://localhost:3500/sign",{
-    user_id:testId,
-    password: testPw
-   })
-   
-}
+  const navigate = useNavigate();
+  const { closeLoginModal, changeModal, setLogin } = useStore();
+  const { testId, testPw, setTestId, setTestPw, setjwttoken, jwttoken } =
+    useStoreTemp();
+  const {
+    user_id,
+    password,
+    nickname,
+    setUserUserid,
+    setUserNickname,
+    setUserPassword,
+  } = useUserinfo();
+  const TestIdHandler = (e) => {
+    setTestId(e.target.value);
+    console.log(testId);
+  };
+  const TestPwHandler = (e) => {
+    setTestPw(e.target.value);
+    console.log(testPw);
+  };
+  const testFn2 = async () => {
+    await axios
+      .post("http://localhost:3500/sign/in", {
+        user_id: testId,
+        password: testPw,
+      })
+      .then((res) => {
+        const fuckingtoken = res.data.data;
+        console.log(fuckingtoken);
+        setjwttoken(fuckingtoken);
+        return axios
+          .get("http://localhost:3500/sign/auth", {
+            headers: {
+              authorization: `${fuckingtoken}`,
+            },
+          })
+          .then((res) => {
+            console.log("@@@@", res, "########", res.data.data.nickname);
+            setUserUserid(res.data.data.user_id);
+            setUserNickname(res.data.data.nickname);
+            setUserPassword(res.data.data.password);
+            setLogin();
+            closeLoginModal();
+            console.log("aaaaasd", user_id);
+          });
+      });
+    navigate("/");
+  };
 
   return (
     <ModalContainer>
@@ -141,15 +170,15 @@ const testFn2 = async () =>{
           <Loginform>
             <div className="idtext">
               아이디
-              <Inputbox 
-              value={testId}
-              onChange={TestIdHandler}/>
+              <Inputbox value={testId} onChange={TestIdHandler} />
             </div>
             <div className="passwordtext">
-              비밀번호 
-              <Inputbox type="password" 
+              비밀번호
+              <Inputbox
+                type="password"
                 value={testPw}
-              onChange={TestPwHandler}/>
+                onChange={TestPwHandler}
+              />
             </div>
             <Button onClick={testFn2}>로그인</Button>
           </Loginform>

@@ -1,20 +1,18 @@
-
-import styled from "styled-components";
 import Header from "../components/header";
 import MyAnswer from "../components/myanswer";
 import Myprofile from "../components/myprofile";
 import Myquestion from "../components/myquestion";
-
+import Footer from "../components/footer";
 
 const Mypage = () => {
-    return (
-    <> 
+  return (
+    <>
       <Header></Header>
       <Myprofile></Myprofile>
       <Myquestion></Myquestion>
       <MyAnswer></MyAnswer>
-      <div>FOOTER</div>
+      <Footer />
     </>
-    );
+  );
 };
 export default Mypage;
