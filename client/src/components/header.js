@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import logo from "../images/logo.png";
 import Button from "../components/button.js";
@@ -42,18 +41,20 @@ const UserNickName = styled.span`
   font-size: 3vw;
 `;
 const RightContainer = styled.div`
-  diplay: flex;
+  /* background-color: blue; */
+  display: flex;
   align-items: flex-end;
-  flex-direction: row;
+  flex-direction: column;
 `;
+
 const MyprofileContainer = styled.div`
   display: flex;
-  flex-direction: row;
   gap: 5vw;
   align-items: center;
-  pading-right: 2vw;
+  padding-right: 2vw;
 `;
 const Btndiv = styled.div`
+  /* background-color: red; */
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -70,15 +71,14 @@ const Btndiv = styled.div`
 `;
 
 const Header = (props) => {
-  const { openLoginModal, openSignupModal, isLogin } = useStore();
-  const { jwttoken, clickMyPage, setClickMypage } = useStoreTemp();
-  const { user_id, password, nickname } = useUserinfo();
+  const { openLoginModal, openSignupModal, islogin } = useStore();
+  const { nickname } = useUserinfo();
 
   const getuserinfo = async () => {
     await axios
       .get("http://localhost:3500/user/auth", {
         headers: {
-          authorization: `${jwttoken}`,
+          authorization: "asdfas",
         },
       })
       .then((res) => {
@@ -88,7 +88,7 @@ const Header = (props) => {
 
   return (
     <>
-      {isLogin === false ? (
+      {islogin === false ? (
         <HeadDiv>
           <Logoimage />
 
@@ -111,7 +111,7 @@ const Header = (props) => {
           <RightContainer>
             <MyprofileContainer>
               <MyProFileImg />
-              <UserNickName>{user_id}</UserNickName>
+              <UserNickName>{nickname}</UserNickName>
             </MyprofileContainer>
             <Btndiv>
               <Button className="headerBtn" onClick={props.openModalHandler}>
