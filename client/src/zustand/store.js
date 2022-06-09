@@ -1,8 +1,10 @@
 import create from "zustand";
-
+//TEST
+//teststststststststt
 export const useStore = create((set) => ({
   loginmodal: false,
   signupmodal: false,
+  isLogin: false,
   openLoginModal: () =>
     set({ loginmodal: true }, console.log("로그인 모달 열림")),
   closeLoginModal: () =>
@@ -12,6 +14,7 @@ export const useStore = create((set) => ({
   closeSignupModal: () =>
     set({ signupmodal: false }, console.log("회원가입 모달 닫힘")),
   changeModal: () => set({ loginmodal: false, signupmodal: true }),
+  setLogin: () => set({ isLogin: true }, console.log("성공")),
 }));
 // qjastar a123456
 export const useStoreTemp = create((set) => ({
@@ -27,6 +30,7 @@ export const useStoreTemp = create((set) => ({
   testId: "",
   testPw: "",
   jwttoken: "",
+  clickMyPage: false,
 
   editPwBtn: () => set((state) => ({ isEditPw: (state.isEditPw = true) })),
   editNicknameBtn: () =>
@@ -51,7 +55,26 @@ export const useStoreTemp = create((set) => ({
     set((state) => ({ testPw: (state.testPw = a) }), console.log(a)),
   openLoginModal: () =>
     set((state) => ({ loginmodal: (state.loginmodal = true) })),
+  setClickMypage: () =>
+    set(
+      (state) => (
+        { clickMyPage: (state.clickMyPage = true) }, console.log("click")
+      )
+    ),
 
   setjwttoken: async (a) =>
     await set((state) => ({ jwttoken: (state.jwttoken = a) })),
+}));
+
+export const useUserinfo = create((set) => ({
+  user_id: "",
+  password: "",
+  nickname: "",
+
+  setUserUserid: (a) =>
+    set((state) => ({ user_id: (state.user_id = a) }), console.log(a)),
+  setUserNickname: (a) =>
+    set((state) => ({ nickname: (state.nickname = a) }), console.log(a)),
+  setUserPassword: (a) =>
+    set((state) => ({ password: (state.password = a) }), console.log(a)),
 }));

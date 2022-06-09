@@ -3,8 +3,9 @@ import styled from "styled-components";
 import logo from "../images/logo.png";
 import Button from "../components/button.js";
 import profileimg from "../images/제경모.jpg";
-import { useStore, useStoreTemp } from "../zustand/store";
+import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const HeadDiv = styled.div`
   box-sizing: border-box;
@@ -40,17 +41,22 @@ const MyProFileImg = styled.img.attrs({
 const UserNickName = styled.span`
   font-size: 3vw;
 `;
-const RightContainer = styled.div``;
+const RightContainer = styled.div`
+  diplay: flex;
+  align-items: flex-end;
+  flex-direction: row;
+`;
 const MyprofileContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5vw;
   align-items: center;
+  pading-right: 2vw;
 `;
 const Btndiv = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: flex-end;
   padding: 0px;
   gap: 2vw;
   margin-top: 2vw;
@@ -58,18 +64,15 @@ const Btndiv = styled.div`
     font-size: 3vw;
     width: 17vw;
   }
+  .link {
+    text-decoration: none;
+  }
 `;
 
 const Header = (props) => {
-  const [isLogined, logined] = useState(false);
-
-  const loginFunction = () => {
-    logined(true);
-    console.log("login상태가 되면 ");
-  };
-
-  const { openLoginModal, openSignupModal } = useStore();
-  const { jwttoken } = useStoreTemp();
+  const { openLoginModal, openSignupModal, isLogin } = useStore();
+  const { jwttoken, clickMyPage, setClickMypage } = useStoreTemp();
+  const { user_id, password, nickname } = useUserinfo();
 
   const getuserinfo = async () => {
     await axios
@@ -85,14 +88,11 @@ const Header = (props) => {
 
   return (
     <>
-      {isLogined === false ? (
+      {isLogin === false ? (
         <HeadDiv>
           <Logoimage />
+
           <RightContainer>
-            <MyprofileContainer>
-              <MyProFileImg />
-              <UserNickName>서양범고래</UserNickName>
-            </MyprofileContainer>
             <Btndiv>
               <Button className="headerBtn" onClick={openLoginModal}>
                 로그인
@@ -105,19 +105,29 @@ const Header = (props) => {
         </HeadDiv>
       ) : (
         <HeadDiv>
-          <Logoimage />
+          <Link to="/">
+            <Logoimage />
+          </Link>
           <RightContainer>
             <MyprofileContainer>
               <MyProFileImg />
-              <UserNickName>.nickname자리</UserNickName>
+              <UserNickName>{user_id}</UserNickName>
             </MyprofileContainer>
             <Btndiv>
               <Button className="headerBtn" onClick={props.openModalHandler}>
                 로그아웃
               </Button>
-              <Button className="headerBtn" onClick={getuserinfo}>
-                회원탈퇴
-              </Button>
+              {clickMyPage === false ? (
+                <Link className="link" to="/mypage">
+                  <Button className="headerBtn" onClick={setClickMypage}>
+                    마이페이지
+                  </Button>
+                </Link>
+              ) : (
+                <Link className="link" to="/mypage">
+                  <Button className="headerBtn">회원탈퇴</Button>
+                </Link>
+              )}
             </Btndiv>
           </RightContainer>
         </HeadDiv>
