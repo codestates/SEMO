@@ -15,4 +15,6 @@ module.exports = {
   passwordedit: require('./users/password_edit'),
   nicknameedit: require('./users/nickname_edit'),
   auth: require('./users/auth'),
+  idcheck: require('./users/id_check'),
+  nicknamecheck: require('./users/nickname_check'),
 };

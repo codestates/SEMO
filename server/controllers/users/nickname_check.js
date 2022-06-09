@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
       where : {nickname : nickname}
     }); //일치하는 정보가 data 에 
     
-    if(!data) return res.status(200).send("okay");
+    if(data) return res.status(200).send("nickname exist");
       
      else{
 
