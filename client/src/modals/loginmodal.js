@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "../components/button";
 import kakaologo from "../images/kakaologo.png";
 import { KAKAO_AUTH_URL } from "../oauth";
-import { useStore, useStoreTemp } from "../zustand/store";
+import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
 import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -107,10 +107,17 @@ const Kakaologbtn = styled.img`
 `;
 const Loginmodal = () => {
   const navigate = useNavigate();
-  const { closeLoginModal, changeModal } = useStore();
+  const { closeLoginModal, changeModal, setLogin } = useStore();
   const { testId, testPw, setTestId, setTestPw, setjwttoken, jwttoken } =
     useStoreTemp();
-
+  const {
+    user_id,
+    password,
+    nickname,
+    setUserUserid,
+    setUserNickname,
+    setUserPassword,
+  } = useUserinfo();
   const TestIdHandler = (e) => {
     setTestId(e.target.value);
     console.log(testId);
@@ -136,10 +143,16 @@ const Loginmodal = () => {
             },
           })
           .then((res) => {
-            console.log(res);
+            console.log("@@@@", res, "########", res.data.data.nickname);
+            setUserUserid(res.data.data.user_id);
+            setUserNickname(res.data.data.nickname);
+            setUserPassword(res.data.data.password);
+            setLogin();
+            closeLoginModal();
+            console.log("aaaaasd", user_id);
           });
       });
-    navigate("/mypage");
+    navigate("/");
   };
 
   return (
