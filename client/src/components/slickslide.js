@@ -1,71 +1,91 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import styled from "styled-components";
-import React from "react";
+import styled from 'styled-components';
+import axios from 'axios';
+import React from 'react';
 
 const Container = styled.div`
-  overflow: hidden;
+  overflow:hidden;
 `;
 
 const StyledSlider = styled(Slider)`
-  .slick-slide div {
-    outline: none;
-  }
+    .slick-slide div{
+      outline: none;
+    }
 `;
 
 const ImageContainer = styled.div`
   display: flex;
-  width: 100%;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  border-bottom: 2px solid #ced4da;
-  border-top: 2px solid #ced4da;
-  justify-content: center;
-  align-items: center;
-  bottom: 0%;
-  z-index: 1;
+  width:100%;
+  padding-top: 2vw;
+  padding-bottom: 2vw;
+  border-bottom: 2px solid #CED4DA;
+  border-top: 2px solid #CED4DA;
+  justify-content : center;
+  align-items : center;
 `;
 
 const ProfilePhoto = styled.img`
   display: flex;
-  width: 10rem;
-  height: 10rem;
+  width:10vw;
+  height:10vw;
   align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  z-index: 2;
+  justify-content : center;
+  border-radius: 100%;  
 `;
 
 const AnswerInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  z-index: 3;
-`;
+  justify-content : center;  
+`
 
 const Name = styled.div`
-  justify-content: center;
-  font-size: 30px;
-`;
+  justify-content : center;
+  font-size: 3vw;
+  font-weight: bold;
+`
 
 const Title = styled.div`
-  font-size: 20px;
-`;
+  font-size: 0.8vw;
+`
 
-const imgUrl = require("../images/김범주.jpg");
+const imgUrl = require('../images/권민수.jpg');
 
 const items = [
-  { id: 1, url: imgUrl },
-  { id: 2, url: imgUrl },
-  { id: 3, url: imgUrl },
-  { id: 4, url: imgUrl },
-  { id: 5, url: imgUrl },
-  { id: 6, url: imgUrl },
+  //유저닉네임과 질문제목을 db에서 받아옴
+  {
+    id: 1, url: imgUrl,
+    Nickname: "fineartgo",
+    Title: "국어가 좋아요"
+  },
+  {
+    id: 2, url: imgUrl,
+    Nickname: "fineartgo",
+    Title: "영어가 좋아요"
+  },
+  {
+    id: 3, url: imgUrl,
+    Nickname: "fineartgo",
+    Title: "수학이 좋아요"
+  },
+  {
+    id: 4, url: imgUrl,
+    Nickname: "fineartgo",
+    Title: "사회가 좋아요"
+  },
+  {
+    id: 5, url: imgUrl,
+    Nickname: "fineartgo",
+    Title: "과학이 좋아요"
+  }
 ];
 
+
 function SimpleSlider() {
+
   const settings = {
     dots: false,
     infinite: true,
@@ -73,29 +93,53 @@ function SimpleSlider() {
     slidesToShow: 3,
     slidesToScroll: 3,
     autoplay: true,
-    autoplaySpeed: 500,
-    arrows: true,
-    centerMode: true,
+    autoplaySpeed: 3000,
+    centerMode: false
   };
+
+  const user_id = 'david0525'
+  const password = 'b123456'
+
+  const SendNickname = () => {
+    axios.get("http://localhost:3500/user/info", {
+      params: {
+        user_id,
+        password
+      }
+    })
+      .then(res => {
+        console.log((res.data.message.nickname));
+        //닉네임만 받아올것
+      })
+  }
+
+  const SendQuestTitle = () => {
+    axios.get("http://localhost:3500/question/all/")
+      .then(res => {
+        console.log((res.data[0].title));
+      })
+  }
+
   return (
     <Container>
-      <h2> 답변을 기다리고 있어요!</h2>
+      <h5> 답변을 기다리고 있어요!</h5>
       <StyledSlider {...settings}>
-        {items.map((item) => {
+        {items.map(item => {
+          console.log(item)
           return (
             <div key={item.id}>
               <ImageContainer>
                 <ProfilePhoto src={item.url} />
-                <AnswerInfo>
-                  <Name>김범주</Name>
-                  <Title>서버 마스터</Title>
+                <AnswerInfo >
+                  <Name><div onClick={SendNickname}>{item.Nickname}</div></Name>
+                  <Title><div onClick={SendQuestTitle}>{item.Title}</div></Title>
                 </AnswerInfo>
               </ImageContainer>
             </div>
           );
         })}
       </StyledSlider>
-    </Container>
+    </Container >
   );
 }
-export default SimpleSlider;
+export default SimpleSlider
