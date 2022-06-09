@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "yourPassword",
+    "password": "qjawnalwn22@",
     "database": "semo",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -14,10 +14,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "yourPassword",
+    "username": "admin",
+    "password": "qjawnalwn22",
     "database": "semo",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "semo.ci0sbbgpydz0.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "port": "3306"
   }
 }
