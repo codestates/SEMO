@@ -32,8 +32,8 @@ app.patch("/answer/edit", controllers.answeredit);
 app.patch("/question/edit", controllers.questionedit);
 app.patch("/user/nickname/edit", controllers.nicknameedit);
 app.patch("/user/password/edit", controllers.passwordedit);
-app.get("/sign/id_check", controllers.id_check);
-app.get("/sign/nickname_check", controllers.nickname_check);
+app.get("/sign/idcheck", controllers.idcheck);
+app.get("/sign/nicknamecheck", controllers.nicknamecheck);
 
 
 const PORT = process.env.PORT || 3500;
