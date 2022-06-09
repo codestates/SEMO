@@ -17,7 +17,8 @@
     "username": "root",
     "password": "1q2w3e4r!",
     "database": "semo",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "semo.ci0sbbgpydz0.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "port": "3306"
   }
 }
