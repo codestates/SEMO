@@ -105,19 +105,13 @@ const Kakaologbtn = styled.img`
   /* border: 1px solid blue; */
   padding-top: 15px;
 `;
-const Loginmodal = () => {
+const Signoutmodal = () => {
   const navigate = useNavigate();
-  const { closeLoginModal, changeModal, setLogin } = useStore();
-  const { testId, testPw, setTestId, setTestPw, setjwttoken, jwttoken } =
-    useStoreTemp();
-  const {
-    user_id,
-    password,
-    nickname,
-    setUserUserid,
-    setUserNickname,
-    setUserPassword,
-  } = useUserinfo();
+  const { closeLoginModal, setLogin } = useStore();
+  const { testId, testPw, setTestId, setTestPw } = useStoreTemp();
+  const { setUserNickname, setUserUser_id, setUserpassword, nickname } =
+    useUserinfo();
+
   const TestIdHandler = (e) => {
     setTestId(e.target.value);
   };
@@ -139,13 +133,9 @@ const Loginmodal = () => {
             },
           })
           .then((res) => {
-            console.log("@@@@", res, "########", res.data.data.nickname);
-            setUserUserid(res.data.data.user_id);
-            setUserNickname(res.data.data.nickname);
-            setUserPassword(res.data.data.password);
             setLogin();
             closeLoginModal();
-            console.log("aaaaasd", user_id);
+            setUserNickname(res.data.data.nickname);
           });
       });
     navigate("/");
@@ -158,11 +148,8 @@ const Loginmodal = () => {
           <Closebutton>
             <div onClick={closeLoginModal}>&times;</div>
           </Closebutton>
-          <Title>로그인</Title>
-          <Login>
-            회원이 아니신가요?
-            <Button onClick={changeModal}>회원가입</Button>
-          </Login>
+          <Title>회원탈퇴</Title>
+          <Login>아이디 비밀번호를 입력해주세요!</Login>
           <Loginform>
             <div className="idtext">
               아이디
@@ -176,15 +163,12 @@ const Loginmodal = () => {
                 onChange={TestPwHandler}
               />
             </div>
-            <Button onClick={testFn2}>로그인</Button>
+            <Button onClick={testFn2}>회원탈퇴</Button>
           </Loginform>
-          <a href={KAKAO_AUTH_URL}>
-            <Kakaologbtn src={kakaologo} alt="" />
-          </a>
         </ModalView>
       </ModalBackdrop>
     </ModalContainer>
   );
 };
 
-export default Loginmodal;
+export default Signoutmodal;
