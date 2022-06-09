@@ -100,6 +100,7 @@ const Myprofile = () => {
     setConfrimInputPw,
     inputPw,
     confirmInputPw,
+    cook,
   } = useStoreTemp(); //zustand
 
   const [isEditPicture, EditPicture] = useState(false);
@@ -147,7 +148,6 @@ const Myprofile = () => {
       //axios 자리
     }
   };
-
   return (
     <>
       <Container>

@@ -5,6 +5,7 @@ import { KAKAO_AUTH_URL } from "../oauth";
 import { useStore, useStoreTemp } from "../zustand/store";
 import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -105,8 +106,10 @@ const Kakaologbtn = styled.img`
   padding-top: 15px;
 `;
 const Loginmodal = () => {
+  const navigate = useNavigate();
   const { closeLoginModal, changeModal } = useStore();
-  const { testId, testPw, setTestId, setTestPw } = useStoreTemp();
+  const { testId, testPw, setTestId, setTestPw, setjwttoken, jwttoken } =
+    useStoreTemp();
 
   const TestIdHandler = (e) => {
     setTestId(e.target.value);
@@ -117,11 +120,26 @@ const Loginmodal = () => {
     console.log(testPw);
   };
   const testFn2 = async () => {
-    console.log("@@@@@@@@@@@@@@@");
-    await axios.post("http://localhost:3500/sign/in", {
-      user_id: testId,
-      password: testPw,
-    });
+    await axios
+      .post("http://localhost:3500/sign/in", {
+        user_id: testId,
+        password: testPw,
+      })
+      .then((res) => {
+        const fuckingtoken = res.data.data;
+        console.log(fuckingtoken);
+        setjwttoken(fuckingtoken);
+        return axios
+          .get("http://localhost:3500/sign/auth", {
+            headers: {
+              authorization: `${fuckingtoken}`,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          });
+      });
+    navigate("/mypage");
   };
 
   return (
