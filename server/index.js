@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
+app.get("/sign/auth", controllers.auth);
 app.post("/sign/in", controllers.signin);
 app.post("/sign/up", controllers.signup);
 app.post("/sign/out", controllers.signout);
@@ -31,6 +32,9 @@ app.patch("/answer/edit", controllers.answeredit);
 app.patch("/question/edit", controllers.questionedit);
 app.patch("/user/nickname/edit", controllers.nicknameedit);
 app.patch("/user/password/edit", controllers.passwordedit);
+app.get("/sign/id_check", controllers.id_check);
+app.get("/sign/nickname_check", controllers.nickname_check);
+
 
 const PORT = process.env.PORT || 3500;
 

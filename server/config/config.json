@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": "qjawnalwn22@",
+    "password": "1q2w3e4r!",
     "database": "semo",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "yourPassword",
+    "password": "1q2w3e4r!",
     "database": "semo",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "admin",
-    "password": "qjawnalwn22",
+    "username": "root",
+    "password": "1q2w3e4r!",
     "database": "semo",
     "host": "semo.ci0sbbgpydz0.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",

@@ -26,6 +26,7 @@ export const useStoreTemp = create((set) => ({
   text: "",
   testId: "",
   testPw: "",
+  jwttoken: "",
 
   editPwBtn: () => set((state) => ({ isEditPw: (state.isEditPw = true) })),
   editNicknameBtn: () =>
@@ -50,4 +51,7 @@ export const useStoreTemp = create((set) => ({
     set((state) => ({ testPw: (state.testPw = a) }), console.log(a)),
   openLoginModal: () =>
     set((state) => ({ loginmodal: (state.loginmodal = true) })),
+
+  setjwttoken: async (a) =>
+    await set((state) => ({ jwttoken: (state.jwttoken = a) })),
 }));

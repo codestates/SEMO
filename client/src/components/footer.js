@@ -13,7 +13,6 @@ const SemoinfoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-bottom: 2px solid #ced4da;
 `;
 const Semoinfo = styled.div`

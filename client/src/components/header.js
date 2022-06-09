@@ -3,7 +3,8 @@ import styled from "styled-components";
 import logo from "../images/logo.png";
 import Button from "../components/button.js";
 import profileimg from "../images/제경모.jpg";
-import { useStore } from "../zustand/store";
+import { useStore, useStoreTemp } from "../zustand/store";
+import axios from "axios";
 
 const HeadDiv = styled.div`
   box-sizing: border-box;
@@ -68,6 +69,19 @@ const Header = (props) => {
   };
 
   const { openLoginModal, openSignupModal } = useStore();
+  const { jwttoken } = useStoreTemp();
+
+  const getuserinfo = async () => {
+    await axios
+      .get("http://localhost:3500/user/auth", {
+        headers: {
+          authorization: `${jwttoken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return (
     <>
@@ -101,7 +115,9 @@ const Header = (props) => {
               <Button className="headerBtn" onClick={props.openModalHandler}>
                 로그아웃
               </Button>
-              <Button className="headerBtn">회원탈퇴</Button>
+              <Button className="headerBtn" onClick={getuserinfo}>
+                회원탈퇴
+              </Button>
             </Btndiv>
           </RightContainer>
         </HeadDiv>
