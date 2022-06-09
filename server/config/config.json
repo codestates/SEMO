@@ -8,16 +8,17 @@
   },
   "test": {
     "username": "root",
-    "password": "qjawnalwn22@",
+    "password": "yourPassword",
     "database": "semo",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "qjawnalwn22@",
+    "username": "admin",
+    "password": "qjawnalwn22",
     "database": "semo",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "semo.ci0sbbgpydz0.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "port": "3306"
   }
 }

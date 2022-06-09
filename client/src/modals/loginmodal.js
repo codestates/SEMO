@@ -2,7 +2,9 @@ import styled from "styled-components";
 import Button from "../components/button";
 import kakaologo from "../images/kakaologo.png";
 import { KAKAO_AUTH_URL } from "../oauth";
-import { useStore } from "../zustand/store";
+import { useStore, useStoreTemp } from "../zustand/store";
+import axios from "axios";
+import React from "react";
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -69,7 +71,7 @@ const Login = styled.div`
   gap: 10px;
 `;
 
-const Loginform = styled.form`
+const Loginform = styled.div`
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
@@ -104,6 +106,24 @@ const Kakaologbtn = styled.img`
 `;
 const Loginmodal = () => {
   const { closeLoginModal, changeModal } = useStore();
+  const { testId, testPw, setTestId, setTestPw } = useStoreTemp();
+
+  const TestIdHandler = (e) => {
+    setTestId(e.target.value);
+    console.log(testId);
+  };
+  const TestPwHandler = (e) => {
+    setTestPw(e.target.value);
+    console.log(testPw);
+  };
+  const testFn2 = async () => {
+    console.log("@@@@@@@@@@@@@@@");
+    await axios.post("http://localhost:3500/sign/in", {
+      user_id: testId,
+      password: testPw,
+    });
+  };
+
   return (
     <ModalContainer>
       <ModalBackdrop onClick={closeLoginModal}>
@@ -119,12 +139,17 @@ const Loginmodal = () => {
           <Loginform>
             <div className="idtext">
               아이디
-              <Inputbox />
+              <Inputbox value={testId} onChange={TestIdHandler} />
             </div>
             <div className="passwordtext">
-              비밀번호 <Inputbox type="password" />
+              비밀번호
+              <Inputbox
+                type="password"
+                value={testPw}
+                onChange={TestPwHandler}
+              />
             </div>
-            <Button>로그인</Button>
+            <Button onClick={testFn2}>로그인</Button>
           </Loginform>
           <a href={KAKAO_AUTH_URL}>
             <Kakaologbtn src={kakaologo} alt="" />

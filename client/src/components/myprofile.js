@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import profileimg from "../images/제경모.jpg";
+import { useStoreTemp } from "../zustand/store";
 import Button from "./button";
 
 const Container = styled.div`
@@ -84,46 +85,68 @@ const InputBox = styled.input`
   background: #cccccc;
   text-align: center;
 `;
-//해야 할 꺼 --> 로그인 상태를 기준으로 닉네임 받아와서 이름 삽입 .
-//onclick 달기, usestate 상태 주기 .?
-//닉네임 수정  -->
-//비밀번호 수정  -->
-//사진 수정 ==>
-// 모달? 컴포넌트 추가?
-//isEditPw
+
 const Myprofile = () => {
-  const [isEditnickname, editNickname] = useState(false);
-  const [password, editPw] = useState("a123456");
-  const [isEditPw,setEditPw] =useState(false)
+  const {
+    isEditnickname,
+    editNicknameBtn,
+    isEditPw,
+    editPwBtn,
+    cancelEditNicknameBtn,
+    password,
+    nickname,
+    setNickname,
+    setInputPw,
+    setConfrimInputPw,
+    inputPw,
+    confirmInputPw,
+  } = useStoreTemp(); //zustand
+
   const [isEditPicture, EditPicture] = useState(false);
-  const [nickname,setNickname] =useState("");
-  const editNicknameBtn = () => {
-    console.log("닉네임수정");
-    editNickname(!isEditnickname);
-    console.log(isEditnickname);
-  };
-  const editPwBtn = () => {
-    console.log("비밀번호수정");
-    setEditPw(!isEditPw);
-    console.log("비밀번호수정");
-    console.log(password);
-  };
   const editPictureBtn = () => {
     console.log("사진수정");
     EditPicture(true);
     console.log(isEditPicture);
   };
-  const nickNameHandler =(e)=>{
-    setNickname(e.target.value)
-  }
-const sendEditNickname =()=>{
-  console.log(nickname)
-  axios.patch("http://localhost:3500/user/nickname/edit",{
-    nickname,
-    password
-  })
-}
-//localhost3500/user/password/edit
+
+  const nickNameHandler = (e) => {
+    setNickname(e.target.value);
+  };
+
+  const sendEditNickname = () => {
+    axios.patch("http://localhost:3500/user/nickname/edit", {
+      nickname,
+      password,
+    });
+  };
+
+  const inputPwHandler = (e) => {
+    setInputPw(e.target.value);
+  };
+
+  const confirmPwHandler = (e) => {
+    setConfrimInputPw(e.target.value);
+  };
+
+  const editPwHandler = () => {
+    const user_id = "david0525";
+    console.log(
+      "비번입력값",
+      inputPw,
+      "@@@@@@@@@@@@비번확인값",
+      confirmInputPw
+    );
+    if (inputPw !== confirmInputPw) {
+      console.log("둘이다름");
+    } else {
+      console.log("굳");
+      axios.patch("http://localhost:3500/user/password/edit", {
+        user_id, //user_id 를 어케 지정해줄지 구현해야함
+        password: inputPw,
+      });
+      //axios 자리
+    }
+  };
 
   return (
     <>
@@ -147,14 +170,18 @@ const sendEditNickname =()=>{
       {isEditnickname !== false ? (
         <Container2>
           <BtnContainer>
-            <InputBox 
-            value ={nickname}
-            placeholder="닉네임을 입력하세요"
-            onChange={nickNameHandler}
-             />
+            <InputBox
+              value={nickname}
+              placeholder="닉네임을 입력하세요"
+              onChange={nickNameHandler}
+            />
             <EditBtnContainer>
-              <Button className="btn2" onClick={sendEditNickname}>수정</Button>
-              <Button className="btn2" onClick={editNicknameBtn}>취소</Button>
+              <Button className="btn2" onClick={sendEditNickname}>
+                수정
+              </Button>
+              <Button className="btn2" onClick={cancelEditNicknameBtn}>
+                취소
+              </Button>
             </EditBtnContainer>
           </BtnContainer>
         </Container2>
@@ -162,10 +189,22 @@ const sendEditNickname =()=>{
       {isEditPw !== false ? (
         <Container2>
           <BtnContainer>
-            <InputBox placeholder="새 비밀번호" type="password" />
-            <InputBox placeholder="새 비밀번호 확인" type="password" />
+            <InputBox
+              placeholder="새 비밀번호"
+              value={inputPw}
+              type="password"
+              onChange={inputPwHandler}
+            />
+            <InputBox
+              placeholder="새 비밀번호 확인"
+              value={confirmInputPw}
+              type="password"
+              onChange={confirmPwHandler}
+            />
             <EditBtnContainer>
-              <Button className="btn2">수정</Button>
+              <Button className="btn2" onClick={editPwHandler}>
+                수정
+              </Button>
               <Button className="btn2">취소</Button>
             </EditBtnContainer>
           </BtnContainer>
