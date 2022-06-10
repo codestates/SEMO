@@ -18,7 +18,7 @@ export const useStoreTemp = create((set) => ({
   loginmodal: false,
   isEditnickname: false,
   isEditPw: false,
-  password: "a123456",
+  password: "a",
   nickname: "",
   inputPw: "",
   confirmInputPw: "",
@@ -50,13 +50,9 @@ export const useStoreTemp = create((set) => ({
   setTestPw: (a) => set((state) => ({ testPw: (state.testPw = a) })),
   openLoginModal: () =>
     set((state) => ({ loginmodal: (state.loginmodal = true) })),
-  setClickMypage: () =>
-    set(
-      (state) => (
-        { clickMyPage: (state.clickMyPage = true) }, console.log("click")
-      )
-    ),
-
+  setClickMypage: () => set((state) => ({ clickMyPage: !state.clickMyPage })),
+  setOffMypage: () =>
+    set((state) => ({ clickMyPage: (state.clickMyPage = false) })),
   setUserpassword: (a) =>
     set((state) => ({ nickname: (state.password = a) }), console.log(a)),
 }));

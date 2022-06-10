@@ -73,6 +73,7 @@ const Btndiv = styled.div`
 const Header = (props) => {
   const { openLoginModal, openSignupModal, islogin } = useStore();
   const { nickname } = useUserinfo();
+  const { clickMyPage, setClickMypage, setOffMypage } = useStoreTemp();
 
   const getuserinfo = async () => {
     await axios
@@ -90,8 +91,9 @@ const Header = (props) => {
     <>
       {islogin === false ? (
         <HeadDiv>
-          <Logoimage />
-
+          <Link to="/">
+            <Logoimage />
+          </Link>
           <RightContainer>
             <Btndiv>
               <Button className="headerBtn" onClick={openLoginModal}>
@@ -106,7 +108,7 @@ const Header = (props) => {
       ) : (
         <HeadDiv>
           <Link to="/">
-            <Logoimage />
+            <Logoimage onClick={setOffMypage} />
           </Link>
           <RightContainer>
             <MyprofileContainer>
@@ -118,14 +120,12 @@ const Header = (props) => {
                 로그아웃
               </Button>
               {clickMyPage === false ? (
-                <Link className="link" to="/mypage">
-                  <Button className="headerBtn" onClick={setClickMypage}>
-                    마이페이지
-                  </Button>
+                <Link className="link" to="/mypage" onClick={setClickMypage}>
+                  <Button className="headerBtn">마이페이지</Button>
                 </Link>
               ) : (
                 <Link className="link" to="/mypage">
-                  <Button className="headerBtn">회원탈퇴</Button>
+                  <Button className="headerBtn">회원 탈퇴</Button>
                 </Link>
               )}
             </Btndiv>
