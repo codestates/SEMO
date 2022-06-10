@@ -139,13 +139,11 @@ const Loginmodal = () => {
             },
           })
           .then((res) => {
-            console.log("@@@@", res, "########", res.data.data.nickname);
             setUserUserid(res.data.data.user_id);
             setUserNickname(res.data.data.nickname);
             setUserPassword(res.data.data.password);
             setLogin();
             closeLoginModal();
-            console.log("aaaaasd", user_id);
           });
       });
     navigate("/");
