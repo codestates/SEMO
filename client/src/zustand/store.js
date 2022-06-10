@@ -18,7 +18,7 @@ export const useStoreTemp = create((set) => ({
   loginmodal: false,
   isEditnickname: false,
   isEditPw: false,
-  password: "a123456",
+  password: "a",
   nickname: "",
   inputPw: "",
   confirmInputPw: "",

@@ -125,7 +125,7 @@ const Header = (props) => {
                 </Link>
               ) : (
                 <Link className="link" to="/mypage">
-                  <Button className="headerBtn">회원탈퇴</Button>
+                  <Button className="headerBtn">회원 탈퇴</Button>
                 </Link>
               )}
             </Btndiv>
