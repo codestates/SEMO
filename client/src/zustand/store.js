@@ -62,10 +62,7 @@ export const useUserinfo = create((set) => ({
   password: "",
   nickname: "",
 
-  setUserUserid: (a) =>
-    set((state) => ({ user_id: (state.user_id = a) }), console.log(a)),
-  setUserNickname: (a) =>
-    set((state) => ({ nickname: (state.nickname = a) }), console.log(a)),
-  setUserPassword: (a) =>
-    set((state) => ({ password: (state.password = a) }), console.log(a)),
+  setUserUserid: (a) => set((state) => ({ user_id: (state.user_id = a) })),
+  setUserNickname: (a) => set((state) => ({ nickname: (state.nickname = a) })),
+  setUserPassword: (a) => set((state) => ({ password: (state.password = a) })),
 }));
