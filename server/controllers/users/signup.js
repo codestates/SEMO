@@ -18,9 +18,9 @@ module.exports = (req, res) => {
         }
       }).then(([result, isCreated])=> {
           if(!isCreated){
-            return res.status(409).send("id exists")
+            return res.status(200).send("id exists")
           } else {
-            return res.status(201).cookie('jwt', sendAccessToken).json({message : "okay"})
+            return res.status(201).cookie('jwt', sendAccessToken).send("okay")
           }
       })
     }

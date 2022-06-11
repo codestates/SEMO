@@ -151,8 +151,17 @@ const Signupmodal = () => {
           user_id,
           nickname,
           password,
-        });
+        }).then(res => {
+          console.log(res.data)
+          if (res.data === 'okay') {
+            alert("회원가입에 성공했습니다. 어서오세요!")
+          }
+          else {
+            alert("회원가입에 실패했습니다. 다시 시도해주세요.")
+          }
+        })
       }
+
     } else {
       alert("모든 항목은 필수입니다.");
     }
