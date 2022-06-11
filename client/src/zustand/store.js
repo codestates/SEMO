@@ -73,6 +73,7 @@ export const useUserinfo = create((set) => ({
   password: "",
   nickname: "",
   edPw: "",
+
   setedPw: (a) => set((state) => ({ edPw: (state.edPw = a) })),
 
   setUserUserid: (a) => set((state) => ({ user_id: (state.user_id = a) })),
