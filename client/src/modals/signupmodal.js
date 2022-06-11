@@ -158,6 +158,38 @@ const Signupmodal = () => {
     }
   };
 
+  const checkUserId = () => {
+    if (user_id) {
+      axios
+        .post("http://localhost:3500/sign/idcheck", {
+          user_id,
+        })
+        .then((res) => {
+          if (res.data === "ok") {
+            alert("사용할 수 있는 아이디 입니다.");
+          } else {
+            alert("사용할 수 없는 아이디 입니다.");
+          }
+        });
+    }
+  };
+
+  const checkUserNickname = () => {
+    if (nickname) {
+      axios
+        .post("http://localhost:3500/sign/nicknamecheck", {
+          nickname,
+        })
+        .then((res) => {
+          if (res.data === "ok") {
+            alert("사용할 수 있는 닉네임 입니다.");
+          } else {
+            alert("사용할 수 없는 닉네임 입니다.");
+          }
+        });
+    }
+  };
+
   return (
     <ModalContainer>
       <ModalBackdrop onClick={closeSignupModal}>
@@ -170,13 +202,17 @@ const Signupmodal = () => {
             <Text>아이디</Text>
             <Signupbox1>
               <Inputbox name="user_id" value={user_id} onChange={idHandler} />
-              <Button className="text">중복검사</Button>
+              <Button className="text" onClick={checkUserId}>
+                중복검사
+              </Button>
             </Signupbox1>
 
             <Text>닉네임</Text>
             <Signupbox1>
               <Inputbox value={nickname} onChange={nickNameHandler} />
-              <Button className="text">중복검사</Button>
+              <Button className="text" onClick={checkUserNickname}>
+                중복검사
+              </Button>
             </Signupbox1>
 
             <Text>비밀번호</Text>
