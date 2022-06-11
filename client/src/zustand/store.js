@@ -12,6 +12,7 @@ export const useStore = create((set) => ({
   closeSignupModal: () => set({ signupmodal: false }),
   changeModal: () => set({ loginmodal: false, signupmodal: true }),
   setLogin: () => set({ islogin: true }),
+  setLogOut: () => set({ islogin: false }),
 }));
 // qjastar a123456
 export const useStoreTemp = create((set) => ({
@@ -28,7 +29,10 @@ export const useStoreTemp = create((set) => ({
   testPw: "",
   jwttoken: "",
   clickMyPage: false,
+  signOutModal: false,
 
+  setSignOutModal: () => set({ signOutModal: true }),
+  closeSignupModal: () => set({ signOutModal: false }),
   editPwBtn: () => set((state) => ({ isEditPw: (state.isEditPw = true) })),
   editNicknameBtn: () =>
     set((state) => ({ isEditnickname: (state.isEditnickname = true) })),
@@ -48,6 +52,7 @@ export const useStoreTemp = create((set) => ({
   setText: (a) => set((state) => ({ text: (state.text = a) }), console.log(a)),
   setTestId: (a) => set((state) => ({ testId: (state.testId = a) })),
   setTestPw: (a) => set((state) => ({ testPw: (state.testPw = a) })),
+
   openLoginModal: () =>
     set((state) => ({ loginmodal: (state.loginmodal = true) })),
   setClickMypage: () => set((state) => ({ clickMyPage: !state.clickMyPage })),
@@ -55,14 +60,26 @@ export const useStoreTemp = create((set) => ({
     set((state) => ({ clickMyPage: (state.clickMyPage = false) })),
   setUserpassword: (a) =>
     set((state) => ({ nickname: (state.password = a) }), console.log(a)),
+
+  setWithdraw: (a) =>
+    set((state) => ({
+      testPw: (state.testPw = ""),
+      testId: (state.testId = ""),
+    })),
 }));
 
 export const useUserinfo = create((set) => ({
   user_id: "",
   password: "",
   nickname: "",
+  edPw: "",
+
+  setedPw: (a) => set((state) => ({ edPw: (state.edPw = a) })),
 
   setUserUserid: (a) => set((state) => ({ user_id: (state.user_id = a) })),
   setUserNickname: (a) => set((state) => ({ nickname: (state.nickname = a) })),
   setUserPassword: (a) => set((state) => ({ password: (state.password = a) })),
+
+  setUserInfoSignOutClear: () =>
+    set({ user_id: "", password: "", nickname: "" }),
 }));
