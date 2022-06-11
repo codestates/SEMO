@@ -117,6 +117,7 @@ const Loginmodal = () => {
     setUserUserid,
     setUserNickname,
     setUserPassword,
+    setedPw,
   } = useUserinfo();
   const TestIdHandler = (e) => {
     setTestId(e.target.value);
@@ -131,17 +132,19 @@ const Loginmodal = () => {
         password: testPw,
       })
       .then((res) => {
-        const goodtoken = res.data.data;
+        const access = res.data.data;
+        const refresh = res.data.refresh;
         return axios
           .get("http://localhost:3500/sign/auth", {
             headers: {
-              authorization: `${goodtoken}`,
+              authorization: `${access}`,
             },
           })
           .then((res) => {
             setUserUserid(res.data.data.user_id);
             setUserNickname(res.data.data.nickname);
             setUserPassword(res.data.data.password);
+            setedPw(res.data.data.password);
             setLogin();
             closeLoginModal();
           });

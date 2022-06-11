@@ -72,7 +72,7 @@ const Main = () => {
 
         <ItemasContainer1>
           <TextContainer>
-            <p className="h1">문제를 푸실려구요?</p>
+            <p className="h1">문제를 풀어볼까요?</p>
             <p className="h2">지금 당장 가시죠!</p>
             <Button className="btn1">풀이하러 가기</Button>
           </TextContainer>

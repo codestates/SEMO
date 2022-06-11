@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import profileimg from "../images/제경모.jpg";
-import { useStoreTemp } from "../zustand/store";
+import { useStoreTemp, useUserinfo } from "../zustand/store";
 import Button from "./button";
 
 const Container = styled.div`
@@ -102,7 +102,7 @@ const Myprofile = () => {
     confirmInputPw,
     cook,
   } = useStoreTemp(); //zustand
-
+  const { edPw } = useUserinfo();
   const [isEditPicture, EditPicture] = useState(false);
   const editPictureBtn = () => {
     console.log("사진수정");
@@ -117,7 +117,7 @@ const Myprofile = () => {
   const sendEditNickname = () => {
     axios.patch("http://localhost:3500/user/nickname/edit", {
       nickname,
-      password,
+      password: edPw,
     });
   };
 
