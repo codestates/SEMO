@@ -131,11 +131,12 @@ const Loginmodal = () => {
         password: testPw,
       })
       .then((res) => {
-        const goodtoken = res.data.data;
+        const access = res.data.data;
+        const refresh = res.data.refresh;
         return axios
           .get("http://localhost:3500/sign/auth", {
             headers: {
-              authorization: `${goodtoken}`,
+              authorization: `${access}`,
             },
           })
           .then((res) => {
