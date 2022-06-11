@@ -4,7 +4,7 @@ const {
   generateRefreshToken,
   sendRefreshToken,
   sendAccessToken,
-} = require('../tokenFunctions');
+} = require("../tokenFunctions");
 
 module.exports = async (req, res) => {
   // TODO: 로그인 정보를 통해 사용자 인증 후 토큰 전달
@@ -21,7 +21,9 @@ module.exports = async (req, res) => {
 
       sendRefreshToken(res, refreshToken);
       sendAccessToken(res, accessToken);
-      return res.status(200).json({ data: accessToken, message: "ok" });
+      return res
+        .status(200)
+        .json({ data: accessToken, refresh: refreshToken, message: "ok" });
     }
   } catch (err) {
     return null;
