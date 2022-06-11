@@ -73,7 +73,8 @@ const Btndiv = styled.div`
 const Header = (props) => {
   const { openLoginModal, openSignupModal, islogin } = useStore();
   const { nickname } = useUserinfo();
-  const { clickMyPage, setClickMypage, setOffMypage } = useStoreTemp();
+  const { clickMyPage, setClickMypage, setOffMypage, setSignOutModal } =
+    useStoreTemp();
 
   const getuserinfo = async () => {
     await axios
@@ -124,9 +125,9 @@ const Header = (props) => {
                   <Button className="headerBtn">마이페이지</Button>
                 </Link>
               ) : (
-                <Link className="link" to="/mypage">
-                  <Button className="headerBtn">회원 탈퇴</Button>
-                </Link>
+                <Button className="headerBtn" onClick={setSignOutModal}>
+                  회원 탈퇴
+                </Button>
               )}
             </Btndiv>
           </RightContainer>

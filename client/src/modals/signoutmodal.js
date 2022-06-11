@@ -107,61 +107,59 @@ const Kakaologbtn = styled.img`
 `;
 const Signoutmodal = () => {
   const navigate = useNavigate();
-  const { closeLoginModal, setLogin } = useStore();
-  const { testId, testPw, setTestId, setTestPw } = useStoreTemp();
-  const { setUserNickname, setUserUser_id, setUserpassword, nickname } =
-    useUserinfo();
+  const { islogin, setLogOut } = useStore();
+  const {
+    testId,
+    testPw,
+    setTestId,
+    setTestPw,
+    setWithdraw,
+    signOutModal,
+    setSignOutModal,
+    closeSignupModal,
+  } = useStoreTemp();
+  const { setUserInfoSignOutClear } = useUserinfo();
 
-  const TestIdHandler = (e) => {
-    setTestId(e.target.value);
+  const DeleteIdValueIdHandler = (e) => {
+    setTestId(e.target.value); //test id 에 id 저장
+    console.log("testid 값 ", testId);
   };
-  const TestPwHandler = (e) => {
+  const DeletePwValueHandler = (e) => {
+    //test pw 에 pw 저장
     setTestPw(e.target.value);
+    console.log("testid 값 ", testPw);
   };
   const testFn2 = async () => {
+    console.log("회원탈퇴 버튼 눌림 ^^ ");
     await axios
-      .post("http://localhost:3500/sign/in", {
+      .post("http://localhost:3500/sign/withdraw", {
         user_id: testId,
         password: testPw,
       })
       .then((res) => {
-        const goodtoken = res.data.data;
-        return axios
-          .get("http://localhost:3500/sign/auth", {
-            headers: {
-              authorization: `${goodtoken}`,
-            },
-          })
-          .then((res) => {
-            setLogin();
-            closeLoginModal();
-            setUserNickname(res.data.data.nickname);
-          });
+        setUserInfoSignOutClear();
+        setLogOut();
       });
     navigate("/");
   };
 
   return (
     <ModalContainer>
-      <ModalBackdrop onClick={closeLoginModal}>
+      <ModalBackdrop onClick={closeSignupModal}>
         <ModalView onClick={(e) => e.stopPropagation()}>
           <Closebutton>
-            <div onClick={closeLoginModal}>&times;</div>
+            <div onClick={closeSignupModal}>&times;</div>
           </Closebutton>
           <Title>회원탈퇴</Title>
           <Login>아이디 비밀번호를 입력해주세요!</Login>
           <Loginform>
             <div className="idtext">
               아이디
-              <Inputbox value={testId} onChange={TestIdHandler} />
+              <Inputbox onChange={DeleteIdValueIdHandler} />
             </div>
             <div className="passwordtext">
               비밀번호
-              <Inputbox
-                type="password"
-                value={testPw}
-                onChange={TestPwHandler}
-              />
+              <Inputbox type="password" onChange={DeletePwValueHandler} />
             </div>
             <Button onClick={testFn2}>회원탈퇴</Button>
           </Loginform>

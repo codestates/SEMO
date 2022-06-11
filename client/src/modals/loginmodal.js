@@ -117,6 +117,7 @@ const Loginmodal = () => {
     setUserUserid,
     setUserNickname,
     setUserPassword,
+    setedPw,
   } = useUserinfo();
   const TestIdHandler = (e) => {
     setTestId(e.target.value);
@@ -142,6 +143,7 @@ const Loginmodal = () => {
             setUserUserid(res.data.data.user_id);
             setUserNickname(res.data.data.nickname);
             setUserPassword(res.data.data.password);
+            setedPw(res.data.data.password);
             setLogin();
             closeLoginModal();
           });

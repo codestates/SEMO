@@ -27,7 +27,7 @@ app.get("/sign/auth", controllers.auth);
 app.post("/sign/in", controllers.signin);
 app.post("/sign/up", controllers.signup);
 app.post("/sign/out", controllers.signout);
-app.delete("/sign/withdraw", controllers.signwithdraw);
+app.post("/sign/withdraw", controllers.signwithdraw);
 app.post("/question", controllers.question);
 app.post("/answer", controllers.answer);
 app.delete("/question/delete", controllers.questiondelete);
