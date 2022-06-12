@@ -139,6 +139,7 @@ const Signoutmodal = () => {
       .then((res) => {
         setUserInfoSignOutClear();
         setLogOut();
+        alert("회원탈퇴 되었습니다.");
       });
     navigate("/");
   };
