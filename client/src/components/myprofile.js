@@ -93,16 +93,15 @@ const Myprofile = () => {
     isEditPw,
     editPwBtn,
     cancelEditNicknameBtn,
-    password,
     nickname,
     setNickname,
     setInputPw,
     setConfrimInputPw,
     inputPw,
     confirmInputPw,
-    cook,
+    cancelEditPwBtn,
   } = useStoreTemp(); //zustand
-  const { edPw } = useUserinfo();
+  const { edPw, user_id, nickname2 } = useUserinfo();
   const [isEditPicture, EditPicture] = useState(false);
   const editPictureBtn = () => {
     console.log("사진수정");
@@ -115,10 +114,19 @@ const Myprofile = () => {
   };
 
   const sendEditNickname = () => {
-    axios.patch("http://localhost:3500/user/nickname/edit", {
-      nickname,
-      password: edPw,
-    });
+    axios
+      .patch("http://localhost:3500/user/nickname/edit", {
+        nickname,
+        password: edPw,
+      })
+      .then((res) => {
+        if (res.data === "info edited") {
+          cancelEditNicknameBtn();
+          alert("닉네임 변경 성공");
+        } else {
+          alert("실패");
+        }
+      });
   };
 
   const inputPwHandler = (e) => {
@@ -130,21 +138,23 @@ const Myprofile = () => {
   };
 
   const editPwHandler = () => {
-    const user_id = "david0525";
-    console.log(
-      "비번입력값",
-      inputPw,
-      "@@@@@@@@@@@@비번확인값",
-      confirmInputPw
-    );
     if (inputPw !== confirmInputPw) {
       console.log("둘이다름");
     } else {
       console.log("굳");
-      axios.patch("http://localhost:3500/user/password/edit", {
-        user_id, //user_id 를 어케 지정해줄지 구현해야함
-        password: inputPw,
-      });
+      axios
+        .patch("http://localhost:3500/user/password/edit", {
+          user_id, //user_id 를 어케 지정해줄지 구현해야함
+          password: inputPw,
+        })
+        .then((res) => {
+          if (res.data === "info edited") {
+            cancelEditPwBtn();
+            alert("비밀번호 변경 성공");
+          } else {
+            alert("실패");
+          }
+        });
       //axios 자리
     }
   };
@@ -153,7 +163,7 @@ const Myprofile = () => {
       <Container>
         <ProfileContainer>
           <Profileimg />
-          <div>서양범고래</div>
+          <div>{nickname2}</div>
         </ProfileContainer>
         <BtnContainer>
           <Button className="btn" onClick={editNicknameBtn}>
