@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick-theme.css";
 import styled from 'styled-components';
 import axios from 'axios';
 import React from 'react';
+import { useState, useEffect } from 'react';
+
 
 const Container = styled.div`
   overflow:hidden;
@@ -54,35 +56,6 @@ const Title = styled.div`
 
 const imgUrl = require('../images/권민수.jpg');
 
-const items = [
-  //유저닉네임과 질문제목을 db에서 받아옴
-  {
-    id: 1, url: imgUrl,
-    Nickname: "fineartgo",
-    Title: "국어가 좋아요"
-  },
-  {
-    id: 2, url: imgUrl,
-    Nickname: "fineartgo",
-    Title: "영어가 좋아요"
-  },
-  {
-    id: 3, url: imgUrl,
-    Nickname: "fineartgo",
-    Title: "수학이 좋아요"
-  },
-  {
-    id: 4, url: imgUrl,
-    Nickname: "fineartgo",
-    Title: "사회가 좋아요"
-  },
-  {
-    id: 5, url: imgUrl,
-    Nickname: "fineartgo",
-    Title: "과학이 좋아요"
-  }
-];
-
 
 function SimpleSlider() {
 
@@ -97,42 +70,53 @@ function SimpleSlider() {
     centerMode: false
   };
 
-  const user_id = 'david0525'
-  const password = 'b123456'
+  function getRandomIndex(arr) {
+    const result = []
+    if (!arr.length) {
+      return [3, 5, 4, 1, 0, 2];
+    }
 
-  const SendNickname = () => {
-    axios.get("http://localhost:3500/user/info", {
-      params: {
-        user_id,
-        password
+    while (result.length < 6) {
+      const randomNum = Math.floor(Math.random() * arr.length + 1) - 1;
+      if (!result.includes(randomNum)) {
+        result.push(randomNum)
       }
-    })
-      .then(res => {
-        console.log((res.data.message.nickname));
-        //닉네임만 받아올것
-      })
+    }
+
+    return result;
   }
 
-  const SendQuestTitle = () => {
-    axios.get("http://localhost:3500/question/all/")
-      .then(res => {
-        console.log((res.data[0].title));
+  const [questions, setquestions] = useState([]) // useEffect 안에서 전체 데이터를 받은후 .then을 빠져나와 6개로 추린 배열을 받는다.
+
+  useEffect(() => {
+    function getQuestInfo() {
+      axios.get("http://localhost:3500/question/all", {
       })
-  }
+        .then(res => {
+
+          const data = res.data
+          const randomIndex = getRandomIndex(data); // [5, 1, 2, 4, 6, 0]
+          const newQuestions = randomIndex.map(i => data[i])
+          setquestions(newQuestions)
+        })
+    }
+
+    getQuestInfo();
+
+  }, []);
 
   return (
     <Container>
       <h5> 답변을 기다리고 있어요!</h5>
       <StyledSlider {...settings}>
-        {items.map(item => {
-          console.log(item)
+        {questions.length && questions.map(item => {
           return (
             <div key={item.id}>
               <ImageContainer>
                 <ProfilePhoto src={item.url} />
                 <AnswerInfo >
-                  <Name><div onClick={SendNickname}>{item.Nickname}</div></Name>
-                  <Title><div onClick={SendQuestTitle}>{item.Title}</div></Title>
+                  <Name><div>{item.user_id} </div></Name>
+                  <Title><div>{item.title}</div></Title>
                 </AnswerInfo>
               </ImageContainer>
             </div>
