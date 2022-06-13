@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Button from "./button";
 //import useState from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
-
+import { Link } from "react-router-dom";
 const Container = styled.div`
   display: flex;
 
@@ -26,6 +26,7 @@ const NicnNDate = styled.div`
 
 const Allquestions = () => {
   const [qLists, setQLists] = useState([]);
+  const { clickTitle, setClickTitle } = useStoreTemp();
   const { user_id, nickname } = useUserinfo();
   const getPosts = async () => {
     try {
@@ -58,20 +59,33 @@ const Allquestions = () => {
       setQLists(data);
     });
   }, []);
+  const viewQuestion = (e) => {
+    // setQLists(e);
+
+    setClickTitle(e);
+    console.log("123", clickTitle);
+  };
+  const textInput = useRef();
+
   return (
     <Container>
       <div>
         {qLists.map((item) => {
-          console.log(item);
           return (
             <QuestionContainer key={item.id} item={item}>
-              {/* <p>{`${item?.subject} 있나`}</p> */}
-
               <NicnNDate>
                 <span>작성자 : {nickname}</span>
                 <span>작성일자 : {item.updatedAt.slice(5, 10)}</span>
               </NicnNDate>
-              <QuestionTitle>{item.title}</QuestionTitle>
+              <Link to="/answer">
+                <QuestionTitle
+                  onClick={() => {
+                    viewQuestion(item.title);
+                  }}
+                >
+                  {item.title}
+                </QuestionTitle>
+              </Link>
             </QuestionContainer>
           );
         })}
