@@ -3,6 +3,9 @@ import Dropdown from "../components/dropdownmenu";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import profileimg from "../images/제경모.jpg";
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const NoticeContainer = styled.div`
   box-sizing: border-box;
@@ -39,19 +42,45 @@ const ItemTexContainer = styled.div`
 `;
 
 const Main = () => {
+  const noticeHandler = async () => {
+    try {
+      const response = await axios.get("http://localhost:3500/question/all");
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const test555 = () => {
+    console.log(test123);
+  };
+
+  const test9999 = noticeHandler();
+  const [test123, setTest123] = useState([]);
+
+  useEffect(() => {
+    test9999.then((data) => {
+      setTest123(data);
+      console.log(data.data);
+    });
+  }, []);
+
   return (
     <>
       <Header />
       <Dropdown />
+      <button onClick={test555}>button2</button>
       <>
         <NoticeContainer>
-          <ItemContainer>
-            <ImgContainer />
-            <ItemTexContainer>
-              <p>제목</p>
-              <p>닉네임</p>
-            </ItemTexContainer>
-          </ItemContainer>
+          {test123.data.map((el) => {
+            return (
+              <ItemContainer>
+                <ImgContainer />
+                <ItemTexContainer>
+                  <p key={el.id}>{el.title}</p>;<p>닉네임</p>
+                </ItemTexContainer>
+              </ItemContainer>
+            );
+          })}
 
           <ItemContainer>
             <ImgContainer />
@@ -119,7 +148,6 @@ const Main = () => {
           </ItemContainer>
         </NoticeContainer>
       </>
-
       <Footer />
     </>
   );
