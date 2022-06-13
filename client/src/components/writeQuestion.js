@@ -56,17 +56,37 @@ const WriteQuestionComponenet = () => {
   const textHandler = (e) => {
     setText(e.target.value);
   };
-  const testFn = () => {
-    axios.post("http://localhost:3500/question", {
+
+  // const testFn = () => {
+  //   // console.log("@@@@@@@@@@@@@@@@타이틀@@@@@@@@",title,"@@@@@@@@@@@@@@@@텍스트@@@@@@@@",text)
+  //   axios.post("http://localhost:3500/question", {
+  //     title,
+  //     content: text,
+  //     user_id,
+  //   });
+  // };
+  const [fileImg, setfileImg] = useState("");
+  const saveFileImg = (e) => {
+    const file = e.target.files[0];
+
+    setfileImg(file);
+  };
+  const testFn = async () => {
+    let formData = new FormData();
+    formData.append("file", fileImg);
+    const axios1 = await axios.post("http://localhost:3500/question", {
       user_id,
       title,
       content: text,
     });
+    const axios2 = await axios.post("http://localhost:3500/uploads", formData);
+    if (axios2.data.success) {
+      alert("okay");
+    } else {
+      alert("no");
+    }
   };
-  const [fileImg, setfileImg] = useState("");
-  const saveFileImg = (e) => {
-    setfileImg(URL.createObjectURL(e.target.files[0]));
-  };
+
   const deleteFileImg = () => {
     URL.revokeObjectURL(fileImg);
     setfileImg("");
@@ -97,6 +117,7 @@ const WriteQuestionComponenet = () => {
           <Button className="btn">취소</Button>
         </BtnContainer>
         {/* 아래는 사진 업로드 기능인데, db로 보내기랑 css수정해야함 */}
+
         <ImageTest>
           <div>사진 업로드 </div>
           <div>image</div>

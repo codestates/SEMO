@@ -5,7 +5,7 @@ module.exports = (req, res) => {
 
   try {
     const { school, grade, subject, title, content, user_id } = req.body;
-    if (!title || !content || !user_id) {
+    if (!user_id) {
       return res.status(422).send("insufficient parameters supplied");
     } else {
       question
