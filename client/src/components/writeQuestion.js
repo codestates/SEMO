@@ -55,17 +55,29 @@ const WriteQuestionComponenet = () => {
   const textHandler = (e) => {
     setText(e.target.value);
   };
-  const testFn = () => {
-    // console.log("@@@@@@@@@@@@@@@@타이틀@@@@@@@@",title,"@@@@@@@@@@@@@@@@텍스트@@@@@@@@",text)
-    axios.post("http://localhost:3500/question", {
-      title,
-      content: text,
-    });
-  };
+
   const [fileImg, setfileImg] = useState("");
   const saveFileImg = (e) => {
-    setfileImg(URL.createObjectURL(e.target.files[0]));
+    const file = (e.target.files[0])
+
+    setfileImg(file);
   };
+  const testFn = async () => {
+    let formData = new FormData();
+    formData.append('file', fileImg)
+    const axios1 = await axios.post("http://localhost:3500/question", {
+      title,
+      content: text,
+    })
+    const axios2 = await axios.post('http://localhost:3500/uploads', formData)
+    if (axios2.data.success) {
+      alert ("okay")
+    }
+    else {
+      alert ("no")
+    }   
+  };
+  
   const deleteFileImg = () => {
     URL.revokeObjectURL(fileImg);
     setfileImg("");
