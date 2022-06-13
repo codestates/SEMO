@@ -47,7 +47,7 @@ const Main = () => {
     }
   };
   const test555 = () => {
-    console.log(test123[0].createdAt);
+    console.log(test123[3].createdAt.slice(0, 19));
   };
 
   const test9999 = noticeHandler();
@@ -74,7 +74,7 @@ const Main = () => {
               return (
                 <ItemContainer key={el.createdAt}>
                   <ImgContainer
-                    src={`../images/${el.createdAt}_.jpg`}
+                    src={`img/${el.createdAt.slice(0, 19)}_.jpg`}
                     alt="sssss"
                   />
                   <ItemTexContainer>
