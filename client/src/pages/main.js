@@ -10,7 +10,7 @@ import LoginModalComponent from "../modals/loginmodal";
 import SignupModalComponent from "../modals/signupmodal";
 import SimpleSlider from "../components/slickslide";
 import { useStore } from "../zustand/store";
-
+import { Link } from "react-router-dom";
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
   width: 100vw;
@@ -65,7 +65,9 @@ const Main = () => {
           <TextContainer>
             <p className="h1">문제를 못풀겠나요?</p>
             <p className="h2">지금 당장 질문하세요!</p>
-            <Button className="btn1">질문하러 가기</Button>
+            <Link to="/question/write">
+              <Button className="btn1">질문하러 가기</Button>
+            </Link>
           </TextContainer>
           <ImgContainer src={image1} alt="" />
         </ItemasContainer1>

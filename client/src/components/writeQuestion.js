@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "./button";
 import { useState } from "react";
 import axios from "axios";
-import { useStoreTemp } from "../zustand/store";
+import { useStoreTemp, useUserinfo } from "../zustand/store";
 const ContainQuestion = styled.div`
   display: flex;
 `;
@@ -49,35 +49,43 @@ const WriteQuestionComponenet = () => {
   // const [title,setTitle]=useState("");
   // const [text,setText]=useState("");
   const { title, text, setTitle, setText } = useStoreTemp();
+  const { user_id } = useUserinfo();
   const titleHandler = (e) => {
     setTitle(e.target.value);
   };
   const textHandler = (e) => {
     setText(e.target.value);
   };
-
+  // const testFn = () => {
+  //   // console.log("@@@@@@@@@@@@@@@@타이틀@@@@@@@@",title,"@@@@@@@@@@@@@@@@텍스트@@@@@@@@",text)
+  //   axios.post("http://localhost:3500/question", {
+  //     title,
+  //     content: text,
+  //     user_id,
+  //   });
+  // };
   const [fileImg, setfileImg] = useState("");
   const saveFileImg = (e) => {
-    const file = (e.target.files[0])
+    const file = e.target.files[0];
 
     setfileImg(file);
   };
   const testFn = async () => {
     let formData = new FormData();
-    formData.append('file', fileImg)
+    formData.append("file", fileImg);
     const axios1 = await axios.post("http://localhost:3500/question", {
+      user_id,
       title,
       content: text,
-    })
-    const axios2 = await axios.post('http://localhost:3500/uploads', formData)
+    });
+    const axios2 = await axios.post("http://localhost:3500/uploads", formData);
     if (axios2.data.success) {
-      alert ("okay")
+      alert("okay");
+    } else {
+      alert("no");
     }
-    else {
-      alert ("no")
-    }   
   };
-  
+
   const deleteFileImg = () => {
     URL.revokeObjectURL(fileImg);
     setfileImg("");
@@ -108,6 +116,7 @@ const WriteQuestionComponenet = () => {
           <Button className="btn">취소</Button>
         </BtnContainer>
         {/* 아래는 사진 업로드 기능인데, db로 보내기랑 css수정해야함 */}
+
         <ImageTest>
           <div>사진 업로드 </div>
           <div>image</div>
