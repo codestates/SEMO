@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "./button";
-
+import { Link } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -27,7 +27,9 @@ const Myquestion = () => {
   return (
     <Container>
       <Button className="showMyquestionBtn">
-        <a>내 질문 보러가기</a>{" "}
+        <Link to="/questionlist">
+          <div>내 질문 보러가기</div>{" "}
+        </Link>
       </Button>
     </Container>
   );

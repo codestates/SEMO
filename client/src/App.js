@@ -5,7 +5,7 @@ import Mypage from "./pages/mypage";
 import Main from "./pages/main";
 import WritingPage from "./pages/question";
 import AnswerPage from "./pages/answer";
-
+import QuestionsListPage from "./pages/questionList";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +15,7 @@ function App() {
         <Route path="/question/write" element={<WritingPage />} />
         <Route path="/answer" element={<AnswerPage />} />
         <Route path="/oauth/callback/kakao" component={KakaoRedirectHandler} />
+        <Route path="/questionlist" element={<QuestionsListPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "./button";
 import { useState } from "react";
 import axios from "axios";
-import { useStoreTemp } from "../zustand/store";
+import { useStoreTemp, useUserinfo } from "../zustand/store";
 const ContainQuestion = styled.div`
   display: flex;
 `;
@@ -49,6 +49,7 @@ const WriteQuestionComponenet = () => {
   // const [title,setTitle]=useState("");
   // const [text,setText]=useState("");
   const { title, text, setTitle, setText } = useStoreTemp();
+  const { user_id } = useUserinfo();
   const titleHandler = (e) => {
     setTitle(e.target.value);
   };
@@ -60,6 +61,7 @@ const WriteQuestionComponenet = () => {
     axios.post("http://localhost:3500/question", {
       title,
       content: text,
+      user_id,
     });
   };
   const [fileImg, setfileImg] = useState("");

@@ -40,6 +40,7 @@ app.patch("/user/nickname/edit", controllers.nicknameedit);
 app.patch("/user/password/edit", controllers.passwordedit);
 app.post("/sign/idcheck", controllers.idcheck);
 app.post("/sign/nicknamecheck", controllers.nicknamecheck);
+app.post("/myquestion/all", controllers.myquestionsall);
 
 const PORT = process.env.PORT || 3500;
 

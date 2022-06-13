@@ -30,6 +30,10 @@ export const useStoreTemp = create((set) => ({
   jwttoken: "",
   clickMyPage: false,
   signOutModal: false,
+  qLists: [],
+
+  setQlists: (a) =>
+    set((state) => ({ qLists: (state.qLists = a) }), console.log(a)),
 
   setSignOutModal: () => set({ signOutModal: true }),
   closeSignupModal: () => set({ signOutModal: false }),
