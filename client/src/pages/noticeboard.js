@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Dropdown from "../components/dropdownmenu";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import profileimg from "../images/제경모.jpg";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -11,7 +10,6 @@ const NoticeContainer = styled.div`
   box-sizing: border-box;
   /* border: 10px solid red; */
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 2vw 0;
@@ -27,9 +25,7 @@ const ItemContainer = styled.div`
   align-items: center;
 `;
 
-const ImgContainer = styled.img.attrs({
-  src: `${profileimg}`,
-})`
+const ImgContainer = styled.img`
   width: 33vw;
   height: 33vw;
   border-radius: 5vw;
@@ -51,7 +47,7 @@ const Main = () => {
     }
   };
   const test555 = () => {
-    console.log(test123);
+    console.log(test123[0].createdAt);
   };
 
   const test9999 = noticeHandler();
@@ -59,7 +55,7 @@ const Main = () => {
 
   useEffect(() => {
     test9999.then((data) => {
-      setTest123(data);
+      setTest123(data.data);
       console.log(data.data);
     });
   }, []);
@@ -71,81 +67,23 @@ const Main = () => {
       <button onClick={test555}>button2</button>
       <>
         <NoticeContainer>
-          {test123.data.map((el) => {
-            return (
-              <ItemContainer>
-                <ImgContainer />
-                <ItemTexContainer>
-                  <p key={el.id}>{el.title}</p>;<p>닉네임</p>
-                </ItemTexContainer>
-              </ItemContainer>
-            );
-          })}
-
-          <ItemContainer>
-            <ImgContainer />
-            <ItemTexContainer>
-              <p>제목</p>
-              <p>닉네임</p>
-            </ItemTexContainer>
-          </ItemContainer>
-        </NoticeContainer>
-      </>
-      <>
-        <NoticeContainer>
-          <ItemContainer>
-            <ImgContainer />
-            <ItemTexContainer>
-              <p>제목</p>
-              <p>닉네임</p>
-            </ItemTexContainer>
-          </ItemContainer>
-
-          <ItemContainer>
-            <ImgContainer />
-            <ItemTexContainer>
-              <p>제목</p>
-              <p>닉네임</p>
-            </ItemTexContainer>
-          </ItemContainer>
-        </NoticeContainer>
-      </>
-      <>
-        <NoticeContainer>
-          <ItemContainer>
-            <ImgContainer />
-            <ItemTexContainer>
-              <p>제목</p>
-              <p>닉네임</p>
-            </ItemTexContainer>
-          </ItemContainer>
-
-          <ItemContainer>
-            <ImgContainer />
-            <ItemTexContainer>
-              <p>제목</p>
-              <p>닉네임</p>
-            </ItemTexContainer>
-          </ItemContainer>
-        </NoticeContainer>
-      </>
-      <>
-        <NoticeContainer>
-          <ItemContainer>
-            <ImgContainer />
-            <ItemTexContainer>
-              <p>제목</p>
-              <p>닉네임</p>
-            </ItemTexContainer>
-          </ItemContainer>
-
-          <ItemContainer>
-            <ImgContainer />
-            <ItemTexContainer>
-              <p>제목</p>
-              <p>닉네임</p>
-            </ItemTexContainer>
-          </ItemContainer>
+          {test123
+            .slice(0)
+            .reverse()
+            .map((el) => {
+              return (
+                <ItemContainer key={el.createdAt}>
+                  <ImgContainer
+                    src={`../images/${el.createdAt}_.jpg`}
+                    alt="sssss"
+                  />
+                  <ItemTexContainer>
+                    <p>{el.title}</p>
+                    <p>{el.nickname}</p>
+                  </ItemTexContainer>
+                </ItemContainer>
+              );
+            })}
         </NoticeContainer>
       </>
       <Footer />
