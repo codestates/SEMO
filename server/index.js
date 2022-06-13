@@ -8,13 +8,12 @@ const morgan = require("morgan");
 const _ = require("lodash");
 const controllers = require("./controllers");
 const multer = require("multer");
-const path = require('path');
+const { min } = require("lodash");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
@@ -49,16 +48,26 @@ app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-
-
-
-
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, 'uploads');	// 콜백 함수로 업로드 파일의 저장 위치를 설정한다.
   },
   filename: (req, file, cb) => {
-      cb(null, file.originalname);	// 콜백 함수로 파일이 저장될 때 이름을 설정한다.
+    let date = new Date()
+    let year = date.getFullYear(); // 년도
+    let month = date.getMonth() + 1;
+    month = month < 10 ? '0' + month : month
+    let day = date.getDate();
+    day = day < 10 ? '0' + day : day
+    let hours = date.getHours();
+    hours = hours < 10 ? '0' + hours : hours
+    let minutes = date.getMinutes();
+    minutes = minutes < 10 ? '0' + minutes : minutes
+    let seconds = date.getSeconds();
+    seconds = seconds < 10 ? '0' + seconds : seconds
+
+    let originname = file.originalname
+      cb(null, year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds+'_'+originname);	// 콜백 함수로 파일이 저장될 때 이름을 설정한다.
   }
 });
 
