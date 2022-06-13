@@ -49,7 +49,7 @@ const BtnContainer = styled.div`
 const ImageTest = styled.div``;
 const WriteQuestionComponenet = () => {
   const { title, text, setTitle, setText } = useStoreTemp();
-  const { nickname } = useUserinfo();
+  const { nickname, user_id } = useUserinfo();
   const titleHandler = (e) => {
     setTitle(e.target.value);
   };
@@ -64,13 +64,17 @@ const WriteQuestionComponenet = () => {
     setfileImg(file);
   };
   const testFn = async () => {
+    console.log("id", user_id, "123", nickname);
     let formData = new FormData();
     formData.append("file", fileImg);
+    console.log("이거 ", nickname, user_id, title, text);
     const axios1 = await axios.post("http://localhost:3500/question", {
       nickname,
+      user_id,
       title,
       content: text,
     });
+
     const axios2 = await axios.post("http://localhost:3500/uploads", formData);
     if (axios2.data.success) {
       alert("okay");
