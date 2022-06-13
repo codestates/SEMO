@@ -67,7 +67,7 @@ const Answer = () => {
       .post("http://localhost:3500/answer", {
         //title, ==> 틀만 잡아놓은거라 get 요청으로 받아오는거의 title 을 그대로 쓰면 됨
         content,
-        title: "kimcoding2",
+        title: clickTitle,
         user_id: user_id,
       })
       .then((res) => {
@@ -83,6 +83,7 @@ const Answer = () => {
       const response = await axios.post("http://localhost:3500/question", {
         title: clickTitle,
         user_id: user_id,
+        nickname,
       });
 
       return response.data;
