@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-
 const morgan = require("morgan");
 const _ = require("lodash");
 const controllers = require("./controllers");
@@ -55,7 +54,7 @@ app.listen(PORT, () => {
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, path.join(__dirname, 'uploads'));	// 콜백 함수로 업로드 파일의 저장 위치를 설정한다.
+      cb(null, 'uploads');	// 콜백 함수로 업로드 파일의 저장 위치를 설정한다.
   },
   filename: (req, file, cb) => {
       cb(null, file.originalname);	// 콜백 함수로 파일이 저장될 때 이름을 설정한다.
@@ -69,7 +68,7 @@ app.post('/uploads', (req, res) => {
       if(err) {
           return res.json({ success: false, err});
       }
-      return res.json({ success: true, url: res.req.file.path, fileName: res.req.file.name });
+      return res.json({ success: true});
   })
 
 });
