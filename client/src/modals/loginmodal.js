@@ -125,8 +125,8 @@ const Loginmodal = () => {
   const TestPwHandler = (e) => {
     setTestPw(e.target.value);
   };
-  const testFn2 = async () => {
-    await axios
+  const testFn2 = () => {
+    axios
       .post("http://localhost:3500/sign/in", {
         user_id: testId,
         password: testPw,
