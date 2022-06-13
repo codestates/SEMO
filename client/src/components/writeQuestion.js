@@ -116,6 +116,7 @@ const WriteQuestionComponenet = () => {
           <Button className="btn">취소</Button>
         </BtnContainer>
         {/* 아래는 사진 업로드 기능인데, db로 보내기랑 css수정해야함 */}
+
         <ImageTest>
           <div>사진 업로드 </div>
           <div>image</div>
