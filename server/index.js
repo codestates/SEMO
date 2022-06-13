@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use(express.static('uploads'));
+app.use(express.static("uploads"));
 
 app.get("/sign/auth", controllers.auth);
 app.post("/sign/in", controllers.signin);
@@ -50,35 +50,47 @@ app.listen(PORT, () => {
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, 'uploads');	// 콜백 함수로 업로드 파일의 저장 위치를 설정한다.
+    cb(null, "../client/src/images"); // 콜백 함수로 업로드 파일의 저장 위치를 설정한다.
   },
   filename: (req, file, cb) => {
-    let date = new Date()
+    let date = new Date();
     let year = date.getFullYear(); // 년도
     let month = date.getMonth() + 1;
-    month = month < 10 ? '0' + month : month
+    month = month < 10 ? "0" + month : month;
     let day = date.getDate();
-    day = day < 10 ? '0' + day : day
+    day = day < 10 ? "0" + day : day;
     let hours = date.getHours();
-    hours = hours < 10 ? '0' + hours : hours
+    hours = hours < 10 ? "0" + hours : hours;
     let minutes = date.getMinutes();
-    minutes = minutes < 10 ? '0' + minutes : minutes
+    minutes = minutes < 10 ? "0" + minutes : minutes;
     let seconds = date.getSeconds();
-    seconds = seconds < 10 ? '0' + seconds : seconds
+    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    let originname = file.originalname
-      cb(null, year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds+'_'+originname);	// 콜백 함수로 파일이 저장될 때 이름을 설정한다.
-  }
+    cb(
+      null,
+      year +
+        "-" +
+        month +
+        "-" +
+        day +
+        "T" +
+        hours +
+        ":" +
+        minutes +
+        ":" +
+        seconds +
+        ".000Z_.jpg"
+    ); // 콜백 함수로 파일이 저장될 때 이름을 설정한다.
+  },
 });
 
-const upload = multer({ storage: storage }).single('file');
+const upload = multer({ storage: storage }).single("file");
 
-app.post('/uploads', (req, res) => {
-  upload(req, res, err => {
-      if(err) {
-          return res.json({ success: false, err});
-      }
-      return res.json({ success: true});
-  })
-
+app.post("/uploads", (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      return res.json({ success: false, err });
+    }
+    return res.json({ success: true });
+  });
 });
