@@ -4,24 +4,21 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const fileUpload = require("express-fileupload");
 const morgan = require("morgan");
 const _ = require("lodash");
 const controllers = require("./controllers");
+const multer = require("multer");
+const path = require('path');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
-app.use(
-  fileUpload({
-    createParentPath: true,
-  })
-);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use(express.static("uploads"));
+app.use(express.static('uploads'));
 
 app.get("/sign/auth", controllers.auth);
 app.post("/sign/in", controllers.signin);
@@ -51,27 +48,27 @@ app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-app.post("/upload", async (req, res) => {
-  try {
-    if (!req.files) {
-      res.send({
-        status: false,
-        message: "파일 업로드 실패",
-      });
-    } else {
-      let f = req.files.uploadFile;
-      f.mv("./uploads/" + f.name);
-      res.send({
-        status: true,
-        message: "파일이 업로드 되었습니다.",
-        data: {
-          name: f.name,
-          minetype: f.minetype,
-          size: f.size,
-        },
-      });
-    }
-  } catch (err) {
-    res.status(500).send(err);
+
+
+
+
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'uploads');	// 콜백 함수로 업로드 파일의 저장 위치를 설정한다.
+  },
+  filename: (req, file, cb) => {
+      cb(null, file.originalname);	// 콜백 함수로 파일이 저장될 때 이름을 설정한다.
   }
+});
+
+const upload = multer({ storage: storage }).single('file');
+
+app.post('/uploads', (req, res) => {
+  upload(req, res, err => {
+      if(err) {
+          return res.json({ success: false, err});
+      }
+      return res.json({ success: true});
+  })
+
 });

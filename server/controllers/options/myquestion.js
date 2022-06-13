@@ -9,22 +9,22 @@ module.exports = (req, res) => {
     if(!title || !content){
       return res.status(422).send("insufficient parameters supplied");
     } else {
-       question.findOrCreate({
-        where : {title : title},
+       const data = question.findAll({
+        where : {user_id : user_id},
         defaults : {
           school: school,
           grade: grade,
           subject: subject,
           content: content,
-          user_id: user_id
+          title: title
         }
-      }).then(([result, isCreated])=> {
-          if(!isCreated){
-            return res.status(409).send({message: result})
-          } else {
-            return res.status(201).json({message : "question created"})
-          }
       })
+        if(!data){
+          return res.status(409).send({message: "error"})
+        } else {
+          return res.status(201).json({message : data})
+        }
+ 
     }
   } 
   catch(err){
