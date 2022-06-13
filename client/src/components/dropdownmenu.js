@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { useState, useCallback } from "react";
-import dropdownItems from "../data/dropdownItems";
-import Button from "./button";
+import { useStore } from "../zustand/store";
 
 export const DropdownContainer = styled.div`
   width: 100vw;
@@ -11,136 +9,80 @@ export const DropdownContainer = styled.div`
   gap: 5vw;
 `;
 
-export const DropdownBody = styled.div`
+const Selecttag = styled.select`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const DropdownSelect = styled.p`
-  font-weight: bold;
-`;
-
-export const DropdownMenu = styled.div`
-  display: ${(props) => (props.isActive ? `flex` : `none`)};
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  background-color: white;
-  position: absolute;
-  box-sizing: border-box;
-`;
-
-export const DropdownItemContainer = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15px;
+  text-align: center;
+  text-align-last: center;
+  font-size: 3vw;
   background-color: #a573ff;
   border: 2px solid #7a57d1;
   border-radius: 10px;
-  padding: 5px 7px;
-  width: 70px;
-
-  &:last-child {
-    border-bottom: none;
-  }
-`;
-
-export const ItemName = styled.p`
-  &:hover {
-    cursor: pointer;
-    font-weight: bold;
-  }
+  padding: 5px 0;
+  width: 17vw;
+  cursor: pointer;
 `;
 
 const Dropdown = () => {
-  // 드롭다운 상태 저장
-  const [isActive, setIsActive] = useState(false);
+  const { school, selectSchool, selectGrade, selectsubject } = useStore();
 
-  // 선택된 드롭다운 아이템 저장
-  const [item, setItem] = useState(null);
+  const selectSchoolHandler = (e) => {
+    selectSchool(e.target.value);
+  };
 
-  // 드롭다운 토글 기능을 수행하는 함수
-  const onActiveToggle = useCallback(() => {
-    setIsActive((prev) => !prev);
-  }, []);
+  const selectGradeHandler = (e) => {
+    selectGrade(e.target.value);
+  };
 
-  // 드롭다운 아이템을 선택했을때 실행되는 함수
-  // 클릭 이벤트가 아이템에서 클릭 됐는지, 드롭다운 박스를 클릭했는지에 따라 조건을 설정
-  const onSelectItem = useCallback((e) => {
-    const targetId = e.target.id;
-    if (targetId === "item_name") {
-      setItem(e.target.parentElement.innerText);
-    } else if (targetId === "item") {
-      setItem(e.target.innertText);
-    }
-
-    // 드롭다운 아이템을 클릭했으면 드롭다운을 닫는다
-    setIsActive((prev) => !prev);
-  }, []);
+  const selectSubjectHandler = (e) => {
+    selectsubject(e.target.value);
+  };
 
   return (
     <DropdownContainer>
-      <DropdownBody>
-        {/* 선택된 아이템이 있다면 드롭다운 기본 메뉴에 선택된 item이 나타나도록한다 */}
-        {item ? (
-          <>
-            <Button onClick={onActiveToggle}>{item}</Button>
-          </>
-        ) : (
-          <>
-            <Button onClick={onActiveToggle}>학교</Button>
-          </>
-        )}
-      </DropdownBody>
-      {/* 드롭다운 기능을 수행하기 위해 styled-components에 active변수를 넘긴다 */}
-      {/* active가 true일때와 false일때 */}
-      <DropdownMenu isActive={isActive}>
-        {dropdownItems.map((item) => (
-          <DropdownItemContainer id="item" key={item.id} onClick={onSelectItem}>
-            <ItemName id="item_name">{item.name}</ItemName>
-          </DropdownItemContainer>
-        ))}
-      </DropdownMenu>
+      <Selecttag
+        name="school"
+        id="school-select"
+        onChange={selectSchoolHandler}
+      >
+        <option value="school">학교</option>
+        <option value="elementary">초등학교</option>
+        <option value="middle">중학교</option>
+        <option value="high">고등학교</option>
+      </Selecttag>
+      {school === "elementary" ? (
+        <Selecttag name="grade" id="grade-select" onChange={selectGradeHandler}>
+          <option value="grade">학년</option>
+          <option value="lv1">1학년</option>
+          <option value="lv2">2학년</option>
+          <option value="lv3">3학년</option>
+          <option value="lv4">4학년</option>
+          <option value="lv5">5학년</option>
+          <option value="lv6">6학년</option>
+        </Selecttag>
+      ) : (
+        <Selecttag name="grade" id="grade-select" onChange={selectGradeHandler}>
+          <option value="grade">학년</option>
+          <option value="lv1">1학년</option>
+          <option value="lv2">2학년</option>
+          <option value="lv3">3학년</option>
+        </Selecttag>
+      )}
 
-      <DropdownBody>
-        {item ? (
-          <>
-            <Button onClick={onActiveToggle}>{item}</Button>
-          </>
-        ) : (
-          <>
-            <Button onClick={onActiveToggle}>학년</Button>
-          </>
-        )}
-      </DropdownBody>
-      <DropdownMenu isActive={isActive}>
-        {dropdownItems.map((item) => (
-          <DropdownItemContainer id="item" key={item.id} onClick={onSelectItem}>
-            <ItemName id="item_name">{item.name}</ItemName>
-          </DropdownItemContainer>
-        ))}
-      </DropdownMenu>
-
-      <DropdownBody>
-        {item ? (
-          <>
-            <Button onClick={onActiveToggle}>{item}</Button>
-          </>
-        ) : (
-          <>
-            <Button onClick={onActiveToggle}>과목</Button>
-          </>
-        )}
-      </DropdownBody>
-      <DropdownMenu isActive={isActive}>
-        {dropdownItems.map((item) => (
-          <DropdownItemContainer id="item" key={item.id} onClick={onSelectItem}>
-            <ItemName id="item_name">{item.name}</ItemName>
-          </DropdownItemContainer>
-        ))}
-      </DropdownMenu>
+      <Selecttag
+        name="subject"
+        id="subject-select"
+        onChange={selectSubjectHandler}
+      >
+        <option value="subject">과목</option>
+        <option value="korean">국어</option>
+        <option value="english">영어</option>
+        <option value="math">수학</option>
+        <option value="social">사회</option>
+        <option value="science">과학</option>
+        <option value="artsandsports">예체능</option>
+      </Selecttag>
     </DropdownContainer>
   );
 };

@@ -5,6 +5,9 @@ export const useStore = create((set) => ({
   loginmodal: false,
   signupmodal: false,
   islogin: false,
+  school: "",
+  grade: "",
+  subject: "",
 
   openLoginModal: () => set({ loginmodal: true }),
   closeLoginModal: () => set({ loginmodal: false }),
@@ -13,6 +16,9 @@ export const useStore = create((set) => ({
   changeModal: () => set({ loginmodal: false, signupmodal: true }),
   setLogin: () => set({ islogin: true }),
   setLogOut: () => set({ islogin: false }),
+  selectSchool: (a) => set((state) => ({ school: (state.school = a) })),
+  selectGrade: (a) => set((state) => ({ grade: (state.grade = a) })),
+  selectsubject: (a) => set((state) => ({ subject: (state.subject = a) })),
 }));
 // qjastar a123456
 export const useStoreTemp = create((set) => ({
