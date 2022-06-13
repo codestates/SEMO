@@ -76,18 +76,6 @@ const Header = (props) => {
   const { clickMyPage, setClickMypage, setOffMypage, setSignOutModal } =
     useStoreTemp();
 
-  const getuserinfo = async () => {
-    await axios
-      .get("http://localhost:3500/user/auth", {
-        headers: {
-          authorization: "asdfas",
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      });
-  };
-
   return (
     <>
       {islogin === false ? (
