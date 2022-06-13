@@ -21,7 +21,7 @@ module.exports = (req, res) => {
         })
         .then(([result, isCreated]) => {
           if (!isCreated) {
-            return res.status(409).send({ message: result });
+            return res.status(201).json(result);
           } else {
             return res.status(201).json({ message: "question created" });
           }
