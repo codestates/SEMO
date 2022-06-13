@@ -11,6 +11,7 @@ import SignupModalComponent from "../modals/signupmodal";
 import SimpleSlider from "../components/slickslide";
 import { useStore } from "../zustand/store";
 import { Link } from "react-router-dom";
+
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
   width: 100vw;
@@ -56,7 +57,7 @@ const TextContainer = styled.div`
 `;
 
 const Main = () => {
-  const { loginmodal, signupmodal } = useStore();
+  const { loginmodal, signupmodal, islogin, openLoginModal } = useStore();
   return (
     <>
       <Header />
@@ -65,9 +66,15 @@ const Main = () => {
           <TextContainer>
             <p className="h1">문제를 못풀겠나요?</p>
             <p className="h2">지금 당장 질문하세요!</p>
-            <Link to="/question/write">
-              <Button className="btn1">질문하러 가기</Button>
-            </Link>
+            {islogin === false ? (
+              <Button className="btn1" onClick={openLoginModal}>
+                질문하러 가기
+              </Button>
+            ) : (
+              <Link to="/question/write">
+                <Button className="btn1">질문하러 가기</Button>
+              </Link>
+            )}
           </TextContainer>
           <ImgContainer src={image1} alt="" />
         </ItemasContainer1>
@@ -76,7 +83,15 @@ const Main = () => {
           <TextContainer>
             <p className="h1">문제를 풀어볼까요?</p>
             <p className="h2">지금 당장 가시죠!</p>
-            <Button className="btn1">풀이하러 가기</Button>
+            {islogin === false ? (
+              <Button className="btn1" onClick={openLoginModal}>
+                풀이하러 가기
+              </Button>
+            ) : (
+              <Link to="/noticeboard">
+                <Button className="btn1">풀이하러 가기</Button>
+              </Link>
+            )}
           </TextContainer>
           <ImgContainer src={image2} alt="" />
         </ItemasContainer1>
@@ -100,10 +115,10 @@ const Main = () => {
             <p className="h2">문제를 풀어줄 수 있어요!</p>
           </TextContainer>
         </ItemasContainer1>
-        {loginmodal === true ? <LoginModalComponent /> : null}
-        {signupmodal === true ? <SignupModalComponent /> : null}
         <Footer />
       </ItemasContainer>
+      {loginmodal === true ? <LoginModalComponent /> : null}
+      {signupmodal === true ? <SignupModalComponent /> : null}
     </>
   );
 };

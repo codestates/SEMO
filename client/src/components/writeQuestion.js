@@ -3,8 +3,10 @@ import Button from "./button";
 import { useState } from "react";
 import axios from "axios";
 import { useStoreTemp, useUserinfo } from "../zustand/store";
+
 const ContainQuestion = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 const InputTitleBox = styled.input`
   width: 80vw;
@@ -46,8 +48,6 @@ const BtnContainer = styled.div`
 
 const ImageTest = styled.div``;
 const WriteQuestionComponenet = () => {
-  // const [title,setTitle]=useState("");
-  // const [text,setText]=useState("");
   const { title, text, setTitle, setText } = useStoreTemp();
   const { user_id } = useUserinfo();
   const titleHandler = (e) => {
@@ -56,6 +56,7 @@ const WriteQuestionComponenet = () => {
   const textHandler = (e) => {
     setText(e.target.value);
   };
+
   // const testFn = () => {
   //   // console.log("@@@@@@@@@@@@@@@@타이틀@@@@@@@@",title,"@@@@@@@@@@@@@@@@텍스트@@@@@@@@",text)
   //   axios.post("http://localhost:3500/question", {

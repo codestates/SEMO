@@ -9,12 +9,14 @@ export const useStore = create((set) => ({
   grade: "",
   subject: "",
 
-  openLoginModal: () => set({ loginmodal: true }),
-  closeLoginModal: () => set({ loginmodal: false }),
+  openLoginModal: () =>
+    set({ loginmodal: true }, console.log("open login modal!")),
+  closeLoginModal: () =>
+    set({ loginmodal: false }, console.log("close login modal")),
   openSignupModal: () => set({ signupmodal: true }),
   closeSignupModal: () => set({ signupmodal: false }),
   changeModal: () => set({ loginmodal: false, signupmodal: true }),
-  setLogin: () => set({ islogin: true }),
+  setLogin: () => set({ islogin: true }, console.log("success login!")),
   setLogOut: () => set({ islogin: false }),
   selectSchool: (a) => set((state) => ({ school: (state.school = a) })),
   selectGrade: (a) => set((state) => ({ grade: (state.grade = a) })),

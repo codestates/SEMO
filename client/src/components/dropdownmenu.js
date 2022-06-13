@@ -6,7 +6,9 @@ export const DropdownContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 5vw;
+  gap: 8vw;
+  /* border: 1px solid red; */
+  padding: 10px 0;
 `;
 
 const Selecttag = styled.select`
