@@ -5,6 +5,9 @@ export const useStore = create((set) => ({
   loginmodal: false,
   signupmodal: false,
   islogin: false,
+  school: "",
+  grade: "",
+  subject: "",
 
   openLoginModal: () => set({ loginmodal: true }),
   closeLoginModal: () => set({ loginmodal: false }),
@@ -13,6 +16,9 @@ export const useStore = create((set) => ({
   changeModal: () => set({ loginmodal: false, signupmodal: true }),
   setLogin: () => set({ islogin: true }),
   setLogOut: () => set({ islogin: false }),
+  selectSchool: (a) => set((state) => ({ school: (state.school = a) })),
+  selectGrade: (a) => set((state) => ({ grade: (state.grade = a) })),
+  selectsubject: (a) => set((state) => ({ subject: (state.subject = a) })),
 }));
 // qjastar a123456
 export const useStoreTemp = create((set) => ({
@@ -34,6 +40,7 @@ export const useStoreTemp = create((set) => ({
   setSignOutModal: () => set({ signOutModal: true }),
   closeSignupModal: () => set({ signOutModal: false }),
   editPwBtn: () => set((state) => ({ isEditPw: (state.isEditPw = true) })),
+  cancelEditPwBtn: () => set((state) => ({ isEditPw: !state.isEditPw })),
   editNicknameBtn: () =>
     set((state) => ({ isEditnickname: (state.isEditnickname = true) })),
   cancelEditNicknameBtn: () =>
@@ -73,11 +80,16 @@ export const useUserinfo = create((set) => ({
   password: "",
   nickname: "",
   edPw: "",
-
+  nickname2: "",
   setedPw: (a) => set((state) => ({ edPw: (state.edPw = a) })),
 
   setUserUserid: (a) => set((state) => ({ user_id: (state.user_id = a) })),
-  setUserNickname: (a) => set((state) => ({ nickname: (state.nickname = a) })),
+  setUserNickname: (a) =>
+    set(
+      (state) => (
+        { nickname: (state.nickname = a) }, { nickname2: (state.nickname2 = a) }
+      )
+    ),
   setUserPassword: (a) => set((state) => ({ password: (state.password = a) })),
 
   setUserInfoSignOutClear: () =>
