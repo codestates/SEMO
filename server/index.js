@@ -50,36 +50,14 @@ app.listen(PORT, () => {
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../client/src/images"); // 콜백 함수로 업로드 파일의 저장 위치를 설정한다.
+    cb(null, "../client/public/img"); // 콜백 함수로 업로드 파일의 저장 위치를 설정한다.
   },
   filename: (req, file, cb) => {
-    let date = new Date();
-    let year = date.getFullYear(); // 년도
-    let month = date.getMonth() + 1;
-    month = month < 10 ? "0" + month : month;
-    let day = date.getDate();
-    day = day < 10 ? "0" + day : day;
-    let hours = date.getHours();
-    hours = hours < 10 ? "0" + hours : hours;
-    let minutes = date.getMinutes();
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    let seconds = date.getSeconds();
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    let date = new Date().toISOString();
+
 
     cb(
-      null,
-      year +
-        "-" +
-        month +
-        "-" +
-        day +
-        "T" +
-        hours +
-        ":" +
-        minutes +
-        ":" +
-        seconds +
-        ".000Z_.jpg"
+      null, date.slice(0, 19)+'_.jpg'
     ); // 콜백 함수로 파일이 저장될 때 이름을 설정한다.
   },
 });
