@@ -43,6 +43,7 @@ const ReplyText = styled.textarea`
   margin: 5vw;
   background: #cccccc;
   vertical-align: middle;
+
   border-radius: 2vw;
   padding: 3vw;
   font-size: 4vw;
