@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
 
   try {
     const { title, content, user_id, nickname } = req.body;
-  
+
     const data = await answer.findAll({
       where: { user_id: user_id },
     });
@@ -14,9 +14,7 @@ module.exports = async (req, res) => {
     } else {
       return res.status(201).json(data);
     }
-    
   } catch (err) {
     return;
   }
-
 };
