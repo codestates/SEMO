@@ -18,4 +18,5 @@ module.exports = {
   idcheck: require("./users/idcheck"),
   nicknamecheck: require("./users/nicknamecheck"),
   myquestionsall: require("./options/myquestionall"),
+  myanswer: require("./options/myanswer"),
 };
