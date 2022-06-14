@@ -30,6 +30,7 @@ app.post("/question/delete", controllers.questiondelete);
 app.delete("/answer/delete", controllers.answerdelete);
 app.get("/question/all", controllers.questionall);
 app.get("/user/info", controllers.userinfo);
+app.get("/myanswer/all", controllers.myanswer);
 app.patch("/answer/edit", controllers.answeredit);
 app.patch("/question/edit", controllers.questionedit);
 app.patch("/user/nickname/edit", controllers.nicknameedit);
