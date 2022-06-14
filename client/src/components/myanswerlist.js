@@ -32,15 +32,11 @@ const AllMyAnswer = () => {
   const { user_id, nickname } = useUserinfo();
   const getPosts = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3500/myquestion/all",
-        { user_id }
-      );
-
+      const response = await axios.post("http://localhost:3500/myanswer/all", {
+        user_id,
+      });
       return response.data;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const testList = getPosts();
   useEffect(() => {
@@ -55,7 +51,9 @@ const AllMyAnswer = () => {
     console.log("123", clickTitle);
   };
   const textInput = useRef();
-
+  const magicBtn = () => {
+    console.log(testList);
+  };
   return (
     <Container>
       <div>
@@ -63,16 +61,16 @@ const AllMyAnswer = () => {
           return (
             <QuestionContainer key={item.id} item={item}>
               <NicnNDate>
-                <span>작성자 : {nickname}</span>
+                <span>제목 : {item.title}</span>
                 <span>작성일자 : {item.updatedAt.slice(5, 10)}</span>
               </NicnNDate>
-              <Link to="/">
+              <Link to="/myanswerview">
                 <QuestionTitle
                   onClick={() => {
                     viewQuestion(item.title);
                   }}
                 >
-                  {item.title}
+                  {item.content}
                 </QuestionTitle>
               </Link>
             </QuestionContainer>
