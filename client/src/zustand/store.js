@@ -40,6 +40,10 @@ export const useStoreTemp = create((set) => ({
   signOutModal: false,
   qLists: [],
   clickTitle: "",
+  editContentStatus: "",
+  setEditContentStatus: (a) =>
+    set((state) => ({ editContentStatus: (state.editContentStatus = a) })),
+
   setClickTitle: (a) =>
     set((state) => ({ clickTitle: (state.clickTitle = a) })),
   // setClickTitle: (a) =>

@@ -26,7 +26,7 @@ app.post("/sign/out", controllers.signout);
 app.post("/sign/withdraw", controllers.signwithdraw);
 app.post("/question", controllers.question);
 app.post("/answer", controllers.answer);
-app.delete("/question/delete", controllers.questiondelete);
+app.post("/question/delete", controllers.questiondelete);
 app.delete("/answer/delete", controllers.answerdelete);
 app.get("/question/all", controllers.questionall);
 app.get("/user/info", controllers.userinfo);
@@ -37,7 +37,7 @@ app.patch("/user/password/edit", controllers.passwordedit);
 app.post("/sign/idcheck", controllers.idcheck);
 app.post("/sign/nicknamecheck", controllers.nicknamecheck);
 app.post("/myquestion/all", controllers.myquestionsall);
-
+app.get("/myanswer/all", controllers.myanswer);
 const PORT = process.env.PORT || 3500;
 
 app.get("/", (req, res) => {
@@ -55,10 +55,7 @@ let storage = multer.diskStorage({
   filename: (req, file, cb) => {
     let date = new Date().toISOString();
 
-
-    cb(
-      null, date.slice(0, 19)+'_.jpg'
-    ); // 콜백 함수로 파일이 저장될 때 이름을 설정한다.
+    cb(null, date.slice(0, 19) + "_.jpg"); // 콜백 함수로 파일이 저장될 때 이름을 설정한다.
   },
 });
 
