@@ -19,4 +19,5 @@ module.exports = {
   nicknamecheck: require("./users/nicknamecheck"),
   myquestionsall: require("./options/myquestionall"),
   myanswer: require("./options/myanswer"),
+  answerone: require("./options/answerone"),
 };
