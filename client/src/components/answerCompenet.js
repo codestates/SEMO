@@ -27,6 +27,7 @@ const AnswerText = styled.div`
   border-radius: 2vw;
   padding: 3vw;
   height: 300px;
+  word-break: break-word;
   margin: 5vw;
 `;
 const ButtonContainer = styled.div`
@@ -50,11 +51,13 @@ const ReplyText = styled.textarea`
 const Answer = () => {
   const [question, setQustion] = useState([]);
   const [solve, setSolved] = useState(false);
-  const { clickTitle } = useStoreTemp();
+  const { clickTitle, editContentStatus, setEditContentStatus } =
+    useStoreTemp();
   const { user_id, nickname } = useUserinfo();
+  const [clickEditBtn, isClickEditBtn] = useState(false);
+  const [editContent, setEditContent] = useState("");
   const addAnswer = () => {
     setSolved(!solve);
-    console.log("reply 값 ", solve);
   };
   const [content, setReply] = useState("");
   const replyHandler = (e) => {
@@ -65,7 +68,6 @@ const Answer = () => {
     console.log("@@@@@", content, "sdfsfd", user_id);
     axios
       .post("http://localhost:3500/answer", {
-        //title, ==> 틀만 잡아놓은거라 get 요청으로 받아오는거의 title 을 그대로 쓰면 됨
         content,
         title: clickTitle,
         user_id: user_id,
@@ -97,23 +99,114 @@ const Answer = () => {
       setQustion(data);
     });
   }, []);
-  const testBtn = () => {
-    console.log(question);
+
+  const editBtn = () => {
+    isClickEditBtn(!clickEditBtn);
+    setEditContent(question.content);
+    console.log("click edit Btn", clickEditBtn);
   };
+  // 수정하기 기능 구현하기용 함수
+  const getEditContent = async () => {
+    try {
+      const response = await axios.post("http://localhost:3500/question", {
+        title: clickTitle,
+        user_id: user_id,
+        nickname,
+      });
+
+      return response.data;
+    } catch (error) {}
+  };
+  const getEditData = getEditContent();
+  useEffect(() => {
+    getEditData.then((data) => {
+      setEditContentStatus(data.content);
+    });
+  }, []);
+  const testreplyHandler = (e) => {
+    setEditContentStatus(e.target.value);
+  };
+  const editQuestionr2 = () => {
+    console.log(
+      "수정버튼 눌림 콘텐트",
+      editContentStatus,
+      "title",
+      clickTitle,
+      "user_id",
+      user_id
+    );
+    axios
+      .patch("http://localhost:3500/question/edit", {
+        content: editContentStatus,
+        title: clickTitle,
+        user_id: user_id,
+      })
+      .then((res) => {
+        if (res.data) {
+          alert("수정 되었습니다");
+        } else {
+          alert("실패");
+        }
+      });
+  };
+  const submitEditQuestion = () => {
+    isClickEditBtn(!clickEditBtn);
+    editQuestionr2();
+  };
+  // 삭제하기 기능 구현
+  const deleteFunction = () => {
+    console.log(clickTitle, "22", user_id);
+    axios
+      .post("http://localhost:3500/question/delete", {
+        title: clickTitle,
+        user_id,
+      })
+      .then((res) => {
+        if (res.data) {
+          alert("삭제 되었습니다");
+        } else {
+          alert("실패");
+        }
+      });
+  };
+
   return (
     <>
       <AnswerContainer>
-        <Button onClick={testBtn}>123</Button>
         <AnswerTitle>{clickTitle}</AnswerTitle>
       </AnswerContainer>
-      <TextContainer>
-        <AnswerText>{question.content}</AnswerText>
-      </TextContainer>
-      <ButtonContainer>
-        <Button onClick={addAnswer}>문제풀기</Button>
-        <Button>수정</Button>
-        <Button>삭제</Button>
-      </ButtonContainer>
+
+      {clickEditBtn !== false ? (
+        <>
+          (
+          <>
+            <TextContainer>
+              <ReplyText
+                type="text"
+                value={editContentStatus}
+                onChange={testreplyHandler}
+              ></ReplyText>
+            </TextContainer>
+            <ButtonContainer>
+              <Button onClick={submitEditQuestion}>수정하기</Button>
+              <Button onClick={editBtn}>취소</Button>
+            </ButtonContainer>
+          </>
+          )
+        </>
+      ) : (
+        <>
+          <TextContainer>
+            <AnswerText>{question.content}</AnswerText>
+          </TextContainer>
+          <ButtonContainer>
+            <Button onClick={addAnswer}>문제풀기</Button>
+            <Button onClick={editBtn}>수정</Button>
+            <Button onClick={deleteFunction}>삭제</Button>
+          </ButtonContainer>
+        </>
+      )}
+
       {solve !== false ? (
         <>
           <AnswerContainer>

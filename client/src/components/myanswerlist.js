@@ -26,8 +26,8 @@ const NicnNDate = styled.div`
 `;
 // const Container = styled.div``;
 
-const Allquestions = () => {
-  const [qLists, setQLists] = useState([]);
+const AllMyAnswer = () => {
+  const [aLists, setALists] = useState([]);
   const { clickTitle, setClickTitle } = useStoreTemp();
   const { user_id, nickname } = useUserinfo();
   const getPosts = async () => {
@@ -41,24 +41,11 @@ const Allquestions = () => {
     } catch (error) {
       console.log(error);
     }
-
-    // console.log("123123jksdfjsldjfljdslfjdslkjf");
-    // axios
-    //   .post("http://localhost:3500/myquestion/all", {
-    //     user_id,
-    //   })
-    //   .then((res) => {
-    //     console.log("123123123123123123123123123");
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
   const testList = getPosts();
   useEffect(() => {
     testList.then((data) => {
-      setQLists(data);
+      setALists(data);
     });
   }, []);
   const viewQuestion = (e) => {
@@ -72,14 +59,14 @@ const Allquestions = () => {
   return (
     <Container>
       <div>
-        {qLists.map((item) => {
+        {aLists.map((item) => {
           return (
             <QuestionContainer key={item.id} item={item}>
               <NicnNDate>
                 <span>작성자 : {nickname}</span>
                 <span>작성일자 : {item.updatedAt.slice(5, 10)}</span>
               </NicnNDate>
-              <Link to="/answer">
+              <Link to="/">
                 <QuestionTitle
                   onClick={() => {
                     viewQuestion(item.title);
@@ -96,4 +83,4 @@ const Allquestions = () => {
   );
 };
 
-export default Allquestions;
+export default AllMyAnswer;
