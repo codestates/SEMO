@@ -44,8 +44,22 @@ const AnswerText = styled.div`
 
 const ViewMyAnswer = () => {
   const [question, setQustion] = useState([]);
-  const { clickTitle, setClickTitle } = useStoreTemp();
+  const [answer, setAnswer] = useState([]);
+  const {
+    clickTitle,
+    setClickTitle,
+    editContentStatus,
+    setEditContentStatus,
+    clickCotent,
+    editAnswerId,
+    setEditAnswerId,
+    setClickContent,
+    editAnswerContent,
+    setEditAnswerContent,
+  } = useStoreTemp();
   const { user_id, nickname } = useUserinfo();
+  const [clickEditBtn, isClickEditBtn] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const getQuestion = async () => {
     try {
       console.log("axios");
@@ -67,43 +81,133 @@ const ViewMyAnswer = () => {
   }, []);
   //++++++++++++++++++++++++++++위에 question 에 달린 내 대답 보기
 
-  //   const getAnswer =async () =>{
-  //       try {
-  //         console.log("getAnsweraxios");
-  //         const response = await.post("http://localhost:3500/myanswer/all")
-  //       }catch(err){
-  //         console.log(err)
-  //       }
-  //   }
-  const testBtn = () => {
-    console.log("123", question.content, "title값", clickTitle);
+  const getAnswer = async () => {
+    try {
+      console.log("getAnsweraxios");
+      const res = await axios.post("http://localhost:3500/answer/one", {
+        title: clickTitle,
+        user_id,
+      });
+      console.log("res", res);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const thisGetAnswer = getAnswer();
+  useEffect(() => {
+    thisGetAnswer.then((data) => {
+      setAnswer(data);
+    });
+  }, []);
+
+  const editBtnHandler = (e, b) => {
+    isClickEditBtn(!clickEditBtn);
+    setEditAnswerId(e);
+    setClickContent(b);
+    console.log(
+      "###############!@#!@#!@#!@#!@#!@#!@#!@#",
+      clickCotent,
+      "!@#!@#!@#!@#",
+      editAnswerId
+    );
   };
 
+  const inputHandler = (e) => {
+    console.log("입력값 변화 ");
+
+    setClickContent(e.target.value);
+  };
+  const submitEditAnswer = () => {
+    console.log("수정하기 버튼 눌림 ");
+    axios.patch("http://localhost:3500/answer/edit", {
+      content: clickCotent,
+      user_id,
+      id: editAnswerId,
+      title: clickTitle,
+    });
+  };
+  const deleteHandler = () => {
+    console.log("삭제버튼 클릭");
+  };
+  const submitDelete = () => {
+    axios
+      .post("http://localhost:3500/answer/delete", {
+        title: clickTitle,
+        user_id,
+        id: editAnswerId,
+      })
+      .then((res) => {
+        if (res.data) {
+          alert("삭제 되었습니다");
+        } else {
+          alert("실패");
+        }
+      });
+  };
+  const testBtn1 = (e) => {
+    setDeleteModal(!deleteModal);
+    setEditAnswerId(e);
+    console.log("!!!!!!@@@#######", editAnswerId);
+  };
   return (
     <>
-      <button onClick={testBtn}>TEST</button>
       <TextContainer>
         <div>제목 {question.title} </div>
         <AnswerText>{question.content}</AnswerText>
       </TextContainer>
       <div>위에는 원래 질문글</div>
-      <TextContainer>
-        <AnswerText>{}</AnswerText>
-      </TextContainer>
-      <ButtonContainer>
-        <Button>수정</Button>
-        <Button>삭제</Button>
-      </ButtonContainer>
+      {/* {answer.map} */}
+
+      {answer.map((item, idx) => {
+        return (
+          <div key={item.id} item={item}>
+            <TextContainer>
+              {/* <button onClick={testBtn}>TEST</button> */}
+              <AnswerText>{item.content}</AnswerText>
+              <div>@@@@@@@@@{item.id}@@@@@@@@</div>
+            </TextContainer>
+            <ButtonContainer>
+              <Button
+                onClick={() => {
+                  editBtnHandler(item.id, item.content);
+                }}
+              >
+                수정
+              </Button>
+
+              {/* 화살표 함수로, item.title? item.content값 넘겨주기 .edit 기능 테스트하기  */}
+              {deleteModal !== true ? (
+                <Button
+                  onClick={() => {
+                    testBtn1(item.id);
+                  }}
+                >
+                  삭제하기
+                </Button>
+              ) : (
+                <Button onClick={submitDelete}>삭제하시겠어요?</Button>
+              )}
+            </ButtonContainer>
+          </div>
+        );
+      })}
+      {clickEditBtn !== false ? (
+        <AnswerContainer>
+          <ReplyContainer>
+            <ReplyText
+              type="text"
+              value={clickCotent}
+              onChange={inputHandler}
+            ></ReplyText>
+            <ButtonContainer>
+              <Button onClick={submitEditAnswer}>수정하기</Button>
+              <Button>취소</Button>
+            </ButtonContainer>
+          </ReplyContainer>
+        </AnswerContainer>
+      ) : null}
       <div>##########################################</div>
-      <AnswerContainer>
-        <ReplyContainer>
-          <ReplyText type="text" placeholder="답변을 입력하세요"></ReplyText>
-          <ButtonContainer>
-            <Button>풀이등록</Button>
-            <Button>취소</Button>
-          </ButtonContainer>
-        </ReplyContainer>
-      </AnswerContainer>
     </>
   );
 };

@@ -27,7 +27,7 @@ app.post("/sign/withdraw", controllers.signwithdraw);
 app.post("/question", controllers.question);
 app.post("/answer", controllers.answer);
 app.post("/question/delete", controllers.questiondelete);
-app.delete("/answer/delete", controllers.answerdelete);
+app.post("/answer/delete", controllers.answerdelete);
 app.get("/question/all", controllers.questionall);
 app.get("/user/info", controllers.userinfo);
 app.post("/myanswer/all", controllers.myanswer);
@@ -39,6 +39,7 @@ app.post("/sign/idcheck", controllers.idcheck);
 app.post("/sign/nicknamecheck", controllers.nicknamecheck);
 app.post("/myquestion/all", controllers.myquestionsall);
 app.get("/myanswer/all", controllers.myanswer);
+app.post("/answer/one", controllers.answerone);
 const PORT = process.env.PORT || 3500;
 
 app.get("/", (req, res) => {

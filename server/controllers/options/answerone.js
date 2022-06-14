@@ -1,32 +1,22 @@
-const { answer } = require('../../models');
-
+const { answer } = require("../../models");
 
 module.exports = async (req, res) => {
   // TODO: 회원가입 및 사용자 생성 로직을 작성하세요.
 
-  try{
-    const {title, content, user_id, nickname} = req.body;
-    if (!title) {
-      return res.status(422).send("insufficient parameters supplied");
+  try {
+    const { title, content, user_id, nickname } = req.body;
+
+    const data = await answer.findAll({
+      where: { user_id: user_id, title: title },
+    });
+    if (!data) {
+      res.status(400).send("error");
+    } else {
+      res.status(200).send(data);
     }
-    else{
-      const data = 
-      await answer.findOne({
-        where: { user_id: user_id },
-      }).then(()=> {
-        return res.status(201).json(data)
-      })
-    }
-      
-    
-  } 
-  catch(err){
-      return ;
+  } catch (err) {
+    return;
   }
-   
-
-  
-
 
   //res.status(409).send();
 };
