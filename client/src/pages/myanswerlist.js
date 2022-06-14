@@ -5,7 +5,6 @@ const MyanswerListPage = () => {
   return (
     <>
       <Header></Header>
-      <div>MyanswerListPage</div>
       <AllMyAnswer></AllMyAnswer>
     </>
   );
