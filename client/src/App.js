@@ -8,6 +8,7 @@ import AnswerPage from "./pages/answer";
 import Noticeboard from "./pages/noticeboard";
 import QuestionsListPage from "./pages/questionList";
 import MyanswerListPage from "./pages/myanswerlist";
+import MyAnswerViewPage from "./pages/myanswerView";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
         <Route path="/oauth/callback/kakao" component={KakaoRedirectHandler} />
         <Route path="/questionlist" element={<QuestionsListPage />} />
         <Route path="/myanswerlist" element={<MyanswerListPage />} />
+        <Route path="/myanswerview" element={<MyAnswerViewPage />} />
       </Routes>
     </BrowserRouter>
   );
