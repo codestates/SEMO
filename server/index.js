@@ -55,10 +55,7 @@ let storage = multer.diskStorage({
   filename: (req, file, cb) => {
     let date = new Date().toISOString();
 
-
-    cb(
-      null, date.slice(0, 19)+'_.jpg'
-    ); // 콜백 함수로 파일이 저장될 때 이름을 설정한다.
+    cb(null, date.slice(0, 19) + "_.jpg"); // 콜백 함수로 파일이 저장될 때 이름을 설정한다.
   },
 });
 
