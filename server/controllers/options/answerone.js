@@ -3,6 +3,7 @@ const { answer } = require("../../models");
 module.exports = async (req, res) => {
   // TODO: 회원가입 및 사용자 생성 로직을 작성하세요.
 
+
   try {
     const { title, content, user_id, nickname } = req.body;
 
@@ -16,6 +17,7 @@ module.exports = async (req, res) => {
     }
   } catch (err) {
     return;
+
   }
 
   //res.status(409).send();

@@ -35,11 +35,13 @@ app.patch("/answer/edit", controllers.answeredit);
 app.patch("/question/edit", controllers.questionedit);
 app.patch("/user/nickname/edit", controllers.nicknameedit);
 app.patch("/user/password/edit", controllers.passwordedit);
+app.patch("/user/profile/edit", controllers.profileedit);
 app.post("/sign/idcheck", controllers.idcheck);
 app.post("/sign/nicknamecheck", controllers.nicknamecheck);
 app.post("/myquestion/all", controllers.myquestionsall);
 app.get("/myanswer/all", controllers.myanswer);
 app.post("/answer/one", controllers.answerone);
+
 const PORT = process.env.PORT || 3500;
 
 app.get("/", (req, res) => {
