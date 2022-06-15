@@ -9,6 +9,13 @@ const AnswerContainer = styled.div`
 `;
 
 const ReplyContainer = styled.div``;
+const AnswerTitle = styled.div`
+  display: flex;
+  width: 80vw;
+  background: #cccccc;
+  border-radius: 2vw;
+  padding: 3vw;
+`;
 
 const ReplyText = styled.textarea`
   width: 80vw;
@@ -25,6 +32,10 @@ const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 10vw;
+  .headerBtn {
+    font-size: 3vw;
+    width: 17vw;
+  }
 `;
 const TextContainer = styled.div`
   display: flex;
@@ -105,12 +116,6 @@ const ViewMyAnswer = () => {
     isClickEditBtn(!clickEditBtn);
     setEditAnswerId(e);
     setClickContent(b);
-    console.log(
-      "###############!@#!@#!@#!@#!@#!@#!@#!@#",
-      clickCotent,
-      "!@#!@#!@#!@#",
-      editAnswerId
-    );
   };
 
   const inputHandler = (e) => {
@@ -152,23 +157,23 @@ const ViewMyAnswer = () => {
   };
   return (
     <>
+      <AnswerContainer>
+        <AnswerTitle> 제목 : {question.title}</AnswerTitle>
+      </AnswerContainer>
       <TextContainer>
-        <div>제목 {question.title} </div>
         <AnswerText>{question.content}</AnswerText>
       </TextContainer>
-      <div>위에는 원래 질문글</div>
-      {/* {answer.map} */}
 
-      {answer.map((item, idx) => {
+      {answer.map((item) => {
         return (
-          <div key={item.id} item={item}>
-            <TextContainer>
+          <div>
+            <TextContainer key={item.id} item={item}>
               {/* <button onClick={testBtn}>TEST</button> */}
               <AnswerText>{item.content}</AnswerText>
-              <div>@@@@@@@@@{item.id}@@@@@@@@</div>
             </TextContainer>
             <ButtonContainer>
               <Button
+                className="headerBtn"
                 onClick={() => {
                   editBtnHandler(item.id, item.content);
                 }}
@@ -179,6 +184,7 @@ const ViewMyAnswer = () => {
               {/* 화살표 함수로, item.title? item.content값 넘겨주기 .edit 기능 테스트하기  */}
               {deleteModal !== true ? (
                 <Button
+                  className="headerBtn"
                   onClick={() => {
                     testBtn1(item.id);
                   }}
@@ -201,13 +207,14 @@ const ViewMyAnswer = () => {
               onChange={inputHandler}
             ></ReplyText>
             <ButtonContainer>
-              <Button onClick={submitEditAnswer}>수정하기</Button>
+              <Button className="headerBtn" onClick={submitEditAnswer}>
+                수정하기
+              </Button>
               <Button>취소</Button>
             </ButtonContainer>
           </ReplyContainer>
         </AnswerContainer>
       ) : null}
-      <div>##########################################</div>
     </>
   );
 };

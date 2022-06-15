@@ -105,8 +105,42 @@ const Myprofile = () => {
   const [isEditPicture, EditPicture] = useState(false);
   const editPictureBtn = () => {
     console.log("사진수정");
-    EditPicture(true);
+    EditPicture(!isEditPicture);
     console.log(isEditPicture);
+  };
+
+  //사진 파일
+
+  const deleteFileImg = () => {
+    URL.revokeObjectURL(fileImg);
+    setfileImg("");
+  };
+
+  const [fileImg, setfileImg] = useState("");
+  const saveFileImg = (e) => {
+    const file = e.target.files[0];
+
+    setfileImg(file);
+  };
+
+  const testFn = async () => {
+    console.log("id", user_id, "123", nickname);
+    let formData = new FormData();
+    formData.append("file", fileImg);
+
+    // const axios1 = await axios.post("http://localhost:3500/question", {
+    //   // 패치 데이터 . 예정
+    //   user_id,
+    //   nickname2,
+    //   profile: "2022",
+    // });
+
+    const axios2 = await axios.post("http://localhost:3500/uploads", formData);
+    if (axios2.data.success) {
+      alert("okay");
+    } else {
+      alert("no");
+    }
   };
 
   const nickNameHandler = (e) => {
@@ -220,7 +254,26 @@ const Myprofile = () => {
           </BtnContainer>
         </Container2>
       ) : null}
-      {isEditPicture !== false ? <Container>와꾸 바꾸기</Container> : null}
+      {isEditPicture !== false ? (
+        <Container>
+          <div>
+            <div>사진 업로드 </div>
+            <div>image</div>
+            <div>
+              {fileImg && <img alt="exam" src={fileImg} />}
+              <input
+                name="imgUp"
+                type="file"
+                accept="image/*"
+                onChange={saveFileImg}
+              />
+              <Button onClick={() => deleteFileImg()}>삭제</Button>
+            </div>
+          </div>
+          <Button onClick={testFn}>수정</Button>
+          <Button onClick={editPictureBtn}>취소</Button>
+        </Container>
+      ) : null}
     </>
   );
 };
