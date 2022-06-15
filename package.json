@@ -3,9 +3,9 @@
     "sequelize-cli": "^6.4.1"
   },
   "dependencies": {
-
     "react-icons": "^4.4.0",
+    "react-intersection-observer": "^9.3.0",
+    "react-loading": "^2.0.3",
     "react-router-dom": "^6.3.0"
-
   }
 }
