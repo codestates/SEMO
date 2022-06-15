@@ -6,18 +6,19 @@ module.exports = async (req, res) => {
 
   try{
     const {title, content, user_id, nickname} = req.body;
-    if (!title) {
-      return res.status(422).send("insufficient parameters supplied");
+
+    const data = 
+    await answer.findAll({
+      where: { user_id: user_id, title: title },
+    })
+    if (!data) {
+      res.status(400).send("error")
     }
-    else{
-      const data = 
-      await answer.findOne({
-        where: { user_id: user_id },
-      }).then(()=> {
-        return res.status(201).json(data)
-      })
+    else {
+      res.status(200).send(data)
     }
-      
+    
+  
     
   } 
   catch(err){

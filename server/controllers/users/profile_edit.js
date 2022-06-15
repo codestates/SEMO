@@ -5,13 +5,13 @@ module.exports = async (req, res) => {
   // TODO: 로그인 정보를 통해 사용자 인증 후 토큰 전달
   try{
 
-    const {user_id, password, nickname} = req.body; //유저 정보 
+    const {user_id, password, nickname, profile} = req.body; //유저 정보 
     await user.update(
       {
-      nickname: nickname,
+      profile: profile,
       },
       {
-      where: {password: password}
+      where: {user_id: user_id}
       }
     ) 
     .then(data => {
