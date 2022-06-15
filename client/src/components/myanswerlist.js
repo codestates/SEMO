@@ -26,39 +26,22 @@ const NicnNDate = styled.div`
 `;
 // const Container = styled.div``;
 
-const Allquestions = () => {
-  const [qLists, setQLists] = useState([]);
+const AllMyAnswer = () => {
+  const [aLists, setALists] = useState([]);
   const { clickTitle, setClickTitle } = useStoreTemp();
   const { user_id, nickname } = useUserinfo();
   const getPosts = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3500/myquestion/all",
-        { user_id }
-      );
-
+      const response = await axios.post("http://localhost:3500/myanswer/all", {
+        user_id,
+      });
       return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-
-    // console.log("123123jksdfjsldjfljdslfjdslkjf");
-    // axios
-    //   .post("http://localhost:3500/myquestion/all", {
-    //     user_id,
-    //   })
-    //   .then((res) => {
-    //     console.log("123123123123123123123123123");
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    } catch (error) {}
   };
   const testList = getPosts();
   useEffect(() => {
     testList.then((data) => {
-      setQLists(data);
+      setALists(data);
     });
   }, []);
   const viewQuestion = (e) => {
@@ -68,24 +51,26 @@ const Allquestions = () => {
     console.log("123", clickTitle);
   };
   const textInput = useRef();
-
+  const magicBtn = () => {
+    console.log(testList);
+  };
   return (
     <Container>
       <div>
-        {qLists.map((item) => {
+        {aLists.map((item) => {
           return (
             <QuestionContainer key={item.id} item={item}>
               <NicnNDate>
-                <span>작성자 : {nickname}</span>
+                <span>제목 : {item.title}</span>
                 <span>작성일자 : {item.updatedAt.slice(5, 10)}</span>
               </NicnNDate>
-              <Link to="/answer">
+              <Link to="/myanswerview">
                 <QuestionTitle
                   onClick={() => {
                     viewQuestion(item.title);
                   }}
                 >
-                  {item.title}
+                  {item.content}
                 </QuestionTitle>
               </Link>
             </QuestionContainer>
@@ -96,4 +81,4 @@ const Allquestions = () => {
   );
 };
 
-export default Allquestions;
+export default AllMyAnswer;

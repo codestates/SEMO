@@ -40,6 +40,19 @@ export const useStoreTemp = create((set) => ({
   signOutModal: false,
   qLists: [],
   clickTitle: "",
+  editContentStatus: "",
+  clickCotent: "",
+  editAnswerId: "",
+  editAnswerContent: "",
+  setEditAnswerContent: (a) =>
+    set((state) => ({ editAnswerContent: (state.editAnswerContent = a) })),
+  setEditAnswerId: (a) =>
+    set((state) => ({ editAnswerId: (state.editAnswerId = a) })),
+  setClickContent: (a) =>
+    set((state) => ({ clickCotent: (state.clickCotent = a) })),
+  setEditContentStatus: (a) =>
+    set((state) => ({ editContentStatus: (state.editContentStatus = a) })),
+
   setClickTitle: (a) =>
     set((state) => ({ clickTitle: (state.clickTitle = a) })),
   // setClickTitle: (a) =>

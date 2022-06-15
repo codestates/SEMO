@@ -26,17 +26,21 @@ app.post("/sign/out", controllers.signout);
 app.post("/sign/withdraw", controllers.signwithdraw);
 app.post("/question", controllers.question);
 app.post("/answer", controllers.answer);
-app.delete("/question/delete", controllers.questiondelete);
-app.delete("/answer/delete", controllers.answerdelete);
+app.post("/question/delete", controllers.questiondelete);
+app.post("/answer/delete", controllers.answerdelete);
 app.get("/question/all", controllers.questionall);
 app.get("/user/info", controllers.userinfo);
+app.post("/myanswer/all", controllers.myanswer);
 app.patch("/answer/edit", controllers.answeredit);
 app.patch("/question/edit", controllers.questionedit);
 app.patch("/user/nickname/edit", controllers.nicknameedit);
 app.patch("/user/password/edit", controllers.passwordedit);
+app.patch("/user/profile/edit", controllers.profileedit);
 app.post("/sign/idcheck", controllers.idcheck);
 app.post("/sign/nicknamecheck", controllers.nicknamecheck);
 app.post("/myquestion/all", controllers.myquestionsall);
+app.get("/myanswer/all", controllers.myanswer);
+app.post("/answer/one", controllers.answerone);
 
 const PORT = process.env.PORT || 3500;
 

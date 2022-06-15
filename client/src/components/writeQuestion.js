@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "./button";
 import { useState } from "react";
 import axios from "axios";
-import { useStoreTemp, useUserinfo } from "../zustand/store";
+import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
 
 const ContainQuestion = styled.div`
   display: flex;
@@ -50,6 +50,7 @@ const ImageTest = styled.div``;
 const WriteQuestionComponenet = () => {
   const { title, text, setTitle, setText } = useStoreTemp();
   const { nickname, user_id } = useUserinfo();
+  const { school, grade, subject } = useStore();
   const titleHandler = (e) => {
     setTitle(e.target.value);
   };
@@ -67,16 +68,19 @@ const WriteQuestionComponenet = () => {
     console.log("id", user_id, "123", nickname);
     let formData = new FormData();
     formData.append("file", fileImg);
-    console.log("이거 ", nickname, user_id, title, text);
     const axios1 = await axios.post("http://localhost:3500/question", {
       nickname,
       user_id,
       title,
       content: text,
+      school,
+      grade,
+      subject,
     });
 
     const axios2 = await axios.post("http://localhost:3500/uploads", formData);
     if (axios2.data.success) {
+
       alert("okay");
     } else {
       alert("no");
