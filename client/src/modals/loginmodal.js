@@ -118,6 +118,8 @@ const Loginmodal = () => {
     setUserNickname,
     setUserPassword,
     setedPw,
+    profile2,
+    setUserProfile,
   } = useUserinfo();
   const TestIdHandler = (e) => {
     setTestId(e.target.value);
@@ -145,6 +147,7 @@ const Loginmodal = () => {
             setUserNickname(res.data.data.nickname);
             setUserPassword(res.data.data.password);
             setedPw(res.data.data.password);
+            setUserProfile(res.data.data.profile);
             setLogin();
             closeLoginModal();
           });

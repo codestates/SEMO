@@ -52,11 +52,8 @@ export const useStoreTemp = create((set) => ({
     set((state) => ({ clickCotent: (state.clickCotent = a) })),
   setEditContentStatus: (a) =>
     set((state) => ({ editContentStatus: (state.editContentStatus = a) })),
-
   setClickTitle: (a) =>
     set((state) => ({ clickTitle: (state.clickTitle = a) })),
-  // setClickTitle: (a) =>
-  //   set((state) => ({ clickTitle: (state.clickTitle = a) }), console.log(a)),
   setQlists: (a) =>
     set((state) => ({ qLists: (state.qLists = a) }), console.log(a)),
 
@@ -90,7 +87,6 @@ export const useStoreTemp = create((set) => ({
     set((state) => ({ clickMyPage: (state.clickMyPage = false) })),
   setUserpassword: (a) =>
     set((state) => ({ nickname: (state.password = a) }), console.log(a)),
-
   setWithdraw: (a) =>
     set((state) => ({
       testPw: (state.testPw = ""),
@@ -104,6 +100,10 @@ export const useUserinfo = create((set) => ({
   nickname: "",
   edPw: "",
   nickname2: "",
+  profile2: "",
+
+  setUserProfile: (a) => set((state) => ({ profile2: (state.profile2 = a) })),
+
   setedPw: (a) => set((state) => ({ edPw: (state.edPw = a) })),
 
   setUserUserid: (a) => set((state) => ({ user_id: (state.user_id = a) })),
