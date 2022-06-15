@@ -27,7 +27,7 @@ app.post("/sign/withdraw", controllers.signwithdraw);
 app.post("/question", controllers.question);
 app.post("/answer", controllers.answer);
 app.post("/question/delete", controllers.questiondelete);
-app.delete("/answer/delete", controllers.answerdelete);
+app.post("/answer/delete", controllers.answerdelete);
 app.get("/question/all", controllers.questionall);
 app.get("/user/info", controllers.userinfo);
 app.post("/myanswer/all", controllers.myanswer);
