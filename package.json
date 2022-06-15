@@ -5,6 +5,7 @@
   "dependencies": {
 
     "react-icons": "^4.4.0",
+    "react-loading": "^2.0.3",
     "react-router-dom": "^6.3.0"
 
   }

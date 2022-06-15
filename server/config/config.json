@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "yourPassword",
+    "password": "1q2w3e4r!",
     "database": "semo",
     "host": "127.0.0.1",
     "dialect": "mysql"

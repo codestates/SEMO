@@ -2,9 +2,11 @@ import styled from "styled-components";
 import Dropdown from "../components/dropdownmenu";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { useEffect, useState } from "react";
+import { useScroll } from "../zustand/store";
+import { getQuestionsData } from "../apis/question";
 import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react";
+import Loading from "react-loading";
 
 const NoticeContainer = styled.div`
   box-sizing: border-box;
@@ -37,42 +39,84 @@ const ItemTexContainer = styled.div`
   align-items: center;
 `;
 
-const Main = () => {
-  const noticeHandler = async () => {
-    try {
-      const response = await axios.get("http://localhost:3500/question/all");
-      return response;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const test555 = () => {
-    console.log(test123[3].createdAt.slice(0, 19));
-  };
+const Loadingbox = styled.div`
+  border: 1px solid red;
+  height: 10vw;
+  width: 100vw;
+  font-size: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-  const test9999 = noticeHandler();
-  const [test123, setTest123] = useState([]);
+const Noticeboard = () => {
+  const { items, preItems, setPreItems, setItems } = useScroll();
+  const [data, setData] = useState([]); // 뿌려줘야할 데이터 누적 상태
+  const [loading, setLoading] = useState(false); // 로딩 유무
+  const [target, setTarget] = useState(null); // intersecting 이 일어나면 useEffect훅을 불러오기위한 state
 
+  // 페이지 첫 마운트시 화면에 뿌려주는 useEffect
   useEffect(() => {
-    test9999.then((data) => {
-      setTest123(data.data);
-      console.log(data.data);
-    });
+    const tempdata = async () => {
+      const temp = await getQuestionsData();
+      setData(temp);
+      setLoading(false);
+      // console.log("첫마운틑ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌ");
+    };
+    tempdata();
   }, []);
+
+  // 타겟에 변화가 있을때마다 실행시켜줄 useEffect에 observer 객체를 선언
+  useEffect(() => {
+    // 콜백함수 인자로 entry와 observer를 받는다, 타겟의 교차상태를 boolean값으로 반환하는
+    // entry.isIntersecting이 true일때 추가적인 데이터를 더 받아와 누적후 뿌려준다
+    // 8개 기본 2개씩 더뿌려줄 예정
+
+    const callback = ([entry], observer) => {
+      if (entry.isIntersecting) {
+        getMoreQuestionsData();
+        observer.observe(target);
+      }
+    };
+
+    let observer;
+    if (target) {
+      observer = new IntersectionObserver(callback, { threshold: 0.5 });
+      observer.observe(target);
+      setLoading(true);
+    }
+    return () => observer && observer.disconnect();
+  }, [target]);
+
+  const getMoreQuestionsData = () => {
+    setLoading(true);
+    setItems();
+    setPreItems();
+    // console.log("@@@@@@@@@@@@@", items, preItems);
+    setTimeout(() => {
+      axios.get("http://localhost:3500/question/all").then((res) => {
+        setData([...res.data.slice(preItems, items), ...data]);
+        // console.log("이건 함수가 실행될때 한번만 작동해야하는거야");
+        // console.log(data);
+      });
+      setLoading(false);
+    }, 700);
+  };
+
+  useEffect(() => {});
 
   return (
     <>
       <Header />
       <Dropdown />
-      <button onClick={test555}>button2</button>
       <>
         <NoticeContainer>
-          {test123
+          {data
             .slice(0)
             .reverse()
             .map((el) => {
               return (
-                <ItemContainer key={el.createdAt}>
+                <ItemContainer key={el.id} ref={setTarget}>
                   <ImgContainer
                     src={`img/${el.createdAt.slice(0, 19)}_.jpg`}
                     alt="sssss"
@@ -86,9 +130,12 @@ const Main = () => {
             })}
         </NoticeContainer>
       </>
+      <Loadingbox>
+        {loading ? <Loading type="spokes" color="black" /> : ""}
+      </Loadingbox>
       <Footer />
     </>
   );
 };
 
-export default Main;
+export default Noticeboard;
