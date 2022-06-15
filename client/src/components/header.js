@@ -26,9 +26,7 @@ const Logoimage = styled.img.attrs({
   width: 17vw;
   height: 17vw;
 `;
-const MyProFileImg = styled.img.attrs({
-  src: `${profileimg}`,
-})`
+const MyProFileImg = styled.img`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -72,7 +70,7 @@ const Btndiv = styled.div`
 
 const Header = (props) => {
   const { openLoginModal, openSignupModal, islogin } = useStore();
-  const { nickname } = useUserinfo();
+  const { nickname, profile2 } = useUserinfo();
   const { clickMyPage, setClickMypage, setOffMypage, setSignOutModal } =
     useStoreTemp();
 
@@ -101,7 +99,11 @@ const Header = (props) => {
           </Link>
           <RightContainer>
             <MyprofileContainer>
-              <MyProFileImg />
+              <MyProFileImg
+                src={`img/${profile2}`}
+                onError={(i) => (i.target.src = "img/githublogo.png")}
+                alt="1"
+              />
               <UserNickName>{nickname}</UserNickName>
             </MyprofileContainer>
             <Btndiv>

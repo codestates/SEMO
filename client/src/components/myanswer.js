@@ -26,9 +26,7 @@ const MyAnswer = () => {
   return (
     <Container>
       <Button className="showMyquestionBtn">
-        <Link to="/myanswerlist">
-          <a>내 답변보러가기</a>
-        </Link>
+        <Link to="/myanswerlist">내 답변보러가기</Link>
       </Button>
     </Container>
   );

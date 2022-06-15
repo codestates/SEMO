@@ -81,7 +81,6 @@ const Answer = () => {
   };
 
   const submitAnswer = () => {
-    console.log("@@@@@", content, "sdfsfd", user_id);
     axios
       .post("http://localhost:3500/answer", {
         content,

@@ -119,6 +119,7 @@ const Noticeboard = () => {
                 <ItemContainer key={el.id} ref={setTarget}>
                   <ImgContainer
                     src={`img/${el.createdAt.slice(0, 19)}_.jpg`}
+                    onError={(i) => (i.target.src = "img/githublogo.png")}
                     alt="sssss"
                   />
                   <ItemTexContainer>
