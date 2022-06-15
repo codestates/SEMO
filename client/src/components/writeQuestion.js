@@ -68,7 +68,6 @@ const WriteQuestionComponenet = () => {
     console.log("id", user_id, "123", nickname);
     let formData = new FormData();
     formData.append("file", fileImg);
-    console.log("이거 ", nickname, user_id, title, text);
     const axios1 = await axios.post("http://localhost:3500/question", {
       nickname,
       user_id,
@@ -81,6 +80,7 @@ const WriteQuestionComponenet = () => {
 
     const axios2 = await axios.post("http://localhost:3500/uploads", formData);
     if (axios2.data.success) {
+
       alert("okay");
     } else {
       alert("no");
