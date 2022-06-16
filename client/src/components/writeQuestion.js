@@ -11,21 +11,25 @@ const ContainQuestion = styled.div`
 const InputTitleBox = styled.input`
   width: 80vw;
   height: 2vw;
-  margin: 5vw 0 2vw 0;
-  background: #cccccc;
+  margin: 1vw 0;
+  background: white;
   border-radius: 2vw;
+  border: 1px solid gray;
   padding: 3vw;
   font-size: 5vw;
+  box-shadow: 3px 3px 3px 3px #999;
 `;
 const InputTextBox = styled.textarea`
   width: 80vw;
   height: 50vw;
-  margin: 5vw;
-  background: #cccccc;
+  margin: 1vw;
+  background: white;
   vertical-align: middle;
   border-radius: 2vw;
   padding: 3vw;
   font-size: 4vw;
+  box-shadow: 3px 3px 3px 3px #999;
+  resize: none;
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -46,7 +50,19 @@ const BtnContainer = styled.div`
   }
 `;
 
-const ImageTest = styled.div``;
+const ImageTest = styled.div`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  padding: 0 35px;
+  display: flex;
+  flex-direction: row;
+
+  > .deletebutton {
+    font-size: 2vw;
+    height: 6vw;
+    width: 10vw;
+  }
+`;
 const WriteQuestionComponenet = () => {
   const { title, text, setTitle, setText } = useStoreTemp();
   const { nickname, user_id } = useUserinfo();
@@ -101,6 +117,20 @@ const WriteQuestionComponenet = () => {
           />
         </TitleContainer>
 
+        <ImageTest>
+          <div>
+            {fileImg && <img alt="exam" src={fileImg} />}
+            <input
+              name="imgUp"
+              type="file"
+              accept="image/*"
+              onChange={saveFileImg}
+            />
+          </div>
+          <Button className="deletebutton" onClick={() => deleteFileImg()}>
+            삭제
+          </Button>
+        </ImageTest>
         <WritingContainer>
           <InputTextBox
             placeholder="내용을 입력하세요"
@@ -115,21 +145,6 @@ const WriteQuestionComponenet = () => {
           <Button className="btn">취소</Button>
         </BtnContainer>
         {/* 아래는 사진 업로드 기능인데, db로 보내기랑 css수정해야함 */}
-
-        <ImageTest>
-          <div>사진 업로드 </div>
-          <div>image</div>
-          <div>
-            {fileImg && <img alt="exam" src={fileImg} />}
-            <input
-              name="imgUp"
-              type="file"
-              accept="image/*"
-              onChange={saveFileImg}
-            />
-            <Button onClick={() => deleteFileImg()}>삭제</Button>
-          </div>
-        </ImageTest>
       </ContainQuestion>
     </>
   );
