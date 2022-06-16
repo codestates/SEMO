@@ -137,11 +137,11 @@ const QuestionOne = () => {
           <ImgContentBox>
             <Profileimg
               src={`img/${clickCreatedAt.slice(0, 19)}_.jpg`}
-              onError={(i) => (i.target.src = "img/2022-06-16T12:25:30_.jpg")}
+              onError={(i) => (i.target.src = "img/githublogo.png")}
               alt="1"
             />
           </ImgContentBox>
-          <ContentBox>콘텐츠:{question.content}</ContentBox>
+          <ContentBox>{question.content}</ContentBox>
         </QContainer>
       </Container>
       <AnswerContainer>
