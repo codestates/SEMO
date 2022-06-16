@@ -52,7 +52,7 @@ const Name = styled.div`
 const Title = styled.div`
   font-size: 0.8vw;
 `
-const DefaultProfileImg = require('../images/기본프로필이미지.png');
+const DefaultProfileImg = require('../images/githublogo.png');
 
 function getRandomArr(arr) {
   const result = []
@@ -89,7 +89,7 @@ function SimpleSlider() {
       axios.get("http://localhost:3500/question/all", {
       })
         .then(res => {
-
+          console.log(res.data)
           const data = res.data
           const randomIndex = getRandomArr(data); // [5, 1, 2, 4, 6, 0]
           const newQuestions = randomIndex.map(i => data[i])
@@ -101,8 +101,7 @@ function SimpleSlider() {
 
   }, []);
 
-  // setClickTitle: (a) =>
-  //   set((state) => ({ clickTitle: (state.clickTitle = a) }))
+
 
   const [questions, setquestions] = useState([]) // useEffect 안에서 전체 데이터를 받은후 .then을 빠져나와 6개로 추린 배열을 받는다.
   const { clickTitle, setClickTitle } = useStoreTemp();
@@ -124,13 +123,16 @@ function SimpleSlider() {
             <div key={item.id}>
               <ImageContainer>
                 <ProfilePhoto src={DefaultProfileImg} />
+
                 <AnswerInfo >
                   <Name>
                     {item.nickname}
                   </Name>
-                  <Title onClick={() => { viewQuestion(item.title); }}>
-                    {item.title}
-                  </Title>
+                  <Link to="/answer">
+                    <Title onClick={() => { viewQuestion(item.title); }}>
+                      {item.title}
+                    </Title>
+                  </Link>
                 </AnswerInfo>
               </ImageContainer>
             </div>
@@ -141,3 +143,4 @@ function SimpleSlider() {
   );
 }
 export default SimpleSlider
+
