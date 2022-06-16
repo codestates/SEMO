@@ -87,8 +87,16 @@ const Loginform = styled.div`
 
   > div.idtext {
     /* background-color: black; */
-    gap: 15px;
     display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  > div.passwordtext {
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 `;
 
@@ -108,7 +116,7 @@ const Kakaologbtn = styled.img`
 const Loginmodal = () => {
   const navigate = useNavigate();
   const { closeLoginModal, changeModal, setLogin } = useStore();
-  const { testId, testPw, setTestId, setTestPw, setjwttoken, jwttoken } =
+  const { testId, testPw, setTestId, setTestPw, settoken, token } =
     useStoreTemp();
   const {
     user_id,
@@ -132,21 +140,32 @@ const Loginmodal = () => {
         password: testPw,
       })
       .then((res) => {
+        localStorage.clear();
         const access = res.data.data;
         const refresh = res.data.refresh;
+        if (res.data.data) {
+          localStorage.setItem("token", access);
+          localStorage.setItem("user_id", testId);
+        }
         return axios
-          .get("http://localhost:3500/sign/auth", {
-            headers: {
-              authorization: `${access}`,
+          .get(
+            "http://localhost:3500/sign/auth",
+            {
+              headers: {
+                authorization: `${access}`,
+              },
             },
-          })
+            { withCredential: true }
+          )
           .then((res) => {
             setUserUserid(res.data.data.user_id);
             setUserNickname(res.data.data.nickname);
             setUserPassword(res.data.data.password);
             setedPw(res.data.data.password);
+            settoken(access);
             setLogin();
             closeLoginModal();
+            console.log(token, testId, testPw);
           });
       });
     navigate("/");

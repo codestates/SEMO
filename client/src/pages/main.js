@@ -50,9 +50,9 @@ const TextContainer = styled.div`
   }
 
   .btn1 {
-    padding: 0;
     font-size: 2.5vw;
-    width: 17vw;
+    width: 20vw;
+    height: 5vw;
   }
 `;
 

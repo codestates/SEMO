@@ -3,7 +3,6 @@ import logo from "../images/logo.png";
 import Button from "../components/button.js";
 import profileimg from "../images/제경모.jpg";
 import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 const HeadDiv = styled.div`
@@ -38,29 +37,34 @@ const MyProFileImg = styled.img.attrs({
   padding: 0 0 0 0px;
 `;
 const UserNickName = styled.span`
-  font-size: 3vw;
+  font-size: 4vw;
+  font-weight: 900;
 `;
 const RightContainer = styled.div`
-  /* background-color: blue; */
+  /* border: 1px solid green; */
   display: flex;
-  align-items: flex-end;
+  gap: 2px;
+  align-items: flex-start;
+  justify-content: flex-end;
   flex-direction: column;
 `;
 
 const MyprofileContainer = styled.div`
+  /* border: 1px solid red; */
   display: flex;
-  gap: 5vw;
   align-items: center;
-  padding-right: 2vw;
+  flex-direction: flex-start;
+  gap: 5vw;
+  padding-left: 1vw;
 `;
 const Btndiv = styled.div`
-  /* background-color: red; */
+  /* background-color: black; */
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   padding: 0px;
   gap: 2vw;
-  margin-top: 2vw;
+
   .headerBtn {
     font-size: 3vw;
     width: 17vw;
@@ -68,14 +72,33 @@ const Btndiv = styled.div`
   .link {
     text-decoration: none;
   }
+
+  .logout {
+    font-size: 3vw;
+    font-weight: 600;
+  }
+
+  .mypage {
+    font-size: 3vw;
+    font-weight: 600;
+  }
 `;
 
 const Header = (props) => {
-  const { openLoginModal, openSignupModal, islogin } = useStore();
+  const { openLoginModal, openSignupModal, islogin, setLogin } = useStore();
   const { nickname } = useUserinfo();
-  const { clickMyPage, setClickMypage, setOffMypage, setSignOutModal } =
-    useStoreTemp();
+  const {
+    clickMyPage,
+    setClickMypage,
+    setOffMypage,
+    setSignOutModal,
+    token,
+    testId,
+    testPw,
+  } = useStoreTemp();
 
+  if (token === localStorage.token) {
+  }
   return (
     <>
       {islogin === false ? (
@@ -105,12 +128,12 @@ const Header = (props) => {
               <UserNickName>{nickname}</UserNickName>
             </MyprofileContainer>
             <Btndiv>
-              <Button className="headerBtn" onClick={props.openModalHandler}>
+              <Button className="logout" onClick={props.openModalHandler}>
                 로그아웃
               </Button>
               {clickMyPage === false ? (
                 <Link className="link" to="/mypage" onClick={setClickMypage}>
-                  <Button className="headerBtn">마이페이지</Button>
+                  <Button className="mypage">마이페이지</Button>
                 </Link>
               ) : (
                 <Button className="headerBtn" onClick={setSignOutModal}>
