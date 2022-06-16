@@ -202,7 +202,7 @@ const Myprofile = () => {
       <Container>
         <ProfileContainer>
           <Profileimg
-            src={`img/${profile2}`}
+            src={`${profile2}`}
             onError={(i) => (i.target.src = "img/githublogo.png")}
             alt="1"
           />

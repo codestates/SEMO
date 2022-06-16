@@ -71,7 +71,7 @@ const Main = () => {
                 질문하러 가기
               </Button>
             ) : (
-              <Link to="/question/write">
+              <Link to="/writequestion">
                 <Button className="btn1">질문하러 가기</Button>
               </Link>
             )}

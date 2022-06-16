@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import logo from "../images/logo.png";
 import Button from "../components/button.js";
-import profileimg from "../images/제경모.jpg";
 import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -73,6 +72,12 @@ const Header = (props) => {
   const { nickname, profile2 } = useUserinfo();
   const { clickMyPage, setClickMypage, setOffMypage, setSignOutModal } =
     useStoreTemp();
+  // onError={(i) => (i.target.src = "img/githublogo.png")}
+
+  const errHandler = (i) => {
+    console.log(i, "시팔");
+    i.target.src = "img/githublogo.png";
+  };
 
   return (
     <>
@@ -99,11 +104,7 @@ const Header = (props) => {
           </Link>
           <RightContainer>
             <MyprofileContainer>
-              <MyProFileImg
-                src={`img/${profile2}`}
-                onError={(i) => (i.target.src = "img/githublogo.png")}
-                alt="1"
-              />
+              <MyProFileImg src={`${profile2}`} onError={errHandler} alt="1" />
               <UserNickName>{nickname}</UserNickName>
             </MyprofileContainer>
             <Btndiv>
