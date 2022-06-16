@@ -124,9 +124,9 @@ export const useUserinfo = create((set) => ({
 }));
 
 export const useScroll = create((set) => ({
-  preItems: -12,
+  preItems: -14,
   items: -8,
 
-  setPreItems: () => set((state) => ({ preItems: state.items - 4 })),
+  setPreItems: () => set((state) => ({ preItems: state.items - 6 })),
   setItems: () => set((state) => ({ items: state.preItems })),
 }));

@@ -276,7 +276,9 @@ const Myprofile = () => {
               <Button className="btn2" onClick={editPwHandler}>
                 수정
               </Button>
-              <Button className="btn2">취소</Button>
+              <Button className="btn2" onClick={cancelEditPwBtn}>
+                취소
+              </Button>
             </EditBtnContainer>
           </BtnContainer>
         </Container2>
