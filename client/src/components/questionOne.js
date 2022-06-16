@@ -36,14 +36,13 @@ const QueWriter = styled.div`
   font-size: 3vw;
 `;
 const ImgContentBox = styled.div`
-
-  padding 200px;
+  padding: 200px;
   width: 70vw;
   height: 50vw;
   margin: 0 auto;
   background: #cccccc;
   vertical-align: middle;
-  border-radius: 3vw 3w 0px 0px ;
+  border-radius: 3vw 3w 0px 0px;
   border-top: 2px solid #7a57d1;
   padding: 3vw;
   font-size: 4vw;

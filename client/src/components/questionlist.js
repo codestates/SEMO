@@ -1,28 +1,50 @@
 import styled from "styled-components";
-import Button from "./button";
-//import useState from "react";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
+import { useStoreTemp, useUserinfo } from "../zustand/store";
 import { Link } from "react-router-dom";
-const Container = styled.div`
-  display: flex;
+import { BsChatDots } from "react-icons/bs";
 
-  width: 100%;
+const Container = styled.div`
+  /* border: 1px solid red; */
+  display: flex;
+  width: 100vw;
   height: 100vh;
+  padding: 4vw 0;
 `;
 const QuestionContainer = styled.div`
+  /* border: 5px solid green; */
   padding-bottom: 3vw;
-
   width: 100vw;
 `;
 const QuestionTitle = styled.strong`
+  /* border: 5px solid pink; */
+  font-size: 3vw;
   font-weight: 900;
+  display: flex;
+  padding: 1vw 2vw;
+  gap: 1vw;
 `;
 const NicnNDate = styled.div`
-  border-bottom: 2px solid;
+  /* border: 5px solid blueviolet; */
+  border-bottom: 1.5px solid gray;
   display: flex;
+  justify-content: flex-end;
   justify-content: space-between;
+`;
+
+const Text = styled.span`
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+  font-size: 2vw;
+  padding: 0 2vw;
+
+  > span {
+    border-left: 1px solid gray;
+    padding-left: 3vw;
+  }
 `;
 // const Container = styled.div``;
 
@@ -41,19 +63,6 @@ const Allquestions = () => {
     } catch (error) {
       console.log(error);
     }
-
-    // console.log("123123jksdfjsldjfljdslfjdslkjf");
-    // axios
-    //   .post("http://localhost:3500/myquestion/all", {
-    //     user_id,
-    //   })
-    //   .then((res) => {
-    //     console.log("123123123123123123123123123");
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
   const testList = getPosts();
   useEffect(() => {
@@ -68,29 +77,33 @@ const Allquestions = () => {
     console.log("123", clickTitle);
   };
   const textInput = useRef();
-
   return (
     <Container>
       <div>
-        {qLists.map((item) => {
-          return (
-            <QuestionContainer key={item.id} item={item}>
-              <NicnNDate>
-                <span>작성자 : {nickname}</span>
-                <span>작성일자 : {item.updatedAt.slice(5, 10)}</span>
-              </NicnNDate>
-              <Link to="/answer">
-                <QuestionTitle
-                  onClick={() => {
-                    viewQuestion(item.title);
-                  }}
-                >
-                  {item.title}
-                </QuestionTitle>
-              </Link>
-            </QuestionContainer>
-          );
-        })}
+        {qLists
+          .slice(0)
+          .reverse()
+          .map((item) => {
+            return (
+              <QuestionContainer key={item.id} item={item}>
+                <NicnNDate>
+                  <Link className="link" to="/answer">
+                    <QuestionTitle
+                      onClick={() => {
+                        viewQuestion(item.title);
+                      }}
+                    >
+                      <BsChatDots color="black" /> {item.title}
+                    </QuestionTitle>
+                  </Link>
+                  <Text>
+                    <span> {nickname}</span>
+                    <span> {item.updatedAt.slice(5, 10)}</span>
+                  </Text>
+                </NicnNDate>
+              </QuestionContainer>
+            );
+          })}
       </div>
     </Container>
   );
