@@ -164,7 +164,7 @@ const Loginmodal = () => {
             setUserNickname(res.data.data.nickname);
             setUserPassword(res.data.data.password);
             setedPw(res.data.data.password);
-            settoken(access);
+
             setUserProfile(res.data.data.profile);
             setLogin();
             closeLoginModal();
