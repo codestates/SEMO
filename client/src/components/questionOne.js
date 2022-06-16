@@ -20,8 +20,17 @@ const HeadWrapper = styled.div`
   border-top: 2px solid #7a57d1;
 `;
 const Title = styled.div``;
-const QHeader = styled.h3``;
+const QHeader = styled.h3`
+  display: flex;
+  justify-content: center;
+`;
 const Writer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  font-size: 3vw;
+  justify-content: space-between;
+`;
+const QueWriter = styled.div`
   display: flex;
   justify-content: flex-end;
   font-size: 3vw;
@@ -53,10 +62,9 @@ const ContentBox = styled.div`
 
 const Profileimg = styled.img`
   display: block;
-
   padding: 0px;
-  width: 50vw;
-  height: 50vw;
+  width: 30vw;
+  height: 30vw;
   margin: 0 auto;
   padding: 0 0 5px 0;
 `;
@@ -72,13 +80,35 @@ const AnswerInputText = styled.textarea`
   display: flex;
 `;
 const ButtonContainer = styled.div``;
+const ImageTest = styled.div`
+  display: flex;
 
+  vertical-align: middle;
+`;
+const ImgInput = styled.input`
+  display: block;
+  margin: 0 auto;
+`;
+const RepContainer = styled.div``;
+const ContentContainer = styled.div`
+  width: 70vw;
+
+  margin: 0 auto;
+  background: #cccccc;
+  vertical-align: middle;
+  border-radius: 5px;
+  padding: 3vw;
+  font-size: 4vw;
+  word-break: break-word;
+`;
 const QuestionOne = () => {
   const { clickTitle, setClickCreatedAt, clickCreatedAt } = useStoreTemp();
   const { user_id, nickname } = useUserinfo();
 
   const [question, setQustion] = useState([]);
   const [reply, setReply] = useState("");
+
+  const [answer, setAnswer] = useState([]);
   const getQuestionData = async () => {
     try {
       const res = await axios.post("http://localhost:3500/question", {
@@ -96,54 +126,113 @@ const QuestionOne = () => {
       setQustion(data.data);
     });
   }, []);
+  //00000000000 answer 목록 받아오기
+  const getAnswer = async () => {
+    try {
+      const res = await axios.post("http://localhost:3500/answer/everyone", {
+        title: clickTitle,
+      });
+
+      return res.data;
+    } catch (err) {}
+  };
+  const thisGetAnswer = getAnswer();
+  useEffect(() => {
+    thisGetAnswer.then((data) => {
+      setAnswer(data);
+    });
+  }, []);
+  //---------답변 등록하기 코드
   const replyHandler = (e) => {
     setReply(e.target.value);
     console.log(reply);
   };
-  const submitAnswer = () => {
-    axios
-      .post("http://localhost:3500/answer", {
-        content: reply,
-        title: clickTitle,
-        user_id: user_id,
-      })
-      .then((res) => {
-        if (res.data) {
-          alert("답변이 등록 되었습니다.");
-        } else {
-          console.log("실패");
-        }
-      });
+
+  const submitAnswer = async () => {
+    let formData = new FormData();
+    formData.append("file", fileImg);
+
+    const axios1 = await axios.post("http://localhost:3500/answer", {
+      content: reply,
+      title: clickTitle,
+      user_id: user_id,
+      nickname,
+    });
+
+    const axios2 = await axios.post("http://localhost:3500/uploads", formData);
+    if (axios2.data.success) {
+      alert("okay");
+    } else {
+      alert("no");
+    }
+  };
+
+  const [fileImg, setfileImg] = useState("");
+  const saveFileImg = (e) => {
+    const file = e.target.files[0];
+
+    setfileImg(file);
+  };
+
+  const deleteFileImg = () => {
+    URL.revokeObjectURL(fileImg);
+    setfileImg("");
   };
   return (
     <>
-      <button
-        onClick={() => {
-          console.log(clickCreatedAt);
-        }}
-      >
-        123
-      </button>
       <Container>
-        <QHeader>질문보기</QHeader>
+        <QHeader>질문 {question.id}</QHeader>
 
         <QContainer>
           <HeadWrapper>
             <Title>{question.title}</Title>
 
-            <Writer>작성자 : {question.nickname}</Writer>
+            <QueWriter>작성자 : {question.nickname}</QueWriter>
           </HeadWrapper>
 
           <ImgContentBox>
             <Profileimg
               src={`img/${clickCreatedAt.slice(0, 19)}_.jpg`}
-              onError={(i) => (i.target.src = "img/2022-06-16T12:25:30_.jpg")}
+              onError={(i) => (i.target.src = "img/githublogo.png")}
               alt="1"
             />
           </ImgContentBox>
-          <ContentBox>콘텐츠:{question.content}</ContentBox>
+          <ContentBox>{question.content}</ContentBox>
         </QContainer>
       </Container>
+
+      <RepContainer>
+        {answer.map((item) => {
+          return (
+            <div>
+              <QContainer key={item.id} item={item}>
+                <HeadWrapper>
+                  <Writer>
+                    <strong>작성자 : {item.nickname}</strong>
+                    <p>작성일자 : {item.createdAt.slice(0, 10)}</p>
+                  </Writer>
+                </HeadWrapper>
+                <ContentContainer>
+                  <Profileimg
+                    src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
+                    onError={(event) => (event.target.style.display = "none")}
+                    alt="1"
+                  />
+                  {item.content}
+                </ContentContainer>
+              </QContainer>
+            </div>
+          );
+        })}
+      </RepContainer>
+      <ImageTest>
+        <ImgInput
+          name="imgUp"
+          type="file"
+          accept="image/*"
+          onChange={saveFileImg}
+        />
+      </ImageTest>
       <AnswerContainer>
         <AnswerInputText
           type="text"

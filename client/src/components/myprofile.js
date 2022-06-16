@@ -14,6 +14,10 @@ const Container = styled.div`
   gap: 25px;
   background: #cccccc;
   height: 60vw;
+  .btn {
+    font-size: 3vw;
+    width: 17vw;
+  }
 `;
 const Container2 = styled.div`
   display: flex;
@@ -147,6 +151,20 @@ const Myprofile = () => {
       }
     );
   };
+  const profileDelete = async () => {
+    const axios1 = await axios.patch(
+      "http://localhost:3500/user/profile/edit",
+      {
+        // 패치 데이터 . 예정
+        user_id,
+
+        profile: "3",
+      }
+    );
+    if (axios1.data) {
+      alert("삭제되었습니다.");
+    }
+  };
 
   const nickNameHandler = (e) => {
     setNickname(e.target.value);
@@ -279,8 +297,15 @@ const Myprofile = () => {
               <Button onClick={() => deleteFileImg()}>삭제</Button>
             </div>
           </div>
-          <Button onClick={testFn}>수정</Button>
-          <Button onClick={editPictureBtn}>취소</Button>
+          <Button className="btn" onClick={testFn}>
+            수정
+          </Button>
+          <Button className="btn" onClick={profileDelete}>
+            프로필 삭제
+          </Button>
+          <Button className="btn" onClick={editPictureBtn}>
+            취소
+          </Button>
         </Container>
       ) : null}
     </>
