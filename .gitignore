@@ -1,3 +1,5 @@
 node_modules
 .env
 ./server/config
+server/config/config.json
+
