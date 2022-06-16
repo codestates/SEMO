@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/question/write" element={<WritingPage />} />
+        <Route path="/writequestion" element={<WritingPage />} />
         <Route path="/answer" element={<AnswerPage />} />
         <Route path="/noticeboard" element={<Noticeboard />} />
         <Route path="/oauth/callback/kakao" component={KakaoRedirectHandler} />
