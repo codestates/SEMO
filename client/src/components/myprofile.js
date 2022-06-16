@@ -35,9 +35,7 @@ const ProfileContainer = styled.div`
   width: 25vw;
   height: 25vw;
 `;
-const Profileimg = styled.img.attrs({
-  src: `${profileimg}`,
-})`
+const Profileimg = styled.img`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -101,7 +99,7 @@ const Myprofile = () => {
     confirmInputPw,
     cancelEditPwBtn,
   } = useStoreTemp(); //zustand
-  const { edPw, user_id, nickname2 } = useUserinfo();
+  const { edPw, user_id, nickname2, profile2 } = useUserinfo();
   const [isEditPicture, EditPicture] = useState(false);
   const editPictureBtn = () => {
     console.log("사진수정");
@@ -122,25 +120,32 @@ const Myprofile = () => {
 
     setfileImg(file);
   };
+  let date = new Date().toISOString();
+  let profile = `img/${date.slice(0, 16)}_.jpg`;
 
   const testFn = async () => {
     console.log("id", user_id, "123", nickname);
     let formData = new FormData();
     formData.append("file", fileImg);
 
-    // const axios1 = await axios.post("http://localhost:3500/question", {
-    //   // 패치 데이터 . 예정
-    //   user_id,
-    //   nickname2,
-    //   profile: "2022",
-    // });
-
-    const axios2 = await axios.post("http://localhost:3500/uploads", formData);
+    const axios2 = await axios.post(
+      "http://localhost:3500/uploadsss",
+      formData
+    );
     if (axios2.data.success) {
       alert("okay");
     } else {
       alert("no");
     }
+    const axios1 = await axios.patch(
+      "http://localhost:3500/user/profile/edit",
+      {
+        // 패치 데이터 . 예정
+        user_id,
+
+        profile,
+      }
+    );
   };
 
   const nickNameHandler = (e) => {
@@ -151,7 +156,7 @@ const Myprofile = () => {
     axios
       .patch("http://localhost:3500/user/nickname/edit", {
         nickname,
-        password: edPw,
+        user_id,
       })
       .then((res) => {
         if (res.data === "info edited") {
@@ -196,7 +201,11 @@ const Myprofile = () => {
     <>
       <Container>
         <ProfileContainer>
-          <Profileimg />
+          <Profileimg
+            src={`${profile2}`}
+            onError={(i) => (i.target.src = "img/githublogo.png")}
+            alt="1"
+          />
           <div>{nickname2}</div>
         </ProfileContainer>
         <BtnContainer>

@@ -126,6 +126,8 @@ const Loginmodal = () => {
     setUserNickname,
     setUserPassword,
     setedPw,
+    profile2,
+    setUserProfile,
   } = useUserinfo();
   const TestIdHandler = (e) => {
     setTestId(e.target.value);
@@ -163,6 +165,7 @@ const Loginmodal = () => {
             setUserPassword(res.data.data.password);
             setedPw(res.data.data.password);
             settoken(access);
+            setUserProfile(res.data.data.profile);
             setLogin();
             closeLoginModal();
             console.log(token, testId, testPw);

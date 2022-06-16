@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import logo from "../images/logo.png";
 import Button from "../components/button.js";
-import profileimg from "../images/제경모.jpg";
 import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
 import { Link } from "react-router-dom";
 
@@ -25,9 +24,7 @@ const Logoimage = styled.img.attrs({
   width: 17vw;
   height: 17vw;
 `;
-const MyProFileImg = styled.img.attrs({
-  src: `${profileimg}`,
-})`
+const MyProFileImg = styled.img`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -85,18 +82,15 @@ const Btndiv = styled.div`
 `;
 
 const Header = (props) => {
-  const { openLoginModal, openSignupModal, islogin, setLogin } = useStore();
-  const { nickname } = useUserinfo();
-  const {
-    clickMyPage,
-    setClickMypage,
-    setOffMypage,
-    setSignOutModal,
-    token,
-    testId,
-    testPw,
-  } = useStoreTemp();
+  const { openLoginModal, openSignupModal, islogin } = useStore();
+  const { nickname, profile2 } = useUserinfo();
+  const { clickMyPage, setClickMypage, setOffMypage, setSignOutModal } =
+    useStoreTemp();
+  // onError={(i) => (i.target.src = "img/githublogo.png")}
 
+  const errHandler = (i) => {
+    i.target.src = "img/githublogo.png";
+  };
   if (token === localStorage.token) {
   }
   return (
@@ -124,7 +118,7 @@ const Header = (props) => {
           </Link>
           <RightContainer>
             <MyprofileContainer>
-              <MyProFileImg />
+              <MyProFileImg src={`${profile2}`} onError={errHandler} alt="1" />
               <UserNickName>{nickname}</UserNickName>
             </MyprofileContainer>
             <Btndiv>

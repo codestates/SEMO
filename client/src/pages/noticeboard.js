@@ -3,14 +3,15 @@ import Dropdown from "../components/dropdownmenu";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import { useScroll } from "../zustand/store";
+import { useScroll, useStoreTemp } from "../zustand/store";
 import { getQuestionsData } from "../apis/question";
 import axios from "axios";
 import Loading from "react-loading";
+import { Link } from "react-router-dom";
 
 const NoticeContainer = styled.div`
   box-sizing: border-box;
-  /* border: 10px solid red; */
+
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -25,6 +26,12 @@ const ItemContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  .link {
+    text-decoration: none;
+    active: none;
+    visited: none;
+    focus: none;
+  }
 `;
 
 const ImgContainer = styled.img`
@@ -54,7 +61,8 @@ const Noticeboard = () => {
   const [data, setData] = useState([]); // 뿌려줘야할 데이터 누적 상태
   const [loading, setLoading] = useState(false); // 로딩 유무
   const [target, setTarget] = useState(null); // intersecting 이 일어나면 useEffect훅을 불러오기위한 state
-
+  const { clickTitle, setClickTitle, setClickCreatedAt, ClickCreatedAt } =
+    useStoreTemp();
   // 페이지 첫 마운트시 화면에 뿌려주는 useEffect
   useEffect(() => {
     const tempdata = async () => {
@@ -103,8 +111,10 @@ const Noticeboard = () => {
     }, 700);
   };
 
-  useEffect(() => {});
-
+  const click = (e) => {
+    setClickTitle(e.title);
+    setClickCreatedAt(e.createdAt);
+  };
   return (
     <>
       <Header />
@@ -119,12 +129,19 @@ const Noticeboard = () => {
                 <ItemContainer key={el.id} ref={setTarget}>
                   <ImgContainer
                     src={`img/${el.createdAt.slice(0, 19)}_.jpg`}
+                    onError={(i) => (i.target.src = "img/githublogo.png")}
                     alt="sssss"
                   />
-                  <ItemTexContainer>
-                    <p>{el.title}</p>
-                    <p>{el.nickname}</p>
-                  </ItemTexContainer>
+                  <Link className="link" to="/viewquestion">
+                    <ItemTexContainer
+                      onClick={() => {
+                        click(el);
+                      }}
+                    >
+                      <p>{el.title}</p>
+                      <p>{el.nickname}</p>
+                    </ItemTexContainer>
+                  </Link>
                 </ItemContainer>
               );
             })}

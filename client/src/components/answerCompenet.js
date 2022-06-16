@@ -81,7 +81,6 @@ const Answer = () => {
   };
 
   const submitAnswer = () => {
-    console.log("@@@@@", content, "sdfsfd", user_id);
     axios
       .post("http://localhost:3500/answer", {
         content,
@@ -143,14 +142,6 @@ const Answer = () => {
     setEditContentStatus(e.target.value);
   };
   const editQuestionr2 = () => {
-    console.log(
-      "수정버튼 눌림 콘텐트",
-      editContentStatus,
-      "title",
-      clickTitle,
-      "user_id",
-      user_id
-    );
     axios
       .patch("http://localhost:3500/question/edit", {
         content: editContentStatus,
