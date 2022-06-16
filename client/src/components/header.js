@@ -91,8 +91,6 @@ const Header = (props) => {
   const errHandler = (i) => {
     i.target.src = "img/githublogo.png";
   };
-  if (token === localStorage.token) {
-  }
   return (
     <>
       {islogin === false ? (

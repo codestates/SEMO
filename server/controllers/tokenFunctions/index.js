@@ -6,12 +6,12 @@ module.exports = {
     // TODO: Access token으로 sign합니다.
     // HINT: 토큰을 리턴하세요. (공식 문서의 Synchronous한 방법을 사용합니다)
     const accessToken = sign(data, process.env.ACCESS_SECRET, {
-      expiresIn: "1d",
+      expiresIn: "100s",
     });
     return accessToken;
   },
   generateRefreshToken: (data) => {
-    return sign(data, process.env.REFRESH_SECRET, { expiresIn: "3d" });
+    return sign(data, process.env.REFRESH_SECRET, { expiresIn: "2000s" });
   },
   sendAccessToken: (res, accessToken) => {
     // TODO: JWT 토큰을 쿠키로 전달합니다.

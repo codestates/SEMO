@@ -11,21 +11,24 @@ import { Link } from "react-router-dom";
 
 const NoticeContainer = styled.div`
   box-sizing: border-box;
-
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   padding: 2vw 0;
+  gap: 3vw;
 `;
 
 const ItemContainer = styled.div`
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   width: 42.5vw;
   height: 42.5vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px 3px #999;
+
   .link {
     text-decoration: none;
     active: none;
@@ -47,7 +50,7 @@ const ItemTexContainer = styled.div`
 `;
 
 const Loadingbox = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 10vw;
   width: 100vw;
   font-size: 3vw;
@@ -130,7 +133,7 @@ const Noticeboard = () => {
                   <ImgContainer
                     src={`img/${el.createdAt.slice(0, 19)}_.jpg`}
                     onError={(i) => (i.target.src = "img/githublogo.png")}
-                    alt="sssss"
+                    alt=""
                   />
                   <Link className="link" to="/viewquestion">
                     <ItemTexContainer
