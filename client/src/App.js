@@ -9,6 +9,7 @@ import Noticeboard from "./pages/noticeboard";
 import QuestionsListPage from "./pages/questionList";
 import MyanswerListPage from "./pages/myanswerlist";
 import MyAnswerViewPage from "./pages/myanswerView";
+import ViewQuestion from "./pages/viewquetion";
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ function App() {
         <Route path="/questionlist" element={<QuestionsListPage />} />
         <Route path="/myanswerlist" element={<MyanswerListPage />} />
         <Route path="/myanswerview" element={<MyAnswerViewPage />} />
+        <Route path="/viewquestion" element={<ViewQuestion />} />
       </Routes>
     </BrowserRouter>
   );

@@ -44,6 +44,10 @@ export const useStoreTemp = create((set) => ({
   clickCotent: "",
   editAnswerId: "",
   editAnswerContent: "",
+  clickCreatedAt: "",
+
+  setClickCreatedAt: (a) =>
+    set((state) => ({ clickCreatedAt: (state.clickCreatedAt = a) })),
   setEditAnswerContent: (a) =>
     set((state) => ({ editAnswerContent: (state.editAnswerContent = a) })),
   setEditAnswerId: (a) =>
