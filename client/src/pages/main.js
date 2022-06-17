@@ -15,13 +15,13 @@ import { Link } from "react-router-dom";
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
   max-width: 1000px;
+  margin: 0 auto;
   height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   box-sizing: border-box;
-  margin: 0 auto;
 `;
 
 const ImgContainer = styled.img`
