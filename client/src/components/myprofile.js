@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import profileimg from "../images/제경모.jpg";
@@ -103,7 +104,14 @@ const Myprofile = () => {
     confirmInputPw,
     cancelEditPwBtn,
   } = useStoreTemp(); //zustand
-  const { edPw, user_id, nickname2, profile2 } = useUserinfo();
+  const {
+    edPw,
+    user_id,
+    nickname2,
+    profile2,
+    setUserNickname,
+    setUserProfile,
+  } = useUserinfo();
   const [isEditPicture, EditPicture] = useState(false);
   const editPictureBtn = () => {
     console.log("사진수정");
@@ -150,6 +158,7 @@ const Myprofile = () => {
         profile,
       }
     );
+    setUserProfile(date);
   };
   const profileDelete = async () => {
     const axios1 = await axios.patch(
@@ -180,6 +189,7 @@ const Myprofile = () => {
         if (res.data === "info edited") {
           cancelEditNicknameBtn();
           alert("닉네임 변경 성공");
+          setUserNickname(nickname);
         } else {
           alert("실패");
         }
