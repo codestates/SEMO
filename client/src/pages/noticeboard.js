@@ -10,18 +10,31 @@ import Loading from "react-loading";
 import { Link } from "react-router-dom";
 
 const NoticeContainer = styled.div`
+  /* border: 3px solid green; */
+  max-width: 1000px;
+  margin: 0 auto;
   box-sizing: border-box;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   padding: 2vw 0;
-  gap: 3vw;
+  gap: 11px;
+
+  /* @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 20vw;
+    height: 20vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 200px;
+    height: 200px;
+  } */
 `;
 
 const ItemContainer = styled.div`
-  /* border: 1px solid blue; */
-  width: 42.5vw;
-  height: 42.5vw;
+  /* border: 1px solid yellow; */
+  width: 159px;
+  height: 159px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,6 +42,16 @@ const ItemContainer = styled.div`
   border-radius: 15px;
   box-shadow: 3px 3px 3px 3px #999;
 
+  /* @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 20vw;
+    height: 20vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 200px;
+    height: 200px;
+  }
+ */
   .link {
     text-decoration: none;
     active: none;
@@ -38,15 +61,28 @@ const ItemContainer = styled.div`
 `;
 
 const ImgContainer = styled.img`
-  width: 33vw;
-  height: 33vw;
+  /* border: 1px solid red; */
+  width: 124px;
+  height: 124px;
   border-radius: 5vw;
 `;
 
 const ItemTexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* border: 1px solid blue; */
+  width: 159px;
+  display: block;
+  text-align: center;
+
+  .title {
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nickname {
+    font-size: 13px;
+  }
 `;
 
 const Loadingbox = styled.div`
@@ -141,8 +177,8 @@ const Noticeboard = () => {
                         click(el);
                       }}
                     >
-                      <p>{el.title}</p>
-                      <p>{el.nickname}</p>
+                      <p className="title">{el.title}</p>
+                      <p className="nickname">{el.nickname}</p>
                     </ItemTexContainer>
                   </Link>
                 </ItemContainer>

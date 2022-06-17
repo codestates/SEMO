@@ -11,47 +11,52 @@ const HeadDiv = styled.div`
   justify-content: space-between;
   padding: 5px 15px;
   width: 100vw;
+  box-shadow: rgb(0 0 0 / 20%) 0px 0px 4px 0px;
 `;
 
 const Logoimage = styled.img.attrs({
   src: `${logo}`,
 })`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 10px;
-  width: 17vw;
-  height: 17vw;
+  width: 70px;
+  height: 70px;
 `;
 const MyProFileImg = styled.img`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 10vw;
-  height: 10vw;
+  width: 38px;
+  height: 38px;
   border-radius: 99px;
   padding: 0 0 0 0px;
 `;
 const UserNickName = styled.span`
-  font-size: 4vw;
+  /* border: 1px solid blue; */
+  font-size: 15px;
   font-weight: 900;
 `;
 const RightContainer = styled.div`
   /* border: 1px solid green; */
   display: flex;
-  gap: 2px;
+  gap: 5px;
   align-items: flex-start;
   justify-content: flex-end;
   flex-direction: column;
+
+  @media screen and (min-width: 401px) {
+    /* border: 1px solid green; */
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: row;
+  }
 `;
 
 const MyprofileContainer = styled.div`
   /* border: 1px solid red; */
   display: flex;
-  align-items: center;
-  flex-direction: flex-start;
-  gap: 5vw;
+  align-items: flex-end;
+  gap: 5px;
   padding-left: 1vw;
 `;
 const Btndiv = styled.div`
@@ -60,11 +65,16 @@ const Btndiv = styled.div`
   flex-direction: row;
   align-items: flex-end;
   padding: 0px;
-  gap: 2vw;
+  gap: 8px;
 
   .headerBtn {
-    font-size: 3vw;
-    width: 17vw;
+    font-size: 11px;
+    width: 67px;
+
+    @media screen and (min-width: 401px) and (max-width: 1000px) {
+      font-size: 11px;
+      width: 67px;
+    }
   }
   .link {
     text-decoration: none;
@@ -120,12 +130,12 @@ const Header = (props) => {
               <UserNickName>{nickname}</UserNickName>
             </MyprofileContainer>
             <Btndiv>
-              <Button className="logout" onClick={props.openModalHandler}>
+              <Button className="headerBtn" onClick={props.openModalHandler}>
                 로그아웃
               </Button>
               {clickMyPage === false ? (
                 <Link className="link" to="/mypage" onClick={setClickMypage}>
-                  <Button className="mypage">마이페이지</Button>
+                  <Button className="headerBtn">마이페이지</Button>
                 </Link>
               ) : (
                 <Button className="headerBtn" onClick={setSignOutModal}>

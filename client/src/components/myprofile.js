@@ -4,14 +4,15 @@ import styled from "styled-components";
 import profileimg from "../images/제경모.jpg";
 import { useStoreTemp, useUserinfo } from "../zustand/store";
 import Button from "./button";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
+  /* border: 1px solid red; */
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0px;
-  gap: 25px;
   background: #cccccc;
   height: 60vw;
   .btn {
@@ -30,38 +31,78 @@ const Container2 = styled.div`
   height: 60vw;
 `;
 const ProfileContainer = styled.div`
+  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  width: 113px;
+  height: 113px;
   gap: 5px;
-  width: 25vw;
-  height: 25vw;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 30vw;
+    height: 30vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 300px;
+    height: 300px;
+  }
 `;
 const Profileimg = styled.img`
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  width: 20vw;
-  height: 20vw;
-  border-radius: 99px;
-  padding: 0 0 5px 0;
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 20vw;
+    height: 20vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 200px;
+    height: 200px;
+  }
 `;
 const BtnContainer = styled.div`
+  /* border: 2px solid black; */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 4vw;
-  width: 30vw;
-  height: 14vw;
-  padding: 0 0 18vw;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+  width: 113px;
+  height: 113px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 30vw;
+    height: 30vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 300px;
+    height: 300px;
+  }
 
   .btn {
-    font-size: 3vw;
-    width: 24vw;
+    font-size: 11px;
+    width: 94px;
+
+    @media screen and (min-width: 401px) and (max-width: 1000px) {
+      font-size: 3vw;
+      width: 25vw;
+    }
+
+    @media screen and (min-width: 1001px) {
+      font-size: 30px;
+      width: 250px;
+    }
   }
   .btn2 {
     font-size: 3vw;
@@ -88,6 +129,19 @@ const InputBox = styled.input`
   text-align: center;
 `;
 
+const NicknameText = styled.div`
+  /* border: 1px solid pink; */
+  font-size: 15px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    font-size: 40px;
+  }
+`;
+
 const Myprofile = () => {
   const {
     isEditnickname,
@@ -103,7 +157,14 @@ const Myprofile = () => {
     confirmInputPw,
     cancelEditPwBtn,
   } = useStoreTemp(); //zustand
-  const { edPw, user_id, nickname2, profile2 } = useUserinfo();
+  const {
+    edPw,
+    user_id,
+    nickname2,
+    profile2,
+    setUserNickname,
+    setUserProfile,
+  } = useUserinfo();
   const [isEditPicture, EditPicture] = useState(false);
   const editPictureBtn = () => {
     console.log("사진수정");
@@ -150,6 +211,7 @@ const Myprofile = () => {
         profile,
       }
     );
+    setUserProfile(date);
   };
   const profileDelete = async () => {
     const axios1 = await axios.patch(
@@ -180,6 +242,7 @@ const Myprofile = () => {
         if (res.data === "info edited") {
           cancelEditNicknameBtn();
           alert("닉네임 변경 성공");
+          setUserNickname(nickname);
         } else {
           alert("실패");
         }
@@ -224,7 +287,7 @@ const Myprofile = () => {
             onError={(i) => (i.target.src = "img/githublogo.png")}
             alt="1"
           />
-          <div>{nickname2}</div>
+          <NicknameText>{nickname2}</NicknameText>
         </ProfileContainer>
         <BtnContainer>
           <Button className="btn" onClick={editNicknameBtn}>
