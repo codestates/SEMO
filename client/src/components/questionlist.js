@@ -50,7 +50,7 @@ const Text = styled.span`
 
 const Allquestions = () => {
   const [qLists, setQLists] = useState([]);
-  const { clickTitle, setClickTitle } = useStoreTemp();
+  const { clickTitle, setClickTitle, setClickCreatedAt } = useStoreTemp();
   const { user_id, nickname } = useUserinfo();
   const getPosts = async () => {
     try {
@@ -91,6 +91,7 @@ const Allquestions = () => {
                     <QuestionTitle
                       onClick={() => {
                         viewQuestion(item.title);
+                        setClickCreatedAt(item.createdAt);
                       }}
                     >
                       <BsChatDots color="black" /> {item.title}

@@ -51,7 +51,7 @@ const Text = styled.span`
 
 const AllMyAnswer = () => {
   const [aLists, setALists] = useState([]);
-  const { clickTitle, setClickTitle } = useStoreTemp();
+  const { clickTitle, setClickTitle, setClickCreatedAt } = useStoreTemp();
   const { user_id, nickname } = useUserinfo();
   const getPosts = async () => {
     try {
@@ -98,6 +98,9 @@ const AllMyAnswer = () => {
                   <QuestionTitle
                     onClick={() => {
                       viewQuestion(item.title);
+                      setClickCreatedAt(
+                        `img/${item.createdAt.slice(0, 19)}_.jpg`
+                      );
                     }}
                   >
                     {item.content}

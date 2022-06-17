@@ -212,11 +212,16 @@ const QuestionOne = () => {
                   </Writer>
                 </HeadWrapper>
                 <ContentContainer>
-                  <Profileimg
-                    src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
-                    onError={(event) => (event.target.style.display = "none")}
-                    alt="1"
-                  />
+                  {question.createdAt !== undefined ? (
+                    <div>
+                      {" "}
+                      <Profileimg
+                        src={`img/${question.createdAt.slice(0, 19)}_.jpg`}
+                        onError={(i) => (i.target.src = "img/githublogo.png")}
+                        alt="1"
+                      />
+                    </div>
+                  ) : null}
                   {item.content}
                 </ContentContainer>
               </QContainer>

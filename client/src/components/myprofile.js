@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import profileimg from "../images/제경모.jpg";

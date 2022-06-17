@@ -3,6 +3,7 @@ import Button from "./button";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
+import { Link } from "react-router-dom";
 const AnswerContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -16,8 +17,17 @@ const AnswerTitle = styled.div`
 `;
 
 const TextContainer = styled.div`
-  display: flex;
-  justify-content: center;
+  padding: 200px;
+  width: 70vw;
+
+  margin: 0 auto;
+
+  vertical-align: middle;
+  border-radius: 3vw 3w 0px 0px;
+  border-top: 2px solid #7a57d1;
+  border-bottom: 2px solid #7a57d1;
+  padding: 3vw;
+  font-size: 4vw;
 `;
 const AnswerText = styled.div`
   display: flex;
@@ -33,6 +43,7 @@ const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 10vw;
+  margin-top: 5px;
   .headerBtn {
     font-size: 3vw;
     width: 17vw;
@@ -40,15 +51,8 @@ const ButtonContainer = styled.div`
 `;
 const ReplyContainer = styled.div``;
 const ReplyText = styled.textarea`
-  width: 80vw;
-  height: 50vw;
-  margin: 5vw;
-  background: #cccccc;
-  vertical-align: middle;
-
-  border-radius: 2vw;
-  padding: 3vw;
-  font-size: 4vw;
+  width: 70vw;
+  height: 40vw;
 `;
 const imgtest = {
   width: "30vw",
@@ -63,7 +67,37 @@ const ImgContainer = styled.img`
 const Img2 = styled.div`
   background: red;
 `;
+//@@@@2
+const HeadWrapper = styled.div`
+  width: 70vw;
 
+  margin: 0 auto;
+
+  padding: 3vw;
+  font-size: 5vw;
+  border-top: 2px solid #7a57d1;
+`;
+const Title = styled.div``;
+const ImgContentBox = styled.div`
+  padding: 200px;
+  width: 70vw;
+  height: 50vw;
+  margin: 0 auto;
+  background: #cccccc;
+  vertical-align: middle;
+  border-radius: 3vw 3w 0px 0px;
+  border-top: 2px solid #7a57d1;
+  padding: 3vw;
+  font-size: 4vw;
+`;
+const Profileimg = styled.img`
+  display: block;
+  padding: 0px;
+  width: 30vw;
+  height: 30vw;
+  margin: 0 auto;
+  padding: 0 0 5px 0;
+`;
 const Answer = () => {
   const [question, setQustion] = useState([]);
   const [solve, setSolved] = useState(false);
@@ -176,20 +210,30 @@ const Answer = () => {
         }
       });
   };
-  //1 . 테이블에 fileImg 추가
 
-  const handleImgErr = () => {
-    console.log("날짜", "슈발");
-  };
   return (
     <>
-      <AnswerContainer>
+      {/* <AnswerContainer>
         <AnswerTitle>{clickTitle}</AnswerTitle>
-      </AnswerContainer>
+      </AnswerContainer> */}
+      <HeadWrapper>
+        <Title>{clickTitle}</Title>
+      </HeadWrapper>
+      <ImgContentBox>
+        {question.createdAt !== undefined ? (
+          <div>
+            {" "}
+            <Profileimg
+              src={`img/${question.createdAt.slice(0, 19)}_.jpg`}
+              onError={(i) => (i.target.src = "img/githublogo.png")}
+              alt="1"
+            />
+          </div>
+        ) : null}
+      </ImgContentBox>
 
       {clickEditBtn !== false ? (
         <>
-          (
           <>
             <TextContainer>
               <ReplyText
@@ -207,64 +251,41 @@ const Answer = () => {
               </Button>
             </ButtonContainer>
           </>
-          )
         </>
       ) : (
         <>
           <TextContainer>
-            <AnswerText>
-              {question.createdAt !== undefined ? (
-                <div>
+            {question.createdAt !== undefined ? (
+              <div>
+                {" "}
+                <strong>
                   {" "}
-                  <div>
-                    <ImgContainer
-                      src={`img/${question.createdAt.slice(0, 19)}_.jpg`}
-                      onError={(i) => (i.target.style.display = "none")}
-                    />
-                  </div>
-                  {question.content}
-                </div>
-              ) : (
+                  작성일자 : {`${question.createdAt.slice(0, 10)}`}
+                </strong>
+                <div> {question.content}</div>
+              </div>
+            ) : (
+              <>
+                <div>{question.createdAt}</div>
                 <div>{question.content}</div>
-              )}
-            </AnswerText>
+              </>
+            )}
           </TextContainer>
           <ButtonContainer>
-            <Button className="headerBtn" onClick={addAnswer}>
-              없앨 예정인 버튼
-            </Button>
             <Button className="headerBtn" onClick={editBtn}>
               수정
             </Button>
             <Button className="headerBtn" onClick={deleteFunction}>
               삭제
             </Button>
+            <Link to="/mypage">
+              <Button className="headerBtn" onClick={addAnswer}>
+                돌아가기
+              </Button>
+            </Link>
           </ButtonContainer>
         </>
       )}
-
-      {solve !== false ? (
-        <>
-          <AnswerContainer>
-            <ReplyContainer>
-              <ReplyText
-                type="text"
-                placeholder="답변을 입력하세요"
-                value={content}
-                onChange={replyHandler}
-              ></ReplyText>
-              <ButtonContainer>
-                <Button className="headerBtn" onClick={submitAnswer}>
-                  풀이등록
-                </Button>
-                <Button className="headerBtn" onClick={addAnswer}>
-                  취소
-                </Button>
-              </ButtonContainer>
-            </ReplyContainer>
-          </AnswerContainer>
-        </>
-      ) : null}
     </>
   );
 };
