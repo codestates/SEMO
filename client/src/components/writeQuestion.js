@@ -5,6 +5,8 @@ import axios from "axios";
 import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
 
 const ContainQuestion = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
 `;
@@ -44,6 +46,7 @@ const BtnContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 3vw;
+  padding: 10px 0;
   .btn {
     font-size: 2.5vw;
     width: 15vw;
@@ -57,12 +60,38 @@ const ImageTest = styled.div`
   display: flex;
   flex-direction: row;
 
+  .input-file-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5px;
+    background-color: #a573ff;
+    border: 2px solid #7a57d1;
+    border-radius: 10px;
+    padding: 5px 7px;
+    width: 57px;
+    cursor: pointer;
+  }
+
   > .deletebutton {
-    font-size: 2vw;
-    height: 6vw;
-    width: 10vw;
+    font-size: 8px;
+    height: 23px;
+    width: 38px;
+
+    @media screen and (min-width: 401px) and (max-width: 1000px) {
+      font-size: 2vw;
+      height: 6vw;
+      width: 10vw;
+    }
+
+    @media screen and (min-width: 1001px) {
+      font-size: 20px;
+      width: 100px;
+      height: 60px;
+    }
   }
 `;
+
 const WriteQuestionComponenet = () => {
   const { title, text, setTitle, setText } = useStoreTemp();
   const { nickname, user_id } = useUserinfo();
@@ -119,8 +148,12 @@ const WriteQuestionComponenet = () => {
 
         <ImageTest>
           <div>
-            {fileImg && <img alt="exam" src={fileImg} />}
+            <label className="input-file-button" for="input-file">
+              이미지 첨부
+            </label>
             <input
+              style={{ display: "none" }}
+              id="input-file"
               name="imgUp"
               type="file"
               accept="image/*"

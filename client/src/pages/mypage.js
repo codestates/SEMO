@@ -5,6 +5,7 @@ import Myquestion from "../components/myquestion";
 import Footer from "../components/footer";
 import Signoutmodal from "../modals/signoutmodal";
 import { useStoreTemp } from "../zustand/store";
+
 const Mypage = () => {
   const { signOutModal } = useStoreTemp();
   return (
