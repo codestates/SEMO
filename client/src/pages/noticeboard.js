@@ -19,16 +19,6 @@ const NoticeContainer = styled.div`
   flex-wrap: wrap;
   padding: 2vw 0;
   gap: 11px;
-
-  /* @media screen and (min-width: 401px) and (max-width: 1000px) {
-    width: 20vw;
-    height: 20vw;
-  }
-
-  @media screen and (min-width: 1001px) {
-    width: 200px;
-    height: 200px;
-  } */
 `;
 
 const ItemContainer = styled.div`
@@ -42,16 +32,6 @@ const ItemContainer = styled.div`
   border-radius: 15px;
   box-shadow: 3px 3px 3px 3px #999;
 
-  /* @media screen and (min-width: 401px) and (max-width: 1000px) {
-    width: 20vw;
-    height: 20vw;
-  }
-
-  @media screen and (min-width: 1001px) {
-    width: 200px;
-    height: 200px;
-  }
- */
   .link {
     text-decoration: none;
     active: none;
