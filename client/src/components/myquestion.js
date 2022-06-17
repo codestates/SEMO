@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import Button from "./button";
 import { Link } from "react-router-dom";
+
 const Container = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -27,9 +30,7 @@ const Myquestion = () => {
   return (
     <Container>
       <Button className="showMyquestionBtn">
-        <Link to="/questionlist">
-          <div>내 질문 보러가기</div>{" "}
-        </Link>
+        <Link to="/questionlist">내 질문 보러가기</Link>
       </Button>
     </Container>
   );

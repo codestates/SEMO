@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import Button from "./button";
 import { Link } from "react-router-dom";
+
 const Container = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -15,6 +18,7 @@ const Container = styled.div`
     background-color: #cccccc;
     border: 0px solid #7a57d1;
     border-radius: 0px;
+    width: 40vw;
     a:hover {
       background-color: orange;
       border-radius: 7px;

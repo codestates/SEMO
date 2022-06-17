@@ -79,7 +79,7 @@ const ProfileInfo = styled.div`
   flex-direction: column;
   font-size: 1vw;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 400px) {
     display: none;
   }
 `;
@@ -115,7 +115,7 @@ function Footer() {
               <Imgbox src={minsoo} alt="team-leader" />
             </a>
             <ProfileInfo>
-              <p>권민수 Full-Stack</p>
+              <p>권민수 Front-End</p>
               <p>kwonys02@naver.com</p>
             </ProfileInfo>
           </ProfilePhoto>
