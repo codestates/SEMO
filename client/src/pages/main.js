@@ -14,18 +14,32 @@ import { Link } from "react-router-dom";
 
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
-  width: 100vw;
+  max-width: 1000px;
   height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  box-sizing: border-box;
+  margin: 0 auto;
 `;
 
 const ImgContainer = styled.img`
   /* border: 1px solid green; */
-  width: 40vw;
-  height: 31.5vw;
+  width: 150px;
+  height: 118px;
+  padding: 5px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    /* border: 1px solid green; */
+    width: 37.4065vw;
+    height: 29.4264vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    height: 294.25px;
+    width: 374.062px;
+  }
 `;
 
 const ItemasContainer1 = styled.div`
@@ -43,16 +57,32 @@ const TextContainer = styled.div`
   > .h1 {
     font-size: 5vw;
     font-weight: bold;
+
+    @media screen and (min-width: 1001px) {
+      font-size: 50px;
+      font-weight: bold;
+    }
   }
   > .h2 {
     font-size: 4vw;
     font-weight: bold;
+
+    @media screen and (min-width: 1001px) {
+      font-size: 40px;
+      font-weight: bold;
+    }
   }
 
   .btn1 {
     font-size: 2.5vw;
     width: 20vw;
     height: 5vw;
+
+    @media screen and (min-width: 1001px) {
+      font-size: 25px;
+      width: 200px;
+      height: 50px;
+    }
   }
 `;
 
@@ -96,7 +126,9 @@ const Main = () => {
           <ImgContainer src={image2} alt="" />
         </ItemasContainer1>
 
-        <div style={{ width: '100%' }}><SimpleSlider /></div>
+        <div style={{ width: "100%" }}>
+          <SimpleSlider />
+        </div>
         {/* 더미 데이터 들어가야하는곳  */}
 
         <ItemasContainer1>
