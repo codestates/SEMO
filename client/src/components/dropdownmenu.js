@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { useStore, useStoreTemp } from "../zustand/store";
+import { useStore } from "../zustand/store";
 import Button from "./button";
-import axios from "axios";
+
 export const DropdownContainer = styled.div`
   /* border: 1px solid red; */
   max-width: 1000px;
@@ -52,9 +52,16 @@ const Selecttag = styled.select`
   }
 `;
 
-const Dropdown = () => {
-  const { school, grade, selectSchool, subject, selectGrade, selectsubject } =
-    useStore();
+const Dropdown = (props) => {
+  const {
+    school,
+    grade,
+    selectSchool,
+    subject,
+    selectGrade,
+    selectsubject,
+    iswrite,
+  } = useStore();
 
   const selectSchoolHandler = (e) => {
     selectSchool(e.target.value);
@@ -133,6 +140,12 @@ const Dropdown = () => {
         <option value="science">과학</option>
         <option value="artsandsports">예체능</option>
       </Selecttag>
+
+      {iswrite === false ? (
+        <Button onClick={props.searchHandler}>조회하기</Button>
+      ) : (
+        ""
+      )}
     </DropdownContainer>
   );
 };
