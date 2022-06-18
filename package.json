@@ -8,6 +8,7 @@
     "react-loading": "^2.0.3",
     "react-router-dom": "^6.3.0",
     "simple-zustand-devtools": "^1.0.1",
+    "styled-reset": "^4.4.1",
     "zustand-persist": "^0.4.0"
   }
 }

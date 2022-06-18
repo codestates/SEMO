@@ -11,6 +11,8 @@ import SignupModalComponent from "../modals/signupmodal";
 import SimpleSlider from "../components/slickslide";
 import { useStore } from "../zustand/store";
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/themeProvider";
+import AppLayout from "../components/AppLayout";
 
 const ItemasContainer = styled.div`
   /* border: 1px solid blue; */
@@ -87,10 +89,14 @@ const TextContainer = styled.div`
 `;
 
 const Main = () => {
+  const ThemeMode = useTheme();
+  const CurrentMode = ThemeMode[0] === "light" ? "🌝" : "🌚";
+
   const { loginmodal, signupmodal, islogin, openLoginModal } = useStore();
   return (
     <>
       <Header />
+      <AppLayout />
       <ItemasContainer>
         <ItemasContainer1>
           <TextContainer>
