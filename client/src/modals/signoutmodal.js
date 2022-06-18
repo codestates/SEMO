@@ -132,7 +132,7 @@ const Signoutmodal = () => {
   const testFn2 = async () => {
     console.log("회원탈퇴 버튼 눌림 ^^ ");
     await axios
-      .post("http://localhost:3500/sign/withdraw", {
+      .post("http://52.78.130.4:3500/sign/withdraw", {
         user_id: testId,
         password: testPw,
       })
