@@ -91,8 +91,8 @@ const Btndiv = styled.div`
   }
 `;
 
-const Header = (props) => {
-  const { openLoginModal, openSignupModal, islogin } = useStore();
+const Header = () => {
+  const { openLoginModal, openSignupModal, islogin, setLogOut } = useStore();
   const { nickname, profile2 } = useUserinfo();
   const { clickMyPage, setClickMypage, setOffMypage, setSignOutModal } =
     useStoreTemp();
@@ -130,9 +130,11 @@ const Header = (props) => {
               <UserNickName>{nickname}</UserNickName>
             </MyprofileContainer>
             <Btndiv>
-              <Button className="headerBtn" onClick={props.openModalHandler}>
-                로그아웃
-              </Button>
+              <Link to="/">
+                <Button className="headerBtn" onClick={setLogOut}>
+                  로그아웃
+                </Button>
+              </Link>
               {clickMyPage === false ? (
                 <Link className="link" to="/mypage" onClick={setClickMypage}>
                   <Button className="headerBtn">마이페이지</Button>
