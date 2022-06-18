@@ -27,15 +27,35 @@ const ImageContainer = styled.div`
   border-top: 2px solid #CED4DA;
   justify-content : center;
   align-items : center;
+
+  @media screen and (min-width: 1001px) {
+    padding-top: 2rem;
+    padding-bottom: 2rem; 
+    border-bottom: 2px solid #CED4DA;
+    border-top: 2px solid #CED4DA;
+    
+  }
 `;
 
 const ProfilePhoto = styled.img`
   display: flex;
-  width:10vw;
-  height:10vw;
+  width:50px;
+  height:50px;
   align-items: center;
   justify-content : center;
   border-radius: 100%;  
+  
+
+  @media screen and (min-width: 400px) and (max-width: 1000px) {
+    width:40px;
+    height:40px;
+  }
+  //길이 400이상 1000이하일때
+  @media screen and (min-width: 1001px) {
+    width: 80px;
+    height: 80px;
+  } 
+  //길이 1001이상일때 
 `;
 
 const AnswerInfo = styled.div`
@@ -48,20 +68,25 @@ const Name = styled.div`
   justify-content : center;
   font-size: 3vw;
   font-weight: bold;
+  
+  @media screen and (min-width: 1001px) {
+    font-size: 2rem;
+  } 
+  
 `
 const Title = styled.div`
   font-size: 0.8vw;
+
+  @media screen and (min-width: 1001px) {
+    font-size: 1rem;
+  }
 `
 const DefaultProfileImg = require('../images/githublogo.png');
 
 function getRandomArr(arr) {
   const result = []
 
-  if (!arr.length) {
-    return [3, 5, 4, 1, 0, 2, 10, 9, 8, 6, 7, 11];
-  }
-
-  while (result.length < 12) {
+  while (result.length < 9) {
     const randomNum = Math.floor(Math.random() * arr.length + 1) - 1;
     if (!result.includes(randomNum)) {
       result.push(randomNum)
@@ -79,7 +104,7 @@ function SimpleSlider() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 3000,
     centerMode: false
   };
@@ -110,6 +135,8 @@ function SimpleSlider() {
     setClickTitle(e);
   };
 
+  const [profileimg, setprofileimg] = useState(false);
+
   return (
     <Container>
 
@@ -122,13 +149,15 @@ function SimpleSlider() {
           return (
             <div key={item.id}>
               <ImageContainer>
-                <ProfilePhoto src={DefaultProfileImg} />
+                <ProfilePhoto src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
+                  onError={(i) => (i.target.src = "img/githubprofile.png")}
+                  alt="1" />
 
                 <AnswerInfo >
                   <Name>
                     {item.nickname}
                   </Name>
-                  <Link to="/answer">
+                  <Link to="/viewquestion">
                     <Title onClick={() => { viewQuestion(item.title); }}>
                       {item.title}
                     </Title>
@@ -143,4 +172,3 @@ function SimpleSlider() {
   );
 }
 export default SimpleSlider
-

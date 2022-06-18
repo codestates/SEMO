@@ -2,102 +2,153 @@ import styled from "styled-components";
 import Button from "./button";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
+import { useStoreTemp, useUserinfo } from "../zustand/store";
 import { Link } from "react-router-dom";
-const AnswerContainer = styled.div`
+
+const OutContainer = styled.div`
+  /* border: 5px solid green; */
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
-const AnswerTitle = styled.div`
-  display: flex;
-  width: 80vw;
+
+const HeadWrapper = styled.div`
+  /* border: 1px solid red; */
+  width: 263px;
+  padding: 11px;
+  font-size: 19px;
+  border-top: 2px solid #7a57d1;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 70vw;
+    padding: 3vw;
+    font-size: 5vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 700px;
+    padding: 30px;
+    font-size: 50px;
+  }
+`;
+
+const ImgContentBox = styled.div`
+  /* border: 5px green solid; */
+  width: 263px;
+  height: 188px;
+  padding: 11px;
+  font-size: 15px;
   background: #cccccc;
-  border-radius: 2vw;
-  padding: 3vw;
+  border-radius: 0 0 11px 11px;
+  border-top: 2px solid #7a57d1;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 70vw;
+    height: 50vw;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 700px;
+    height: 500px;
+    padding: 30px;
+    font-size: 40px;
+  }
+`;
+
+const Profileimg = styled.img`
+  display: block;
+  margin: 0 auto;
+  width: 170px;
+  height: 170px;
+  padding: 8px 0;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 45vw;
+    height: 45vw;
+    padding: 2vw 0;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 450px;
+    height: 450px;
+    padding: 20px 0;
+  }
 `;
 
 const TextContainer = styled.div`
-  padding: 200px;
-  width: 70vw;
-
-  margin: 0 auto;
-
-  vertical-align: middle;
-  border-radius: 3vw 3w 0px 0px;
+  /* border: 1px solid purple; */
+  width: 263px;
+  padding: 11px;
+  font-size: 15px;
   border-top: 2px solid #7a57d1;
   border-bottom: 2px solid #7a57d1;
-  padding: 3vw;
-  font-size: 4vw;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 70vw;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 700px;
+    padding: 30px;
+    font-size: 40px;
+  }
 `;
-const AnswerText = styled.div`
-  display: flex;
-  width: 80vw;
-  background: #cccccc;
-  border-radius: 2vw;
-  padding: 3vw;
-  word-break: break-word;
-  margin: 5vw;
+
+const ReplyText = styled.textarea`
+  width: 263px;
+  height: 150px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 70vw;
+    height: 40vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 700px;
+    height: 400px;
+  }
 `;
+
 const ButtonContainer = styled.div`
+  border: 1px solid purple;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 10vw;
+  gap: 38px;
   margin-top: 5px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    gap: 10vw;
+    margin-top: 1vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    gap: 100px;
+    margin-top: 10px;
+  }
+
   .headerBtn {
-    font-size: 3vw;
-    width: 17vw;
+    font-size: 11px;
+    width: 64px;
+
+    @media screen and (min-width: 401px) and (max-width: 1000px) {
+      font-size: 3vw;
+      width: 17vw;
+    }
+
+    @media screen and (min-width: 1001px) {
+      font-size: 30px;
+      width: 170px;
+    }
   }
 `;
-const ReplyContainer = styled.div``;
-const ReplyText = styled.textarea`
-  width: 70vw;
-  height: 40vw;
-`;
-const imgtest = {
-  width: "30vw",
-  height: "30vw",
-};
 
-const ImgContainer = styled.img`
-  width:50vw;
-  align=bottom;
-  
-`;
-const Img2 = styled.div`
-  background: red;
-`;
-//@@@@2
-const HeadWrapper = styled.div`
-  width: 70vw;
-
-  margin: 0 auto;
-
-  padding: 3vw;
-  font-size: 5vw;
-  border-top: 2px solid #7a57d1;
-`;
-const Title = styled.div``;
-const ImgContentBox = styled.div`
-  padding: 200px;
-  width: 70vw;
-  height: 50vw;
-  margin: 0 auto;
-  background: #cccccc;
-  vertical-align: middle;
-  border-radius: 3vw 3w 0px 0px;
-  border-top: 2px solid #7a57d1;
-  padding: 3vw;
-  font-size: 4vw;
-`;
-const Profileimg = styled.img`
-  display: block;
-  padding: 0px;
-  width: 30vw;
-  height: 30vw;
-  margin: 0 auto;
-  padding: 0 0 5px 0;
-`;
 const Answer = () => {
   const [question, setQustion] = useState([]);
   const [solve, setSolved] = useState(false);
@@ -108,10 +159,6 @@ const Answer = () => {
   const [editContent, setEditContent] = useState("");
   const addAnswer = () => {
     setSolved(!solve);
-  };
-  const [content, setReply] = useState("");
-  const replyHandler = (e) => {
-    setReply(e.target.value);
   };
 
   const getQuestion = async () => {
@@ -197,13 +244,8 @@ const Answer = () => {
   };
 
   return (
-    <>
-      {/* <AnswerContainer>
-        <AnswerTitle>{clickTitle}</AnswerTitle>
-      </AnswerContainer> */}
-      <HeadWrapper>
-        <Title>{clickTitle}</Title>
-      </HeadWrapper>
+    <OutContainer>
+      <HeadWrapper>{clickTitle}</HeadWrapper>
       <ImgContentBox>
         {question.createdAt !== undefined ? (
           <div>
@@ -271,7 +313,7 @@ const Answer = () => {
           </ButtonContainer>
         </>
       )}
-    </>
+    </OutContainer>
   );
 };
 

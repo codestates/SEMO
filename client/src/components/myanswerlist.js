@@ -7,23 +7,47 @@ import { BsChatDots } from "react-icons/bs";
 
 const Container = styled.div`
   /* border: 1px solid green; */
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  padding: 4vw 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3vw 0;
 `;
 const QuestionContainer = styled.div`
   /* border: 5px solid red; */
-  padding-bottom: 3vw;
-  width: 100vw;
-  word-break: break-word;
+  padding-bottom: 11px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    /* border: 1px solid green; */
+    padding-bottom: 3vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    padding-bottom: 20px;
+  }
 `;
 const QuestionTitle = styled.strong`
-  font-size: 3vw;
+  /* border: 1px solid red; */
+  width: 230px;
+  font-size: 11px;
   font-weight: 900;
-  display: flex;
-  padding: 1vw 2vw;
-  gap: 1vw;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 4px 8px;
+  text-decoration: none;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    /* border: 1px solid green; */
+    padding: 1vw 2vw;
+    width: 62vw;
+    font-size: 3vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    padding: 1px 20px;
+    width: 620px;
+    font-size: 30px;
+  }
 `;
 const NicnNDate = styled.div`
   /* border: 10px solid gold; */
@@ -37,13 +61,35 @@ const Text = styled.span`
   /* background-color: red; */
   display: flex;
   align-items: center;
-  gap: 3vw;
-  font-size: 2vw;
-  padding: 0 2vw;
+  gap: 11px;
+  font-size: 8px;
+  padding: 0 8px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    gap: 3vw;
+    font-size: 2.5vw;
+    padding: 0 2vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    gap: 20px;
+    font-size: 25px;
+    padding: 0 20px;
+  }
 
   > span {
     border-left: 1px solid gray;
     padding-left: 3vw;
+
+    @media screen and (min-width: 401px) and (max-width: 1000px) {
+      border-left: 1px solid gray;
+      padding-left: 2.75vw;
+    }
+
+    @media screen and (min-width: 1001px) {
+      border-left: 1px solid gray;
+      padding-left: 28px;
+    }
   }
 `;
 

@@ -60,19 +60,6 @@ const ImageTest = styled.div`
   display: flex;
   flex-direction: row;
 
-  .input-file-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 5px;
-    background-color: #a573ff;
-    border: 2px solid #7a57d1;
-    border-radius: 10px;
-    padding: 5px 7px;
-    width: 57px;
-    cursor: pointer;
-  }
-
   > .deletebutton {
     font-size: 8px;
     height: 23px;
@@ -148,12 +135,8 @@ const WriteQuestionComponenet = () => {
 
         <ImageTest>
           <div>
-            <label className="input-file-button" for="input-file">
-              이미지 첨부
-            </label>
+            {fileImg && <img alt="exam" src={fileImg} />}
             <input
-              style={{ display: "none" }}
-              id="input-file"
               name="imgUp"
               type="file"
               accept="image/*"
