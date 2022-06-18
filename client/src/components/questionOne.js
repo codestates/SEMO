@@ -341,16 +341,17 @@ const QuestionOne = () => {
                   </Writer>
                 </HeadWrapper>
                 <ContentContainer>
-                  {question.createdAt !== undefined ? (
+                  {item.createdAt !== undefined ? (
                     <div>
                       {" "}
                       <Profileimg
-                        src={`img/${question.createdAt.slice(0, 19)}_.jpg`}
+                        src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
                         onError={(i) => (i.target.src = "img/githublogo.png")}
                         alt="1"
                       />
                     </div>
                   ) : null}
+
                   {item.content}
                 </ContentContainer>
               </QContainer>
@@ -358,6 +359,7 @@ const QuestionOne = () => {
           );
         })}
       </RepContainer>
+
       <ImageTest>
         <ImgInput
           name="imgUp"
