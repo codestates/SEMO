@@ -48,8 +48,10 @@ const ProfilePhoto = styled.img`
   
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
-    width:60px;
-    height:60px;
+    width:45px;
+    height:45px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
   //길이 400이상 1000이하일때
   @media screen and (min-width: 1001px) {
