@@ -116,7 +116,7 @@ const ReplyText = styled.textarea`
 `;
 
 const ButtonContainer = styled.div`
-  border: 1px solid purple;
+  /* border: 1px solid purple; */
   display: flex;
   flex-direction: row;
   justify-content: center;

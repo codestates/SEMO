@@ -2,13 +2,24 @@ import styled from "styled-components";
 import { useStore } from "../zustand/store";
 
 export const DropdownContainer = styled.div`
-  width: 100vw;
+  /* border: 1px solid red; */
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 8vw;
-  /* border: 1px solid red; */
+  gap: 30px;
   padding: 10px 0;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    gap: 8vw;
+    padding: 2.5vw 0;
+  }
+
+  @media screen and (min-width: 1001px) {
+    gap: 80px;
+    padding: 25px 0;
+  }
 `;
 
 const Selecttag = styled.select`
@@ -17,13 +28,27 @@ const Selecttag = styled.select`
   align-items: center;
   text-align: center;
   text-align-last: center;
-  font-size: 3vw;
   background-color: #a573ff;
   border: 2px solid #7a57d1;
+  font-size: 11px;
   border-radius: 10px;
   padding: 5px 0;
-  width: 17vw;
+  width: 64px;
   cursor: pointer;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    font-size: 3vw;
+    border-radius: 2.6vw;
+    padding: 1.3vw 0;
+    width: 17vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    font-size: 30px;
+    border-radius: 26px;
+    padding: 13px 0;
+    width: 170px;
+  }
 `;
 
 const Dropdown = () => {

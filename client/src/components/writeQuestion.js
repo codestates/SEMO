@@ -11,45 +11,104 @@ const ContainQuestion = styled.div`
   flex-direction: column;
 `;
 const InputTitleBox = styled.input`
-  width: 80vw;
-  height: 2vw;
-  margin: 1vw 0;
+  width: 300px;
+  height: 8px;
+  margin: 4px 0;
   background: white;
-  border-radius: 2vw;
+  border-radius: 8px;
   border: 1px solid gray;
-  padding: 3vw;
-  font-size: 5vw;
+  padding: 11px;
+  font-size: 15px;
   box-shadow: 3px 3px 3px 3px #999;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 80vw;
+    height: 2vw;
+    margin: 1vw 0;
+    border-radius: 2vw;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 800px;
+    height: 20px;
+    margin: 10px 0;
+    border-radius: 20px;
+    padding: 30px;
+    font-size: 40px;
+  }
 `;
 const InputTextBox = styled.textarea`
-  width: 80vw;
-  height: 50vw;
-  margin: 1vw;
+  width: 300px;
+  height: 188px;
+  margin: 4px;
   background: white;
   vertical-align: middle;
-  border-radius: 2vw;
-  padding: 3vw;
-  font-size: 4vw;
+  border-radius: 8px;
+  padding: 11px;
+  font-size: 15px;
   box-shadow: 3px 3px 3px 3px #999;
   resize: none;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 80vw;
+    height: 50vw;
+    margin: 1vw;
+    border-radius: 2vw;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 800px;
+    height: 500px;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 30px;
+    font-size: 40px;
+  }
 `;
 const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const WritingContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const BtnContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 3vw;
+  gap: 11px;
   padding: 10px 0;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    gap: 3vw;
+    padding: 2.6vw 0;
+  }
+
+  @media screen and (min-width: 1001px) {
+    gap: 30px;
+    padding: 26px 0;
+  }
+
   .btn {
-    font-size: 2.5vw;
-    width: 15vw;
+    font-size: 9px;
+    width: 56px;
+
+    @media screen and (min-width: 401px) and (max-width: 1000px) {
+      font-size: 2.5vw;
+      width: 15vw;
+    }
+
+    @media screen and (min-width: 1001px) {
+      font-size: 25px;
+      width: 150px;
+    }
   }
 `;
 
@@ -73,8 +132,8 @@ const ImageTest = styled.div`
 
     @media screen and (min-width: 1001px) {
       font-size: 20px;
-      width: 100px;
-      height: 60px;
+      width: 60px;
+      height: 100px;
     }
   }
 `;

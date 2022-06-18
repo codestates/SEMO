@@ -61,35 +61,58 @@ const Text = styled.span`
   /* background-color: red; */
   display: flex;
   align-items: center;
-  gap: 11px;
+  padding: 0 5px;
+  gap: 5px;
   font-size: 8px;
-  padding: 0 8px;
 
   @media screen and (min-width: 401px) and (max-width: 1000px) {
-    gap: 3vw;
-    font-size: 2.5vw;
-    padding: 0 2vw;
+    padding: 0 1.3vw;
+    gap: 1.3vw;
+    font-size: 2vw;
   }
 
   @media screen and (min-width: 1001px) {
-    gap: 20px;
-    font-size: 25px;
-    padding: 0 20px;
+    padding: 0 13px;
+    gap: 13px;
+    font-size: 20px;
+  }
+`;
+
+const Nickname = styled.div`
+  border-left: 1px solid gray;
+  padding-left: 5px;
+  width: 61px;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    padding-left: 1.3vw;
+    width: 17vw;
   }
 
-  > span {
-    border-left: 1px solid gray;
-    padding-left: 3vw;
+  @media screen and (min-width: 1001px) {
+    padding-left: 13px;
+    width: 170px;
+  }
+`;
 
-    @media screen and (min-width: 401px) and (max-width: 1000px) {
-      border-left: 1px solid gray;
-      padding-left: 2.75vw;
-    }
+const UpdatedAt = styled.div`
+  border-left: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  padding-left: 5px;
+  width: 25px;
 
-    @media screen and (min-width: 1001px) {
-      border-left: 1px solid gray;
-      padding-left: 28px;
-    }
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    padding-left: 1.3vw;
+    width: 6.7vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    padding-left: 13px;
+    width: 67px;
   }
 `;
 
@@ -136,8 +159,8 @@ const AllMyAnswer = () => {
                     {item.title}
                   </QuestionTitle>
                   <Text>
-                    <span>{nickname}</span>
-                    <span>{item.updatedAt.slice(5, 10)}</span>
+                    <Nickname>{nickname}</Nickname>
+                    <UpdatedAt>{item.updatedAt.slice(5, 10)}</UpdatedAt>
                   </Text>
                 </NicnNDate>
                 <Link to="/myanswerview">
