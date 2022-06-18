@@ -180,7 +180,7 @@ const Answer = () => {
       setQustion(data);
     });
   }, []);
-
+  // response.data.user_id !==user_id
   const editBtn = () => {
     isClickEditBtn(!clickEditBtn);
     setEditContent(question.content);
