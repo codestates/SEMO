@@ -9,7 +9,7 @@ import Footer from "../components/footer";
 import LoginModalComponent from "../modals/loginmodal";
 import SignupModalComponent from "../modals/signupmodal";
 import SimpleSlider from "../components/slickslide";
-import { useStore } from "../zustand/store";
+import { useStore, useStoreTemp } from "../zustand/store";
 import { Link } from "react-router-dom";
 
 const ItemasContainer = styled.div`
@@ -88,6 +88,7 @@ const TextContainer = styled.div`
 
 const Main = () => {
   const { loginmodal, signupmodal, islogin, openLoginModal } = useStore();
+  const { isSearch, setisSearchTrue, setisSearchFalse } = useStoreTemp();
   return (
     <>
       <Header />
@@ -97,12 +98,25 @@ const Main = () => {
             <p className="h1">문제를 못풀겠나요?</p>
             <p className="h2">지금 당장 질문하세요!</p>
             {islogin === false ? (
-              <Button className="btn1" onClick={openLoginModal}>
+              <Button
+                className="btn1"
+                onClick={() => {
+                  setisSearchFalse();
+                  openLoginModal();
+                }}
+              >
                 질문하러 가기
               </Button>
             ) : (
               <Link to="/writequestion">
-                <Button className="btn1">질문하러 가기</Button>
+                <Button
+                  className="btn1"
+                  onClick={() => {
+                    setisSearchFalse();
+                  }}
+                >
+                  질문하러 가기
+                </Button>
               </Link>
             )}
           </TextContainer>
@@ -114,12 +128,25 @@ const Main = () => {
             <p className="h1">문제를 풀어볼까요?</p>
             <p className="h2">지금 당장 가시죠!</p>
             {islogin === false ? (
-              <Button className="btn1" onClick={openLoginModal}>
+              <Button
+                className="btn1"
+                onClick={() => {
+                  setisSearchTrue();
+                  openLoginModal();
+                }}
+              >
                 풀이하러 가기
               </Button>
             ) : (
               <Link to="/noticeboard">
-                <Button className="btn1">풀이하러 가기</Button>
+                <Button
+                  className="btn1"
+                  onClick={() => {
+                    setisSearchTrue();
+                  }}
+                >
+                  풀이하러 가기
+                </Button>
               </Link>
             )}
           </TextContainer>

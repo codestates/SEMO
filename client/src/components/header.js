@@ -94,8 +94,14 @@ const Btndiv = styled.div`
 const Header = (props) => {
   const { openLoginModal, openSignupModal, islogin } = useStore();
   const { nickname, profile2 } = useUserinfo();
-  const { clickMyPage, setClickMypage, setOffMypage, setSignOutModal } =
-    useStoreTemp();
+  const {
+    clickMyPage,
+    setClickMypage,
+    setOffMypage,
+    setSignOutModal,
+    setisSearchTrue,
+    isSearch,
+  } = useStoreTemp();
   // onError={(i) => (i.target.src = "img/githublogo.png")}
 
   const errHandler = (i) => {
@@ -106,7 +112,11 @@ const Header = (props) => {
       {islogin === false ? (
         <HeadDiv>
           <Link to="/">
-            <Logoimage />
+            <Logoimage
+              onClick={() => {
+                setisSearchTrue();
+              }}
+            />
           </Link>
           <RightContainer>
             <Btndiv>
@@ -121,7 +131,13 @@ const Header = (props) => {
         </HeadDiv>
       ) : (
         <HeadDiv>
-          <Link to="/">
+          <Link
+            to="/"
+            onClick={() => {
+              setisSearchTrue();
+              console.log(isSearch);
+            }}
+          >
             <Logoimage onClick={setOffMypage} />
           </Link>
           <RightContainer>
