@@ -140,12 +140,16 @@ function SimpleSlider() {
 
   const { islogin, openLoginModal } = useStore();
   const [questions, setquestions] = useState([]) // useEffect 안에서 전체 데이터를 받은후 .then을 빠져나와 6개로 추린 배열을 받는다.
-  const { clickTitle, setClickTitle } = useStoreTemp();
+  const { clickTitle, setClickTitle, setClickCreatedAt, ClickCreatedAt } = useStoreTemp();
 
   const viewQuestion = (e) => {
     setClickTitle(e);
   };
 
+  const click = (e) => {
+    setClickTitle(e.title);
+    setClickCreatedAt(e.createdAt);
+  };
 
   return (
     <Container>
@@ -159,10 +163,13 @@ function SimpleSlider() {
           return (
             <div key={item.id}>
               <ImageContainer>
-                <ProfilePhoto src={"img/githubprofile.png"} />
+                <ProfilePhoto
+                  src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
+                  onError={(i) => (i.target.src = "img/githubprofile.png")}
+                  alt="1" />
                 <AnswerInfo >
                   <Name>
-                    {item.nickname}
+                    {item.nickname.slice(0, 9)}
                   </Name>
                   {islogin === false ? (
                     <Title className='openlogin' onClick={openLoginModal}>
@@ -170,7 +177,7 @@ function SimpleSlider() {
                     </Title>
                   ) : (
                     <Link to="/viewquestion">
-                      <Title onClick={() => { viewQuestion(item.title); }}>
+                      <Title onClick={() => { click(item); }}>
                         {item.title.slice(0, 9)}
                       </Title>
                     </Link>
