@@ -23,4 +23,5 @@ module.exports = {
   answerone: require("./options/answerone"),
   answereveryone: require("./options/answereveryone"),
   qfora: require("./options/qfora"),
+  filter: require("./options/filter"),
 };

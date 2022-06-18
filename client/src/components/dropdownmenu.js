@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useStore } from "../zustand/store";
-
+import { useStore, useStoreTemp } from "../zustand/store";
+import Button from "./button";
+import axios from "axios";
 export const DropdownContainer = styled.div`
   width: 100vw;
   display: flex;
@@ -27,7 +28,8 @@ const Selecttag = styled.select`
 `;
 
 const Dropdown = () => {
-  const { school, selectSchool, selectGrade, selectsubject } = useStore();
+  const { school, grade, selectSchool, subject, selectGrade, selectsubject } =
+    useStore();
 
   const selectSchoolHandler = (e) => {
     selectSchool(e.target.value);
@@ -40,6 +42,27 @@ const Dropdown = () => {
   const selectSubjectHandler = (e) => {
     selectsubject(e.target.value);
   };
+
+  // const searchHandler = (e) => {
+  //   if (school !== "" && grade !== "" && subject !== "") {
+  //     axios
+  //       .post("http://localhost:3500/question/filter", {
+  //         school,
+  //         grade,
+  //         subject,
+  //       })
+  //       .then((res) => {
+  //         if (res.data.length === 0) {
+  //           alert("일치하는 항목이 없습니다.");
+  //         } else {
+  //           console.log("!@#!@#!@#!@#!@##", res);
+  //           return res;
+  //         }
+  //       });
+  //   } else {
+  //     alert("모든 항목을 선택하셔야 합니다.");
+  //   }
+  // };
 
   return (
     <DropdownContainer>

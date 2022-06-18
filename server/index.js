@@ -43,6 +43,7 @@ app.post("/answer/one", controllers.answerone);
 app.patch("/user/profile/edit", controllers.profileedit);
 app.post("/answer/everyone", controllers.answereveryone);
 app.post("/question/qfora", controllers.qfora);
+app.post("/question/filter", controllers.filter);
 const PORT = process.env.PORT || 3500;
 
 app.get("/", (req, res) => {
