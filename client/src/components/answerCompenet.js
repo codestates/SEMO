@@ -114,21 +114,6 @@ const Answer = () => {
     setReply(e.target.value);
   };
 
-  const submitAnswer = () => {
-    axios
-      .post("http://localhost:3500/answer", {
-        content,
-        title: clickTitle,
-        user_id: user_id,
-      })
-      .then((res) => {
-        if (res.data) {
-          console.log("성공");
-        } else {
-          console.log("실패");
-        }
-      });
-  };
   const getQuestion = async () => {
     try {
       const response = await axios.post("http://localhost:3500/question", {
@@ -148,7 +133,7 @@ const Answer = () => {
       setQustion(data);
     });
   }, []);
-
+  // response.data.user_id !==user_id
   const editBtn = () => {
     isClickEditBtn(!clickEditBtn);
     setEditContent(question.content);
