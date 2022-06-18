@@ -2,146 +2,300 @@ import styled from "styled-components";
 import Button from "./button";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
+import { useStoreTemp, useUserinfo } from "../zustand/store";
 import { Link } from "react-router-dom";
-const AnswerContainer = styled.div`
+
+const Container = styled.div`
+  /* border: 1px solid red; */
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
-const ReplyContainer = styled.div``;
-const AnswerTitle = styled.div`
-  display: flex;
-  width: 80vw;
-  background: #cccccc;
-  border-radius: 2vw;
-  padding: 3vw;
-`;
+const QHeader = styled.strong`
+  /* border: 1px solid blue; */
+  font-size: 1px;
+  padding: 2px 11px;
+  width: 263px;
+  opacity: 0.3;
 
-const ReplyText = styled.textarea`
-  width: 80vw;
-  height: 50vw;
-  margin: 5vw;
-  background: #cccccc;
-  vertical-align: middle;
-  border-radius: 2vw;
-  padding: 3vw;
-  font-size: 4vw;
-`;
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10vw;
-  .headerBtn {
-    font-size: 3vw;
-    width: 17vw;
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    padding: 1vw 3vw;
+    width: 70vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    padding: 10px 30px;
+    width: 700px;
   }
 `;
-const TextContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-const AnswerText = styled.div`
-  display: flex;
-  width: 80vw;
-  height: 2vw;
-  background: #cccccc;
-  border-radius: 2vw;
-  padding: 3vw;
-  height: 300px;
-  word-break: break-word;
-  margin: 5vw;
-`;
-//@@@@@@@@@@@추가
-const Container = styled.div``;
+
 const HeadWrapper = styled.div`
-  width: 70vw;
-
-  margin: 0 auto;
-
-  padding: 3vw;
-  font-size: 5vw;
+  width: 263px;
+  padding: 11px;
+  font-size: 19px;
   border-top: 2px solid #7a57d1;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 70vw;
+    padding: 3vw;
+    font-size: 5vw;
+    border-top: 2px solid #7a57d1;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 700px;
+    padding: 30px;
+    font-size: 50px;
+    border-top: 2px solid #7a57d1;
+  }
 `;
-const Title = styled.div``;
-const QHeader = styled.h3`
-  display: flex;
-  justify-content: center;
-`;
+
 const QueWriter = styled.div`
+  /* border: 1px solid purple; */
   display: flex;
   justify-content: flex-end;
-  font-size: 3vw;
+  font-size: 11px;
+  width: 263px;
+  padding: 11px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    font-size: 3vw;
+    width: 70vw;
+    padding: 3vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    font-size: 30px;
+    width: 700px;
+    padding: 30px;
+  }
 `;
+
 const ImgContentBox = styled.div`
-  padding: 200px;
-  width: 70vw;
-  height: 50vw;
-  margin: 0 auto;
+  width: 263px;
+  height: 188px;
+  padding: 11px;
+  font-size: 15px;
   background: #cccccc;
   vertical-align: middle;
-  border-radius: 3vw 3w 0px 0px;
   border-top: 2px solid #7a57d1;
-  padding: 3vw;
-  font-size: 4vw;
+  border-bottom: 1px solid gray;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 70vw;
+    height: 50vw;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 700px;
+    height: 500px;
+    padding: 30px;
+    font-size: 15px;
+  }
 `;
 
 const ContentBox = styled.div`
-  width: 70vw;
-  height: 50vw;
-  margin: 0 auto;
+  /* border: 1px solid blue; */
   background: #cccccc;
-  vertical-align: middle;
+  width: 263px;
+  height: 188px;
   border-radius: 0px 0px 15px 15px;
-  padding: 3vw;
-  font-size: 4vw;
+  padding: 11px;
+  font-size: 15px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 70vw;
+    height: 50vw;
+    border-radius: 0 0 4vw 4vw;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 700px;
+    height: 500px;
+    border-radius: 0 0 40px 40px;
+    padding: 30px;
+    font-size: 40px;
+  }
+`;
+
+const RepContainer = styled.div`
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    gap: 1.3vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    gap: 13px;
+  }
+`;
+
+const ContentContainer = styled.div`
+  /* border: 2px solid blue; */
+  width: 263px;
+  border-radius: 5px;
+  padding: 11px;
+  font-size: 15px;
+  background: #cccccc;
+  word-break: break-word;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 70vw;
+    border-radius: 1.3vw;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 700px;
+    border-radius: 13px;
+    padding: 30px;
+    font-size: 40px;
+  }
 `;
 
 const Profileimg = styled.img`
   display: block;
-  padding: 0px;
-  width: 30vw;
-  height: 30vw;
   margin: 0 auto;
-  padding: 0 0 5px 0;
-`;
-const QContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-const Writer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  font-size: 3vw;
-  justify-content: space-between;
-`;
-const ContentContainer = styled.div`
-  width: 70vw;
+  width: 170px;
+  height: 170px;
+  padding: 10px 35px;
 
-  margin: 0 auto;
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 45vw;
+    height: 45vw;
+    padding: 3vw 10vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 450px;
+    height: 450px;
+    padding: 30px 100px;
+  }
+`;
+
+const Writer = styled.div`
+  /* border: 1px solid skyblue; */
+  font-size: 11px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    font-size: 3vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    font-size: 30px;
+  }
+`;
+
+const ReplyText = styled.textarea`
   background: #cccccc;
-  vertical-align: middle;
-  border-radius: 5px;
-  padding: 3vw;
-  font-size: 4vw;
-  word-break: break-word;
+  width: 300px;
+  height: 188px;
+  margin: 19px;
+  border-radius: 8px;
+  padding: 11px;
+  font-size: 15px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 80v;
+    height: 50vw;
+    margin: 5vw;
+    border-radius: 2vw;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 800px;
+    height: 500px;
+    margin: 50px;
+    border-radius: 20px;
+    padding: 30px;
+    font-size: 40px;
+  }
+`;
+const ButtonContainer = styled.div`
+  /* border: 1px black solid; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 38px;
+  padding: 5px 0;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    gap: 10vw;
+    padding: 1.3vw 0;
+  }
+
+  @media screen and (min-width: 1001px) {
+    gap: 100px;
+    padding: 13px 0;
+  }
+
+  .headerBtn {
+    font-size: 11px;
+    width: 64px;
+
+    @media screen and (min-width: 401px) and (max-width: 1000px) {
+      font-size: 3vw;
+      width: 17vw;
+    }
+
+    @media screen and (min-width: 1001px) {
+      font-size: 30px;
+      width: 170px;
+    }
+  }
 `;
 const ImageTest = styled.div`
-  width: 80vw;
-  display: block;
+  width: 300px;
   border-top: 3px solid #7a57d1;
+  display: block;
   margin: 0 auto;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 80vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    width: 800px;
+  }
 `;
+
 const ImgInput = styled.input`
   display: block;
   margin: 0 auto;
 `;
+
 const AnswerInputText = styled.textarea`
-  padding: 0px;
-  width: 75vw;
+  border: 1px solid blue;
+  width: 281px;
+  height: 70px;
   display: flex;
+  resize: none;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    width: 75vw;
+    height: 19vw;
+  }
+
+  @media screen and (min-width: 1001px) {
+    margin: 0 auto;
+    width: 750px;
+    height: 190px;
+  }
 `;
 const AddAnswerContainer = styled.div`
   display: block;
@@ -149,7 +303,6 @@ const AddAnswerContainer = styled.div`
   width: 75vw;
   height: 30vw;
 `;
-const RepContainer = styled.div``;
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 const ViewMyAnswer = () => {
@@ -302,102 +455,90 @@ const ViewMyAnswer = () => {
   return (
     <>
       <Container>
-        <button onClick={executeScroll}> Click to scroll </button>
-        <QHeader>질문 {question.id}</QHeader>
-        {/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */}
-        <QContainer>
-          <HeadWrapper>
-            <Title>{question.title}</Title>
-
-            <QueWriter>작성자 : {question.nickname}</QueWriter>
-          </HeadWrapper>
-
-          <ImgContentBox>
-            {question.createdAt !== undefined ? (
-              <div>
-                {" "}
-                <Profileimg
-                  src={`img/${question.createdAt.slice(0, 19)}_.jpg`}
-                  onError={(i) => (i.target.src = "img/githublogo.png")}
-                  alt="1"
-                />
-              </div>
-            ) : null}
-          </ImgContentBox>
-          <ContentBox>{question.content}</ContentBox>
-        </QContainer>
+        <QHeader>No. {question.id}</QHeader>
+        <HeadWrapper>{question.title}</HeadWrapper>
+        <QueWriter>{question.nickname}</QueWriter>
+        <ImgContentBox>
+          {question.createdAt !== undefined ? (
+            <div>
+              {" "}
+              <Profileimg
+                src={`img/${question.createdAt.slice(0, 19)}_.jpg`}
+                onError={(i) => (i.target.src = "img/githublogo.png")}
+                alt="1"
+              />
+            </div>
+          ) : null}
+        </ImgContentBox>
+        <ContentBox>{question.content}</ContentBox>
       </Container>
       <RepContainer>
         {answer.map((item) => {
           return (
-            <QContainer>
-              <div key={item.id} item={item}>
-                <HeadWrapper>
-                  <Writer> 작성일 : {item.createdAt.slice(0, 10)}</Writer>
-                </HeadWrapper>
+            <div key={item.id} item={item}>
+              <HeadWrapper>
+                <Writer> 작성일 : {item.createdAt.slice(0, 10)}</Writer>
+              </HeadWrapper>
 
-                <ContentContainer>
-                  <Profileimg
-                    src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
-                    onError={(event) => (event.target.style.display = "none")}
-                    alt="1"
-                  />
-                  {item.content}
-                </ContentContainer>
-                <ButtonContainer>
+              <ContentContainer>
+                <Profileimg
+                  src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
+                  onError={(event) => (event.target.style.display = "none")}
+                  alt="1"
+                />
+                {item.content}
+              </ContentContainer>
+              <ButtonContainer>
+                <Button
+                  className="headerBtn"
+                  onClick={() => {
+                    editBtnHandler(item.id, item.content);
+                    executeScroll();
+                  }}
+                >
+                  수정
+                </Button>
+
+                {/* 화살표 함수로, item.title? item.content값 넘겨주기 .edit 기능 테스트하기  */}
+                {deleteModal !== true ? (
                   <Button
                     className="headerBtn"
                     onClick={() => {
-                      editBtnHandler(item.id, item.content);
-                      executeScroll();
+                      testBtn1(item.id);
                     }}
                   >
-                    수정
+                    삭제하기
                   </Button>
-
-                  {/* 화살표 함수로, item.title? item.content값 넘겨주기 .edit 기능 테스트하기  */}
-                  {deleteModal !== true ? (
-                    <Button
-                      className="headerBtn"
-                      onClick={() => {
-                        testBtn1(item.id);
-                      }}
-                    >
-                      삭제하기
-                    </Button>
-                  ) : (
-                    <Button onClick={submitDelete}>삭제하시겠어요?</Button>
-                  )}
-                </ButtonContainer>
-              </div>
-            </QContainer>
+                ) : (
+                  <Button onClick={submitDelete}>삭제하시겠어요?</Button>
+                )}
+              </ButtonContainer>
+            </div>
           );
         })}
       </RepContainer>
 
       {clickEditBtn !== false ? (
-        <AnswerContainer>
-          <ReplyContainer>
-            <ReplyText
-              type="text"
-              value={clickCotent}
-              onChange={inputHandler}
-            ></ReplyText>
-            <ButtonContainer>
-              <Button className="headerBtn" onClick={submitEditAnswer}>
-                수정하기
-              </Button>
-              <Button
-                ref={myRef}
-                onClick={() => {
-                  isClickEditBtn(!clickEditBtn);
-                }}
-              >
-                취소
-              </Button>
-            </ButtonContainer>
-          </ReplyContainer>
-        </AnswerContainer>
+        <>
+          <ReplyText
+            type="text"
+            value={clickCotent}
+            onChange={inputHandler}
+          ></ReplyText>
+          <ButtonContainer>
+            <Button className="headerBtn" onClick={submitEditAnswer}>
+              수정하기
+            </Button>
+            <Button
+              ref={myRef}
+              onClick={() => {
+                isClickEditBtn(!clickEditBtn);
+              }}
+            >
+              취소
+            </Button>
+          </ButtonContainer>
+        </>
       ) : null}
 
       <ImageTest ref={myRef}>
@@ -418,9 +559,11 @@ const ViewMyAnswer = () => {
           {" "}
         </AnswerInputText>
         <ButtonContainer>
-          <Button onClick={submitAnswer}>답변추가</Button>
+          <Button className="headerBtn" onClick={submitAnswer}>
+            답변추가
+          </Button>
           <Link to="/">
-            <Button>나가기</Button>
+            <Button className="headerBtn">나가기</Button>
           </Link>
         </ButtonContainer>
       </AddAnswerContainer>
