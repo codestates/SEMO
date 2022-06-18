@@ -186,7 +186,7 @@ function Footer() {
             </a>
             <ProfileInfo>
               <p>권익찬 Front-End</p>
-              <p>ikchan0625@gmail.comm</p>
+              <p>ikchan0625@gmail.com</p>
             </ProfileInfo>
           </ProfilePhoto>
 

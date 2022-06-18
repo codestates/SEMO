@@ -21,8 +21,8 @@ const StyledSlider = styled(Slider)`
 const ImageContainer = styled.div`
   display: flex;
   width:100%;
-  padding-top: 2vw;
-  padding-bottom: 2vw;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-bottom: 2px solid #CED4DA;
   border-top: 2px solid #CED4DA;
   justify-content : center;
@@ -39,16 +39,19 @@ const ImageContainer = styled.div`
 
 const ProfilePhoto = styled.img`
   display: flex;
-  width:50px;
-  height:50px;
+  width:30px;
+  height:30px;
   align-items: center;
   justify-content : center;
-  border-radius: 100%;  
+  padding-right : 1rem;
+  /* border-radius: 100%;   */
   
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
-    width:40px;
-    height:40px;
+    width:45px;
+    height:45px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
   //길이 400이상 1000이하일때
   @media screen and (min-width: 1001px) {
@@ -66,22 +69,30 @@ const AnswerInfo = styled.div`
 `
 const Name = styled.div`
   justify-content : center;
-  font-size: 3vw;
+  font-size: 0.5rem;
   font-weight: bold;
   
+  @media screen and (min-width: 400px) and (max-width: 1000px) {
+    font-size: 1rem;
+  }
+
   @media screen and (min-width: 1001px) {
     font-size: 2rem;
   } 
   
 `
 const Title = styled.div`
-  font-size: 0.8vw;
+  font-size: 0.5rem;
+
+  @media screen and (min-width: 400px) and (max-width: 1000px) {
+    font-size: 0.5rem;
+  }
 
   @media screen and (min-width: 1001px) {
     font-size: 1rem;
   }
 `
-const DefaultProfileImg = require('../images/githublogo.png');
+// const DefaultProfileImg = require('../images/githublogo.png');
 
 function getRandomArr(arr) {
   const result = []
@@ -104,8 +115,8 @@ function SimpleSlider() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    // autoplay: true,
-    autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 2500,
     centerMode: false
   };
 
@@ -114,7 +125,7 @@ function SimpleSlider() {
       axios.get("http://localhost:3500/question/all", {
       })
         .then(res => {
-          console.log(res.data)
+
           const data = res.data
           const randomIndex = getRandomArr(data); // [5, 1, 2, 4, 6, 0]
           const newQuestions = randomIndex.map(i => data[i])
@@ -127,15 +138,18 @@ function SimpleSlider() {
   }, []);
 
 
-
+  const { islogin, openLoginModal } = useStore();
   const [questions, setquestions] = useState([]) // useEffect 안에서 전체 데이터를 받은후 .then을 빠져나와 6개로 추린 배열을 받는다.
-  const { clickTitle, setClickTitle } = useStoreTemp();
+  const { clickTitle, setClickTitle, setClickCreatedAt, ClickCreatedAt } = useStoreTemp();
 
   const viewQuestion = (e) => {
     setClickTitle(e);
   };
 
-  const [profileimg, setprofileimg] = useState(false);
+  const click = (e) => {
+    setClickTitle(e.title);
+    setClickCreatedAt(e.createdAt);
+  };
 
   return (
     <Container>
@@ -149,19 +163,25 @@ function SimpleSlider() {
           return (
             <div key={item.id}>
               <ImageContainer>
-                <ProfilePhoto src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
+                <ProfilePhoto
+                  src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
                   onError={(i) => (i.target.src = "img/githubprofile.png")}
                   alt="1" />
-
                 <AnswerInfo >
                   <Name>
-                    {item.nickname}
+                    {item.nickname.slice(0, 9)}
                   </Name>
-                  <Link to="/viewquestion">
-                    <Title onClick={() => { viewQuestion(item.title); }}>
-                      {item.title}
+                  {islogin === false ? (
+                    <Title className='openlogin' onClick={openLoginModal}>
+                      {item.title.slice(0, 9)}
                     </Title>
-                  </Link>
+                  ) : (
+                    <Link to="/viewquestion">
+                      <Title onClick={() => { click(item); }}>
+                        {item.title.slice(0, 9)}
+                      </Title>
+                    </Link>
+                  )}
                 </AnswerInfo>
               </ImageContainer>
             </div>

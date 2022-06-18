@@ -3,12 +3,12 @@ import Dropdown from "../components/dropdownmenu";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import { useScroll, useStoreTemp } from "../zustand/store";
+import { useStore, useScroll, useStoreTemp } from "../zustand/store";
 import { getQuestionsData } from "../apis/question";
 import axios from "axios";
 import Loading from "react-loading";
 import { Link } from "react-router-dom";
-
+import Button from "../components/button";
 const NoticeContainer = styled.div`
   /* border: 3px solid green; */
   max-width: 1000px;
@@ -134,10 +134,39 @@ const Noticeboard = () => {
     setClickTitle(e.title);
     setClickCreatedAt(e.createdAt);
   };
+
+  const { school, grade, selectSchool, subject, selectGrade, selectsubject } =
+    useStore();
+  const searchHandler = (e) => {
+    if (school !== "" && grade !== "" && subject !== "") {
+      axios
+        .post("http://localhost:3500/question/filter", {
+          school,
+          grade,
+          subject,
+        })
+        .then((res) => {
+          if (res.data.length === 0) {
+            alert("일치하는 항목이 없습니다.");
+          } else {
+            setData(res.data);
+            selectSchool("");
+            selectGrade("");
+            selectsubject("");
+            return;
+          }
+        });
+    } else {
+      alert("모든 항목을 선택하셔야 합니다.");
+    }
+  };
+
   return (
     <>
       <Header />
+
       <Dropdown />
+      <Button onClick={searchHandler}>조회하기</Button>
       <>
         <NoticeContainer>
           {data
