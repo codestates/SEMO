@@ -45,7 +45,15 @@ export const useStoreTemp = create((set) => ({
   editAnswerId: "",
   editAnswerContent: "",
   clickCreatedAt: "",
-
+  filterSchool: "",
+  filterGrade: "",
+  filterSubject: "",
+  setFilterSchool: (a) =>
+    set((state) => ({ filterSchool: (state.filterSchool = a) })),
+  setFilterGrade: (a) =>
+    set((state) => ({ filterGrade: (state.filterGrade = a) })),
+  setFilterSubject: (a) =>
+    set((state) => ({ filterSubject: (state.filterSubject = a) })),
   setClickCreatedAt: (a) =>
     set((state) => ({ clickCreatedAt: (state.clickCreatedAt = a) })),
   setEditAnswerContent: (a) =>

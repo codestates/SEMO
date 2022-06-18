@@ -82,7 +82,8 @@ const ImageTest = styled.div`
 const WriteQuestionComponenet = () => {
   const { title, text, setTitle, setText } = useStoreTemp();
   const { nickname, user_id } = useUserinfo();
-  const { school, grade, subject } = useStore();
+  const { school, grade, subject, selectSchool, selectGrade, selectsubject } =
+    useStore();
   const titleHandler = (e) => {
     setTitle(e.target.value);
   };
@@ -111,6 +112,9 @@ const WriteQuestionComponenet = () => {
 
     const axios2 = await axios.post("http://localhost:3500/uploads", formData);
     if (axios2.data.success) {
+      selectSchool("");
+      selectGrade("");
+      selectsubject("");
       alert("okay");
     } else {
       alert("no");
