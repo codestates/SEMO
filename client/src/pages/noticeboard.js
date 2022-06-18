@@ -34,9 +34,6 @@ const ItemContainer = styled.div`
 
   .link {
     text-decoration: none;
-    active: none;
-    visited: none;
-    focus: none;
   }
 `;
 
@@ -165,8 +162,7 @@ const Noticeboard = () => {
     <>
       <Header />
 
-      <Dropdown />
-      <Button onClick={searchHandler}>조회하기</Button>
+      <Dropdown searchHandler={searchHandler} />
       <>
         <NoticeContainer>
           {data

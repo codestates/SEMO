@@ -8,6 +8,7 @@ export const useStore = create((set) => ({
   school: "",
   grade: "",
   subject: "",
+  iswrite: false,
 
   openLoginModal: () =>
     set({ loginmodal: true }, console.log("open login modal!")),
