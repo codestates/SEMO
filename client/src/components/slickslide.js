@@ -15,6 +15,7 @@ const Container = styled.div`
 const StyledSlider = styled(Slider)`
   .slick-slide div {
     outline: none;
+  
   }
 `;
 
@@ -27,12 +28,20 @@ const ImageContainer = styled.div`
   border-top: 2px solid #ced4da;
   justify-content: center;
   align-items: center;
+  margin-left: 0.5rem;
 
+  @media screen and (min-width: 400px) and (max-width: 1000px) {
+    
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  
   @media screen and (min-width: 1001px) {
     padding-top: 2rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid #ced4da;
     border-top: 2px solid #ced4da;
+    padding-left: 1rem;
   }
 `;
 
@@ -42,12 +51,13 @@ const ProfilePhoto = styled.img`
   height: 30px;
   align-items: center;
   justify-content: center;
-  padding-right: 1rem;
+  padding-right: 0.5rem;
+  /* margin-left: 3rem; */
   /* border-radius: 100%;   */
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     padding-top: 5px;
     padding-bottom: 5px;
   }
@@ -69,24 +79,48 @@ const Name = styled.div`
   justify-content: center;
   font-size: 0.5rem;
   font-weight: bold;
+  width: 75px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
     font-size: 1rem;
+    width: 110px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   @media screen and (min-width: 1001px) {
     font-size: 2rem;
+    width: 220px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 `;
 const Title = styled.div`
   font-size: 0.5rem;
+  width: 75px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
-    font-size: 0.5rem;
+    font-size: 1rem;
+    width: 110px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   @media screen and (min-width: 1001px) {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 `;
 // const DefaultProfileImg = require('../images/githublogo.png');
@@ -111,7 +145,7 @@ function SimpleSlider() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 2500,
     centerMode: false,
   };
@@ -163,10 +197,10 @@ function SimpleSlider() {
                     alt="1"
                   />
                   <AnswerInfo>
-                    <Name>{item.nickname.slice(0, 9)}</Name>
+                    <Name>{item.nickname}</Name>
                     {islogin === false ? (
                       <Title className="openlogin" onClick={openLoginModal}>
-                        {item.title.slice(0, 9)}
+                        {item.title}
                       </Title>
                     ) : (
                       <Link to="/viewquestion">
@@ -175,7 +209,7 @@ function SimpleSlider() {
                             click(item);
                           }}
                         >
-                          {item.title.slice(0, 9)}
+                          {item.title}
                         </Title>
                       </Link>
                     )}
