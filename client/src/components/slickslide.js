@@ -30,8 +30,8 @@ const ImageContainer = styled.div`
   margin-left: 0.5rem;
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   @media screen and (min-width: 1001px) {
@@ -78,7 +78,7 @@ const Name = styled.div`
   overflow: hidden;
   white-space: nowrap;
 
-  @media screen and (min-width: 400px) and (max-width: 1000px) {
+  @media screen and (min-width: 500px) and (max-width: 1000px) {
     font-size: 1rem;
     width: 110px;
     text-overflow: ellipsis;
@@ -102,7 +102,7 @@ const Title = styled.div`
   overflow: hidden;
   white-space: nowrap;
 
-  @media screen and (min-width: 400px) and (max-width: 1000px) {
+  @media screen and (min-width: 500px) and (max-width: 1000px) {
     font-size: 1rem;
     width: 110px;
     text-overflow: ellipsis;
