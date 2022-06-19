@@ -89,9 +89,6 @@ const TextContainer = styled.div`
 `;
 
 const Main = () => {
-  const ThemeMode = useTheme();
-  const CurrentMode = ThemeMode[0] === "light" ? "🌝" : "🌚";
-
   const { loginmodal, signupmodal, islogin, openLoginModal } = useStore();
   const { isSearch, setisSearchTrue, setisSearchFalse } = useStoreTemp();
   return (

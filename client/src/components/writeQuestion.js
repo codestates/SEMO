@@ -159,7 +159,7 @@ const WriteQuestionComponenet = () => {
   const testFn = async () => {
     let formData = new FormData();
     formData.append("file", fileImg);
-    const axios1 = await axios.post("http://localhost:3500/question", {
+    const axios1 = await axios.post("http://52.78.130.4:3500/question", {
       nickname,
       user_id,
       title,
@@ -169,7 +169,10 @@ const WriteQuestionComponenet = () => {
       subject,
     });
 
-    const axios2 = await axios.post("http://localhost:3500/uploads", formData);
+    const axios2 = await axios.post(
+      "http://52.78.130.4:3500/uploads",
+      formData
+    );
     if (axios2.data.success) {
       selectSchool("");
       selectGrade("");
@@ -191,7 +194,7 @@ const WriteQuestionComponenet = () => {
         <TitleContainer>
           <InputTitleBox
             placeholder="제목"
-            value={title}
+            value={undefined}
             onChange={titleHandler}
           />
         </TitleContainer>
@@ -213,7 +216,7 @@ const WriteQuestionComponenet = () => {
         <WritingContainer>
           <InputTextBox
             placeholder="내용을 입력하세요"
-            value={text}
+            value={undefined}
             onChange={textHandler}
           ></InputTextBox>
         </WritingContainer>
