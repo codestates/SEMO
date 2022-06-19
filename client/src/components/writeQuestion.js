@@ -163,7 +163,7 @@ const WriteQuestionComponenet = () => {
 
     if (fileImg !== "") {
       const axios2 = await axios.post(
-        "http://localhost:3500/uploads3",
+        "http://52.78.130.4:3500/uploads3",
         formData
       );
       if (axios2.data) {
@@ -174,7 +174,7 @@ const WriteQuestionComponenet = () => {
       } else {
         alert("no");
       }
-      return axios.post("http://localhost:3500/question", {
+      return axios.post("http://52.78.130.4:3500/question", {
         nickname: nickname,
         user_id,
         title,
@@ -185,7 +185,7 @@ const WriteQuestionComponenet = () => {
         image: axios2.data,
       });
     } else {
-      axios.post("http://localhost:3500/question", {
+      axios.post("http://52.78.130.4:3500/question", {
         nickname: nickname,
         user_id,
         title,

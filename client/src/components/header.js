@@ -142,7 +142,11 @@ const Header = () => {
           </Link>
           <RightContainer>
             <MyprofileContainer>
-              <MyProFileImg src={`${profile2}`} onError={errHandler} alt="1" />
+              <MyProFileImg
+                src={profile2 === null ? "img/githublogo.png" : profile2}
+                onError={errHandler}
+                alt="1"
+              />
               <UserNickName>{nickname}</UserNickName>
             </MyprofileContainer>
             <Btndiv>

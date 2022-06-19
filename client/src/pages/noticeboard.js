@@ -116,7 +116,7 @@ const Noticeboard = () => {
     setItems();
     setPreItems();
     setTimeout(() => {
-      axios.get("http://localhost:3500/question/all").then((res) => {
+      axios.get("http://52.78.130.4:3500/question/all").then((res) => {
         setData([...res.data.slice(preItems, items), ...data]);
         // console.log("이건 함수가 실행될때 한번만 작동해야하는거야");
       });
@@ -134,7 +134,7 @@ const Noticeboard = () => {
   const searchHandler = (e) => {
     if (school !== "" && grade !== "" && subject !== "") {
       axios
-        .post("http://localhost:3500/question/filter", {
+        .post("http://52.78.130.4:3500/question/filter", {
           school,
           grade,
           subject,
@@ -169,7 +169,7 @@ const Noticeboard = () => {
               return (
                 <ItemContainer key={el.id} ref={setTarget}>
                   <ImgContainer
-                    src={el.image}
+                    src={el.image === null ? "img/githublogo.png" : el.image}
                     onError={(i) => (i.target.src = "img/githublogo.png")}
                     alt=""
                   />
