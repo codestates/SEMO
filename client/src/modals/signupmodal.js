@@ -148,7 +148,6 @@ const Signupmodal = () => {
             password,
           })
           .then((res) => {
-            console.log(res.data);
             if (res.data === "okay") {
               alert("회원가입에 성공했습니다. 어서오세요!");
             } else {

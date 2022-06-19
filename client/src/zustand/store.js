@@ -9,14 +9,12 @@ export const useStore = create((set) => ({
   grade: "",
   subject: "",
 
-  openLoginModal: () =>
-    set({ loginmodal: true }, console.log("open login modal!")),
-  closeLoginModal: () =>
-    set({ loginmodal: false }, console.log("close login modal")),
+  openLoginModal: () => set({ loginmodal: true }),
+  closeLoginModal: () => set({ loginmodal: false }),
   openSignupModal: () => set({ signupmodal: true }),
   closeSignupModal: () => set({ signupmodal: false }),
   changeModal: () => set({ loginmodal: false, signupmodal: true }),
-  setLogin: () => set({ islogin: true }, console.log("success login!")),
+  setLogin: () => set({ islogin: true }),
   setLogOut: () => set({ islogin: false }),
   selectSchool: (a) => set((state) => ({ school: (state.school = a) })),
   selectGrade: (a) => set((state) => ({ grade: (state.grade = a) })),
@@ -69,8 +67,7 @@ export const useStoreTemp = create((set) => ({
     set((state) => ({ editContentStatus: (state.editContentStatus = a) })),
   setClickTitle: (a) =>
     set((state) => ({ clickTitle: (state.clickTitle = a) })),
-  setQlists: (a) =>
-    set((state) => ({ qLists: (state.qLists = a) }), console.log(a)),
+  setQlists: (a) => set((state) => ({ qLists: (state.qLists = a) })),
 
   setSignOutModal: () => set({ signOutModal: true }),
   closeSignupModal: () => set({ signOutModal: false }),
@@ -80,18 +77,12 @@ export const useStoreTemp = create((set) => ({
     set((state) => ({ isEditnickname: (state.isEditnickname = true) })),
   cancelEditNicknameBtn: () =>
     set((state) => ({ isEditnickname: !state.isEditnickname })),
-  setNickname: (a) =>
-    set((state) => ({ nickname: (state.nickname = a) }), console.log(a)),
-  setInputPw: (a) =>
-    set((state) => ({ inputPw: (state.inputPw = a) }), console.log(a)),
+  setNickname: (a) => set((state) => ({ nickname: (state.nickname = a) })),
+  setInputPw: (a) => set((state) => ({ inputPw: (state.inputPw = a) })),
   setConfrimInputPw: (a) =>
-    set(
-      (state) => ({ confirmInputPw: (state.confirmInputPw = a) }),
-      console.log(a)
-    ),
-  setTitle: (a) =>
-    set((state) => ({ title: (state.title = a) }), console.log(a)),
-  setText: (a) => set((state) => ({ text: (state.text = a) }), console.log(a)),
+    set((state) => ({ confirmInputPw: (state.confirmInputPw = a) })),
+  setTitle: (a) => set((state) => ({ title: (state.title = a) })),
+  setText: (a) => set((state) => ({ text: (state.text = a) })),
   setTestId: (a) => set((state) => ({ testId: (state.testId = a) })),
   setTestPw: (a) => set((state) => ({ testPw: (state.testPw = a) })),
 
@@ -100,8 +91,7 @@ export const useStoreTemp = create((set) => ({
   setClickMypage: () => set((state) => ({ clickMyPage: !state.clickMyPage })),
   setOffMypage: () =>
     set((state) => ({ clickMyPage: (state.clickMyPage = false) })),
-  setUserpassword: (a) =>
-    set((state) => ({ nickname: (state.password = a) }), console.log(a)),
+  setUserpassword: (a) => set((state) => ({ nickname: (state.password = a) })),
   setWithdraw: (a) =>
     set((state) => ({
       testPw: (state.testPw = ""),

@@ -12,7 +12,6 @@ module.exports = async (req, res) => {
     if (!data) {
       return res.status(409).send({ message: "error" });
     } else {
-      console.log("@@@@@@@", data);
       return res.status(201).json(data);
     }
   } catch (err) {

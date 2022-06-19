@@ -135,7 +135,7 @@ const Header = () => {
             to="/"
             onClick={() => {
               setisSearchTrue();
-              console.log(isSearch);
+              // console.log(isSearch);
             }}
           >
             <Logoimage onClick={setOffMypage} />

@@ -278,26 +278,26 @@ const QuestionOne = () => {
   //---------답변 등록하기 코드
   const replyHandler = (e) => {
     setReply(e.target.value);
-    console.log(reply);
   };
 
   const submitAnswer = async () => {
     let formData = new FormData();
     formData.append("file", fileImg);
 
-    const axios1 = await axios.post("http://localhost:3500/answer", {
-      content: reply,
-      title: clickTitle,
-      user_id: user_id,
-      nickname,
-    });
-
-    const axios2 = await axios.post("http://localhost:3500/uploads", formData);
+    const axios2 = await axios.post("http://localhost:3500/uploads3", formData);
     if (axios2.data.success) {
       alert("okay");
     } else {
       alert("no");
     }
+
+    const axios1 = await axios.post("http://localhost:3500/answer", {
+      content: reply,
+      title: clickTitle,
+      user_id: user_id,
+      nickname,
+      image: axios2.data,
+    });
   };
 
   const [fileImg, setfileImg] = useState("");
@@ -320,7 +320,7 @@ const QuestionOne = () => {
           <QueWriter>{question.nickname}</QueWriter>
           <ImgContentBox>
             <Profileimg
-              src={`img/${clickCreatedAt.slice(0, 19)}_.jpg`}
+              src={question.image}
               onError={(i) => (i.target.src = "img/githublogo.png")}
               alt="1"
             />
@@ -345,7 +345,7 @@ const QuestionOne = () => {
                     <div>
                       {" "}
                       <Profileimg
-                        src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
+                        src={item.image}
                         onError={(i) => (i.target.src = "img/githublogo.png")}
                         alt="1"
                       />
