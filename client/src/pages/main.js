@@ -126,6 +126,10 @@ const Main = () => {
           <ImgContainer src={image1} alt="" />
         </ItemasContainer1>
 
+        {/* <div style={{ width: "100%" }}>
+          <SimpleSlider />
+        </div> */}
+
         <ItemasContainer1>
           <TextContainer>
             <p className="h1">문제를 풀어볼까요?</p>
