@@ -143,6 +143,8 @@ function SimpleSlider() {
     setClickCreatedAt(e.createdAt);
   };
 
+
+
   return (
     <Container>
       <Link to="/noticeboard">
@@ -156,7 +158,7 @@ function SimpleSlider() {
               <div key={item.id}>
                 <ImageContainer>
                   <ProfilePhoto
-                    src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
+                    src={item.image === null ? "img/githubprofile.png" : item.image}
                     onError={(i) => (i.target.src = "img/githubprofile.png")}
                     alt="1"
                   />
