@@ -160,9 +160,9 @@ const Main = () => {
           <ImgContainer src={image2} alt="" />
         </ItemasContainer1>
 
-        {/* <div style={{ width: "100%" }}>
+        <div style={{ width: "100%" }}>
           <SimpleSlider />
-        </div> */}
+        </div>
         {/* 더미 데이터 들어가야하는곳  */}
 
         <ItemasContainer1>
