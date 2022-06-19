@@ -329,20 +329,37 @@ const ViewMyAnswer = () => {
     let formData = new FormData();
     formData.append("file", fileImg);
 
-    const axios2 = await axios.post("http://localhost:3500/uploads3", formData);
-    if (axios2.data) {
-      alert("okay");
+    if (fileImg !== "") {
+      const axios2 = await axios.post(
+        "http://localhost:3500/uploads3",
+        formData
+      );
+      if (axios2.data) {
+        alert("okay");
+      } else {
+        alert("no");
+      }
+      return axios
+        .post("http://localhost:3500/answer", {
+          content: reply,
+          title: clickTitle,
+          user_id: user_id,
+          nickname,
+          image: axios2.data,
+        })
+        .then(() => {
+          setReply("");
+        });
     } else {
-      alert("no");
+      const axios1 = await axios.post("http://localhost:3500/answer", {
+        content: reply,
+        title: clickTitle,
+        user_id: user_id,
+        nickname,
+      });
     }
-
-    const axios1 = await axios.post("http://localhost:3500/answer", {
-      content: reply,
-      title: clickTitle,
-      user_id: user_id,
-      nickname,
-      image: axios2.data,
-    });
+    alert("담변이 등록 되었습니다.");
+    setReply("");
   };
 
   const getQuestion = async () => {
@@ -363,7 +380,7 @@ const ViewMyAnswer = () => {
     thisQuestion.then((data) => {
       setQustion(data);
     });
-  }, []);
+  }, [question]);
   //++++++++++++++++++++++++++++위에 question 에 달린 내 대답 보기
 
   const getAnswer = async () => {
@@ -382,7 +399,7 @@ const ViewMyAnswer = () => {
     thisGetAnswer.then((data) => {
       setAnswer(data);
     });
-  }, []);
+  }, [answer]);
 
   const editBtnHandler = (e, b) => {
     isClickEditBtn(!clickEditBtn);
@@ -405,6 +422,8 @@ const ViewMyAnswer = () => {
     });
     alert("수정되었습니다.");
     isClickEditBtn(!clickEditBtn);
+    setEditAnswerId("");
+    setClickContent("");
   };
   const deleteHandler = () => {
     // console.log("삭제버튼 클릭");
