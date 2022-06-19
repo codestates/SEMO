@@ -32,22 +32,20 @@ const ModalView = styled.div.attrs((props) => ({
   border: 1px solid #7a57d1;
   box-sizing: border-box;
   width: 234px;
-  height: 275px;
+  height: 320px;
 `;
 
 const Closebutton = styled.div`
   /* border: 1px solid red; */
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
-  align-items: flex-end;
   color: white;
   font-size: 20px;
-  width: 234px;
+  width: 232px;
 
   > div {
     cursor: pointer;
-    padding: 10px 15px 0 0;
+    padding: 0 15px 0 0;
   }
 `;
 
@@ -75,7 +73,6 @@ const Signupform = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0 0 0 25px;
-  gap: 2px;
 
   > div {
     color: white;
@@ -105,7 +102,6 @@ const Inputbox = styled.input`
 const Signupbox1 = styled.div`
   /* border: 1px solid black; */
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 5px;
 
@@ -115,9 +111,7 @@ const Signupbox1 = styled.div`
   }
 `;
 
-const Text = styled.div`
-  /* border: 1px solid green; */
-`;
+const Text = styled.div``;
 
 const Signupbutton = styled.div`
   padding: 7px 0 0 60px;

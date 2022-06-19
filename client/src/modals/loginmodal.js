@@ -129,6 +129,7 @@ const Loginmodal = () => {
     profile2,
     setUserProfile,
   } = useUserinfo();
+
   const TestIdHandler = (e) => {
     setTestId(e.target.value);
   };
@@ -167,7 +168,6 @@ const Loginmodal = () => {
             setUserProfile(res.data.data.profile);
             setLogin();
             closeLoginModal();
-            console.log(token, testId, testPw);
           });
       });
     navigate("/");
@@ -188,13 +188,13 @@ const Loginmodal = () => {
           <Loginform>
             <div className="idtext">
               아이디
-              <Inputbox value={testId} onChange={TestIdHandler} />
+              <Inputbox value={undefined} onChange={TestIdHandler} />
             </div>
             <div className="passwordtext">
               비밀번호
               <Inputbox
+                value={undefined}
                 type="password"
-                value={testPw}
                 onChange={TestPwHandler}
               />
             </div>

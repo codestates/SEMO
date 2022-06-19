@@ -191,7 +191,7 @@ const WriteQuestionComponenet = () => {
         <TitleContainer>
           <InputTitleBox
             placeholder="제목"
-            value={title}
+            value={undefined}
             onChange={titleHandler}
           />
         </TitleContainer>
@@ -213,7 +213,7 @@ const WriteQuestionComponenet = () => {
         <WritingContainer>
           <InputTextBox
             placeholder="내용을 입력하세요"
-            value={text}
+            value={undefined}
             onChange={textHandler}
           ></InputTextBox>
         </WritingContainer>

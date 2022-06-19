@@ -306,8 +306,8 @@ const Myprofile = () => {
         <Container2>
           <BtnContainer>
             <InputBox
-              value={nickname}
               placeholder="닉네임을 입력하세요"
+              value={undefined}
               onChange={nickNameHandler}
             />
             <EditBtnContainer>
@@ -326,14 +326,14 @@ const Myprofile = () => {
           <BtnContainer>
             <InputBox
               placeholder="새 비밀번호"
-              value={inputPw}
               type="password"
+              value={undefined}
               onChange={inputPwHandler}
             />
             <InputBox
               placeholder="새 비밀번호 확인"
-              value={confirmInputPw}
               type="password"
+              value={undefined}
               onChange={confirmPwHandler}
             />
             <EditBtnContainer>
