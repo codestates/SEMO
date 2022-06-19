@@ -145,7 +145,7 @@ function SimpleSlider() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 2500,
     centerMode: false,
   };
