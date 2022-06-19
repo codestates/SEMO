@@ -456,7 +456,7 @@ const ViewMyAnswer = () => {
             <div>
               {" "}
               <Profileimg
-                src={question.image ? question.image : null}
+                src={question.image ? question.image : ""}
                 onError={(i) => (i.target.src = "img/githublogo.png")}
                 alt="1"
               />
