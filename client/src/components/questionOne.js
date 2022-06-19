@@ -274,7 +274,7 @@ const QuestionOne = () => {
     thisGetAnswer.then((data) => {
       setAnswer(data);
     });
-  }, []);
+  }, [answer]);
   //---------답변 등록하기 코드
   const replyHandler = (e) => {
     setReply(e.target.value);
@@ -294,13 +294,17 @@ const QuestionOne = () => {
       } else {
         alert("no");
       }
-      return axios.post("http://localhost:3500/answer", {
-        content: reply,
-        title: clickTitle,
-        user_id: user_id,
-        nickname,
-        image: axios2.data,
-      });
+      return axios
+        .post("http://localhost:3500/answer", {
+          content: reply,
+          title: clickTitle,
+          user_id: user_id,
+          nickname,
+          image: axios2.data,
+        })
+        .then((res) => {
+          setReply("");
+        });
     } else {
       axios.post("http://localhost:3500/answer", {
         content: reply,
@@ -309,6 +313,7 @@ const QuestionOne = () => {
         nickname,
         image: "1",
       });
+      setReply("");
     }
   };
 
