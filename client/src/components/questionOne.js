@@ -346,8 +346,8 @@ const QuestionOne = () => {
       <RepContainer>
         {answer.map((item) => {
           return (
-            <div>
-              <QContainer key={item.id} item={item}>
+            <div key={item.id} item={item}>
+              <QContainer>
                 <HeadWrapper>
                   <Writer>
                     <strong>작성자 : {item.nickname}</strong>
