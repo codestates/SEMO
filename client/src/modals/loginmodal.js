@@ -138,7 +138,7 @@ const Loginmodal = () => {
   };
   const testFn2 = () => {
     axios
-      .post("http://localhost:3500/sign/in", {
+      .post("http://52.78.130.4:3500/sign/in", {
         user_id: testId,
         password: testPw,
       })
@@ -152,7 +152,7 @@ const Loginmodal = () => {
         }
         return axios
           .get(
-            "http://localhost:3500/sign/auth",
+            "http://52.78.130.4:3500/sign/auth",
             {
               headers: {
                 authorization: `${access}`,

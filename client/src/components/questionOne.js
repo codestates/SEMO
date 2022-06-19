@@ -244,7 +244,7 @@ const QuestionOne = () => {
   const [answer, setAnswer] = useState([]);
   const getQuestionData = async () => {
     try {
-      const res = await axios.post("http://localhost:3500/question", {
+      const res = await axios.post("http://52.78.130.4:3500/question", {
         nickname,
         title: clickTitle,
       });
@@ -262,7 +262,7 @@ const QuestionOne = () => {
   //00000000000 answer 목록 받아오기
   const getAnswer = async () => {
     try {
-      const res = await axios.post("http://localhost:3500/answer/everyone", {
+      const res = await axios.post("http://52.78.130.4:3500/answer/everyone", {
         title: clickTitle,
       });
 
@@ -284,20 +284,32 @@ const QuestionOne = () => {
     let formData = new FormData();
     formData.append("file", fileImg);
 
-    const axios2 = await axios.post("http://localhost:3500/uploads3", formData);
-    if (axios2.data.success) {
-      alert("okay");
+    if (fileImg !== "") {
+      const axios2 = await axios.post(
+        "http://52.78.130.4:3500/uploads3",
+        formData
+      );
+      if (axios2.data.success) {
+        alert("okay");
+      } else {
+        alert("no");
+      }
+      return axios.post("http://52.78.130.4:3500/answer", {
+        content: reply,
+        title: clickTitle,
+        user_id: user_id,
+        nickname,
+        image: axios2.data,
+      });
     } else {
-      alert("no");
+      axios.post("http://52.78.130.4:3500/answer", {
+        content: reply,
+        title: clickTitle,
+        user_id: user_id,
+        nickname,
+        image: "1",
+      });
     }
-
-    const axios1 = await axios.post("http://localhost:3500/answer", {
-      content: reply,
-      title: clickTitle,
-      user_id: user_id,
-      nickname,
-      image: axios2.data,
-    });
   };
 
   const [fileImg, setfileImg] = useState("");
@@ -320,7 +332,9 @@ const QuestionOne = () => {
           <QueWriter>{question.nickname}</QueWriter>
           <ImgContentBox>
             <Profileimg
-              src={question.image}
+              src={
+                question.image === null ? "img/githublogo.png" : question.image
+              }
               onError={(i) => (i.target.src = "img/githublogo.png")}
               alt="1"
             />
@@ -332,8 +346,8 @@ const QuestionOne = () => {
       <RepContainer>
         {answer.map((item) => {
           return (
-            <div>
-              <QContainer key={item.id} item={item}>
+            <div key={item.id} item={item}>
+              <QContainer>
                 <HeadWrapper>
                   <Writer>
                     <strong>작성자 : {item.nickname}</strong>
@@ -345,8 +359,10 @@ const QuestionOne = () => {
                     <div>
                       {" "}
                       <Profileimg
-                        src={item.image}
-                        onError={(i) => (i.target.src = "img/githublogo.png")}
+                        src={`${item.image ? item.image : null}`}
+                        onError={(event) =>
+                          (event.target.style.display = "none")
+                        }
                         alt="1"
                       />
                     </div>
