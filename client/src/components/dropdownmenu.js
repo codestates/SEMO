@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useStore } from "../zustand/store";
+import { useStore, useStoreTemp } from "../zustand/store";
 import Button from "./button";
 
 export const DropdownContainer = styled.div`
@@ -20,6 +20,8 @@ export const DropdownContainer = styled.div`
   @media screen and (min-width: 1001px) {
     gap: 80px;
     padding: 25px 0;
+  }
+  .search {
   }
 `;
 
@@ -55,13 +57,13 @@ const Selecttag = styled.select`
 const Dropdown = (props) => {
   const {
     school,
-    grade,
+
     selectSchool,
-    subject,
+
     selectGrade,
     selectsubject,
-    iswrite,
   } = useStore();
+  const { isSearch } = useStoreTemp();
 
   const selectSchoolHandler = (e) => {
     selectSchool(e.target.value);
@@ -141,8 +143,10 @@ const Dropdown = (props) => {
         <option value="artsandsports">예체능</option>
       </Selecttag>
 
-      {iswrite === false ? (
-        <Button onClick={props.searchHandler}>조회하기</Button>
+      {isSearch === true ? (
+        <Button className="search" onClick={props.searchHandler}>
+          조회하기
+        </Button>
       ) : (
         ""
       )}

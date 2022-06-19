@@ -9,7 +9,7 @@ import Footer from "../components/footer";
 import LoginModalComponent from "../modals/loginmodal";
 import SignupModalComponent from "../modals/signupmodal";
 import SimpleSlider from "../components/slickslide";
-import { useStore } from "../zustand/store";
+import { useStore, useStoreTemp } from "../zustand/store";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/themeProvider";
 import AppLayout from "../components/AppLayout";
@@ -90,6 +90,7 @@ const TextContainer = styled.div`
 
 const Main = () => {
   const { loginmodal, signupmodal, islogin, openLoginModal } = useStore();
+  const { isSearch, setisSearchTrue, setisSearchFalse } = useStoreTemp();
   return (
     <>
       <Header />
@@ -100,12 +101,25 @@ const Main = () => {
             <p className="h1">문제를 못풀겠나요?</p>
             <p className="h2">지금 당장 질문하세요!</p>
             {islogin === false ? (
-              <Button className="btn1" onClick={openLoginModal}>
+              <Button
+                className="btn1"
+                onClick={() => {
+                  setisSearchFalse();
+                  openLoginModal();
+                }}
+              >
                 질문하러 가기
               </Button>
             ) : (
               <Link to="/writequestion">
-                <Button className="btn1">질문하러 가기</Button>
+                <Button
+                  className="btn1"
+                  onClick={() => {
+                    setisSearchFalse();
+                  }}
+                >
+                  질문하러 가기
+                </Button>
               </Link>
             )}
           </TextContainer>
@@ -117,21 +131,34 @@ const Main = () => {
             <p className="h1">문제를 풀어볼까요?</p>
             <p className="h2">지금 당장 가시죠!</p>
             {islogin === false ? (
-              <Button className="btn1" onClick={openLoginModal}>
+              <Button
+                className="btn1"
+                onClick={() => {
+                  setisSearchTrue();
+                  openLoginModal();
+                }}
+              >
                 풀이하러 가기
               </Button>
             ) : (
               <Link to="/noticeboard">
-                <Button className="btn1">풀이하러 가기</Button>
+                <Button
+                  className="btn1"
+                  onClick={() => {
+                    setisSearchTrue();
+                  }}
+                >
+                  풀이하러 가기
+                </Button>
               </Link>
             )}
           </TextContainer>
           <ImgContainer src={image2} alt="" />
         </ItemasContainer1>
 
-        <div style={{ width: "100%" }}>
+        {/* <div style={{ width: "100%" }}>
           <SimpleSlider />
-        </div>
+        </div> */}
         {/* 더미 데이터 들어가야하는곳  */}
 
         <ItemasContainer1>

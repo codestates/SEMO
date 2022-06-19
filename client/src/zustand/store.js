@@ -8,7 +8,6 @@ export const useStore = create((set) => ({
   school: "",
   grade: "",
   subject: "",
-  iswrite: false,
 
   openLoginModal: () =>
     set({ loginmodal: true }, console.log("open login modal!")),
@@ -49,6 +48,9 @@ export const useStoreTemp = create((set) => ({
   filterSchool: "",
   filterGrade: "",
   filterSubject: "",
+  isSearch: false,
+  setisSearchFalse: () => set({ isSearch: false }),
+  setisSearchTrue: () => set({ isSearch: true }),
   setFilterSchool: (a) =>
     set((state) => ({ filterSchool: (state.filterSchool = a) })),
   setFilterGrade: (a) =>

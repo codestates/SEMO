@@ -124,12 +124,9 @@ const AllMyAnswer = () => {
   const { user_id, nickname } = useUserinfo();
   const getPosts = async () => {
     try {
-      const response = await axios.post(
-        "http://52.78.130.4:3500/myanswer/all",
-        {
-          user_id,
-        }
-      );
+      const response = await axios.post("http://localhost:3500/myanswer/all", {
+        user_id,
+      });
       return response.data;
     } catch (error) {}
   };

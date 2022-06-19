@@ -156,31 +156,51 @@ const WriteQuestionComponenet = () => {
 
     setfileImg(file);
   };
+
   const testFn = async () => {
     let formData = new FormData();
     formData.append("file", fileImg);
-    const axios1 = await axios.post("http://52.78.130.4:3500/question", {
-      nickname,
-      user_id,
-      title,
-      content: text,
-      school,
-      grade,
-      subject,
-    });
 
-    const axios2 = await axios.post(
-      "http://52.78.130.4:3500/uploads",
-      formData
-    );
-    if (axios2.data.success) {
-      selectSchool("");
-      selectGrade("");
-      selectsubject("");
-      alert("okay");
+    if (fileImg !== "") {
+      const axios2 = await axios.post(
+        "http://localhost:3500/uploads3",
+        formData
+      );
+      if (axios2.data) {
+        selectSchool("");
+        selectGrade("");
+        selectsubject("");
+        alert("okay");
+        console.log("axios2.data", axios2.data);
+      } else {
+        alert("no");
+      }
+      console.log("axios2 실행되냐? ");
+      return axios.post("http://localhost:3500/question", {
+        nickname: nickname,
+        user_id,
+        title,
+        content: text,
+        school,
+        grade,
+        subject,
+        image: axios2.data,
+      });
     } else {
-      alert("no");
+      axios.post("http://localhost:3500/question", {
+        nickname: nickname,
+        user_id,
+        title,
+        content: text,
+        school,
+        grade,
+        subject,
+      });
+      console.log("없는경우 실행되냐? ");
     }
+
+    //사진 없이 글 올리는 경우  -> image"" 공백이나 false? 이런거 넣게 하기 ? " or 그냥 안넣어도 되는지?
+    // 사진 있게 올리는 경우  ==> axops2 를하고, swerver 에서 오는 응답 req 를 넣기.
   };
 
   const deleteFileImg = () => {
@@ -198,7 +218,13 @@ const WriteQuestionComponenet = () => {
             onChange={titleHandler}
           />
         </TitleContainer>
-
+        <button
+          onClick={() => {
+            console.log("asdasd");
+          }}
+        >
+          버튼버튼버튼버튼버튼버튼버튼버튼버튼
+        </button>
         <ImageTest>
           <div>
             {fileImg && <img alt="exam" src={fileImg} />}

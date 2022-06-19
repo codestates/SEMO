@@ -123,7 +123,7 @@ const Allquestions = () => {
   const getPosts = async () => {
     try {
       const response = await axios.post(
-        "http://52.78.130.4:3500/myquestion/all",
+        "http://localhost:3500/myquestion/all",
         { user_id }
       );
 
