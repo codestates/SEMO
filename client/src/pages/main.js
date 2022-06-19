@@ -126,10 +126,6 @@ const Main = () => {
           <ImgContainer src={image1} alt="" />
         </ItemasContainer1>
 
-        {/* <div style={{ width: "100%" }}>
-          <SimpleSlider />
-        </div> */}
-
         <ItemasContainer1>
           <TextContainer>
             <p className="h1">문제를 풀어볼까요?</p>
@@ -163,7 +159,6 @@ const Main = () => {
         <div style={{ width: "100%" }}>
           <SimpleSlider />
         </div>
-        {/* 더미 데이터 들어가야하는곳  */}
 
         <ItemasContainer1>
           <ImgContainer src={image3} alt="" />
