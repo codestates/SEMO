@@ -123,11 +123,3 @@ export const useUserinfo = create((set) => ({
   setUserInfoSignOutClear: () =>
     set({ user_id: "", password: "", nickname: "" }),
 }));
-
-export const useScroll = create((set) => ({
-  preItems: -14,
-  items: -8,
-
-  setPreItems: () => set((state) => ({ preItems: state.items - 6 })),
-  setItems: () => set((state) => ({ items: state.preItems })),
-}));

@@ -142,7 +142,7 @@ const Signupmodal = () => {
         alert("비밀번호가 일치하지 않습니다.");
       } else {
         axios
-          .post("http://52.78.130.4:3500/sign/up", {
+          .post("http://localhost:3500/sign/up", {
             user_id,
             nickname,
             password,
@@ -163,7 +163,7 @@ const Signupmodal = () => {
   const checkUserId = () => {
     if (user_id) {
       axios
-        .post("http://52.78.130.4:3500/sign/idcheck", {
+        .post("http://localhost:3500/sign/idcheck", {
           user_id,
         })
         .then((res) => {
@@ -179,7 +179,7 @@ const Signupmodal = () => {
   const checkUserNickname = () => {
     if (nickname) {
       axios
-        .post("http://52.78.130.4:3500/sign/nicknamecheck", {
+        .post("http://localhost:3500/sign/nicknamecheck", {
           nickname,
         })
         .then((res) => {

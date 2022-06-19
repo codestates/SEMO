@@ -24,4 +24,6 @@ module.exports = {
   answereveryone: require("./options/answereveryone"),
   qfora: require("./options/qfora"),
   filter: require("./options/filter"),
+  infinity: require("./options/infinity"),
+  addinfinity: require("./options/addinfinity"),
 };

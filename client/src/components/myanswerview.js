@@ -329,17 +329,14 @@ const ViewMyAnswer = () => {
     let formData = new FormData();
     formData.append("file", fileImg);
 
-    const axios2 = await axios.post(
-      "http://52.78.130.4:3500/uploads3",
-      formData
-    );
+    const axios2 = await axios.post("http://localhost:3500/uploads3", formData);
     if (axios2.data) {
       alert("okay");
     } else {
       alert("no");
     }
 
-    const axios1 = await axios.post("http://52.78.130.4:3500/answer", {
+    const axios1 = await axios.post("http://localhost:3500/answer", {
       content: reply,
       title: clickTitle,
       user_id: user_id,
@@ -350,7 +347,7 @@ const ViewMyAnswer = () => {
 
   const getQuestion = async () => {
     try {
-      const response = await axios.post("http://52.78.130.4:3500/question", {
+      const response = await axios.post("http://localhost:3500/question", {
         title: clickTitle,
         user_id: user_id,
         nickname,
@@ -371,7 +368,7 @@ const ViewMyAnswer = () => {
 
   const getAnswer = async () => {
     try {
-      const res = await axios.post("http://52.78.130.4:3500/answer/one", {
+      const res = await axios.post("http://localhost:3500/answer/one", {
         title: clickTitle,
         user_id,
       });
@@ -400,7 +397,7 @@ const ViewMyAnswer = () => {
   };
   const submitEditAnswer = () => {
     // console.log("수정하기 버튼 눌림 ");
-    axios.patch("http://52.78.130.4:3500/answer/edit", {
+    axios.patch("http://localhost:3500/answer/edit", {
       content: clickCotent,
       user_id,
       id: editAnswerId,
@@ -414,7 +411,7 @@ const ViewMyAnswer = () => {
   };
   const submitDelete = () => {
     axios
-      .post("http://52.78.130.4:3500/answer/delete", {
+      .post("http://localhost:3500/answer/delete", {
         title: clickTitle,
         user_id,
         id: editAnswerId,

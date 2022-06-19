@@ -4,11 +4,10 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import { useStore, useScroll, useStoreTemp } from "../zustand/store";
-import { getQuestionsData } from "../apis/question";
 import axios from "axios";
 import Loading from "react-loading";
 import { Link } from "react-router-dom";
-import Button from "../components/button";
+
 const NoticeContainer = styled.div`
   /* border: 3px solid green; */
   max-width: 1000px;
@@ -73,7 +72,7 @@ const Loadingbox = styled.div`
 `;
 
 const Noticeboard = () => {
-  const { items, preItems, setPreItems, setItems } = useScroll();
+  const [id, setId] = useState(1);
   const [data, setData] = useState([]); // 뿌려줘야할 데이터 누적 상태
   const [loading, setLoading] = useState(false); // 로딩 유무
   const [target, setTarget] = useState(null); // intersecting 이 일어나면 useEffect훅을 불러오기위한 state
@@ -84,10 +83,32 @@ const Noticeboard = () => {
     const tempdata = async () => {
       const temp = await getQuestionsData();
       setData(temp);
+      // console.log(temp);
       setLoading(false);
     };
     tempdata();
   }, []);
+
+  const getQuestionsData = async () => {
+    const good = await axios.get("http://localhost:3500/question/infinity");
+    setId(good.data[7].id);
+    return good.data;
+  };
+
+  const getMoreQuestionsData = () => {
+    setLoading(true);
+    console.log(id);
+    setTimeout(() => {
+      axios
+        .post("http://localhost:3500/question/addinfinity", { id: id })
+        .then((res) => {
+          setData([...data, ...res.data]);
+          // console.log("이건 함수가 실행될때 한번만 작동해야하는거야");
+          setId(id - 8);
+        });
+      setLoading(false);
+    }, 700);
+  };
 
   // 타겟에 변화가 있을때마다 실행시켜줄 useEffect에 observer 객체를 선언
   useEffect(() => {
@@ -111,19 +132,6 @@ const Noticeboard = () => {
     return () => observer && observer.disconnect();
   }, [target]);
 
-  const getMoreQuestionsData = () => {
-    setLoading(true);
-    setItems();
-    setPreItems();
-    setTimeout(() => {
-      axios.get("http://52.78.130.4:3500/question/all").then((res) => {
-        setData([...res.data.slice(preItems, items), ...data]);
-        // console.log("이건 함수가 실행될때 한번만 작동해야하는거야");
-      });
-      setLoading(false);
-    }, 700);
-  };
-
   const click = (e) => {
     setClickTitle(e.title);
     setClickCreatedAt(e.createdAt);
@@ -134,7 +142,7 @@ const Noticeboard = () => {
   const searchHandler = (e) => {
     if (school !== "" && grade !== "" && subject !== "") {
       axios
-        .post("http://52.78.130.4:3500/question/filter", {
+        .post("http://localhost:3500/question/filter", {
           school,
           grade,
           subject,
@@ -162,32 +170,30 @@ const Noticeboard = () => {
       <Dropdown searchHandler={searchHandler} />
       <>
         <NoticeContainer>
-          {data
-            .slice(0)
-            .reverse()
-            .map((el) => {
-              return (
-                <ItemContainer key={el.id} ref={setTarget}>
-                  <ImgContainer
-                    src={el.image === null ? "img/githublogo.png" : el.image}
-                    onError={(i) => (i.target.src = "img/githublogo.png")}
-                    alt=""
-                  />
-                  <Link className="link" to="/viewquestion">
-                    <ItemTexContainer
-                      onClick={() => {
-                        click(el);
-                      }}
-                    >
-                      <p className="title">{el.title}</p>
-                      <p className="nickname">{el.nickname}</p>
-                    </ItemTexContainer>
-                  </Link>
-                </ItemContainer>
-              );
-            })}
+          {data.map((el) => {
+            return (
+              <ItemContainer key={el.id} ref={setTarget}>
+                <ImgContainer
+                  src={el.image === null ? "img/githublogo.png" : el.image}
+                  onError={(i) => (i.target.src = "img/githublogo.png")}
+                  alt=""
+                />
+                <Link className="link" to="/viewquestion">
+                  <ItemTexContainer
+                    onClick={() => {
+                      click(el);
+                    }}
+                  >
+                    <p className="title">{el.title}</p>
+                    <p className="nickname">{el.nickname}</p>
+                  </ItemTexContainer>
+                </Link>
+              </ItemContainer>
+            );
+          })}
         </NoticeContainer>
       </>
+
       <Loadingbox>
         {loading ? <Loading type="spokes" color="black" /> : ""}
       </Loadingbox>

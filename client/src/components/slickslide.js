@@ -118,7 +118,7 @@ function SimpleSlider() {
 
   useEffect(() => {
     function getQuestInfo() {
-      axios.get("http://52.78.130.4:3500/question/all", {}).then((res) => {
+      axios.get("http://localhost:3500/question/all", {}).then((res) => {
         const data = res.data;
         const randomIndex = getRandomArr(data); // [5, 1, 2, 4, 6, 0]
         const newQuestions = randomIndex.map((i) => data[i]);
@@ -143,8 +143,6 @@ function SimpleSlider() {
     setClickCreatedAt(e.createdAt);
   };
 
-
-
   return (
     <Container>
       <Link to="/noticeboard">
@@ -158,7 +156,9 @@ function SimpleSlider() {
               <div key={item.id}>
                 <ImageContainer>
                   <ProfilePhoto
-                    src={item.image === null ? "img/githubprofile.png" : item.image}
+                    src={
+                      item.image === null ? "img/githubprofile.png" : item.image
+                    }
                     onError={(i) => (i.target.src = "img/githubprofile.png")}
                     alt="1"
                   />
