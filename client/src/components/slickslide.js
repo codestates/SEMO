@@ -118,7 +118,7 @@ function SimpleSlider() {
 
   useEffect(() => {
     function getQuestInfo() {
-      axios.get("http://localhost:3500/question/all", {}).then((res) => {
+      axios.get("http://52.78.130.4:3500/question/all", {}).then((res) => {
         const data = res.data;
         const randomIndex = getRandomArr(data); // [5, 1, 2, 4, 6, 0]
         const newQuestions = randomIndex.map((i) => data[i]);
