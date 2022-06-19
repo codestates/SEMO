@@ -6,7 +6,7 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
+import { useStore, useStoreTemp } from "../zustand/store";
 
 const Container = styled.div`
   overflow: hidden;
@@ -15,7 +15,6 @@ const Container = styled.div`
 const StyledSlider = styled(Slider)`
   .slick-slide div {
     outline: none;
-  
   }
 `;
 
@@ -31,16 +30,13 @@ const ImageContainer = styled.div`
   margin-left: 0.5rem;
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
-    
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
-  
+
   @media screen and (min-width: 1001px) {
     padding-top: 2rem;
     padding-bottom: 2rem;
-    border-bottom: 2px solid #ced4da;
-    border-top: 2px solid #ced4da;
     padding-left: 1rem;
   }
 `;
@@ -52,8 +48,7 @@ const ProfilePhoto = styled.img`
   align-items: center;
   justify-content: center;
   padding-right: 0.5rem;
-  /* margin-left: 3rem; */
-  /* border-radius: 100%;   */
+  
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
     width: 50px;
@@ -61,12 +56,10 @@ const ProfilePhoto = styled.img`
     padding-top: 5px;
     padding-bottom: 5px;
   }
-  //길이 400이상 1000이하일때
   @media screen and (min-width: 1001px) {
     width: 80px;
     height: 80px;
   }
-  //길이 1001이상일때
 `;
 
 const AnswerInfo = styled.div`
@@ -75,6 +68,7 @@ const AnswerInfo = styled.div`
   align-items: flex-start;
   justify-content: center;
 `;
+
 const Name = styled.div`
   justify-content: center;
   font-size: 0.5rem;
@@ -100,8 +94,9 @@ const Name = styled.div`
     white-space: nowrap;
   }
 `;
+
 const Title = styled.div`
-  font-size: 0.5rem;
+  font-size: 10px;
   width: 75px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -117,13 +112,12 @@ const Title = styled.div`
 
   @media screen and (min-width: 1001px) {
     font-size: 1.5rem;
-    width: 200px;
+    width: 210px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
   }
 `;
-// const DefaultProfileImg = require('../images/githublogo.png');
 
 function getRandomArr(arr) {
   const result = [];
@@ -145,7 +139,7 @@ function SimpleSlider() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 2500,
     centerMode: false,
   };
