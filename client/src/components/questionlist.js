@@ -140,11 +140,10 @@ const Allquestions = () => {
   }, []);
   const viewQuestion = (e) => {
     // setQLists(e);
-
     setClickTitle(e);
-    console.log("123", clickTitle);
   };
   const textInput = useRef();
+
   return (
     <Container>
       <div>

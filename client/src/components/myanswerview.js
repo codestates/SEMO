@@ -310,16 +310,10 @@ const ViewMyAnswer = () => {
   const [answer, setAnswer] = useState([]);
   const {
     clickTitle,
-    setClickTitle,
-    editContentStatus,
-    setEditContentStatus,
     clickCotent,
     editAnswerId,
     setEditAnswerId,
     setClickContent,
-    editAnswerContent,
-    setEditAnswerContent,
-    clickCreatedAt,
   } = useStoreTemp();
   const { user_id, nickname } = useUserinfo();
   const [clickEditBtn, isClickEditBtn] = useState(false);
@@ -329,31 +323,30 @@ const ViewMyAnswer = () => {
   const [reply, setReply] = useState("");
   const replyHandler = (e) => {
     setReply(e.target.value);
-    console.log(reply);
   };
 
   const submitAnswer = async () => {
     let formData = new FormData();
     formData.append("file", fileImg);
 
+    const axios2 = await axios.post("http://localhost:3500/uploads3", formData);
+    if (axios2.data) {
+      alert("okay");
+    } else {
+      alert("no");
+    }
+
     const axios1 = await axios.post("http://localhost:3500/answer", {
       content: reply,
       title: clickTitle,
       user_id: user_id,
       nickname,
+      image: axios2.data,
     });
-
-    const axios2 = await axios.post("http://localhost:3500/uploads", formData);
-    if (axios2.data.success) {
-      alert("okay");
-    } else {
-      alert("no");
-    }
   };
 
   const getQuestion = async () => {
     try {
-      console.log("axios");
       const response = await axios.post("http://localhost:3500/question", {
         title: clickTitle,
         user_id: user_id,
@@ -375,12 +368,10 @@ const ViewMyAnswer = () => {
 
   const getAnswer = async () => {
     try {
-      console.log("getAnsweraxios");
       const res = await axios.post("http://localhost:3500/answer/one", {
         title: clickTitle,
         user_id,
       });
-      console.log("res", res);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -400,12 +391,12 @@ const ViewMyAnswer = () => {
   };
 
   const inputHandler = (e) => {
-    console.log("입력값 변화 ");
+    // console.log("입력값 변화 ");
 
     setClickContent(e.target.value);
   };
   const submitEditAnswer = () => {
-    console.log("수정하기 버튼 눌림 ");
+    // console.log("수정하기 버튼 눌림 ");
     axios.patch("http://localhost:3500/answer/edit", {
       content: clickCotent,
       user_id,
@@ -416,7 +407,7 @@ const ViewMyAnswer = () => {
     isClickEditBtn(!clickEditBtn);
   };
   const deleteHandler = () => {
-    console.log("삭제버튼 클릭");
+    // console.log("삭제버튼 클릭");
   };
   const submitDelete = () => {
     axios
@@ -436,7 +427,6 @@ const ViewMyAnswer = () => {
   const testBtn1 = (e) => {
     setDeleteModal(!deleteModal);
     setEditAnswerId(e);
-    console.log("!!!!!!@@@#######", editAnswerId);
   };
 
   const myRef = useRef(null);
@@ -463,7 +453,7 @@ const ViewMyAnswer = () => {
             <div>
               {" "}
               <Profileimg
-                src={`img/${question.createdAt.slice(0, 19)}_.jpg`}
+                src={question.image ? question.image : null}
                 onError={(i) => (i.target.src = "img/githublogo.png")}
                 alt="1"
               />
@@ -482,7 +472,7 @@ const ViewMyAnswer = () => {
 
               <ContentContainer>
                 <Profileimg
-                  src={`img/${item.createdAt.slice(0, 19)}_.jpg`}
+                  src={`${item.image ? item.image : null}`}
                   onError={(event) => (event.target.style.display = "none")}
                   alt="1"
                 />

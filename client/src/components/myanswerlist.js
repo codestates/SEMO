@@ -138,12 +138,9 @@ const AllMyAnswer = () => {
   }, []);
   const viewQuestion = (e) => {
     setClickTitle(e);
-    console.log("123", clickTitle);
   };
   const textInput = useRef();
-  const magicBtn = () => {
-    console.log(testList);
-  };
+
   return (
     <Container>
       <div>
@@ -167,9 +164,7 @@ const AllMyAnswer = () => {
                   <QuestionTitle
                     onClick={() => {
                       viewQuestion(item.title);
-                      setClickCreatedAt(
-                        `img/${item.createdAt.slice(0, 19)}_.jpg`
-                      );
+                      setClickCreatedAt(item.image);
                     }}
                   >
                     {item.content}

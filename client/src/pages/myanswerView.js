@@ -1,5 +1,5 @@
 import Header from "../components/header";
-import Answer from "../components/answerCompenet";
+import Answer from "../components/answerComponent";
 import ViewMyAnswer from "../components/myanswerview";
 
 const MyAnswerViewPage = () => {

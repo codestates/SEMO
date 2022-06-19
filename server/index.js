@@ -77,6 +77,6 @@ const upload = multer({ dest: "uploads/" });
 app.post("/uploads3", upload.single("file"), async (req, res) => {
   const file = req.file;
   const result = await uploadFile(file);
-  console.log(result.Location);
+  // console.log(result.Location);
   res.send(result.Location);
 });

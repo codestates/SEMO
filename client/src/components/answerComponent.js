@@ -184,7 +184,7 @@ const Answer = () => {
   const editBtn = () => {
     isClickEditBtn(!clickEditBtn);
     setEditContent(question.content);
-    console.log("click edit Btn", clickEditBtn);
+    // console.log("click edit Btn", clickEditBtn);
   };
   // 수정하기 기능 구현하기용 함수
   const getEditContent = async () => {
@@ -228,7 +228,7 @@ const Answer = () => {
   };
   // 삭제하기 기능 구현
   const deleteFunction = () => {
-    console.log(clickTitle, "22", user_id);
+    // console.log(clickTitle, "22", user_id);
     axios
       .post("http://localhost:3500/question/delete", {
         title: clickTitle,

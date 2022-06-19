@@ -122,15 +122,13 @@ const Signoutmodal = () => {
 
   const DeleteIdValueIdHandler = (e) => {
     setTestId(e.target.value); //test id 에 id 저장
-    console.log("testid 값 ", testId);
   };
   const DeletePwValueHandler = (e) => {
     //test pw 에 pw 저장
     setTestPw(e.target.value);
-    console.log("testid 값 ", testPw);
   };
   const testFn2 = async () => {
-    console.log("회원탈퇴 버튼 눌림 ^^ ");
+    // console.log("회원탈퇴 버튼 눌림 ^^ ");
     await axios
       .post("http://localhost:3500/sign/withdraw", {
         user_id: testId,

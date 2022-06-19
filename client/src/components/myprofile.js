@@ -168,9 +168,8 @@ const Myprofile = () => {
   } = useUserinfo();
   const [isEditPicture, EditPicture] = useState(false);
   const editPictureBtn = () => {
-    console.log("사진수정");
+    // console.log("사진수정");
     EditPicture(!isEditPicture);
-    console.log(isEditPicture);
   };
 
   //사진 파일
@@ -186,19 +185,13 @@ const Myprofile = () => {
 
     setfileImg(file);
   };
-  let date = new Date().toISOString();
-  let profile = `img/${date.slice(0, 16)}_.jpg`;
 
   const testFn = async () => {
-    console.log("id", user_id, "123", nickname);
     let formData = new FormData();
     formData.append("file", fileImg);
 
-    const axios2 = await axios.post(
-      "http://localhost:3500/uploadsss",
-      formData
-    );
-    if (axios2.data.success) {
+    const axios2 = await axios.post("http://localhost:3500/uploads3", formData);
+    if (axios2.data) {
       alert("okay");
     } else {
       alert("no");
@@ -208,11 +201,10 @@ const Myprofile = () => {
       {
         // 패치 데이터 . 예정
         user_id,
-
-        profile,
+        profile: axios2.data,
       }
     );
-    setUserProfile(date);
+    setUserProfile(axios2.data);
   };
   const profileDelete = async () => {
     const axios1 = await axios.patch(
@@ -220,12 +212,12 @@ const Myprofile = () => {
       {
         // 패치 데이터 . 예정
         user_id,
-
-        profile: "3",
+        profile: null,
       }
     );
     if (axios1.data) {
       alert("삭제되었습니다.");
+      setUserProfile("");
     }
   };
 
@@ -260,9 +252,9 @@ const Myprofile = () => {
 
   const editPwHandler = () => {
     if (inputPw !== confirmInputPw) {
-      console.log("둘이다름");
+      // console.log("둘이다름");
     } else {
-      console.log("굳");
+      // console.log("굳");
       axios
         .patch("http://localhost:3500/user/password/edit", {
           user_id, //user_id 를 어케 지정해줄지 구현해야함

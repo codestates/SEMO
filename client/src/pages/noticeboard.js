@@ -85,7 +85,6 @@ const Noticeboard = () => {
       const temp = await getQuestionsData();
       setData(temp);
       setLoading(false);
-      // console.log("첫마운틑ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌ");
     };
     tempdata();
   }, []);
@@ -116,12 +115,10 @@ const Noticeboard = () => {
     setLoading(true);
     setItems();
     setPreItems();
-    // console.log("@@@@@@@@@@@@@", items, preItems);
     setTimeout(() => {
       axios.get("http://localhost:3500/question/all").then((res) => {
         setData([...res.data.slice(preItems, items), ...data]);
         // console.log("이건 함수가 실행될때 한번만 작동해야하는거야");
-        // console.log(data);
       });
       setLoading(false);
     }, 700);
@@ -172,7 +169,7 @@ const Noticeboard = () => {
               return (
                 <ItemContainer key={el.id} ref={setTarget}>
                   <ImgContainer
-                    src={`img/${el.createdAt.slice(0, 19)}_.jpg`}
+                    src={el.image}
                     onError={(i) => (i.target.src = "img/githublogo.png")}
                     alt=""
                   />

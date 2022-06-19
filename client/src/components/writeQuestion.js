@@ -171,11 +171,9 @@ const WriteQuestionComponenet = () => {
         selectGrade("");
         selectsubject("");
         alert("okay");
-        console.log("axios2.data", axios2.data);
       } else {
         alert("no");
       }
-      console.log("axios2 실행되냐? ");
       return axios.post("http://localhost:3500/question", {
         nickname: nickname,
         user_id,
@@ -196,7 +194,6 @@ const WriteQuestionComponenet = () => {
         grade,
         subject,
       });
-      console.log("없는경우 실행되냐? ");
     }
 
     //사진 없이 글 올리는 경우  -> image"" 공백이나 false? 이런거 넣게 하기 ? " or 그냥 안넣어도 되는지?
@@ -218,13 +215,6 @@ const WriteQuestionComponenet = () => {
             onChange={titleHandler}
           />
         </TitleContainer>
-        <button
-          onClick={() => {
-            console.log("asdasd");
-          }}
-        >
-          버튼버튼버튼버튼버튼버튼버튼버튼버튼
-        </button>
         <ImageTest>
           <div>
             {fileImg && <img alt="exam" src={fileImg} />}

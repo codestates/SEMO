@@ -1,6 +1,6 @@
 import Button from "../components/button";
 import Header from "../components/header";
-import Answer from "../components/answerCompenet";
+import Answer from "../components/answerComponent";
 
 const AnswerPage = () => {
   return (

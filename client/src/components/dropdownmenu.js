@@ -77,27 +77,6 @@ const Dropdown = (props) => {
     selectsubject(e.target.value);
   };
 
-  // const searchHandler = (e) => {
-  //   if (school !== "" && grade !== "" && subject !== "") {
-  //     axios
-  //       .post("http://52.78.130.4:3500/question/filter", {
-  //         school,
-  //         grade,
-  //         subject,
-  //       })
-  //       .then((res) => {
-  //         if (res.data.length === 0) {
-  //           alert("일치하는 항목이 없습니다.");
-  //         } else {
-  //           console.log("!@#!@#!@#!@#!@##", res);
-  //           return res;
-  //         }
-  //       });
-  //   } else {
-  //     alert("모든 항목을 선택하셔야 합니다.");
-  //   }
-  // };
-
   return (
     <DropdownContainer>
       <Selecttag
