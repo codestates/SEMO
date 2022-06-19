@@ -251,7 +251,7 @@ const Answer = () => {
           <div>
             {" "}
             <Profileimg
-              src={`img/${question.createdAt.slice(0, 19)}_.jpg`}
+              src={question.image ? question.image : ""}
               onError={(i) => (i.target.src = "img/githublogo.png")}
               alt="1"
             />
