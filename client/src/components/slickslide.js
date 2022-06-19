@@ -6,7 +6,7 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
+import { useStore, useStoreTemp } from "../zustand/store";
 
 const Container = styled.div`
   overflow: hidden;
