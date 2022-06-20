@@ -3,7 +3,7 @@ import Button from "./button";
 import { useState } from "react";
 import axios from "axios";
 import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
-
+import { useNavigate } from "react-router";
 const ContainQuestion = styled.div`
   max-width: 1000px;
   margin: 0 auto;
@@ -143,6 +143,7 @@ const WriteQuestionComponenet = () => {
   const { nickname, user_id } = useUserinfo();
   const { school, grade, subject, selectSchool, selectGrade, selectsubject } =
     useStore();
+  const navigate = useNavigate();
   const titleHandler = (e) => {
     setTitle(e.target.value);
   };
@@ -171,6 +172,7 @@ const WriteQuestionComponenet = () => {
         selectGrade("");
         selectsubject("");
         alert("okay");
+        navigate("/noticeboard");
       } else {
         alert("no");
       }
@@ -194,6 +196,8 @@ const WriteQuestionComponenet = () => {
         grade,
         subject,
       });
+      alert("등록 되었습니다.");
+      navigate("/noticeboard");
     }
 
     //사진 없이 글 올리는 경우  -> image"" 공백이나 false? 이런거 넣게 하기 ? " or 그냥 안넣어도 되는지?

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useStoreTemp, useUserinfo } from "../zustand/store";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router";
 const OutContainer = styled.div`
   /* border: 5px solid green; */
   max-width: 1000px;
@@ -152,6 +152,7 @@ const ButtonContainer = styled.div`
 const Answer = () => {
   const [question, setQustion] = useState([]);
   const [solve, setSolved] = useState(false);
+  const navigate = useNavigate();
   const { clickTitle, editContentStatus, setEditContentStatus } =
     useStoreTemp();
   const { user_id, nickname } = useUserinfo();
@@ -179,7 +180,7 @@ const Answer = () => {
     thisQuestion.then((data) => {
       setQustion(data);
     });
-  }, []);
+  }, [question]);
   // response.data.user_id !==user_id
   const editBtn = () => {
     isClickEditBtn(!clickEditBtn);
@@ -237,6 +238,7 @@ const Answer = () => {
       .then((res) => {
         if (res.data) {
           alert("삭제 되었습니다");
+          navigate("/questionlist");
         } else {
           alert("실패");
         }
