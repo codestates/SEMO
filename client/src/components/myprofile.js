@@ -7,6 +7,46 @@ import { useStoreTemp, useUserinfo } from "../zustand/store";
 import Button from "./button";
 import { useNavigate } from "react-router-dom";
 
+const Leftbox = styled.div`
+  /* border: 1px solid red; */
+  width: 170px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+  }
+  gap: 45vw;
+
+  @media screen and (min-width: 1001px) {
+    gap: 450px;
+  }
+`;
+
+const Rightbox = styled.div`
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  gap: 7.5px;
+
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+  }
+  gap: 2vw;
+
+  @media screen and (min-width: 1001px) {
+    gap: 20px;
+  }
+
+  .profilebutton {
+    width: 94px;
+
+    @media screen and (min-width: 401px) and (max-width: 1000px) {
+    }
+    width: 25vw;
+
+    @media screen and (min-width: 1001px) {
+      width: 250px;
+    }
+  }
+`;
+
 const Container = styled.div`
   /* border: 1px solid red; */
   max-width: 1000px;
@@ -19,6 +59,10 @@ const Container = styled.div`
   .btn {
     font-size: 3vw;
     width: 17vw;
+  }
+
+  .profilebutton {
+    font-size: 15px;
   }
 `;
 const Container2 = styled.div`
@@ -109,6 +153,9 @@ const BtnContainer = styled.div`
     font-size: 3vw;
     width: 12vw;
   }
+
+  .profilebutton {
+  }
 `;
 const EditBtnContainer = styled.div`
   display: flex;
@@ -192,9 +239,9 @@ const Myprofile = () => {
 
     const axios2 = await axios.post("http://localhost:3500/uploads3", formData);
     if (axios2.data) {
-      alert("okay");
+      alert("수정되었습니다!");
     } else {
-      alert("no");
+      alert("수정되었습니다!");
     }
     const axios1 = await axios.patch(
       "http://localhost:3500/user/profile/edit",
@@ -341,29 +388,40 @@ const Myprofile = () => {
       ) : null}
       {isEditPicture !== false ? (
         <Container>
-          <div>
+          <Leftbox>
             <div>사진 업로드 </div>
-            <div>image</div>
-            <div>
-              {fileImg && <img alt="exam" src={fileImg} />}
-              <input
-                name="imgUp"
-                type="file"
-                accept="image/*"
-                onChange={saveFileImg}
-              />
-              <Button onClick={() => deleteFileImg()}>삭제</Button>
-            </div>
-          </div>
-          <Button className="btn" onClick={testFn}>
-            수정
-          </Button>
-          <Button className="btn" onClick={profileDelete}>
-            프로필 삭제
-          </Button>
-          <Button className="btn" onClick={editPictureBtn}>
-            취소
-          </Button>
+            {fileImg && <img alt="exam" src={fileImg} />}
+            <input
+              name="imgUp"
+              type="file"
+              accept="image/*"
+              onChange={saveFileImg}
+            />
+            <Button onClick={() => deleteFileImg()}>삭제</Button>
+          </Leftbox>
+          <Rightbox>
+            <Button
+              className="profilebutton"
+              onClick={() => {
+                testFn();
+                editPictureBtn();
+              }}
+            >
+              수정
+            </Button>
+            <Button
+              className="profilebutton"
+              onClick={() => {
+                profileDelete();
+                editPictureBtn();
+              }}
+            >
+              프로필 삭제
+            </Button>
+            <Button className="profilebutton" onClick={editPictureBtn}>
+              취소
+            </Button>
+          </Rightbox>
         </Container>
       ) : null}
     </>
