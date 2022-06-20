@@ -48,7 +48,6 @@ const ProfilePhoto = styled.img`
   align-items: center;
   justify-content: center;
   padding-right: 0.5rem;
-  
 
   @media screen and (min-width: 400px) and (max-width: 1000px) {
     width: 50px;

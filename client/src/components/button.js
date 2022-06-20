@@ -9,7 +9,7 @@ const Button_component = styled.button`
   border: 2px solid #7a57d1;
   border-radius: 10px;
   padding: 5px 7px;
-  width: 70px;
+  width: 60px;
   cursor: pointer;
 
   /* @media screen and (min-width: 401px) and (max-width: 1000px) {

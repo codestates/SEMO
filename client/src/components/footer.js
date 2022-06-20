@@ -7,7 +7,7 @@ import styled from "styled-components";
 import SEMOLOGO from "../images/logo.png";
 
 const FooterContainer = styled.footer`
-  border: 1px solid gold;
+  /* border: 1px solid gold; */
   max-width: 1000px;
   margin: 0 auto;
   background-color: #a573ff;
