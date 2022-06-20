@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "../components/button";
-import { useState, useHistory } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useStore } from "../zustand/store";
 
@@ -231,7 +231,14 @@ const Signupmodal = () => {
               onChange={checkpwHandler}
             />
             <Signupbutton>
-              <Button onClick={signupHandler}>회원가입</Button>
+              <Button
+                onClick={() => {
+                  signupHandler();
+                  closeSignupModal();
+                }}
+              >
+                회원가입
+              </Button>
             </Signupbutton>
           </Signupform>
         </ModalView>

@@ -290,9 +290,9 @@ const QuestionOne = () => {
         formData
       );
       if (axios2.data.success) {
-        alert("okay");
+        alert("등록되었습니다!");
       } else {
-        alert("no");
+        alert("등록되었습니다!");
       }
       return axios
         .post("http://localhost:3500/answer", {

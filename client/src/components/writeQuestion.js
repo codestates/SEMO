@@ -114,26 +114,28 @@ const BtnContainer = styled.div`
 
 const ImageTest = styled.div`
   /* border: 1px solid red; */
-  box-sizing: border-box;
-  padding: 0 35px;
   display: flex;
-  flex-direction: row;
+  max-width: 300px;
+  margin: 0 auto;
 
-  > .deletebutton {
-    font-size: 8px;
-    height: 23px;
-    width: 38px;
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    max-width: 80vw;
+    margin: 0 auto;
+  }
 
+  @media screen and (min-width: 1001px) {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .deletebutton {
+    font-size: 10px;
     @media screen and (min-width: 401px) and (max-width: 1000px) {
-      font-size: 2vw;
-      height: 6vw;
-      width: 10vw;
+      font-size: 2.6vw;
     }
 
     @media screen and (min-width: 1001px) {
-      font-size: 20px;
-      width: 60px;
-      height: 100px;
+      font-size: 26px;
     }
   }
 `;
@@ -171,10 +173,10 @@ const WriteQuestionComponenet = () => {
         selectSchool("");
         selectGrade("");
         selectsubject("");
-        alert("okay");
+        alert("등록되었습니다!");
         navigate("/noticeboard");
       } else {
-        alert("no");
+        alert("등록되었습니다!");
       }
       return axios.post("http://localhost:3500/question", {
         nickname: nickname,
@@ -220,15 +222,13 @@ const WriteQuestionComponenet = () => {
           />
         </TitleContainer>
         <ImageTest>
-          <div>
-            {fileImg && <img alt="exam" src={fileImg} />}
-            <input
-              name="imgUp"
-              type="file"
-              accept="image/*"
-              onChange={saveFileImg}
-            />
-          </div>
+          {fileImg && <img alt="exam" src={fileImg} />}
+          <input
+            name="imgUp"
+            type="file"
+            accept="image/*"
+            onChange={saveFileImg}
+          />
           <Button className="deletebutton" onClick={() => deleteFileImg()}>
             삭제
           </Button>

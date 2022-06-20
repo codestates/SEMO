@@ -103,16 +103,16 @@ const UpdatedAt = styled.div`
   display: flex;
   justify-content: center;
   padding-left: 5px;
-  width: 25px;
+  width: 30px;
 
   @media screen and (min-width: 401px) and (max-width: 1000px) {
     padding-left: 1.3vw;
-    width: 6.7vw;
+    width: 8vw;
   }
 
   @media screen and (min-width: 1001px) {
     padding-left: 13px;
-    width: 67px;
+    width: 80px;
   }
 `;
 
