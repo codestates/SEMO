@@ -24,4 +24,4 @@
 
 Semo, World of Education trends & news for you
 
-[🏠 Semo Homepage](https://www.semo.com/)
+[🏠 Semo Homepage](http://semo.s3-website.ap-northeast-2.amazonaws.com/)
