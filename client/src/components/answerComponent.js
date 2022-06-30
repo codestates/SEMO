@@ -164,7 +164,7 @@ const Answer = () => {
 
   const getQuestion = async () => {
     try {
-      const response = await axios.post("http://localhost:3500/question", {
+      const response = await axios.post("http://52.78.130.4:3500/question", {
         title: clickTitle,
         user_id: user_id,
         nickname,
@@ -190,7 +190,7 @@ const Answer = () => {
   // 수정하기 기능 구현하기용 함수
   const getEditContent = async () => {
     try {
-      const response = await axios.post("http://localhost:3500/question", {
+      const response = await axios.post("http://52.78.130.4:3500/question", {
         title: clickTitle,
         user_id: user_id,
         nickname,
@@ -210,7 +210,7 @@ const Answer = () => {
   };
   const editQuestionr2 = () => {
     axios
-      .patch("http://localhost:3500/question/edit", {
+      .patch("http://52.78.130.4:3500/question/edit", {
         content: editContentStatus,
         title: clickTitle,
         user_id: user_id,
@@ -231,7 +231,7 @@ const Answer = () => {
   const deleteFunction = () => {
     // console.log(clickTitle, "22", user_id);
     axios
-      .post("http://localhost:3500/question/delete", {
+      .post("http://52.78.130.4:3500/question/delete", {
         title: clickTitle,
         user_id,
       })

@@ -244,7 +244,7 @@ const QuestionOne = () => {
   const [answer, setAnswer] = useState([]);
   const getQuestionData = async () => {
     try {
-      const res = await axios.post("http://localhost:3500/question", {
+      const res = await axios.post("http://52.78.130.4:3500/question", {
         nickname,
         title: clickTitle,
       });
@@ -262,7 +262,7 @@ const QuestionOne = () => {
   //00000000000 answer 목록 받아오기
   const getAnswer = async () => {
     try {
-      const res = await axios.post("http://localhost:3500/answer/everyone", {
+      const res = await axios.post("http://52.78.130.4:3500/answer/everyone", {
         title: clickTitle,
       });
 
@@ -286,7 +286,7 @@ const QuestionOne = () => {
 
     if (fileImg !== "") {
       const axios2 = await axios.post(
-        "http://localhost:3500/uploads3",
+        "http://52.78.130.4:3500/uploads3",
         formData
       );
       if (axios2.data.success) {
@@ -295,7 +295,7 @@ const QuestionOne = () => {
         alert("등록되었습니다!");
       }
       return axios
-        .post("http://localhost:3500/answer", {
+        .post("http://52.78.130.4:3500/answer", {
           content: reply,
           title: clickTitle,
           user_id: user_id,
@@ -306,7 +306,7 @@ const QuestionOne = () => {
           setReply("");
         });
     } else {
-      axios.post("http://localhost:3500/answer", {
+      axios.post("http://52.78.130.4:3500/answer", {
         content: reply,
         title: clickTitle,
         user_id: user_id,

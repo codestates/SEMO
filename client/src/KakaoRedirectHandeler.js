@@ -14,7 +14,7 @@ const KakaoRedirectHandler = () => {
         `https://kauth.kakao.com/oauth/token?
         grant_type=${grant_type}
         &client_id=${client_id}
-        &redirect_uri=http://localhost:3500/
+        &redirect_uri=http://52.78.130.4:3500/
         kakao&code=${code}`,
         {
           headers: {

@@ -331,7 +331,7 @@ const ViewMyAnswer = () => {
 
     if (fileImg !== "") {
       const axios2 = await axios.post(
-        "http://localhost:3500/uploads3",
+        "http://52.78.130.4:3500/uploads3",
         formData
       );
       if (axios2.data) {
@@ -340,7 +340,7 @@ const ViewMyAnswer = () => {
         alert("등록되었습니다!");
       }
       return axios
-        .post("http://localhost:3500/answer", {
+        .post("http://52.78.130.4:3500/answer", {
           content: reply,
           title: clickTitle,
           user_id: user_id,
@@ -351,7 +351,7 @@ const ViewMyAnswer = () => {
           setReply("");
         });
     } else {
-      const axios1 = await axios.post("http://localhost:3500/answer", {
+      const axios1 = await axios.post("http://52.78.130.4:3500/answer", {
         content: reply,
         title: clickTitle,
         user_id: user_id,
@@ -364,7 +364,7 @@ const ViewMyAnswer = () => {
 
   const getQuestion = async () => {
     try {
-      const response = await axios.post("http://localhost:3500/question", {
+      const response = await axios.post("http://52.78.130.4:3500/question", {
         title: clickTitle,
         user_id: user_id,
         nickname,
@@ -385,7 +385,7 @@ const ViewMyAnswer = () => {
 
   const getAnswer = async () => {
     try {
-      const res = await axios.post("http://localhost:3500/answer/one", {
+      const res = await axios.post("http://52.78.130.4:3500/answer/one", {
         title: clickTitle,
         user_id,
       });
@@ -414,7 +414,7 @@ const ViewMyAnswer = () => {
   };
   const submitEditAnswer = () => {
     // console.log("수정하기 버튼 눌림 ");
-    axios.patch("http://localhost:3500/answer/edit", {
+    axios.patch("http://52.78.130.4:3500/answer/edit", {
       content: clickCotent,
       user_id,
       id: editAnswerId,
@@ -430,7 +430,7 @@ const ViewMyAnswer = () => {
   };
   const submitDelete = () => {
     axios
-      .post("http://localhost:3500/answer/delete", {
+      .post("http://52.78.130.4:3500/answer/delete", {
         title: clickTitle,
         user_id,
         id: editAnswerId,
@@ -519,7 +519,15 @@ const ViewMyAnswer = () => {
                     삭제하기
                   </Button>
                 ) : (
-                  <Button onClick={submitDelete}>삭제하시겠어요?</Button>
+                  <Button
+                    className="headerBtn"
+                    onClick={() => {
+                      submitDelete();
+                      setDeleteModal();
+                    }}
+                  >
+                    삭제 확인
+                  </Button>
                 )}
               </ButtonContainer>
             </div>
