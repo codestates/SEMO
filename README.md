@@ -8,6 +8,7 @@
 
 📰 About
 ========================
+[🏠 Semo Homepage](http://semo.s3-website.ap-northeast-2.amazonaws.com/)
 
 쉽고 빠르게 내가 원하는 풀이와 답을 찾아주는 학습 플랫폼 **_세모_**
 
@@ -24,4 +25,4 @@
 
 Semo, World of Education trends & news for you
 
-[🏠 Semo Homepage](https://www.semo.com/)
+
