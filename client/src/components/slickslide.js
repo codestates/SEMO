@@ -10,6 +10,11 @@ import { useStore, useStoreTemp } from "../zustand/store";
 
 const Container = styled.div`
   overflow: hidden;
+
+  .Link {
+    text-decoration: none;
+    text-align: center;
+  }
 `;
 
 const StyledSlider = styled(Slider)`
@@ -145,7 +150,7 @@ function SimpleSlider() {
 
   useEffect(() => {
     function getQuestInfo() {
-      axios.get("http://localhost:3500/question/all", {}).then((res) => {
+      axios.get("http://52.78.130.4:3500/question/all", {}).then((res) => {
         const data = res.data;
         const randomIndex = getRandomArr(data); // [5, 1, 2, 4, 6, 0]
         const newQuestions = randomIndex.map((i) => data[i]);
@@ -172,7 +177,7 @@ function SimpleSlider() {
 
   return (
     <Container>
-      <Link to="/noticeboard">
+      <Link className="Link" to="/noticeboard">
         <h5>답변을 기다리고 있어요!</h5>
       </Link>
 

@@ -237,14 +237,17 @@ const Myprofile = () => {
     let formData = new FormData();
     formData.append("file", fileImg);
 
-    const axios2 = await axios.post("http://localhost:3500/uploads3", formData);
+    const axios2 = await axios.post(
+      "http://52.78.130.4:3500/uploads3",
+      formData
+    );
     if (axios2.data) {
       alert("수정되었습니다!");
     } else {
       alert("수정되었습니다!");
     }
     const axios1 = await axios.patch(
-      "http://localhost:3500/user/profile/edit",
+      "http://52.78.130.4:3500/user/profile/edit",
       {
         // 패치 데이터 . 예정
         user_id,
@@ -255,7 +258,7 @@ const Myprofile = () => {
   };
   const profileDelete = async () => {
     const axios1 = await axios.patch(
-      "http://localhost:3500/user/profile/edit",
+      "http://52.78.130.4:3500/user/profile/edit",
       {
         // 패치 데이터 . 예정
         user_id,
@@ -274,7 +277,7 @@ const Myprofile = () => {
 
   const sendEditNickname = () => {
     axios
-      .patch("http://localhost:3500/user/nickname/edit", {
+      .patch("http://52.78.130.4:3500/user/nickname/edit", {
         nickname,
         user_id,
       })
@@ -303,7 +306,7 @@ const Myprofile = () => {
     } else {
       // console.log("굳");
       axios
-        .patch("http://localhost:3500/user/password/edit", {
+        .patch("http://52.78.130.4:3500/user/password/edit", {
           user_id, //user_id 를 어케 지정해줄지 구현해야함
           password: inputPw,
         })

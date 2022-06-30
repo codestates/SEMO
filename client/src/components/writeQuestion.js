@@ -141,7 +141,7 @@ const ImageTest = styled.div`
 `;
 
 const WriteQuestionComponenet = () => {
-  const { title, text, setTitle, setText } = useStoreTemp();
+  const { title, text, setTitle, setText, setisSearchTrue } = useStoreTemp();
   const { nickname, user_id } = useUserinfo();
   const { school, grade, subject, selectSchool, selectGrade, selectsubject } =
     useStore();
@@ -166,7 +166,7 @@ const WriteQuestionComponenet = () => {
 
     if (fileImg !== "") {
       const axios2 = await axios.post(
-        "http://localhost:3500/uploads3",
+        "http://52.78.130.4:3500/uploads3",
         formData
       );
       if (axios2.data) {
@@ -174,11 +174,12 @@ const WriteQuestionComponenet = () => {
         selectGrade("");
         selectsubject("");
         alert("등록되었습니다!");
+        setisSearchTrue();
         navigate("/noticeboard");
       } else {
         alert("등록되었습니다!");
       }
-      return axios.post("http://localhost:3500/question", {
+      return axios.post("http://52.78.130.4:3500/question", {
         nickname: nickname,
         user_id,
         title,
@@ -189,7 +190,7 @@ const WriteQuestionComponenet = () => {
         image: axios2.data,
       });
     } else {
-      axios.post("http://localhost:3500/question", {
+      axios.post("http://52.78.130.4:3500/question", {
         nickname: nickname,
         user_id,
         title,
@@ -200,6 +201,7 @@ const WriteQuestionComponenet = () => {
       });
       alert("등록 되었습니다.");
       navigate("/noticeboard");
+      setisSearchTrue();
     }
 
     //사진 없이 글 올리는 경우  -> image"" 공백이나 false? 이런거 넣게 하기 ? " or 그냥 안넣어도 되는지?
@@ -244,7 +246,14 @@ const WriteQuestionComponenet = () => {
           <Button className="btn" onClick={testFn}>
             질문하기
           </Button>
-          <Button className="btn">취소</Button>
+          <Button
+            className="btn"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            취소
+          </Button>
         </BtnContainer>
         {/* 아래는 사진 업로드 기능인데, db로 보내기랑 css수정해야함 */}
       </ContainQuestion>

@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import { BsChatDots } from "react-icons/bs";
 
 const Container = styled.div`
-  /* border: 1px solid red; */
+  border: 1px solid red;
   max-width: 1000px;
   margin: 0 auto;
   padding: 3vw 0;
 `;
 const QuestionContainer = styled.div`
-  /* border: 5px solid green; */
+  border: 5px solid green;
   padding-bottom: 11px;
 
   @media screen and (min-width: 401px) and (max-width: 1000px) {
@@ -26,6 +26,7 @@ const QuestionContainer = styled.div`
 `;
 const QuestionTitle = styled.strong`
   /* border: 5px solid pink; */
+  border-left: 10px solid black;
   width: 230px;
   font-size: 11px;
   font-weight: 900;
@@ -123,8 +124,10 @@ const Allquestions = () => {
   const getPosts = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3500/myquestion/all",
-        { user_id }
+        "http://52.78.130.4:3500/myquestion/all",
+        {
+          user_id,
+        }
       );
 
       return response.data;

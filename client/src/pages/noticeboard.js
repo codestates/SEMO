@@ -90,7 +90,7 @@ const Noticeboard = () => {
   }, []);
 
   const getQuestionsData = async () => {
-    const good = await axios.get("http://localhost:3500/question/infinity");
+    const good = await axios.get("http://52.78.130.4:3500/question/infinity");
     setId(good.data[7].id);
     return good.data;
   };
@@ -100,7 +100,7 @@ const Noticeboard = () => {
     console.log(id);
     setTimeout(() => {
       axios
-        .post("http://localhost:3500/question/addinfinity", { id: id })
+        .post("http://52.78.130.4:3500/question/addinfinity", { id: id })
         .then((res) => {
           setData([...data, ...res.data]);
           // console.log("이건 함수가 실행될때 한번만 작동해야하는거야");
@@ -142,7 +142,7 @@ const Noticeboard = () => {
   const searchHandler = (e) => {
     if (school !== "" && grade !== "" && subject !== "") {
       axios
-        .post("http://localhost:3500/question/filter", {
+        .post("http://52.78.130.4:3500/question/filter", {
           school,
           grade,
           subject,
