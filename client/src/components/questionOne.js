@@ -240,8 +240,9 @@ const QuestionOne = () => {
 
   const [question, setQustion] = useState([]);
   const [reply, setReply] = useState("");
-
+  const [addAnswer, setAddAnswer] = useState(false);
   const [answer, setAnswer] = useState([]);
+  const [updateAnswer, setUpdateAnswer] = useState(false);
   const getQuestionData = async () => {
     try {
       const res = await axios.post("http://52.78.130.4:3500/question", {
@@ -254,11 +255,7 @@ const QuestionOne = () => {
     }
   };
   const qdata = getQuestionData();
-  useEffect(() => {
-    qdata.then((data) => {
-      setQustion(data.data);
-    });
-  }, []);
+
   //00000000000 answer 목록 받아오기
   const getAnswer = async () => {
     try {
@@ -271,11 +268,17 @@ const QuestionOne = () => {
   };
   const thisGetAnswer = getAnswer();
   useEffect(() => {
+    qdata.then((data) => {
+      setQustion(data.data);
+    });
+  }, [updateAnswer]);
+  useEffect(() => {
     thisGetAnswer.then((data) => {
       setAnswer(data);
     });
-  }, [answer]);
+  }, [updateAnswer]);
   //---------답변 등록하기 코드
+
   const replyHandler = (e) => {
     setReply(e.target.value);
   };
@@ -304,16 +307,21 @@ const QuestionOne = () => {
         })
         .then((res) => {
           setReply("");
+          setUpdateAnswer(!updateAnswer);
         });
     } else {
-      axios.post("http://52.78.130.4:3500/answer", {
-        content: reply,
-        title: clickTitle,
-        user_id: user_id,
-        nickname,
-        image: "1",
-      });
-      setReply("");
+      axios
+        .post("http://52.78.130.4:3500/answer", {
+          content: reply,
+          title: clickTitle,
+          user_id: user_id,
+          nickname,
+          image: "1",
+        })
+        .then((res) => {
+          setReply("");
+          setUpdateAnswer(!updateAnswer);
+        });
     }
   };
 
