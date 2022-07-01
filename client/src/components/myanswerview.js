@@ -5,6 +5,296 @@ import axios from "axios";
 import { useStoreTemp, useUserinfo } from "../zustand/store";
 import { Link } from "react-router-dom";
 
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
+const ViewMyAnswer = () => {
+  const [question, setQustion] = useState([]);
+  const [answer, setAnswer] = useState([]);
+  const {
+    clickTitle,
+    clickCotent,
+    editAnswerId,
+    setEditAnswerId,
+    setClickContent,
+  } = useStoreTemp();
+  const { user_id, nickname } = useUserinfo();
+  const [clickEditBtn, isClickEditBtn] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [reply, setReply] = useState("");
+  const [test999, setTest999] = useState(false);
+
+  const replyHandler = (e) => {
+    setReply(e.target.value);
+  };
+
+  const submitAnswer = async () => {
+    let formData = new FormData();
+    formData.append("file", fileImg);
+
+    if (fileImg !== "") {
+      const axios2 = await axios.post(
+        "http://52.78.130.4:3500/uploads3",
+        formData
+      );
+      if (axios2.data) {
+        // alert("등록되었습니다!");
+      } else {
+        // alert("등록되었습니다!");
+      }
+      return axios
+        .post("http://52.78.130.4:3500/answer", {
+          content: reply,
+          title: clickTitle,
+          user_id: user_id,
+          nickname,
+          image: axios2.data,
+        })
+        .then(() => {
+          setTest999(!test999);
+          setReply("");
+        });
+    } else {
+      const axios1 = await axios.post("http://52.78.130.4:3500/answer", {
+        content: reply,
+        title: clickTitle,
+        user_id: user_id,
+        nickname,
+      });
+    }
+    // alert("담변이 등록 되었습니다.");
+    setTest999(!test999);
+    setReply("");
+  };
+
+  const getQuestion = async () => {
+    try {
+      const response = await axios.post("http://52.78.130.4:3500/question", {
+        title: clickTitle,
+        user_id: user_id,
+        nickname,
+      });
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const thisQuestion = getQuestion();
+  useEffect(() => {
+    thisQuestion.then((data) => {
+      setQustion(data);
+    });
+  }, []);
+  //++++++++++++++++++++++++++++위에 question 에 달린 내 대답 보기
+
+  const getAnswer = async () => {
+    try {
+      const res = await axios.post("http://52.78.130.4:3500/answer/one", {
+        title: clickTitle,
+        user_id,
+      });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const thisGetAnswer = getAnswer();
+  useEffect(() => {
+    thisGetAnswer.then((data) => {
+      setAnswer(data);
+    });
+  }, [test999]);
+
+  const editBtnHandler = (e, b) => {
+    isClickEditBtn(!clickEditBtn);
+    setEditAnswerId(e);
+    setClickContent(b);
+  };
+
+  const inputHandler = (e) => {
+    // console.log("입력값 변화 ");
+
+    setClickContent(e.target.value);
+  };
+  const submitEditAnswer = () => {
+    // console.log("수정하기 버튼 눌림 ");
+    axios.patch("http://52.78.130.4:3500/answer/edit", {
+      content: clickCotent,
+      user_id,
+      id: editAnswerId,
+      title: clickTitle,
+    });
+    alert("수정되었습니다.");
+    isClickEditBtn(!clickEditBtn);
+    setEditAnswerId("");
+    setClickContent("");
+  };
+  const deleteHandler = () => {
+    // console.log("삭제버튼 클릭");
+  };
+  const submitDelete = () => {
+    axios
+      .post("http://52.78.130.4:3500/answer/delete", {
+        title: clickTitle,
+        user_id,
+        id: editAnswerId,
+      })
+      .then((res) => {
+        if (res.data) {
+          alert("삭제 되었습니다");
+        } else {
+          alert("실패");
+        }
+      });
+  };
+  const testBtn1 = (e) => {
+    setDeleteModal(!deleteModal);
+    setEditAnswerId(e);
+  };
+
+  const myRef = useRef(null);
+  const executeScroll = () => scrollToRef(myRef);
+  const [fileImg, setfileImg] = useState("");
+  const saveFileImg = (e) => {
+    const file = e.target.files[0];
+
+    setfileImg(file);
+  };
+
+  const deleteFileImg = () => {
+    URL.revokeObjectURL(fileImg);
+    setfileImg("");
+  };
+  return (
+    <>
+      <Container>
+        <QHeader>No. {question.id}</QHeader>
+        <HeadWrapper>{question.title}</HeadWrapper>
+        <QueWriter>{question.nickname}</QueWriter>
+        <ImgContentBox>
+          {question.createdAt !== undefined ? (
+            <div>
+              {" "}
+              <Profileimg
+                src={question.image ? question.image : ""}
+                onError={(i) => (i.target.src = "img/githublogo.png")}
+                alt="1"
+              />
+            </div>
+          ) : null}
+        </ImgContentBox>
+        <ContentBox>{question.content}</ContentBox>
+      </Container>
+      <RepContainer>
+        {answer.map((item) => {
+          return (
+            <div key={item.id} item={item}>
+              <HeadWrapper>
+                <Writer> 작성일 : {item.createdAt.slice(0, 10)}</Writer>
+              </HeadWrapper>
+
+              <ContentContainer>
+                <Profileimg
+                  src={`${item.image ? item.image : null}`}
+                  onError={(event) => (event.target.style.display = "none")}
+                  alt="1"
+                />
+                {item.content}
+              </ContentContainer>
+              <ButtonContainer>
+                <Button
+                  className="headerBtn"
+                  onClick={() => {
+                    editBtnHandler(item.id, item.content);
+                    executeScroll();
+                  }}
+                >
+                  수정
+                </Button>
+
+                {/* 화살표 함수로, item.title? item.content값 넘겨주기 .edit 기능 테스트하기  */}
+                {deleteModal !== true ? (
+                  <Button
+                    className="headerBtn"
+                    onClick={() => {
+                      testBtn1(item.id);
+                    }}
+                  >
+                    삭제하기
+                  </Button>
+                ) : (
+                  <Button
+                    className="headerBtn"
+                    onClick={() => {
+                      submitDelete();
+                      setDeleteModal();
+                    }}
+                  >
+                    삭제 확인
+                  </Button>
+                )}
+              </ButtonContainer>
+            </div>
+          );
+        })}
+      </RepContainer>
+
+      {clickEditBtn !== false ? (
+        <>
+          <ReplyText
+            type="text"
+            value={clickCotent}
+            onChange={inputHandler}
+          ></ReplyText>
+          <ButtonContainer>
+            <Button className="headerBtn" onClick={submitEditAnswer}>
+              수정하기
+            </Button>
+            <Button
+              ref={myRef}
+              onClick={() => {
+                isClickEditBtn(!clickEditBtn);
+              }}
+            >
+              취소
+            </Button>
+          </ButtonContainer>
+        </>
+      ) : null}
+
+      <ImageTest ref={myRef}>
+        <ImgInput
+          name="imgUp"
+          type="file"
+          accept="image/*"
+          onChange={saveFileImg}
+        />
+      </ImageTest>
+      <AddAnswerContainer>
+        <AnswerInputText
+          type="text"
+          placeholder="답변을 입력하세요"
+          value={reply}
+          onChange={replyHandler}
+        >
+          {" "}
+        </AnswerInputText>
+        <ButtonContainer>
+          <Button className="headerBtn" onClick={submitAnswer}>
+            답변추가
+          </Button>
+          <Link to="/">
+            <Button className="headerBtn">나가기</Button>
+          </Link>
+        </ButtonContainer>
+      </AddAnswerContainer>
+      {/* <div ref={myRef}>1</div> */}
+    </>
+  );
+};
+
+export default ViewMyAnswer;
+
 const Container = styled.div`
   /* border: 1px solid red; */
   max-width: 1000px;
@@ -303,290 +593,3 @@ const AddAnswerContainer = styled.div`
   width: 75vw;
   height: 30vw;
 `;
-const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-
-const ViewMyAnswer = () => {
-  const [question, setQustion] = useState([]);
-  const [answer, setAnswer] = useState([]);
-  const {
-    clickTitle,
-    clickCotent,
-    editAnswerId,
-    setEditAnswerId,
-    setClickContent,
-  } = useStoreTemp();
-  const { user_id, nickname } = useUserinfo();
-  const [clickEditBtn, isClickEditBtn] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
-  const [a, b] = useState([]);
-  //@@ 테스트
-  const [reply, setReply] = useState("");
-  const replyHandler = (e) => {
-    setReply(e.target.value);
-  };
-
-  const submitAnswer = async () => {
-    let formData = new FormData();
-    formData.append("file", fileImg);
-
-    if (fileImg !== "") {
-      const axios2 = await axios.post(
-        "http://52.78.130.4:3500/uploads3",
-        formData
-      );
-      if (axios2.data) {
-        alert("등록되었습니다!");
-      } else {
-        alert("등록되었습니다!");
-      }
-      return axios
-        .post("http://52.78.130.4:3500/answer", {
-          content: reply,
-          title: clickTitle,
-          user_id: user_id,
-          nickname,
-          image: axios2.data,
-        })
-        .then(() => {
-          setReply("");
-        });
-    } else {
-      const axios1 = await axios.post("http://52.78.130.4:3500/answer", {
-        content: reply,
-        title: clickTitle,
-        user_id: user_id,
-        nickname,
-      });
-    }
-    alert("담변이 등록 되었습니다.");
-    setReply("");
-  };
-
-  const getQuestion = async () => {
-    try {
-      const response = await axios.post("http://52.78.130.4:3500/question", {
-        title: clickTitle,
-        user_id: user_id,
-        nickname,
-      });
-
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const thisQuestion = getQuestion();
-  useEffect(() => {
-    thisQuestion.then((data) => {
-      setQustion(data);
-    });
-  }, [question]);
-  //++++++++++++++++++++++++++++위에 question 에 달린 내 대답 보기
-
-  const getAnswer = async () => {
-    try {
-      const res = await axios.post("http://52.78.130.4:3500/answer/one", {
-        title: clickTitle,
-        user_id,
-      });
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const thisGetAnswer = getAnswer();
-  useEffect(() => {
-    thisGetAnswer.then((data) => {
-      setAnswer(data);
-    });
-  }, [answer]);
-
-  const editBtnHandler = (e, b) => {
-    isClickEditBtn(!clickEditBtn);
-    setEditAnswerId(e);
-    setClickContent(b);
-  };
-
-  const inputHandler = (e) => {
-    // console.log("입력값 변화 ");
-
-    setClickContent(e.target.value);
-  };
-  const submitEditAnswer = () => {
-    // console.log("수정하기 버튼 눌림 ");
-    axios.patch("http://52.78.130.4:3500/answer/edit", {
-      content: clickCotent,
-      user_id,
-      id: editAnswerId,
-      title: clickTitle,
-    });
-    alert("수정되었습니다.");
-    isClickEditBtn(!clickEditBtn);
-    setEditAnswerId("");
-    setClickContent("");
-  };
-  const deleteHandler = () => {
-    // console.log("삭제버튼 클릭");
-  };
-  const submitDelete = () => {
-    axios
-      .post("http://52.78.130.4:3500/answer/delete", {
-        title: clickTitle,
-        user_id,
-        id: editAnswerId,
-      })
-      .then((res) => {
-        if (res.data) {
-          alert("삭제 되었습니다");
-        } else {
-          alert("실패");
-        }
-      });
-  };
-  const testBtn1 = (e) => {
-    setDeleteModal(!deleteModal);
-    setEditAnswerId(e);
-  };
-
-  const myRef = useRef(null);
-  const executeScroll = () => scrollToRef(myRef);
-  const [fileImg, setfileImg] = useState("");
-  const saveFileImg = (e) => {
-    const file = e.target.files[0];
-
-    setfileImg(file);
-  };
-
-  const deleteFileImg = () => {
-    URL.revokeObjectURL(fileImg);
-    setfileImg("");
-  };
-  return (
-    <>
-      <Container>
-        <QHeader>No. {question.id}</QHeader>
-        <HeadWrapper>{question.title}</HeadWrapper>
-        <QueWriter>{question.nickname}</QueWriter>
-        <ImgContentBox>
-          {question.createdAt !== undefined ? (
-            <div>
-              {" "}
-              <Profileimg
-                src={question.image ? question.image : ""}
-                onError={(i) => (i.target.src = "img/githublogo.png")}
-                alt="1"
-              />
-            </div>
-          ) : null}
-        </ImgContentBox>
-        <ContentBox>{question.content}</ContentBox>
-      </Container>
-      <RepContainer>
-        {answer.map((item) => {
-          return (
-            <div key={item.id} item={item}>
-              <HeadWrapper>
-                <Writer> 작성일 : {item.createdAt.slice(0, 10)}</Writer>
-              </HeadWrapper>
-
-              <ContentContainer>
-                <Profileimg
-                  src={`${item.image ? item.image : null}`}
-                  onError={(event) => (event.target.style.display = "none")}
-                  alt="1"
-                />
-                {item.content}
-              </ContentContainer>
-              <ButtonContainer>
-                <Button
-                  className="headerBtn"
-                  onClick={() => {
-                    editBtnHandler(item.id, item.content);
-                    executeScroll();
-                  }}
-                >
-                  수정
-                </Button>
-
-                {/* 화살표 함수로, item.title? item.content값 넘겨주기 .edit 기능 테스트하기  */}
-                {deleteModal !== true ? (
-                  <Button
-                    className="headerBtn"
-                    onClick={() => {
-                      testBtn1(item.id);
-                    }}
-                  >
-                    삭제하기
-                  </Button>
-                ) : (
-                  <Button
-                    className="headerBtn"
-                    onClick={() => {
-                      submitDelete();
-                      setDeleteModal();
-                    }}
-                  >
-                    삭제 확인
-                  </Button>
-                )}
-              </ButtonContainer>
-            </div>
-          );
-        })}
-      </RepContainer>
-
-      {clickEditBtn !== false ? (
-        <>
-          <ReplyText
-            type="text"
-            value={clickCotent}
-            onChange={inputHandler}
-          ></ReplyText>
-          <ButtonContainer>
-            <Button className="headerBtn" onClick={submitEditAnswer}>
-              수정하기
-            </Button>
-            <Button
-              ref={myRef}
-              onClick={() => {
-                isClickEditBtn(!clickEditBtn);
-              }}
-            >
-              취소
-            </Button>
-          </ButtonContainer>
-        </>
-      ) : null}
-
-      <ImageTest ref={myRef}>
-        <ImgInput
-          name="imgUp"
-          type="file"
-          accept="image/*"
-          onChange={saveFileImg}
-        />
-      </ImageTest>
-      <AddAnswerContainer>
-        <AnswerInputText
-          type="text"
-          placeholder="답변을 입력하세요"
-          value={reply}
-          onChange={replyHandler}
-        >
-          {" "}
-        </AnswerInputText>
-        <ButtonContainer>
-          <Button className="headerBtn" onClick={submitAnswer}>
-            답변추가
-          </Button>
-          <Link to="/">
-            <Button className="headerBtn">나가기</Button>
-          </Link>
-        </ButtonContainer>
-      </AddAnswerContainer>
-      {/* <div ref={myRef}>1</div> */}
-    </>
-  );
-};
-
-export default ViewMyAnswer;

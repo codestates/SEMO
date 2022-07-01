@@ -156,10 +156,6 @@ const Main = () => {
           <ImgContainer src={image2} alt="" />
         </ItemasContainer1>
 
-        <div style={{ width: "100%" }}>
-          <SimpleSlider />
-        </div>
-
         <ItemasContainer1>
           <ImgContainer src={image3} alt="" />
           <TextContainer>

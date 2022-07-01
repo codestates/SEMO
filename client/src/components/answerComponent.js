@@ -158,6 +158,8 @@ const Answer = () => {
   const { user_id, nickname } = useUserinfo();
   const [clickEditBtn, isClickEditBtn] = useState(false);
   const [editContent, setEditContent] = useState("");
+  const [test999, setTest999] = useState(false);
+
   const addAnswer = () => {
     setSolved(!solve);
   };
@@ -169,7 +171,6 @@ const Answer = () => {
         user_id: user_id,
         nickname,
       });
-
       return response.data;
     } catch (error) {
       console.log(error);
@@ -180,7 +181,7 @@ const Answer = () => {
     thisQuestion.then((data) => {
       setQustion(data);
     });
-  }, [question]);
+  }, [test999]);
   // response.data.user_id !==user_id
   const editBtn = () => {
     isClickEditBtn(!clickEditBtn);
@@ -195,7 +196,6 @@ const Answer = () => {
         user_id: user_id,
         nickname,
       });
-
       return response.data;
     } catch (error) {}
   };
@@ -216,6 +216,8 @@ const Answer = () => {
         user_id: user_id,
       })
       .then((res) => {
+        setTest999(!test999);
+
         if (res.data) {
           alert("수정 되었습니다");
         } else {

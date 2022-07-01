@@ -8,69 +8,6 @@ import axios from "axios";
 import Loading from "react-loading";
 import { Link } from "react-router-dom";
 
-const NoticeContainer = styled.div`
-  /* border: 3px solid green; */
-  max-width: 1000px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  padding: 2vw 0;
-  gap: 11px;
-`;
-
-const ItemContainer = styled.div`
-  /* border: 1px solid yellow; */
-  width: 159px;
-  height: 159px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  box-shadow: 3px 3px 3px 3px #999;
-
-  .link {
-    text-decoration: none;
-  }
-`;
-
-const ImgContainer = styled.img`
-  /* border: 1px solid red; */
-  width: 124px;
-  height: 124px;
-  border-radius: 5vw;
-`;
-
-const ItemTexContainer = styled.div`
-  /* border: 1px solid blue; */
-  width: 159px;
-  display: block;
-  text-align: center;
-
-  .title {
-    font-size: 15px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .nickname {
-    font-size: 13px;
-  }
-`;
-
-const Loadingbox = styled.div`
-  /* border: 1px solid red; */
-  height: 10vw;
-  width: 100vw;
-  font-size: 3vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Noticeboard = () => {
   const [id, setId] = useState(1);
   const [data, setData] = useState([]); // 뿌려줘야할 데이터 누적 상태
@@ -203,3 +140,66 @@ const Noticeboard = () => {
 };
 
 export default Noticeboard;
+
+const NoticeContainer = styled.div`
+  /* border: 3px solid green; */
+  max-width: 1000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 2vw 0;
+  gap: 11px;
+`;
+
+const ItemContainer = styled.div`
+  /* border: 1px solid yellow; */
+  width: 159px;
+  height: 159px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px 3px #999;
+
+  .link {
+    text-decoration: none;
+  }
+`;
+
+const ImgContainer = styled.img`
+  /* border: 1px solid red; */
+  width: 124px;
+  height: 124px;
+  border-radius: 5vw;
+`;
+
+const ItemTexContainer = styled.div`
+  /* border: 1px solid blue; */
+  width: 159px;
+  display: block;
+  text-align: center;
+
+  .title {
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nickname {
+    font-size: 13px;
+  }
+`;
+
+const Loadingbox = styled.div`
+  /* border: 1px solid red; */
+  height: 10vw;
+  width: 100vw;
+  font-size: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
