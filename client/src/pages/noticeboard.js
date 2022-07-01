@@ -39,9 +39,10 @@ const Noticeboard = () => {
       axios
         .post("http://52.78.130.4:3500/question/addinfinity", { id: id })
         .then((res) => {
+          console.log(res);
           setData([...data, ...res.data]);
           // console.log("이건 함수가 실행될때 한번만 작동해야하는거야");
-          setId(id - 8);
+          setId(res.data[0].id);
         });
       setLoading(false);
     }, 700);
