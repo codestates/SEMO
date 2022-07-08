@@ -90,7 +90,9 @@ const TextContainer = styled.div`
 
 const Main = () => {
   const { loginmodal, signupmodal, islogin, openLoginModal } = useStore();
-  const { isSearch, setisSearchTrue, setisSearchFalse } = useStoreTemp();
+  const { isSearch, setisSearchTrue, setisSearchFalse, nickname } =
+    useStoreTemp();
+
   return (
     <>
       <Header />

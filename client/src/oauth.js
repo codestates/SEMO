@@ -1,4 +1,4 @@
-const CLIENT_ID = "1d3ae3d7f704bfdf575aca7d042711fc";
+const CLIENT_ID = "80d37ab8b606a30f1f9a301818c6a4be";
 const REDIRECT_URI = "http://52.78.130.4:3000/oauth/callback/kakao";
 
 // 프런트엔드 리다이랙트 URI 예시입니다.
