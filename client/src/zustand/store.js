@@ -1,6 +1,5 @@
 import create from "zustand";
-//TEST
-//teststststststststt
+
 export const useStore = create((set) => ({
   loginmodal: false,
   signupmodal: false,
@@ -20,7 +19,7 @@ export const useStore = create((set) => ({
   selectGrade: (a) => set((state) => ({ grade: (state.grade = a) })),
   selectsubject: (a) => set((state) => ({ subject: (state.subject = a) })),
 }));
-// qjastar a123456
+
 export const useStoreTemp = create((set) => ({
   loginmodal: false,
   isEditnickname: false,

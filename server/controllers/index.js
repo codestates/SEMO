@@ -26,4 +26,5 @@ module.exports = {
   filter: require("./options/filter"),
   infinity: require("./options/infinity"),
   addinfinity: require("./options/addinfinity"),
+  kakao: require("./users/kakao"),
 };

@@ -200,6 +200,9 @@ const Loginmodal = () => {
             </div>
             <Button onClick={testFn2}>로그인</Button>
           </Loginform>
+          <a href={KAKAO_AUTH_URL}>
+            <Kakaologbtn src={kakaologo} alt="" />
+          </a>
         </ModalView>
       </ModalBackdrop>
     </ModalContainer>
@@ -207,7 +210,3 @@ const Loginmodal = () => {
 };
 
 export default Loginmodal;
-
-//<a href={KAKAO_AUTH_URL}>
-//<Kakaologbtn src={kakaologo} alt="" />
-//</a>
