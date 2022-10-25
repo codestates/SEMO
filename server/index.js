@@ -84,7 +84,4 @@ app.post("/uploads3", upload.single("file"), async (req, res) => {
   res.send(result.Location);
 });
 
-app.post("/kakao/profile", controllers.kakao);
-
-// 프론트 => 카카오서버로 데이터 요청까지
-//  프론튼 => 로컬 서버로 요청 => 백엔드에서 카카오로요청 후 데이터반환
+app.post("/kakao/profile", controllers.kakao)
