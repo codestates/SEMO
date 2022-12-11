@@ -14,7 +14,7 @@ const KakaoRedirectHandler = () => {
     let client_id = "80d37ab8b606a30f1f9a301818c6a4be";
     let token = axios
       .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=http://52.78.130.4:3000/oauth/callback/kakao&code=${code}`,
+        `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=http://semo.s3-website.ap-northeast-2.amazonaws.com/oauth/callback/kakao&code=${code}`,
         {
           headers: {
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",

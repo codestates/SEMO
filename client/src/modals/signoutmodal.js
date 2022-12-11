@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import Button from "../components/button";
-import kakaologo from "../images/kakaologo.png";
-import { KAKAO_AUTH_URL } from "../oauth";
 import { useStore, useStoreTemp, useUserinfo } from "../zustand/store";
 import axios from "axios";
 import React from "react";
